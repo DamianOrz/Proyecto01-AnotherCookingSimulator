@@ -144,7 +144,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tiempoCocinado: 0
-  material: []
+  material:
+  - {fileID: 2100000, guid: 9bfe8f038fb80fb4380a462f670f0c7b, type: 2}
+  - {fileID: 2100000, guid: 38882960f55b2c543beaafbd4b35a0fc, type: 2}
 --- !u!114 &2690486914946218300
 MonoBehaviour:
   m_ObjectHideFlags: 0
