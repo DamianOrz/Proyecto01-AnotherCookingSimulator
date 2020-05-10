@@ -22,6 +22,7 @@ public class cuandoSeCocina : MonoBehaviour
     {
         if(touchGrill==true)
         {
+            FindObjectOfType<AudioManager>().Play("Fry");
             tiempoCocinado += Time.deltaTime;
             cambiarEstado();
         }
