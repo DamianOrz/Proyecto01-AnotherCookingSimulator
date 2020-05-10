@@ -11,6 +11,7 @@ public class PlayerConnectionObject : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        FindObjectOfType<AudioManager>().Play("Fry");
         //Cada vez que entra un jugador se crea una unidad fisica en el servidor
         if(bandera==true)
         {
