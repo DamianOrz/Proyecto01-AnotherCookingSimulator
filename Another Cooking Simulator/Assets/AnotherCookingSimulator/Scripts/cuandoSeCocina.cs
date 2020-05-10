@@ -9,7 +9,7 @@ public class cuandoSeCocina : MonoBehaviour
     //Permito ingresar materiales para el cambio de estado
     public Material[] material;
     Renderer rend;
-    bool touchGrill=false;
+    bool touchGrill=false, estaSonando=false;
 
     void Start()
     {
@@ -22,7 +22,12 @@ public class cuandoSeCocina : MonoBehaviour
     {
         if(touchGrill==true)
         {
-            //FindObjectOfType<AudioManager>().Play("Fry");
+            if (estaSonando==false)
+            {
+                estaSonando = true;
+                FindObjectOfType<AudioManager>().PlayInPosition("Fry",this.gameObject.transform.position);
+            }
+            
             tiempoCocinado += Time.deltaTime;
             cambiarEstado();
         }
