@@ -1520,6 +1520,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1888241063}
     m_Modifications:
+    - target: {fileID: 1355551262646845067, guid: 71fd26fa88da77c4b90ca0e701c76178,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2690486914946218300, guid: 71fd26fa88da77c4b90ca0e701c76178,
         type: 3}
       propertyPath: sceneId
@@ -1588,6 +1593,11 @@ PrefabInstance:
     - target: {fileID: 7176322530704266810, guid: 71fd26fa88da77c4b90ca0e701c76178,
         type: 3}
       propertyPath: syncInterval
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7368302417637845847, guid: 71fd26fa88da77c4b90ca0e701c76178,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
