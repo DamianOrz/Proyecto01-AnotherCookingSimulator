@@ -59,5 +59,4 @@ public class cuandoSeCocina : MonoBehaviour
             rend.sharedMaterial = material[0];
         }
     }
-    
 }
