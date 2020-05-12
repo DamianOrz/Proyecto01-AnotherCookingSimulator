@@ -10,9 +10,11 @@ public class cuandoSeCocina : MonoBehaviour
     public Material[] material;
     Renderer rend;
     bool touchGrill=false, estaSonando=false;
+    public ParticleSystem grillSmoke;
 
     void Start()
     {
+        grillSmoke.Stop();
         rend = GetComponent<Renderer>();
         rend.enabled = true;
     }
@@ -20,12 +22,17 @@ public class cuandoSeCocina : MonoBehaviour
     // Y cambia estado dependiendo el tiempo que pasó
     void Update()
     {
-        if(touchGrill==true)
+        if (touchGrill==true)
         {
-            if (estaSonando==false)
+            if (estaSonando == false)
             {
                 estaSonando = true;
-                FindObjectOfType<AudioManager>().PlayInPosition("Fry",this.gameObject.transform.position);
+                //FindObjectOfType<AudioManager>().PlayInPosition("Fry",this.gameObject.transform.position);
+            }
+
+            if (!grillSmoke.isPlaying)
+            {
+              grillSmoke.Play();
             }
             
             tiempoCocinado += Time.deltaTime;
@@ -37,7 +44,7 @@ public class cuandoSeCocina : MonoBehaviour
     {
         if (collisionInfo.collider.tag == "SurfaceOfGrill")
         {
-            touchGrill= true;
+            touchGrill = true;
         }
     }
     // Cuando un pati deja de tocar el horno se cambia a false el bool::touchGrill
@@ -45,6 +52,7 @@ public class cuandoSeCocina : MonoBehaviour
     {
         if (collisionInfo.collider.tag == "SurfaceOfGrill")
         {
+            grillSmoke.Stop();
             touchGrill = false;
         }
     }
@@ -54,7 +62,11 @@ public class cuandoSeCocina : MonoBehaviour
         if(tiempoCocinado>=12)
         {
             rend.sharedMaterial = material[1];
-        }else if(tiempoCocinado>=6)
+
+            var main = grillSmoke.main;
+            main.startColor = new Color(0, 0, 0, 1);
+        }
+        else if(tiempoCocinado>=6)
         {
             rend.sharedMaterial = material[0];
         }
