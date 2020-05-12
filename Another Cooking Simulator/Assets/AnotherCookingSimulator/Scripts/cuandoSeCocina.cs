@@ -27,7 +27,7 @@ public class cuandoSeCocina : MonoBehaviour
             if (estaSonando == false)
             {
                 estaSonando = true;
-                //FindObjectOfType<AudioManager>().PlayInPosition("Fry",this.gameObject.transform.position);
+                FindObjectOfType<AudioManager>().PlayInPosition("Fry",this.gameObject.transform.position);
             }
 
             if (!grillSmoke.isPlaying)
