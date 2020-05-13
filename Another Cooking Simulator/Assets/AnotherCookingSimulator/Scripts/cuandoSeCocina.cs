@@ -14,7 +14,6 @@ public class cuandoSeCocina : MonoBehaviour
 
     void Start()
     {
-        grillSmoke.Stop();
         rend = GetComponent<Renderer>();
         rend.enabled = true;
     }
@@ -69,6 +68,9 @@ public class cuandoSeCocina : MonoBehaviour
         else if(tiempoCocinado>=6)
         {
             rend.sharedMaterial = material[0];
+
+            var main = grillSmoke.main;
+            //main.startColor = new Color(0, 0, 23, 1);
         }
     }
 }

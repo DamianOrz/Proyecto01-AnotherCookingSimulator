@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PruebaColliders : MonoBehaviour
 {
-
-    public GameObject hamburguesa;
     public GameObject anborguesa;
     private GameObject bun = null;
     private Renderer rend;

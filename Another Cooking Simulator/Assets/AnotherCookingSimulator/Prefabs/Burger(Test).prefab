@@ -262,8 +262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hamburguesa: {fileID: 6932006767579964791}
-  material: {fileID: 2100000, guid: 9bfe8f038fb80fb4380a462f670f0c7b, type: 2}
-  material2: {fileID: 2100000, guid: 38882960f55b2c543beaafbd4b35a0fc, type: 2}
+  anborguesa: {fileID: 0}
 --- !u!1 &6932006768836681210
 GameObject:
   m_ObjectHideFlags: 0
@@ -339,5 +338,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hamburguesa: {fileID: 6932006767579964791}
-  material: {fileID: 2100000, guid: 9bfe8f038fb80fb4380a462f670f0c7b, type: 2}
-  material2: {fileID: 2100000, guid: 38882960f55b2c543beaafbd4b35a0fc, type: 2}
+  anborguesa: {fileID: 0}
