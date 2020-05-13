@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4223482314817180433}
   - component: {fileID: 1718120830600823722}
   - component: {fileID: 108025216838437241}
+  - component: {fileID: 2346554087657273243}
   m_Layer: 0
   m_Name: TOPBun
   m_TagString: Untagged
@@ -129,6 +130,20 @@ MonoBehaviour:
   m_snapOrientation: 1
   m_snapOffset: {fileID: 0}
   m_grabPoints: []
+--- !u!138 &2346554087657273243
+FixedJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2239822483091247756}
+  m_ConnectedBody: {fileID: 0}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!1 &2363879471759859976
 GameObject:
   m_ObjectHideFlags: 0
