@@ -6,6 +6,7 @@ public class PruebaColliders : MonoBehaviour
 {
     public GameObject anborguesa;
     private GameObject bun = null;
+    private Vector3 escalaCollider;
     private Renderer rend;
     private FixedJoint fj;
 
@@ -18,7 +19,12 @@ public class PruebaColliders : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if(bun != null)
+        {
+            escalaCollider = bun.transform.position;
+            escalaCollider.y += bun.transform.position.y;
+            anborguesa.transform.SetPositionAndRotation(escalaCollider,anborguesa.transform.rotation);
+        }
     }
 
     void OnCollisionEnter(Collision colliderInfo)
@@ -26,6 +32,9 @@ public class PruebaColliders : MonoBehaviour
         if(this.name == "Collider_Bot" && colliderInfo.collider.name == "BunTOP")
         {
             bun = colliderInfo.gameObject;
+            escalaCollider = bun.transform.position;
+            escalaCollider.y += bun.transform.position.y;
+            anborguesa.transform.SetPositionAndRotation(escalaCollider, anborguesa.transform.rotation);
             anborguesa.transform.parent = bun.transform;
             fj = bun.GetComponent<FixedJoint>();
             fj.connectedBody = anborguesa.GetComponent<Rigidbody>();
