@@ -4,40 +4,64 @@ using UnityEngine;
 
 public class PruebaColliders : MonoBehaviour
 {
-    public GameObject anborguesa;
-    private GameObject bun = null;
+    private GameObject elOtro = null;
     private Vector3 escalaCollider;
-    private Renderer rend;
-    private FixedJoint fj;
+    private float alturaCollider;
+    public GameObject pruebaBurgers;
+    private bool yaChoco;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        yaChoco = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(bun != null)
+        if(elOtro != null)
         {
-            escalaCollider = bun.transform.position;
-            escalaCollider.y += bun.transform.position.y;
-            anborguesa.transform.SetPositionAndRotation(escalaCollider,anborguesa.transform.rotation);
+            if (elOtro.name == "BunBOT")
+            {
+                escalaCollider = elOtro.transform.position;
+                escalaCollider.y += alturaCollider / 2;
+                pruebaBurgers.transform.SetPositionAndRotation(escalaCollider, elOtro.transform.rotation);
+            }
+            if (elOtro.name == "BunTOP")
+            {
+                escalaCollider = pruebaBurgers.transform.position;
+                escalaCollider.y += alturaCollider / 2;
+                elOtro.transform.SetPositionAndRotation(escalaCollider, pruebaBurgers.transform.rotation);
+            }
         }
     }
 
     void OnCollisionEnter(Collision colliderInfo)
     {
-        if(this.name == "Collider_Bot" && colliderInfo.collider.name == "BunTOP")
+        Debug.Log(this.name + " choco con " + colliderInfo.collider.name);
+        if (this.name == "Collider_Bot" && colliderInfo.gameObject.name == "BunBOT" && yaChoco == false)
         {
-            bun = colliderInfo.gameObject;
-            escalaCollider = bun.transform.position;
-            escalaCollider.y += bun.transform.position.y;
-            anborguesa.transform.SetPositionAndRotation(escalaCollider, anborguesa.transform.rotation);
-            anborguesa.transform.parent = bun.transform;
-            fj = bun.GetComponent<FixedJoint>();
-            fj.connectedBody = anborguesa.GetComponent<Rigidbody>();
+            escalaCollider = colliderInfo.gameObject.transform.position;
+            alturaCollider = colliderInfo.gameObject.transform.localScale.y;
+            alturaCollider += pruebaBurgers.transform.localScale.y;
+            escalaCollider.y += alturaCollider / 2;
+            Debug.Log(alturaCollider);
+            pruebaBurgers.transform.SetPositionAndRotation(escalaCollider, pruebaBurgers.transform.rotation);
+            pruebaBurgers.transform.parent = colliderInfo.gameObject.transform;
+            elOtro = colliderInfo.gameObject;
+            yaChoco = true;
+        }
+        if (this.name == "Collider_Top" && colliderInfo.gameObject.name == "BunTOP" && yaChoco == false)
+        {
+            elOtro = colliderInfo.gameObject;
+            escalaCollider = pruebaBurgers.transform.position;
+            alturaCollider = pruebaBurgers.transform.localScale.y;
+            //alturaCollider += (((colliderInfo.gameObject.transform.localScale.y)/2)+ 0.05f);
+            escalaCollider.y += alturaCollider / 2;
+            Debug.Log(alturaCollider);
+            elOtro.transform.SetPositionAndRotation(escalaCollider, elOtro.transform.rotation);
+            elOtro.transform.parent = pruebaBurgers.transform;
+            yaChoco = true;
         }
     }
 }

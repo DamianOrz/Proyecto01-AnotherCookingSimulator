@@ -11,10 +11,11 @@ public class cuandoSeCocina : MonoBehaviour
     Renderer rend;
     bool touchGrill=false, estaSonando=false;
     public ParticleSystem grillSmoke;
+    public GameObject burger;
 
     void Start()
     {
-        rend = GetComponent<Renderer>();
+        rend = burger.GetComponent<Renderer>();
         rend.enabled = true;
     }
     // Se cuenta el tiempo que el pati esta tocando el horno
@@ -26,7 +27,7 @@ public class cuandoSeCocina : MonoBehaviour
             if (estaSonando == false)
             {
                 estaSonando = true;
-                FindObjectOfType<AudioManager>().PlayInPosition("Fry",this.gameObject.transform.position);
+                FindObjectOfType<AudioManager>().PlayInPosition("Fry",burger.transform.position);
             }
 
             if (!grillSmoke.isPlaying)

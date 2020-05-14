@@ -6,6 +6,7 @@ TagManager:
   tags:
   - SurfaceOfGrill
   - Burger
+  - Escenario
   layers:
   - Default
   - TransparentFX

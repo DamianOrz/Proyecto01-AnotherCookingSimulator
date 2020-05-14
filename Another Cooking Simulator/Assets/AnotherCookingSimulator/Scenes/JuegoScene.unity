@@ -264,7 +264,7 @@ GameObject:
   - component: {fileID: 312036559}
   m_Layer: 0
   m_Name: Table
-  m_TagString: Untagged
+  m_TagString: Escenario
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -834,7 +834,7 @@ GameObject:
   - component: {fileID: 637581273}
   m_Layer: 0
   m_Name: Grill
-  m_TagString: Untagged
+  m_TagString: Escenario
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1152,7 +1152,7 @@ GameObject:
   - component: {fileID: 933325090}
   m_Layer: 0
   m_Name: Floor
-  m_TagString: Untagged
+  m_TagString: Escenario
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1339,7 +1339,7 @@ GameObject:
   - component: {fileID: 956446010}
   m_Layer: 0
   m_Name: Grill
-  m_TagString: Untagged
+  m_TagString: Escenario
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1815,7 +1815,7 @@ GameObject:
   - component: {fileID: 2008956998}
   m_Layer: 0
   m_Name: Cocina
-  m_TagString: Untagged
+  m_TagString: Escenario
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2020,6 +2020,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1349905044506496228, guid: 5354b0100577075428fd5551624a94be,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6157273465374906529, guid: 5354b0100577075428fd5551624a94be,
         type: 3}
       propertyPath: m_Name
@@ -2201,7 +2206,7 @@ PrefabInstance:
     - target: {fileID: 9132635369590238084, guid: ce28b19c914ca6c4d983e692b62d82d8,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2346554087657273243, guid: ce28b19c914ca6c4d983e692b62d82d8, type: 3}
