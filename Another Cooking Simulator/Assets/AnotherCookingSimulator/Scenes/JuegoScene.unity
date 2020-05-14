@@ -1751,6 +1751,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
+  - name: ButtonClick
+    clip: {fileID: 8300000, guid: c8e73707566b0c44fbe93595ba6c5879, type: 3}
+    volume: 0.471
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
   - name: Fry
     clip: {fileID: 8300000, guid: 8395ef7cd364163498c2c018baa40358, type: 3}
     volume: 0.471
@@ -1824,6 +1830,22 @@ MonoBehaviour:
   outputOnMax: {fileID: 3927981410965967560, guid: 7c91c3fcfcd47164e90de2dd1b0df10b,
     type: 3}
   outputOnMin: Boton en 0
+--- !u!114 &1912764829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912764822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 1414658159
+  serverOnly: 0
+  m_AssetId: 2e35d8d95f56e4a4cbbc883051640917
+  hasSpawned: 0
 --- !u!1 &2001765610
 GameObject:
   m_ObjectHideFlags: 0
@@ -2086,6 +2108,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7132283997897916828, guid: 2e35d8d95f56e4a4cbbc883051640917,
+        type: 3}
+      propertyPath: pressSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7132283997897916828, guid: 2e35d8d95f56e4a4cbbc883051640917,
+        type: 3}
+      propertyPath: returnSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7132283997897916828, guid: 2e35d8d95f56e4a4cbbc883051640917,
+        type: 3}
+      propertyPath: pressedDistance
+      value: -0.03
+      objectReference: {fileID: 0}
     - target: {fileID: 7132283997897916829, guid: 2e35d8d95f56e4a4cbbc883051640917,
         type: 3}
       propertyPath: outputOnMin
