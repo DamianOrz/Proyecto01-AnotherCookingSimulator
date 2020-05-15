@@ -5,6 +5,7 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
     public Sound[] sounds;
+    private Sound s;
     // Start is called before the first frame update
     void Awake()
     {
@@ -19,17 +20,17 @@ public class AudioManager : MonoBehaviour
     }
     public void PlayInPosition(string name, Vector3 position)
     {
-        Sound s = Array.Find(sounds, sound => sound.name == name);
+        s = Array.Find(sounds, sound => sound.name == name);
         if (s == null)
         {
             return;
         }
         AudioSource.PlayClipAtPoint(s.clip, transform.position = position);
     }
-    public bool sigueSonando(string name)
+    public bool sigueSonando(/*string name*/)
     {
         bool sigueSonando;
-        Sound s = Array.Find(sounds, sound => sound.name == name);
+        //s = Array.Find(sounds, sound => sound.name == name);
         sigueSonando = s.source.isPlaying;
         return sigueSonando;
     }
@@ -39,7 +40,11 @@ public class AudioManager : MonoBehaviour
     }
     public Sound pedirSource(string name)
     {
-        Sound s = Array.Find(sounds, sound => sound.name == name);
-        return s;
+        Sound sonido = Array.Find(sounds, sound => sound.name == name);
+        return sonido;
+    }
+    public void pararDeSonar()
+    {
+
     }
 }

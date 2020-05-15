@@ -29,12 +29,6 @@ public class cuandoSeCocina : MonoBehaviour
                 estaSonando = true;
                 FindObjectOfType<AudioManager>().PlayInPosition("Fry",burger.transform.position);
             }
-
-            if (!grillSmoke.isPlaying)
-            {
-              grillSmoke.Play();
-            }
-            
             tiempoCocinado += Time.deltaTime;
             cambiarEstado();
         }
@@ -45,6 +39,7 @@ public class cuandoSeCocina : MonoBehaviour
         if (collisionInfo.collider.tag == "SurfaceOfGrill")
         {
             touchGrill = true;
+            grillSmoke.Play();
         }
     }
     // Cuando un pati deja de tocar el horno se cambia a false el bool::touchGrill
@@ -69,7 +64,6 @@ public class cuandoSeCocina : MonoBehaviour
         else if(tiempoCocinado>=6)
         {
             rend.sharedMaterial = material[0];
-
             var main = grillSmoke.main;
             //main.startColor = new Color(0, 0, 23, 1);
         }
