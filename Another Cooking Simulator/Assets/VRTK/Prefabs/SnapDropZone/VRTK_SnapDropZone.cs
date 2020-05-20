@@ -58,6 +58,8 @@ namespace VRTK
             UseParenting
         }
 
+        public GameObject padre;
+
         [Tooltip("A game object that is used to draw the highlighted destination for within the drop zone. This object will also be created in the Editor for easy placement.")]
         public GameObject highlightObjectPrefab;
         [Tooltip("The Snap Type to apply when a valid interactable object is dropped within the snap zone.")]
@@ -475,6 +477,7 @@ namespace VRTK
                     if (!willSnap)
                     {
                         OnObjectEnteredSnapDropZone(SetSnapDropZoneEvent(interactableObjectCheck.gameObject));
+                        //Debug.Log("el nombre de interactableObjectCheck.gameObject es: " + interactableObjectCheck.gameObject.name);  Esto pasa cuando el objeto que estas agarrando entra en la zona del collider de este drop zone
                     }
                     willSnap = true;
                     ToggleHighlightColor();
@@ -715,6 +718,9 @@ namespace VRTK
                     }
 
                     interactableObjectCheck.ToggleSnapDropZone(this, true);
+                    //Rigidbody rg = padre.GetComponent<Rigidbody>();
+                    //rg.isKinematic = true;
+                    //Debug.Log("el padre de " + this.name + " es: " + padre.name);
                 }
             }
 
@@ -776,6 +782,7 @@ namespace VRTK
 
         protected virtual void UnsnapObject()
         {
+            Debug.Log("mal ahi lo unsnapearon");
             if (currentSnappedObject != null)
             {
                 ResetPermanentCloneColliders(currentSnappedObject.gameObject);
@@ -958,7 +965,13 @@ namespace VRTK
             //force snap settings on
             willSnap = true;
             //Force touch one of the object's colliders on this trigger collider
+            Rigidbody rb = padre.GetComponent<Rigidbody>();
+            rb.isKinematic = true;
+            Rigidbody rb2 = objectToSnap.GetComponent<Rigidbody>();
+            rb2.isKinematic = true;
             SnapObjectToZone(objectToSnap);
+            objectToSnap.transform.SetParent(padre.transform);
+            Debug.Log("el padre de objectToSnap es " + objectToSnap.transform.parent);
         }
 
         protected virtual IEnumerator AttemptForceSnapAtEndOfFrame(VRTK_InteractableObject objectToSnap)
