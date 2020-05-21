@@ -17,18 +17,18 @@ public class PlayerRayCasting : MonoBehaviour
     {
         player = GameObject.FindWithTag("Player");
     }
-
+    [SerializeField] Pedido pedido = new Pedido();
     // Update is called once per frame
     void Update()
     {
         Debug.DrawRay(this.transform.position, this.transform.forward * distanceToSee, Color.magenta);
         if(Physics.Raycast(this.transform.position,this.transform.forward, out whatIHit,distanceToSee))
         {
-            if(Input.GetKeyDown(KeyCode.E) && whatIHit.collider.gameObject.tag== "Interactable-object")
+            if(Input.GetKeyDown(KeyCode.E) && whatIHit.collider.gameObject.tag== "BtnCrearPedidoRandom")
             {
-                player.GetComponent<Inventory>().countOfBalls++;
-                Debug.Log("I have a ball");
-                Destroy(whatIHit.collider.gameObject);
+                Debug.Log("Se crea el pedido random");
+                FindObjectOfType<AudioManager>().PlayInPosition("ButtonClick", whatIHit.collider.gameObject.transform.position);
+                pedido=PedidoManager.crearPedidoRandom();
             }
         }
         if (Physics.Raycast(this.transform.position, this.transform.forward, out whatIHit, distanceToSee))
@@ -41,7 +41,6 @@ public class PlayerRayCasting : MonoBehaviour
                     Debug.Log("I put a ball");
                     player.GetComponent<Inventory>().countOfBalls--;
                 }
-                
             }
         }
     }
