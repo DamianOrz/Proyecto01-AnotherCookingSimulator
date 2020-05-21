@@ -62,5 +62,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  VrUnit: {fileID: 4614475008235875038, guid: cd9ef17474e611f49b895793957f7327, type: 3}
-  PcUnit: {fileID: 1480027675339556, guid: 21daf89214c6ee443ad6875b73083c60, type: 3}
+  PcUnit: {fileID: 2603676936608662819, guid: b4d35aed20e4c204ab639a0edf15cc3a, type: 3}
