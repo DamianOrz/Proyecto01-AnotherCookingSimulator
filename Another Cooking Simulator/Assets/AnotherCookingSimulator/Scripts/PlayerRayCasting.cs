@@ -29,6 +29,10 @@ public class PlayerRayCasting : MonoBehaviour
                 Debug.Log("Se crea el pedido random");
                 FindObjectOfType<AudioManager>().PlayInPosition("ButtonClick", whatIHit.collider.gameObject.transform.position);
                 pedido=PedidoManager.crearPedidoRandom();
+
+                //Activa la animacion
+                GameObject BotonPedidos = whatIHit.collider.gameObject;
+                BotonPedidos.GetComponent<Animation>().Play();
             }
         }
         if (Physics.Raycast(this.transform.position, this.transform.forward, out whatIHit, distanceToSee))
