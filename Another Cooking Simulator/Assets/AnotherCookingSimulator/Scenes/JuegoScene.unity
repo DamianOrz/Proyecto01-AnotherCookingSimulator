@@ -1190,7 +1190,12 @@ PrefabInstance:
     - target: {fileID: 890868157246367147, guid: b4d35aed20e4c204ab639a0edf15cc3a,
         type: 3}
       propertyPath: m_Height
-      value: 3
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 890868157246367147, guid: b4d35aed20e4c204ab639a0edf15cc3a,
+        type: 3}
+      propertyPath: m_StepOffset
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 1400374397050109886, guid: b4d35aed20e4c204ab639a0edf15cc3a,
         type: 3}
@@ -1200,7 +1205,7 @@ PrefabInstance:
     - target: {fileID: 1400374397050109886, guid: b4d35aed20e4c204ab639a0edf15cc3a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.415
+      value: 7.14
       objectReference: {fileID: 0}
     - target: {fileID: 1400374397050109886, guid: b4d35aed20e4c204ab639a0edf15cc3a,
         type: 3}
@@ -1250,7 +1255,17 @@ PrefabInstance:
     - target: {fileID: 1400374397050109886, guid: b4d35aed20e4c204ab639a0edf15cc3a,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.47765
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1400374397050109886, guid: b4d35aed20e4c204ab639a0edf15cc3a,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1400374397050109886, guid: b4d35aed20e4c204ab639a0edf15cc3a,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2603676936608662819, guid: b4d35aed20e4c204ab639a0edf15cc3a,
         type: 3}
@@ -3593,7 +3608,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1133895438}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.24, z: 0}
+  m_LocalPosition: {x: 0, y: -1.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1528763226}
@@ -3630,8 +3645,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1528763225}
-  speed: 12
+  speed: 6
   gravity: -9.81
+  jumpHeight: 2
+  groundCheck: {fileID: 1133895439}
+  groundDistance: 0.4
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!143 &1528763225 stripped
 CharacterController:
   m_CorrespondingSourceObject: {fileID: 890868157246367147, guid: b4d35aed20e4c204ab639a0edf15cc3a,
