@@ -1949,6 +1949,7 @@ GameObject:
   - component: {fileID: 875221210}
   - component: {fileID: 875221209}
   - component: {fileID: 875221208}
+  - component: {fileID: 875221211}
   m_Layer: 8
   m_Name: Boton
   m_TagString: BtnCrearPedidoRandom
@@ -2030,6 +2031,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 875221206}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!111 &875221211
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 875221206}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!4 &876102498 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8122809592802399163, guid: 66abfd478215eef4cbef89c92ac2e0c4,
