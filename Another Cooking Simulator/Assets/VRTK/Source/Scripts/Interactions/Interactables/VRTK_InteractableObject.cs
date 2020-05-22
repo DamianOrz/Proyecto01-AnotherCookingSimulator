@@ -452,10 +452,13 @@ namespace VRTK
         /// </summary>
         /// <param name="grabbedBy">An optional GameObject to check if the Interactable Object is grabbed by that specific GameObject. Defaults to `null`</param>
         /// <returns>Returns `true` if the Interactable Object is currently being grabbed.</returns>
+        public Rigidbody rb;
         public virtual bool IsGrabbed(GameObject grabbedBy = null)
         {
             if (grabbingObjects.Count > 0 && grabbedBy != null)
             {
+                Debug.Log(this.name + " esta siendo agarrado");
+                rb.isKinematic = false;
                 return (grabbingObjects.Contains(grabbedBy));
             }
             return (grabbingObjects.Count > 0);
@@ -541,6 +544,8 @@ namespace VRTK
         /// The Grabbed method is called automatically when the Interactable Object is grabbed initially.
         /// </summary>
         /// <param name="currentGrabbingObject">The interacting object that is currently grabbing this Interactable Object.</param>
+        /// 
+        public VRTK_SnapDropZone snapDropZone;
         public virtual void Grabbed(VRTK_InteractGrab currentGrabbingObject = null)
         {
             GameObject currentGrabbingGameObject = (currentGrabbingObject != null ? currentGrabbingObject.gameObject : null);
@@ -573,6 +578,8 @@ namespace VRTK
             {
                 SecondaryControllerUngrab(previousGrabbingGameObject);
             }
+            Debug.Log(this.name + " fue soltado");
+            this.isKinematic = false;
             OnInteractableObjectUngrabbed(SetInteractableObjectEvent(previousGrabbingGameObject));
         }
 

@@ -58,7 +58,7 @@ namespace VRTK
             UseParenting
         }
 
-        public GameObject padre;
+        public VRTK_InteractableObject padre;
 
         [Tooltip("A game object that is used to draw the highlighted destination for within the drop zone. This object will also be created in the Editor for easy placement.")]
         public GameObject highlightObjectPrefab;
@@ -439,7 +439,7 @@ namespace VRTK
             {
                 StopCoroutine(overridePreviousStateAtEndOfFrameRoutine);
             }
-
+            Debug.Log("Entro en OnDisable");
             ForceUnsnap();
             SetHighlightObjectActive(false);
             UnregisterAllUngrabEvents();
@@ -457,11 +457,13 @@ namespace VRTK
 
         protected virtual void OnTriggerEnter(Collider collider)
         {
+            //Debug.Log(collider.name + " entro en el trigger");
             CheckCanSnap(collider.GetComponentInParent<VRTK_InteractableObject>());
         }
 
         protected virtual void OnTriggerExit(Collider collider)
         {
+            //Debug.Log("exiteo el trigger");
             CheckCanUnsnap(collider.GetComponentInParent<VRTK_InteractableObject>());
         }
 
@@ -487,10 +489,12 @@ namespace VRTK
 
         protected virtual void CheckCanUnsnap(VRTK_InteractableObject interactableObjectCheck)
         {
+            Debug.Log("entro en checkCanUnsnap");
             if (interactableObjectCheck != null && currentValidSnapInteractableObjects.Contains(interactableObjectCheck) && ValidUnsnap(interactableObjectCheck))
             {
-                if (isSnapped && currentSnappedObject == interactableObjectCheck)
+                if (isSnapped && currentSnappedObject == interactableObjectCheck && interactableObjectCheck.IsGrabbed())
                 {
+                    Debug.Log("entro en checkCanUnsnap");
                     ForceUnsnap();
                 }
 
@@ -548,6 +552,7 @@ namespace VRTK
         {
             if (isSnapped && (currentSnappedObject == null || !currentSnappedObject.gameObject.activeInHierarchy))
             {
+                Debug.Log("entro en checkSnappedItemExists");
                 ForceUnsnap();
                 OnObjectUnsnappedFromDropZone(SetSnapDropZoneEvent((currentSnappedObject != null ? currentSnappedObject.gameObject : null)));
             }
@@ -792,6 +797,7 @@ namespace VRTK
             isSnapped = false;
             wasSnapped = true;
             VRTK_InteractableObject checkCanSnapObject = currentSnappedObject;
+            checkCanSnapObject.isKinematic = false;
             currentSnappedObject = null;
             ResetSnapDropZoneJoint();
 
