@@ -139,9 +139,9 @@ GameObject:
   - component: {fileID: 8615481361446125991}
   - component: {fileID: 237517090837329445}
   - component: {fileID: 2935224752259941744}
-  - component: {fileID: 5494480875046434468}
+  - component: {fileID: -3572093410102117422}
   m_Layer: 0
-  m_Name: First Person Player
+  m_Name: PCPlayer
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -207,6 +207,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f145b3168665c0d47b4e7b19e15108d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   controller: {fileID: 8920691298893338034}
   speed: 6
   gravity: -9.81
@@ -250,27 +252,28 @@ MonoBehaviour:
   localPositionSensitivity: 0.01
   localRotationSensitivity: 0.01
   localScaleSensitivity: 0.01
---- !u!114 &5494480875046434468
+--- !u!114 &-3572093410102117422
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6030962872811205946}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bc425788d239a14dbad48a11f5af3b7, type: 3}
+  m_Script: {fileID: 11500000, guid: 9307f4e8c9a5e894bac991ad04e71306, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  componentsToDisable:
+  componentsToDisableOfVR:
   - {fileID: 8615481361446125991}
   - {fileID: 7745552787337676139}
   - {fileID: 6758149732822935998}
-  - {fileID: 6782277203635071270}
-  - {fileID: 764780745645010201}
   - {fileID: 7439290454514386484}
+  - {fileID: 764780745645010201}
+  - {fileID: 6782277203635071270}
+  componentsToDisableOfPC: []
 --- !u!1 &8615481361839689215
 GameObject:
   m_ObjectHideFlags: 0
