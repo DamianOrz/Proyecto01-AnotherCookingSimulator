@@ -22,8 +22,6 @@ public class PlayerMovement : NetworkBehaviour
     
     void Update()
     {
-        if (hasAuthority)
-        {
             isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
             
             if (isGrounded && velocity.y < 0)
@@ -44,6 +42,5 @@ public class PlayerMovement : NetworkBehaviour
             {
                 velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
             }
-        }
     }
 }

@@ -5,24 +5,19 @@ using Mirror;
 
 public class PlayerConnectionObject : NetworkBehaviour
 {
-    static bool bandera = true;
+    private static bool bandera = true;
 
-    public GameObject VrUnit;
-    public GameObject PcUnit;
+    public GameObject[] PlayerArray;
+
     // Start is called before the first frame update
     void Start()
     {
+        if(isLocalPlayer)
+        {
+            return;
+        }
         //Cada vez que entra un jugador se crea una unidad fisica en el servidor
-        if(bandera==true)
-        {
-            CmdSpawnMyVR();
-            bandera = false;
-        }
-        else
-        {
-          CmdSpawnMyPC();
-          bandera = true;
-        }
+        CmdSpawnPlayers();
     }
     // Update is called once per frame
     void Update()
@@ -30,16 +25,19 @@ public class PlayerConnectionObject : NetworkBehaviour
 
     }
     [Command]
-    void CmdSpawnMyVR()
+    void CmdSpawnPlayers()
     {
-        GameObject go = Instantiate(VrUnit);
-        //go.GetComponent<NetworkIdentity>().AssignClientAuthority(connectionToClient);
-        NetworkServer.Spawn(go,connectionToClient);
-    }
-    [Command]
-    void CmdSpawnMyPC()
-    {
-        GameObject go = Instantiate(PcUnit);
-        NetworkServer.Spawn(go,connectionToClient);
-    }
+        if ()
+        {
+            GameObject go = Instantiate(PlayerArray[0]);
+            //go.GetComponent<NetworkIdentity>().AssignClientAuthority(connectionToClient);
+            NetworkServer.Spawn(go, connectionToClient);
+            bandera = false;
+        }else
+        {
+            GameObject go = Instantiate(PlayerArray[1]);
+            //go.GetComponent<NetworkIdentity>().AssignClientAuthority(connectionToClient);
+            NetworkServer.Spawn(go,connectionToClient);
+        }
+    } 
 }

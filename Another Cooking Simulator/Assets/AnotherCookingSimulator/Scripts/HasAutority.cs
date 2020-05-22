@@ -12,8 +12,6 @@ public class HasAutority : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (!hasAuthority)
-        {
             if(this.gameObject.name=="VRPlayer")
                 for (int i = 0; i < componentsToDisableOfVR.Length; i++)
                 {
@@ -26,7 +24,6 @@ public class HasAutority : NetworkBehaviour
                     componentsToDisableOfVR[i].enabled = false;
                 }       
             }
-        }
     }
     void Update()
     {

@@ -24,12 +24,13 @@ public class PlayerRayCasting : MonoBehaviour
         Debug.DrawRay(this.transform.position, this.transform.forward * distanceToSee, Color.magenta);
         if(Physics.Raycast(this.transform.position,this.transform.forward, out whatIHit,distanceToSee))
         {
-            if(Input.GetKeyDown(KeyCode.E) && whatIHit.collider.gameObject.tag== "BtnCrearPedidoRandom")
+            if (Input.GetKeyDown(KeyCode.E) && whatIHit.collider.gameObject.tag == "BtnCrearPedidoRandom")
             {
                 Debug.Log("Se crea el pedido random");
                 FindObjectOfType<AudioManager>().PlayInPosition("ButtonClick", whatIHit.collider.gameObject.transform.position);
-                pedido=PedidoManager.crearPedidoRandom();
-
+                PedidoManager.crearPedidoRandom();
+                List<Pedido> pedidos = PedidoManager.getListaPedidos();
+                Debug.Log("");
                 GameObject Boton = whatIHit.collider.gameObject;
                 Boton.GetComponent<Animation>().Play();
             }
