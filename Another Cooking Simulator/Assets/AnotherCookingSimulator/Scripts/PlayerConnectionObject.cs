@@ -6,6 +6,7 @@ using Mirror;
 public class PlayerConnectionObject : NetworkBehaviour
 {
     static bool bandera = true;
+
     public GameObject VrUnit;
     public GameObject PcUnit;
     // Start is called before the first frame update
@@ -32,13 +33,13 @@ public class PlayerConnectionObject : NetworkBehaviour
     void CmdSpawnMyVR()
     {
         GameObject go = Instantiate(VrUnit);
-
-        NetworkServer.Spawn(go);
+        //go.GetComponent<NetworkIdentity>().AssignClientAuthority(connectionToClient);
+        NetworkServer.Spawn(go,connectionToClient);
     }
     [Command]
     void CmdSpawnMyPC()
     {
         GameObject go = Instantiate(PcUnit);
-        NetworkServer.Spawn(go);
+        NetworkServer.Spawn(go,connectionToClient);
     }
 }
