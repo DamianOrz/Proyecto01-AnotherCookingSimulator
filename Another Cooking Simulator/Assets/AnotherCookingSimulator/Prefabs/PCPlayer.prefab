@@ -138,9 +138,10 @@ GameObject:
   - component: {fileID: 7745552787337676139}
   - component: {fileID: 8615481361446125991}
   - component: {fileID: 237517090837329445}
-  - component: {fileID: 3341972325209337259}
+  - component: {fileID: 2935224752259941744}
+  - component: {fileID: -3572093410102117422}
   m_Layer: 0
-  m_Name: First Person Player
+  m_Name: PCPlayer
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -206,6 +207,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f145b3168665c0d47b4e7b19e15108d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   controller: {fileID: 8920691298893338034}
   speed: 6
   gravity: -9.81
@@ -231,7 +234,7 @@ MonoBehaviour:
   serverOnly: 0
   m_AssetId: 
   hasSpawned: 0
---- !u!114 &3341972325209337259
+--- !u!114 &2935224752259941744
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -244,11 +247,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   syncMode: 0
-  syncInterval: 0.1
+  syncInterval: 0
   clientAuthority: 0
   localPositionSensitivity: 0.01
   localRotationSensitivity: 0.01
   localScaleSensitivity: 0.01
+--- !u!114 &-3572093410102117422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6030962872811205946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9307f4e8c9a5e894bac991ad04e71306, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  componentsToDisableOfVR:
+  - {fileID: 8615481361446125991}
+  - {fileID: 7745552787337676139}
+  - {fileID: 6758149732822935998}
+  - {fileID: 7439290454514386484}
+  - {fileID: 764780745645010201}
+  - {fileID: 6782277203635071270}
+  componentsToDisableOfPC: []
 --- !u!1 &8615481361839689215
 GameObject:
   m_ObjectHideFlags: 0
@@ -290,6 +315,8 @@ GameObject:
   - component: {fileID: 5847729354869451453}
   - component: {fileID: 3901681121555984112}
   - component: {fileID: 4025997273560923352}
+  - component: {fileID: 246186011778081393}
+  - component: {fileID: 8812823242051652987}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -358,3 +385,38 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &246186011778081393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8632099884428874047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  m_AssetId: 
+  hasSpawned: 0
+--- !u!114 &8812823242051652987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8632099884428874047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 734b48bea0b204338958ee3d885e11f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0
+  clientAuthority: 0
+  localPositionSensitivity: 0.01
+  localRotationSensitivity: 0.01
+  localScaleSensitivity: 0.01
+  target: {fileID: 0}
