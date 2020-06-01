@@ -27,7 +27,7 @@ public class PlayerConnectionObject : NetworkBehaviour
     [Command]
     void CmdSpawnPlayers()
     {
-        if ()
+        if (base.hasAuthority)
         {
             GameObject go = Instantiate(PlayerArray[0]);
             //go.GetComponent<NetworkIdentity>().AssignClientAuthority(connectionToClient);
