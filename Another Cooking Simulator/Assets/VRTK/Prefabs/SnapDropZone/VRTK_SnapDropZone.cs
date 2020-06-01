@@ -58,7 +58,7 @@ namespace VRTK
             UseParenting
         }
 
-        public VRTK_InteractableObject padre;
+        //public VRTK_InteractableObject padre;
 
         [Tooltip("A game object that is used to draw the highlighted destination for within the drop zone. This object will also be created in the Editor for easy placement.")]
         public GameObject highlightObjectPrefab;
@@ -439,7 +439,7 @@ namespace VRTK
             {
                 StopCoroutine(overridePreviousStateAtEndOfFrameRoutine);
             }
-            Debug.Log("Entro en OnDisable");
+            //Debug.Log("Entro en OnDisable");
             ForceUnsnap();
             SetHighlightObjectActive(false);
             UnregisterAllUngrabEvents();
@@ -489,7 +489,7 @@ namespace VRTK
 
         protected virtual void CheckCanUnsnap(VRTK_InteractableObject interactableObjectCheck)
         {
-            Debug.Log("entro en checkCanUnsnap");
+            //Debug.Log("entro en checkCanUnsnap");
             if (interactableObjectCheck != null && currentValidSnapInteractableObjects.Contains(interactableObjectCheck) && ValidUnsnap(interactableObjectCheck))
             {
                 if (isSnapped && currentSnappedObject == interactableObjectCheck && interactableObjectCheck.IsGrabbed())
@@ -703,8 +703,8 @@ namespace VRTK
                         //Turn off the drop zone highlighter
                         SetHighlightObjectActive(false);
                     }
-
                     Vector3 newLocalScale = GetNewLocalScale(interactableObjectCheck);
+                    Debug.Log("newLocalScale: " + newLocalScale.x + ", " + newLocalScale.y + ", " + newLocalScale.z);
                     if (transitionInPlaceRoutine != null)
                     {
                         StopCoroutine(transitionInPlaceRoutine);
@@ -787,6 +787,12 @@ namespace VRTK
 
         protected virtual void UnsnapObject()
         {
+            /*Transform padreTodo = padre.transform.parent.transform.parent;
+            if(padreTodo != null)
+            {
+                Debug.Log("padreTodoEnUnSnap: " + padreTodo.localScale.x + ", " + padreTodo.localScale.y + ", " + padreTodo.localScale.z);
+                currentSnappedObject.transform.localScale.Set(currentSnappedObject.publicPreviousLocalScale.x * padreTodo.localScale.x, currentSnappedObject.publicPreviousLocalScale.y * padreTodo.localScale.y, currentSnappedObject.publicPreviousLocalScale.z * padreTodo.localScale.z);// = currentSnappedObject.publicPreviousLocalScale;
+            }*/
             Debug.Log("mal ahi lo unsnapearon");
             if (currentSnappedObject != null)
             {
@@ -826,12 +832,29 @@ namespace VRTK
         protected virtual Vector3 GetNewLocalScale(VRTK_InteractableObject checkObject)
         {
             // If apply scaling is checked then use the drop zone scale to resize the object
+            Debug.Log("checkObject: " + checkObject.transform.localScale.x + ", " + checkObject.transform.localScale.y + ", " + checkObject.transform.localScale.z);
             Vector3 newLocalScale = checkObject.transform.localScale;
             if (applyScalingOnSnap)
             {
-                checkObject.StoreLocalScale();
-                newLocalScale = Vector3.Scale(checkObject.transform.localScale, transform.localScale);
+                /*
+                if(snapType == SnapTypes.UseParenting)
+                {
+                    checkObject.StoreLocalScale();
+                    newLocalScale.Set(newLocalScale.x / padre.transform.localScale.x, newLocalScale.y / padre.transform.localScale.y, newLocalScale.z / padre.transform.localScale.z);
+                }
+                */
+                newLocalScale = Vector3.Scale(transform.localScale, checkObject.transform.localScale);
             }
+            /*
+            if (snapType == SnapTypes.UseJoint)
+            {
+                Transform padreTodo = padre.transform.parent.transform.parent;
+                if (padreTodo != null)
+                {
+                    checkObject.StoreLocalScale();
+                    newLocalScale.Set(newLocalScale.x / padreTodo.transform.localScale.x, newLocalScale.y / padreTodo.transform.localScale.y, newLocalScale.z / padreTodo.transform.localScale.z);
+                }
+            }*/
             return newLocalScale;
         }
 
@@ -857,7 +880,13 @@ namespace VRTK
                 {
                     ioTransform.position = Vector3.Lerp(startPosition, endSettings.transform.position, (elapsedTime / duration));
                     ioTransform.rotation = Quaternion.Lerp(startRotation, endSettings.transform.rotation, (elapsedTime / duration));
-                    ioTransform.localScale = Vector3.Lerp(startScale, endScale, (elapsedTime / duration));
+                    //endScale.Set(endScale.x * this.transform.localScale.x, endScale.y * this.transform.localScale.y, endScale.z * this.transform.localScale.z);
+                    ioTransform.localScale = endScale;//Vector3.Scale(startScale, endScale/*, (elapsedTime / duration)*/);
+                    /*
+                    Debug.Log("this: " + this.transform.localScale.x + ", " + this.transform.localScale.y + ", " + this.transform.localScale.z);
+                    Debug.Log("startScale: " + startScale.x + ", " + startScale.y + ", " + startScale.z);
+                    Debug.Log("endScale: " + endScale.x + ", " + endScale.y + ", " + endScale.z);
+                    */
                 }
                 yield return null;
             }
@@ -868,6 +897,7 @@ namespace VRTK
                 ioTransform.position = endSettings.transform.position;
                 ioTransform.rotation = endSettings.transform.rotation;
                 ioTransform.localScale = endScale;
+                Debug.Log("endScale 2 : " + endScale.x + ", " + endScale.y + ", " + endScale.z);
             }
 
             ioCheck.isKinematic = storedKinematicState;
@@ -971,13 +1001,35 @@ namespace VRTK
             //force snap settings on
             willSnap = true;
             //Force touch one of the object's colliders on this trigger collider
-            Rigidbody rb = padre.GetComponent<Rigidbody>();
-            rb.isKinematic = true;
-            Rigidbody rb2 = objectToSnap.GetComponent<Rigidbody>();
-            rb2.isKinematic = true;
+            //Rigidbody rb = padre.GetComponent<Rigidbody>();
+            //rb.isKinematic = true;
+            //Rigidbody rb2 = objectToSnap.GetComponent<Rigidbody>();
+            //rb2.isKinematic = true;
             SnapObjectToZone(objectToSnap);
-            objectToSnap.transform.SetParent(padre.transform);
-            Debug.Log("el padre de objectToSnap es " + objectToSnap.transform.parent);
+            /*
+            if(snapType == SnapTypes.UseParenting)
+            {
+                Transform padreTodo = padre.transform.parent;
+                if(padreTodo != null)
+                {
+                    objectToSnap.transform.SetParent(padreTodo.transform);
+                    Debug.Log("el padreTodo es: " + padreTodo.name);
+                }
+                else
+                {
+                    objectToSnap.transform.SetParent(padre.transform);
+                }
+            }
+            if(snapType == SnapTypes.UseJoint)
+            {
+                Transform padreTodo = padre.transform.parent;
+                if (padreTodo != null)
+                {
+                    objectToSnap.transform.SetParent(padreTodo.transform);
+                    Debug.Log("el padreTodo es: " + padreTodo.name);
+                }
+            }
+            //Debug.Log("el padre de objectToSnap es " + objectToSnap.transform.parent);*/
         }
 
         protected virtual IEnumerator AttemptForceSnapAtEndOfFrame(VRTK_InteractableObject objectToSnap)

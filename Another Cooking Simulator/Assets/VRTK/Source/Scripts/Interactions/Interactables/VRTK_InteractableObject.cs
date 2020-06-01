@@ -223,6 +223,7 @@ namespace VRTK
         protected bool snappedInSnapDropZone = false;
         protected VRTK_SnapDropZone storedSnapDropZone;
         protected Vector3 previousLocalScale = Vector3.zero;
+        public Vector3 publicPreviousLocalScale;
         protected bool startDisabled = false;
 
         /// <summary>
@@ -876,6 +877,7 @@ namespace VRTK
         public virtual void StoreLocalScale()
         {
             previousLocalScale = transform.localScale;
+            publicPreviousLocalScale = transform.localScale;
         }
 
         /// <summary>
@@ -1460,6 +1462,7 @@ namespace VRTK
 
             if (!previousLocalScale.Equals(Vector3.zero))
             {
+                Debug.Log("previousLocalScale: " + previousLocalScale.x + ", " + previousLocalScale.y + ", " + previousLocalScale.z);
                 transform.localScale = previousLocalScale;
             }
 
