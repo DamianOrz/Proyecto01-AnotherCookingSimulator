@@ -8,6 +8,7 @@ TagManager:
   - Burger
   - Escenario
   - BtnCrearPedidoRandom
+  - PedidoACrear
   layers:
   - Default
   - TransparentFX
