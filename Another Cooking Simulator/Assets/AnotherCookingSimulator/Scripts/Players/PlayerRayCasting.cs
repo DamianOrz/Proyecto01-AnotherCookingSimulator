@@ -28,7 +28,7 @@ public class PlayerRayCasting : MonoBehaviour
             {
                 Debug.Log("Se crea el pedido random");
                 FindObjectOfType<AudioManager>().PlayInPosition("ButtonClick", whatIHit.collider.gameObject.transform.position);
-                PedidoManager.crearPedidoRandom();
+                PedidoManager.crearPedidoRandom(1);
                 List<Pedido> pedidos = PedidoManager.getListaPedidos();
                 Debug.Log("");
                 GameObject Boton = whatIHit.collider.gameObject;

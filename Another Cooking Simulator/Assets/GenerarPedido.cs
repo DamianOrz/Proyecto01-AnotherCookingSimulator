@@ -45,26 +45,5 @@ public class GenerarPedido : MonoBehaviour
         //}
     }
 
-    public static void GenerarPedidoCanvas(Pedido unPedido)
-    {
-        //Cuando se conecte con el boton esta funcion recibirá parámetros
-        string textoPedido = "ERROR";
-       
-        GameObject pedidoCreado = Instantiate(prefab);
-
-        GameObject panel =pedidoCreado.transform.Find("Panel").gameObject; 
-
-        //BATALLA 1 GANADA CONTRA DAMIAN (SEÑOR FUERZAS DEL MAL), PUNTO PARA SIMI
-
-        panel.transform.Find("strNumeroPedido").gameObject.GetComponent<TMP_Text>().text = "Pedido # " + unPedido.getId();
-
-        panel.transform.Find("strIngredientes").gameObject.GetComponent<TMP_Text>().text = "A preparar: " + unPedido.getOrdenIngredientes();
-
-        panel.transform.Find("strTiempoRestante").gameObject.GetComponent<TMP_Text>().text = "Tiempo Restante:";
-        
-        pedidoCreado.transform.SetParent(content.transform,false);
-
-        iNumPedido++;
-        
-    }
+    
 }

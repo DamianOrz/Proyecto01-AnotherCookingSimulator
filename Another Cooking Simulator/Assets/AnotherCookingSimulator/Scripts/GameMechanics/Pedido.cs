@@ -5,28 +5,62 @@ using System.Collections.Generic;
 [System.Serializable]
 public class Pedido
 {
-    private int _intIdPedido = 1;
+    #region Variables Privadas
+    private int _intIdPedido = 0;
     private int _intNumMesa;
     private List<String> _OrdenIngredientes;
     private List<String> _InterpretacionIngredientes;
+    #endregion
+    #region Getter and Setters 
+    public int GetIdPedido()
+    {
+        return _intIdPedido;
+    }
+    public void SetIdPedido(int intIdPedido)
+    {
+        _intIdPedido = intIdPedido;
+    }
 
-    public int IntNumMesa { get => _intNumMesa; set => _intNumMesa = value; }
-    public List<string> OrdenIngredientes { get => _OrdenIngredientes; set => _OrdenIngredientes = value; }
-    public List<string> InterpretacionIngredientes { get => _InterpretacionIngredientes; set => _InterpretacionIngredientes = value; }
-    public int IntIdPedido { get => _intIdPedido; set => _intIdPedido = value; }
+    public int GetNumMesa()
+    {
+        return _intNumMesa;
+    }
+    public void SetNumMesa(int numMesa)
+    {
+        _intNumMesa = numMesa;
+    }
 
-    public Pedido(int intId, List<String> strOrdenIngredientes)
+    public List<String> GetOrdenIngredientes()
+    {
+        return _OrdenIngredientes;
+    }
+    public void SetOrdenIngredientes(List<String> OrdenIngredientes)
+    {
+        _OrdenIngredientes = OrdenIngredientes;
+    }
+
+    public List<String> GetInterpretacionIngredientes()
+    {
+        return _InterpretacionIngredientes;
+    }
+    public void SetInterpretacionIngredientes(List<String> InterpretacionIngredientes)
+    {
+        _InterpretacionIngredientes = InterpretacionIngredientes;
+    }
+    #endregion
+    #region Constructors
+    public Pedido(int intId, List<String> OrdenIngredientes)
     {
         this._intIdPedido = intId;
-        this._strOrdenIngredientes = strOrdenIngredientes;
+        this._OrdenIngredientes = OrdenIngredientes;
     }
-    public Pedido(List<String> ordenIngredientes)
+    public Pedido(List<String> OrdenIngredientes)
     {
-        this._intIdPedido++;
-        this.OrdenIngredientes = ordenIngredientes;
+        this._OrdenIngredientes = OrdenIngredientes;
     }
     public Pedido()
     {
-
+        this._intIdPedido++;
     }
+    #endregion
 }
