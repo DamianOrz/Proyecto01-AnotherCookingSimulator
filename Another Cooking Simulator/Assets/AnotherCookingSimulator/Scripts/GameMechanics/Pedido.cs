@@ -1,43 +1,32 @@
-﻿using UnityEngine.Audio;
-using UnityEngine;
-
+﻿using UnityEngine;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 [System.Serializable]
 public class Pedido
 {
-    public int _intId = -1;
-    public string _ordenIngredientes;
+    private int _intIdPedido = 1;
+    private int _intNumMesa;
+    private List<String> _OrdenIngredientes;
+    private List<String> _InterpretacionIngredientes;
 
-    public Pedido(int intId, string ordenIngredientes)
+    public int IntNumMesa { get => _intNumMesa; set => _intNumMesa = value; }
+    public List<string> OrdenIngredientes { get => _OrdenIngredientes; set => _OrdenIngredientes = value; }
+    public List<string> InterpretacionIngredientes { get => _InterpretacionIngredientes; set => _InterpretacionIngredientes = value; }
+    public int IntIdPedido { get => _intIdPedido; set => _intIdPedido = value; }
+
+    public Pedido(int intId, List<String> strOrdenIngredientes)
     {
-        this._intId = intId;
-        this._ordenIngredientes = ordenIngredientes;
+        this._intIdPedido = intId;
+        this._strOrdenIngredientes = strOrdenIngredientes;
     }
-    public Pedido(string ordenIngredientes)
+    public Pedido(List<String> ordenIngredientes)
     {
-        this._intId++;
-        this._ordenIngredientes = ordenIngredientes;
+        this._intIdPedido++;
+        this.OrdenIngredientes = ordenIngredientes;
     }
     public Pedido()
     {
 
-    }
-
-    public int getId()
-    {
-        return this._intId;
-    }
-
-    public void setID(int value)
-    {
-        this._intId = value;
-    }
-    public string getOrdenIngredientes()
-    {
-        return this._ordenIngredientes;
-    }
-
-    public void setOrdenIngredientes(string value)
-    {
-        this._ordenIngredientes = value;
     }
 }
