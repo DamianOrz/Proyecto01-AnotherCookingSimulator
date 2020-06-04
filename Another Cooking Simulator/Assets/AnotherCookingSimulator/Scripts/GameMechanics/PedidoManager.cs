@@ -30,7 +30,7 @@ public class PedidoManager : MonoBehaviour
         float fIndiceRandom = UnityEngine.Random.Range(0f, 2f);
         int iIndiceRandom = Convert.ToInt32(fIndiceRandom);
         Pedido unPedido = new Pedido();
-        unPedido.SetOrdenIngredientes(_posiblesOrdenes[level-1]);
+        unPedido.SetOrdenIngredientes(_posiblesIngredientes[level-1]);
         _listaPedidos.Add(unPedido);
     }
 
