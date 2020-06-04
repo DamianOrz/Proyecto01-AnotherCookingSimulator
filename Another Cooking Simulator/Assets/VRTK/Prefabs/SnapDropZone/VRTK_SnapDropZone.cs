@@ -435,7 +435,7 @@ namespace VRTK
                 StopCoroutine(checkCanSnapRoutine);
             }
 
-            if(overridePreviousStateAtEndOfFrameRoutine != null)
+            if (overridePreviousStateAtEndOfFrameRoutine != null)
             {
                 StopCoroutine(overridePreviousStateAtEndOfFrameRoutine);
             }
@@ -469,22 +469,83 @@ namespace VRTK
 
         protected virtual void CheckCanSnap(VRTK_InteractableObject interactableObjectCheck)
         {
-            if (interactableObjectCheck != null && ValidSnapObject(interactableObjectCheck, true))
+            if (interactableObjectCheck != null)
             {
-                AddCurrentValidSnapObject(interactableObjectCheck);
-                if (!isSnapped)
+                //Debug.Log("El padre es " + this.transform.parent + ", y el objeto a snapear es " + interactableObjectCheck.name);
+                int cantPadresObject = getCantPadresInteractableObjectCheck(interactableObjectCheck);
+                int cantPadresThis = getCantPadresThis();
+                //Debug.Log("Cant padres object: " + cantPadresObject);
+                //Debug.Log("Cant padres this: " + cantPadresThis);
+                if (cantPadresObject == 0)
                 {
-                    ToggleHighlight(interactableObjectCheck, true);
-                    interactableObjectCheck.SetSnapDropZoneHover(this, true);
-                    if (!willSnap)
+                    if (cantPadresThis == 1)
                     {
-                        OnObjectEnteredSnapDropZone(SetSnapDropZoneEvent(interactableObjectCheck.gameObject));
-                        //Debug.Log("el nombre de interactableObjectCheck.gameObject es: " + interactableObjectCheck.gameObject.name);  Esto pasa cuando el objeto que estas agarrando entra en la zona del collider de este drop zone
+                        if (interactableObjectCheck != null && ValidSnapObject(interactableObjectCheck, true) && interactableObjectCheck.transform != this.transform.parent)
+                        {
+                            AddCurrentValidSnapObject(interactableObjectCheck);
+                            if (!isSnapped)
+                            {
+                                ToggleHighlight(interactableObjectCheck, true);
+                                interactableObjectCheck.SetSnapDropZoneHover(this, true);
+                                if (!willSnap)
+                                {
+                                    OnObjectEnteredSnapDropZone(SetSnapDropZoneEvent(interactableObjectCheck.gameObject));
+                                    //Debug.Log("el nombre de interactableObjectCheck.gameObject es: " + interactableObjectCheck.gameObject.name);  Esto pasa cuando el objeto que estas agarrando entra en la zona del collider de este drop zone
+                                }
+                                willSnap = true;
+                                ToggleHighlightColor();
+                            }
+                        }
                     }
-                    willSnap = true;
-                    ToggleHighlightColor();
+                    else if (cantPadresThis == 3)
+                    {
+                        if (interactableObjectCheck != null && ValidSnapObject(interactableObjectCheck, true) && interactableObjectCheck.transform != this.transform.parent && interactableObjectCheck.transform != this.transform.parent.transform.parent.transform.parent)
+                        {
+                            AddCurrentValidSnapObject(interactableObjectCheck);
+                            if (!isSnapped)
+                            {
+                                ToggleHighlight(interactableObjectCheck, true);
+                                interactableObjectCheck.SetSnapDropZoneHover(this, true);
+                                if (!willSnap)
+                                {
+                                    OnObjectEnteredSnapDropZone(SetSnapDropZoneEvent(interactableObjectCheck.gameObject));
+                                    //Debug.Log("el nombre de interactableObjectCheck.gameObject es: " + interactableObjectCheck.gameObject.name);  Esto pasa cuando el objeto que estas agarrando entra en la zona del collider de este drop zone
+                                }
+                                willSnap = true;
+                                ToggleHighlightColor();
+                            }
+                        }
+                    }
                 }
             }
+        }
+
+        private int getCantPadresInteractableObjectCheck(VRTK_InteractableObject interactableObjectCheck)
+        {
+            int cantPadres = 0;
+            if (interactableObjectCheck.transform.parent != null)
+            {
+                cantPadres = 1;
+                if (interactableObjectCheck.transform.parent.transform.parent != null)
+                {
+                    cantPadres = 2;
+                }
+            }
+            return cantPadres;
+        }
+
+        private int getCantPadresThis()
+        {
+            int cantPadres = 0;
+            if (this.transform.parent != null)
+            {
+                cantPadres = 1;
+                if (this.transform.parent.transform.parent != null)
+                {
+                    cantPadres = 3;
+                }
+            }
+            return cantPadres;
         }
 
         protected virtual void CheckCanUnsnap(VRTK_InteractableObject interactableObjectCheck)
@@ -704,12 +765,13 @@ namespace VRTK
                         SetHighlightObjectActive(false);
                     }
                     Vector3 newLocalScale = GetNewLocalScale(interactableObjectCheck);
-                    Debug.Log("newLocalScale: " + newLocalScale.x + ", " + newLocalScale.y + ", " + newLocalScale.z);
+                    //Debug.Log("newLocalScale: " + newLocalScale.x + ", " + newLocalScale.y + ", " + newLocalScale.z);
                     if (transitionInPlaceRoutine != null)
                     {
                         StopCoroutine(transitionInPlaceRoutine);
                     }
-
+                    BoxCollider collider = interactableObjectCheck.GetComponent<BoxCollider>();
+                    collider.isTrigger = true;
                     isSnapped = true;
                     currentSnappedObject = interactableObjectCheck;
                     if (cloneNewOnUnsnap)
@@ -804,6 +866,8 @@ namespace VRTK
             wasSnapped = true;
             VRTK_InteractableObject checkCanSnapObject = currentSnappedObject;
             checkCanSnapObject.isKinematic = false;
+            BoxCollider collider = checkCanSnapObject.GetComponent<BoxCollider>();
+            collider.isTrigger = false;
             currentSnappedObject = null;
             ResetSnapDropZoneJoint();
 
@@ -897,7 +961,7 @@ namespace VRTK
                 ioTransform.position = endSettings.transform.position;
                 ioTransform.rotation = endSettings.transform.rotation;
                 ioTransform.localScale = endScale;
-                Debug.Log("endScale 2 : " + endScale.x + ", " + endScale.y + ", " + endScale.z);
+                //Debug.Log("endScale 2 : " + endScale.x + ", " + endScale.y + ", " + endScale.z);
             }
 
             ioCheck.isKinematic = storedKinematicState;
