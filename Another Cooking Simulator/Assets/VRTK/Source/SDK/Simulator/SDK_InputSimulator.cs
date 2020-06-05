@@ -4,6 +4,7 @@
     using UnityEngine.UI;
     using System;
     using System.Collections.Generic;
+    using Mirror;
 
     /// <summary>
     /// The `[VRSimulator_CameraRig]` prefab is a mock Camera Rig set up that can be used to develop with VRTK without the need for VR Hardware.
@@ -11,7 +12,7 @@
     /// <remarks>
     /// Use the mouse and keyboard to move around both play area and hands and interacting with objects without the need of a hmd or VR controls.
     /// </remarks>
-    public class SDK_InputSimulator : MonoBehaviour
+    public class SDK_InputSimulator : NetworkBehaviour
     {
         /// <summary>
         /// Mouse input mode types
@@ -29,6 +30,9 @@
         }
 
         #region Public fields
+        [Header("ANIMATOR")]
+
+        //public GameObject animator;
 
         [Header("General Settings")]
 
@@ -222,6 +226,16 @@
 
         protected virtual void Update()
         {
+            if (!transform.root.gameObject.GetComponent<NetworkIdentity>().hasAuthority)
+            {
+                //animator.GetComponent<Animator>().enabled = false;
+
+                return;
+            }
+            else
+            {
+                //animator.GetComponent<Animator>().enabled = true;
+            }
             if (Input.GetKeyDown(toggleControlHints))
             {
                 showControlHints = !showControlHints;

@@ -41,7 +41,6 @@ public class PlayerMovement : NetworkBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
     // Update is called once per frame
-    [Client]
     void Update()
     {
         if (!base.hasAuthority)

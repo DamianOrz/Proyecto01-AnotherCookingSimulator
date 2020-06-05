@@ -136,7 +136,6 @@ GameObject:
   - component: {fileID: 8615481361446125991}
   - component: {fileID: 237517090837329445}
   - component: {fileID: 2935224752259941744}
-  - component: {fileID: -3572093410102117422}
   m_Layer: 0
   m_Name: PCPlayer
   m_TagString: Player
@@ -207,6 +206,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   controller: {fileID: 8920691298893338034}
+  camera: {fileID: 6704076369939002905}
   speed: 6
   gravity: -9.81
   jumpHeight: 1
@@ -215,6 +215,9 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 256
+  distanceToSee: 0
+  Ball: {fileID: 0}
+  mouseSensitivity: 100
 --- !u!114 &237517090837329445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -249,28 +252,6 @@ MonoBehaviour:
   localPositionSensitivity: 0.01
   localRotationSensitivity: 0.01
   localScaleSensitivity: 0.01
---- !u!114 &-3572093410102117422
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6030962872811205946}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9307f4e8c9a5e894bac991ad04e71306, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  componentsToDisableOfVR:
-  - {fileID: 8615481361446125991}
-  - {fileID: 7745552787337676139}
-  - {fileID: 6758149732822935998}
-  - {fileID: 7439290454514386484}
-  - {fileID: 764780745645010201}
-  - {fileID: 6782277203635071270}
-  componentsToDisableOfPC: []
 --- !u!1 &8615481361839689215
 GameObject:
   m_ObjectHideFlags: 0
