@@ -341,11 +341,10 @@ GameObject:
   - component: {fileID: 30737956}
   - component: {fileID: 30737955}
   - component: {fileID: 30737954}
-  - component: {fileID: 30737958}
   - component: {fileID: 30737957}
   m_Layer: 5
   m_Name: btnHamburguesaSimpleConQueso
-  m_TagString: Untagged
+  m_TagString: Interactuable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -412,7 +411,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 30737955}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 30737957}
+        m_MethodName: CrearInterpretacionHQ
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &30737955
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -459,20 +469,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 30737952}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 286a680ab908503489d2d5449f01c521, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _parentInteractableObj: {fileID: 30737952}
---- !u!114 &30737958
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 30737952}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7185ca706364c3546a56069a45a679f6, type: 3}
+  m_Script: {fileID: 11500000, guid: 33aa34a6c72e09a4baebbf70327ef9f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &50690708
@@ -1723,7 +1720,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 310468866}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1416783816}
@@ -3388,7 +3385,7 @@ GameObject:
   - component: {fileID: 875221211}
   m_Layer: 8
   m_Name: btnGenerarPedido
-  m_TagString: BtnCrearPedidoRandom
+  m_TagString: Interactuable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4141,11 +4138,10 @@ GameObject:
   - component: {fileID: 1085063154}
   - component: {fileID: 1085063153}
   - component: {fileID: 1085063152}
-  - component: {fileID: 1085063156}
   - component: {fileID: 1085063155}
   m_Layer: 5
   m_Name: btnHamburguesaDoble
-  m_TagString: Untagged
+  m_TagString: Interactuable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4212,7 +4208,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1085063153}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1085063155}
+        m_MethodName: CrearInterpretacionHD
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1085063153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4259,20 +4266,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1085063150}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 286a680ab908503489d2d5449f01c521, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _parentInteractableObj: {fileID: 1085063150}
---- !u!114 &1085063156
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1085063150}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7185ca706364c3546a56069a45a679f6, type: 3}
+  m_Script: {fileID: 11500000, guid: 33aa34a6c72e09a4baebbf70327ef9f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &1091493299 stripped
@@ -5515,7 +5509,7 @@ GameObject:
   - component: {fileID: 1416783820}
   m_Layer: 5
   m_Name: btnHamburguesaSimple
-  m_TagString: Untagged
+  m_TagString: Interactuable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5583,9 +5577,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1416783817}
-        m_MethodName: set_enabled
-        m_Mode: 6
+      - m_Target: {fileID: 1416783820}
+        m_MethodName: CrearInterpretacionHS
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -10597,11 +10591,10 @@ GameObject:
   - component: {fileID: 1513785230}
   - component: {fileID: 1513785229}
   - component: {fileID: 1513785228}
-  - component: {fileID: 1513785232}
   - component: {fileID: 1513785231}
   m_Layer: 5
   m_Name: btnHamburguesaDobleConQueso
-  m_TagString: Untagged
+  m_TagString: Interactuable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10668,7 +10661,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1513785229}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1513785231}
+        m_MethodName: CrearInterpretacionHDQ
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1513785229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10715,20 +10719,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1513785226}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 286a680ab908503489d2d5449f01c521, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _parentInteractableObj: {fileID: 1513785226}
---- !u!114 &1513785232
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1513785226}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7185ca706364c3546a56069a45a679f6, type: 3}
+  m_Script: {fileID: 11500000, guid: 33aa34a6c72e09a4baebbf70327ef9f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1531975328
@@ -11587,7 +11578,7 @@ GameObject:
   - component: {fileID: 1897309438}
   m_Layer: 0
   m_Name: BotonGenerarPedido
-  m_TagString: Untagged
+  m_TagString: Interactuable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11741,7 +11732,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1993255781}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa72f4f91fc2a3645a83f2cfc5214fa8, type: 3}
+  m_Script: {fileID: 11500000, guid: 7525153719e13f948a6d42514bb4a4d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1996354309

@@ -10,6 +10,8 @@ TagManager:
   - BtnCrearPedidoRandom
   - PedidoACrear
   - VRPlayer
+  - CameraPlayer
+  - Interactuable
   layers:
   - Default
   - TransparentFX

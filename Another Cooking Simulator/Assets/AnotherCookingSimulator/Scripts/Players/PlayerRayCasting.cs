@@ -8,7 +8,6 @@ public class PlayerRayCasting : MonoBehaviour
     public float distanceToSee;
     RaycastHit whatIHit;
 
-    public GameObject Ball;
     Vector3 position = new Vector3(-6.13f, 1.937f, -5.388f);
 
     GameObject player;
@@ -33,18 +32,6 @@ public class PlayerRayCasting : MonoBehaviour
                 Debug.Log("");
                 GameObject Boton = whatIHit.collider.gameObject;
                 Boton.GetComponent<Animation>().Play();
-            }
-        }
-        if (Physics.Raycast(this.transform.position, this.transform.forward, out whatIHit, distanceToSee))
-        {
-            if (Input.GetKeyDown(KeyCode.E) && whatIHit.collider.gameObject.tag!= "Interactable-object")
-            {
-                if (player.GetComponent<Inventory>().countOfBalls>0)
-                {
-                    Instantiate(Ball,position,Ball.transform.rotation);
-                    Debug.Log("I put a ball");
-                    player.GetComponent<Inventory>().countOfBalls--;
-                }
             }
         }
     }

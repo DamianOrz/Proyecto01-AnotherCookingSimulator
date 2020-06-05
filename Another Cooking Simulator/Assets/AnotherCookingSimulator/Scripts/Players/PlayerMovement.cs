@@ -5,8 +5,10 @@ using Mirror;
 
 public class PlayerMovement : NetworkBehaviour
 {
+    public static int _idCombo;
+
     public CharacterController controller;
-    public Transform camera;
+    public Camera camera;
     //MOVEMENT
     public float speed = 7f;
     public float gravity = -9.81f;
@@ -25,7 +27,6 @@ public class PlayerMovement : NetworkBehaviour
     public float distanceToSee;
     RaycastHit whatIHit;
 
-    public GameObject Ball;
     Vector3 position = new Vector3(-6.13f, 1.937f, -5.388f);
 
     GameObject player;
@@ -55,7 +56,7 @@ public class PlayerMovement : NetworkBehaviour
             GetComponentInChildren<AudioListener>().enabled = true;
         }
         Movement();
-        //Interaction();
+        Interaction();
         Look();
     }
 
@@ -85,30 +86,33 @@ public class PlayerMovement : NetworkBehaviour
     void Interaction()
     {
         Debug.DrawRay(camera.transform.position, camera.transform.forward * distanceToSee, Color.magenta);
-
-
-        if (Physics.Raycast(camera.transform.position, camera.transform.forward, out whatIHit, distanceToSee))
+        
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            if (Input.GetKeyDown(KeyCode.E) && whatIHit.collider.gameObject.tag == "BtnCrearPedidoRandom")
+            Physics.Raycast(camera.transform.position, camera.transform.forward, out whatIHit, distanceToSee);
+            if (whatIHit.collider.gameObject.tag == "Interactuable")
             {
-                Debug.Log("Se crea el pedido random");
-                FindObjectOfType<AudioManager>().PlayInPosition("ButtonClick", whatIHit.collider.gameObject.transform.position);
-                PedidoManager.crearPedidoRandom(1);
-                List<Pedido> pedidos = PedidoManager.getListaPedidos();
-                Debug.Log("");
-                GameObject Boton = whatIHit.collider.gameObject;
-                Boton.GetComponent<Animation>().Play();
-            }
-        }
-        if (Physics.Raycast(camera.transform.position, camera.transform.forward, out whatIHit, distanceToSee))
-        {
-            if (Input.GetKeyDown(KeyCode.E) && whatIHit.collider.gameObject.tag != "Interactable-object")
-            {
-                if (this.GetComponent<Inventory>().countOfBalls > 0)
+                if (whatIHit.collider.gameObject.name=="btnGenerarPedido")
                 {
-                    Instantiate(Ball, position, Ball.transform.rotation);
-                    Debug.Log("I put a ball");
-                    this.GetComponent<Inventory>().countOfBalls--;
+                    Debug.Log("Crear Pedido");
+                    FindObjectOfType<AudioManager>().PlayInPosition("ButtonClick", whatIHit.collider.gameObject.transform.position);
+                    PedidoManager.crearPedidoRandom(1);
+                    _idCombo = Random.Range(1, 4);
+                    PedidoManager.CrearInterpretacion(_idCombo);
+                    List<Pedido> pedidos = PedidoManager.getListaPedidos();
+                    GameObject Boton = whatIHit.collider.gameObject;
+                    Boton.GetComponent<Animation>().Play();
+                }
+            }
+            if (whatIHit.collider.gameObject.tag == "Interactuable")
+            {
+                if (whatIHit.collider.gameObject.name == "btnHamburguesaSimple")
+                {
+                    Debug.Log("Crear Pedido");
+                    PedidoManager.crearPedidoRandom(1);
+                    List<Pedido> pedidos = PedidoManager.getListaPedidos();
+                    GameObject Boton = whatIHit.collider.gameObject;
+                    Boton.GetComponent<Animation>().Play();
                 }
             }
         }
@@ -121,8 +125,11 @@ public class PlayerMovement : NetworkBehaviour
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
-        camera.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+        camera.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         transform.Rotate(Vector3.up * mouseX);
     }
-
+    public static void SetIdCombo(int combo)
+    {
+        _idCombo = combo;
+    }
 }

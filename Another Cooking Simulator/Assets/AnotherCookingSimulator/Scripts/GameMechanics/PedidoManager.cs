@@ -7,13 +7,13 @@ using TMPro;
 
 public class PedidoManager : MonoBehaviour
 {
+
     public static GameObject content;
     public static GameObject prefab;
     static int iNumPedido = 1;
     //private List<String> diaUnoOpciones = new List<String>() { "pan, carne, pan", "pan, carne, queso, pan", "pan, queso, carne, pan"};
     //private List<String> diaDosOpciones = new List<String>() { "pan, carne, pan", "pan, carne, queso, pan", "pan, queso, carne, pan", "pan , queso, cebolla carne, pan", "pan, queso, cebolla, carne, bacon, pan" };
     //private List<String> diaTresOpciones = new List<String>() { "pan, carne, pan", "pan, carne, queso, pan", "pan, queso, carne, pan", "pan , queso, cebolla carne, pan", "pan, queso, cebolla, carne, bacon, pan", "pan ,lechuga, queso, cebolla, carne, bacon, pan" };
-
     [SerializeField] private static List<Pedido> _listaPedidos = new List<Pedido>();
     //List<string>[] posiblesOrdenes = new List<string>[]();
     private static List<String>[] _posiblesIngredientes = new List<String>[]
@@ -24,7 +24,13 @@ public class PedidoManager : MonoBehaviour
     new List<String>() { "bacon", "queso", "carne", "cebolla" ,"lechuga","tomate"},
     new List<String>() { "bacon", "queso", "carne", "cebolla" ,"lechuga","tomate","ketchup","mayonesa"}
     };
-
+    private static List<String>[] _combosHamburguesas = new List<String>[]
+    {
+    new List<String>() { "pan","carne","pan"} ,
+    new List<String>() { "pan", "carne","carne", "pan" },
+    new List<String>() { "pan", "queso", "carne","pan"},
+    new List<String>() { "pan", "carne", "queso", "carne","pan"}
+    };
     public static void crearPedidoRandom(int level)
     {
         float fIndiceRandom = UnityEngine.Random.Range(0f, 2f);
@@ -34,9 +40,33 @@ public class PedidoManager : MonoBehaviour
         _listaPedidos.Add(unPedido);
     }
 
-    public static Pedido crearInterpretacion(int id)
+    public static Pedido CrearInterpretacion(int id)
     {
-        Pedido unPedido = new Pedido();
+        Pedido unPedido;
+         unPedido = agarrarUltimoPedido();
+        switch (id)
+        {
+            //COMBO 1 = HAMBURGUESA SIMPLE
+            case 1:
+                unPedido.SetInterpretacionIngredientes(_combosHamburguesas[id - 1]);
+                break;
+            //COMBO 2 = HAMBURGUESA DOBLE
+            case 2:
+                unPedido.SetInterpretacionIngredientes(_combosHamburguesas[id - 1]);
+                break;
+            //COMBO 3 = HAMBURGUESA CON QUESO
+            case 3:
+                unPedido.SetInterpretacionIngredientes(_combosHamburguesas[id - 1]);
+                break;
+            //COMBO 4 = HAMBURGUESA DOBLE CON QUESO
+            case 4:
+                unPedido.SetInterpretacionIngredientes(_combosHamburguesas[id - 1]);
+                break;
+
+            default:
+                break;
+        }
+        GenerarPedidoCanvas(unPedido);
         return unPedido;
     }
     public static List<Pedido> getListaPedidos()
@@ -44,11 +74,13 @@ public class PedidoManager : MonoBehaviour
         List<Pedido> pedidos = _listaPedidos;
         return pedidos;
     }
-    //public static void ActualizarContenidoDePantalla()
-    //{
-    //    GenerarPedido.GenerarPedidoCanvas(pedido);
-    //}
-    private void GenerarPedidoCanvas(Pedido unPedido)
+    public static Pedido agarrarUltimoPedido()
+    {
+        Pedido Pedido;
+        Pedido = _listaPedidos[_listaPedidos.Count-1];
+        return Pedido;
+    }
+    private static void GenerarPedidoCanvas(Pedido unPedido)
     {
         //Cuando se conecte con el boton esta funcion recibirá parámetros
         string textoPedido = "ERROR";
@@ -61,7 +93,7 @@ public class PedidoManager : MonoBehaviour
 
         panel.transform.Find("strNumeroPedido").gameObject.GetComponent<TMP_Text>().text = "Pedido # " + unPedido.GetIdPedido();
 
-        panel.transform.Find("strIngredientes").gameObject.GetComponent<TMP_Text>().text = "A preparar: " + unPedido.GetOrdenIngredientes();
+        panel.transform.Find("strIngredientes").gameObject.GetComponent<TMP_Text>().text = "A preparar: " + unPedido.GetInterpretacionIngredientes();
 
         panel.transform.Find("strTiempoRestante").gameObject.GetComponent<TMP_Text>().text = "Tiempo Restante:";
 
