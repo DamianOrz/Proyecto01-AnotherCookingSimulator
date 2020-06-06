@@ -5,16 +5,72 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 
+
 public class PedidoManager : MonoBehaviour
 {
+    public GameObject content;
+    public GameObject prefab;
 
-    public static GameObject content;
-    public static GameObject prefab;
+    public static GameObject contentStc;
+    public static GameObject prefabStc;
     static int iNumPedido = 1;
+    private PedidoManager()
+    {
+
+    }
+
+    private enum _posiblesIngredientesDia1
+    {
+        carne=1,
+        queso=2
+    }
+    private enum _posiblesIngredientesDia2
+    {
+        carne = 1,
+        queso = 2,
+        panceta = 3,
+        cebolla=4
+    }
+    private enum _posiblesIngredientesDia3
+    {
+        carne = 1,
+        queso = 2,
+        panceta = 3,
+        cebolla = 4,
+        lechuga = 5
+    }
+    private enum _posiblesIngredientesDia4
+    {
+        carne = 1,
+        queso = 2,
+        panceta = 3,
+        cebolla = 4,
+        lechuga = 5,
+        tomate = 6
+    }
+    private enum _posiblesIngredientesDia5
+    {
+        carne = 1,
+        queso = 2,
+        panceta = 3,
+        cebolla = 4,
+        lechuga = 5,
+        tomate = 6,
+        ketchup=7,
+        mayonesa=8
+    }
+
+    private void Start()
+    {
+        contentStc = content;
+        prefabStc = prefab;
+    }
     //private List<String> diaUnoOpciones = new List<String>() { "pan, carne, pan", "pan, carne, queso, pan", "pan, queso, carne, pan"};
     //private List<String> diaDosOpciones = new List<String>() { "pan, carne, pan", "pan, carne, queso, pan", "pan, queso, carne, pan", "pan , queso, cebolla carne, pan", "pan, queso, cebolla, carne, bacon, pan" };
     //private List<String> diaTresOpciones = new List<String>() { "pan, carne, pan", "pan, carne, queso, pan", "pan, queso, carne, pan", "pan , queso, cebolla carne, pan", "pan, queso, cebolla, carne, bacon, pan", "pan ,lechuga, queso, cebolla, carne, bacon, pan" };
+
     [SerializeField] private static List<Pedido> _listaPedidos = new List<Pedido>();
+
     //List<string>[] posiblesOrdenes = new List<string>[]();
     private static List<String>[] _posiblesIngredientes = new List<String>[]
     {
@@ -31,6 +87,7 @@ public class PedidoManager : MonoBehaviour
     new List<String>() { "pan", "queso", "carne","pan"},
     new List<String>() { "pan", "carne", "queso", "carne","pan"}
     };
+
     public static void crearPedidoRandom(int level)
     {
         float fIndiceRandom = UnityEngine.Random.Range(0f, 2f);
@@ -39,7 +96,6 @@ public class PedidoManager : MonoBehaviour
         unPedido.SetOrdenIngredientes(_posiblesIngredientes[level-1]);
         _listaPedidos.Add(unPedido);
     }
-
     public static Pedido CrearInterpretacion(int id)
     {
         Pedido unPedido;
@@ -77,15 +133,17 @@ public class PedidoManager : MonoBehaviour
     public static Pedido agarrarUltimoPedido()
     {
         Pedido Pedido;
-        Pedido = _listaPedidos[_listaPedidos.Count-1];
+        int indice = _listaPedidos.Count-1;
+        Pedido = _listaPedidos[indice];
         return Pedido;
     }
-    private static void GenerarPedidoCanvas(Pedido unPedido)
+    public static void GenerarPedidoCanvas(Pedido unPedido)
     {
+        
         //Cuando se conecte con el boton esta funcion recibirá parámetros
         string textoPedido = "ERROR";
 
-        GameObject pedidoCreado = Instantiate(prefab);
+        GameObject pedidoCreado = Instantiate(prefabStc);
 
         GameObject panel = pedidoCreado.transform.Find("Panel").gameObject;
 
@@ -97,7 +155,7 @@ public class PedidoManager : MonoBehaviour
 
         panel.transform.Find("strTiempoRestante").gameObject.GetComponent<TMP_Text>().text = "Tiempo Restante:";
 
-        pedidoCreado.transform.SetParent(content.transform, false);
+        pedidoCreado.transform.SetParent(contentStc.transform, false);
 
         iNumPedido++;
     }

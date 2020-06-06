@@ -106,6 +106,7 @@ GameObject:
   - component: {fileID: 8615481361446125991}
   - component: {fileID: 237517090837329445}
   - component: {fileID: 2935224752259941744}
+  - component: {fileID: -93008395901557731}
   m_Layer: 0
   m_Name: PCPlayer
   m_TagString: Player
@@ -185,8 +186,8 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 256
-  distanceToSee: 10.02
-  mouseSensitivity: 100
+  distanceToSee: 5.73
+  mouseSensitivity: 200
 --- !u!114 &237517090837329445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,6 +222,19 @@ MonoBehaviour:
   localPositionSensitivity: 0.01
   localRotationSensitivity: 0.01
   localScaleSensitivity: 0.01
+--- !u!114 &-93008395901557731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6030962872811205946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 207a3c8632e548a4790de7e920326837, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crossHair: {fileID: 0}
 --- !u!1 &8615481361839689215
 GameObject:
   m_ObjectHideFlags: 0

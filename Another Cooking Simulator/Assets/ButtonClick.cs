@@ -6,18 +6,18 @@ public class ButtonClick : MonoBehaviour
 {
     public void CrearInterpretacionHS()
     {
-        PlayerMovement.SetIdCombo(1);
+        PcManager.SetIdCombo(1);
     }
     public void CrearInterpretacionHD()
     {
-        PlayerMovement.SetIdCombo(2);
+        PcManager.SetIdCombo(2);
     }
     public void CrearInterpretacionHQ()
     {
-        PlayerMovement.SetIdCombo(3);
+        PcManager.SetIdCombo(3);
     }
     public void CrearInterpretacionHDQ()
     {
-        PlayerMovement.SetIdCombo(4);
+        PcManager.SetIdCombo(4);
     }
 }

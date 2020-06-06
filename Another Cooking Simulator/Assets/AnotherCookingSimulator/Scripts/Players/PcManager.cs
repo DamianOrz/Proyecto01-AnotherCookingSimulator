@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public class PlayerMovement : NetworkBehaviour
+public class PcManager : NetworkBehaviour
 {
-    public static int _idCombo;
+    private static int _idCombo;
+
+    private RectTransform crossHair;
 
     public CharacterController controller;
     public Camera camera;
@@ -55,6 +57,7 @@ public class PlayerMovement : NetworkBehaviour
             GetComponentInChildren<Camera>().enabled = true;
             GetComponentInChildren<AudioListener>().enabled = true;
         }
+        SetCrossHair();
         Movement();
         Interaction();
         Look();
@@ -94,14 +97,16 @@ public class PlayerMovement : NetworkBehaviour
             {
                 if (whatIHit.collider.gameObject.name=="btnGenerarPedido")
                 {
-                    Debug.Log("Crear Pedido");
                     FindObjectOfType<AudioManager>().PlayInPosition("ButtonClick", whatIHit.collider.gameObject.transform.position);
-                    PedidoManager.crearPedidoRandom(1);
-                    _idCombo = Random.Range(1, 4);
-                    PedidoManager.CrearInterpretacion(_idCombo);
-                    List<Pedido> pedidos = PedidoManager.getListaPedidos();
+
                     GameObject Boton = whatIHit.collider.gameObject;
                     Boton.GetComponent<Animation>().Play();
+                    
+                     
+                    _idCombo = Random.Range(1, 4);
+                    PedidoManager.crearPedidoRandom(1);
+                    PedidoManager.CrearInterpretacion(_idCombo);
+                    List<Pedido> pedidos = PedidoManager.getListaPedidos();
                 }
             }
             if (whatIHit.collider.gameObject.tag == "Interactuable")
@@ -127,6 +132,10 @@ public class PlayerMovement : NetworkBehaviour
 
         camera.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         transform.Rotate(Vector3.up * mouseX);
+    }
+    void SetCrossHair()
+    {
+        crossHair = GetComponent<RectTransform>();
     }
     public static void SetIdCombo(int combo)
     {

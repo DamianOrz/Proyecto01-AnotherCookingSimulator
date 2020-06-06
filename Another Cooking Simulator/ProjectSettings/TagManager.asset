@@ -12,6 +12,8 @@ TagManager:
   - VRPlayer
   - CameraPlayer
   - Interactuable
+  - Content
+  - Panel
   layers:
   - Default
   - TransparentFX
