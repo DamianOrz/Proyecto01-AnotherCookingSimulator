@@ -657,6 +657,11 @@ PrefabInstance:
       propertyPath: m_AssetId
       value: 66abfd478215eef4cbef89c92ac2e0c4
       objectReference: {fileID: 0}
+    - target: {fileID: 4585414645498312667, guid: 66abfd478215eef4cbef89c92ac2e0c4,
+        type: 3}
+      propertyPath: holdButtonToGrab
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4585414645498312671, guid: 66abfd478215eef4cbef89c92ac2e0c4,
         type: 3}
       propertyPath: m_Name
@@ -1805,6 +1810,11 @@ PrefabInstance:
       propertyPath: m_AssetId
       value: 66abfd478215eef4cbef89c92ac2e0c4
       objectReference: {fileID: 0}
+    - target: {fileID: 4585414645498312667, guid: 66abfd478215eef4cbef89c92ac2e0c4,
+        type: 3}
+      propertyPath: holdButtonToGrab
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4585414645498312671, guid: 66abfd478215eef4cbef89c92ac2e0c4,
         type: 3}
       propertyPath: m_Name
@@ -2244,6 +2254,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Carne
+      objectReference: {fileID: 0}
+    - target: {fileID: 2106482936141823132, guid: da199598c16c0c84ca1d22f56ce172be,
+        type: 3}
+      propertyPath: holdButtonToGrab
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2106482936141823139, guid: da199598c16c0c84ca1d22f56ce172be,
         type: 3}
@@ -2903,6 +2918,11 @@ PrefabInstance:
         type: 3}
       propertyPath: sceneId
       value: 655620125
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910594368256509861, guid: 81fed6138b88fac4688f86d1fdf3ee83,
+        type: 3}
+      propertyPath: m_AssetId
+      value: 81fed6138b88fac4688f86d1fdf3ee83
       objectReference: {fileID: 0}
     - target: {fileID: 5744627762868715802, guid: 81fed6138b88fac4688f86d1fdf3ee83,
         type: 3}
@@ -5079,6 +5099,11 @@ PrefabInstance:
         type: 3}
       propertyPath: sceneId
       value: 3771024994
+      objectReference: {fileID: 0}
+    - target: {fileID: 4585414645498312667, guid: 66abfd478215eef4cbef89c92ac2e0c4,
+        type: 3}
+      propertyPath: holdButtonToGrab
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4585414645498312671, guid: 66abfd478215eef4cbef89c92ac2e0c4,
         type: 3}
