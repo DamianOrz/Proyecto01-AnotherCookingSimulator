@@ -5,51 +5,63 @@ using VRTK;
 
 public class VerificarPedido : MonoBehaviour
 {
-    private bool yaLoHizo = false;
+    private bool noSeHizo;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        noSeHizo = true;
     }
 
     // Update is called once per frame
     void Update()
     {
         VRTK_SnapDropZone snapDropZone = this.GetComponent<VRTK_SnapDropZone>();
-        List<VRTK_InteractableObject> hijos = new List<VRTK_InteractableObject>();
-        VRTK_SnapDropZone objectParaBuscarHijos;
-        if(snapDropZone.GetCurrentSnappedObject() != null /*&& this.GetComponentInParent<VRTK_InteractableObject>().IsGrabbed() == true*/)
+        if (ObtenerHijos(snapDropZone).Count != 0)
         {
-            objectParaBuscarHijos = this.GetComponent<VRTK_SnapDropZone>();
-            bool tieneHijos = true;
-            do
+            if (noSeHizo)
             {
-                if(ObtenerHijos(objectParaBuscarHijos).Count != 0)
+                List<VRTK_InteractableObject> hijos = ObtenerTodosLosHijos();
+                noSeHizo = false;
+                for (int i = 0; i < hijos.Count; i++)
                 {
-                    hijos.Add(ObtenerHijos(objectParaBuscarHijos)[0]);
-                    VRTK_SnapDropZone nuevoObject = ObtenerHijos(objectParaBuscarHijos)[0].GetComponentInChildren<VRTK_SnapDropZone>();
-                    objectParaBuscarHijos = nuevoObject;
+                    Debug.Log(hijos[i].name);
                 }
-                else
-                {
-                    tieneHijos = false;
-                }
-            } while (tieneHijos == true);
-            for (int i = 0; i < hijos.Count; i++)
-            {
-                Debug.Log(hijos[i].name);
             }
-            yaLoHizo = true;
         }
+        if (noSeHizo == false && ObtenerHijos(snapDropZone).Count == 0)
+        {
+            noSeHizo = true;
+        }
+    }
+
+    private List<VRTK_InteractableObject> ObtenerTodosLosHijos()
+    {
+        List<VRTK_InteractableObject> hijos = new List<VRTK_InteractableObject>();
+        VRTK_SnapDropZone objectParaBuscarHijos = this.GetComponent<VRTK_SnapDropZone>();
+        bool tieneHijos = true;
+        do
+        {
+            if (ObtenerHijos(objectParaBuscarHijos).Count != 0)
+            {
+                hijos.Add(ObtenerHijos(objectParaBuscarHijos)[0]);
+                VRTK_SnapDropZone nuevoObject = ObtenerHijos(objectParaBuscarHijos)[0].GetComponentInChildren<VRTK_SnapDropZone>();
+                objectParaBuscarHijos = nuevoObject;
+            }
+            else
+            {
+                tieneHijos = false;
+            }
+        } while (tieneHijos == true);
+        return hijos;
     }
 
     private List<VRTK_InteractableObject> ObtenerHijos(VRTK_SnapDropZone objeto)
     {
         List<VRTK_InteractableObject> hijos = new List<VRTK_InteractableObject>();
-        foreach(Transform child in objeto.transform)
+        foreach (Transform child in objeto.transform)
         {
-            if(child.name != "HighlightContainer")
+            if (child.name != "HighlightContainer")
             {
                 hijos.Add(child.GetComponent<VRTK_InteractableObject>());
             }

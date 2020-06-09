@@ -495,7 +495,6 @@ GameObject:
   - component: {fileID: 4585414645721608430}
   - component: {fileID: 4585414645721608427}
   - component: {fileID: 1967986279227031684}
-  - component: {fileID: 163889641}
   m_Layer: 0
   m_Name: SnapDropZone
   m_TagString: Untagged
@@ -623,17 +622,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8e2c0977cb3960b46936ba7b199d2369, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &163889641
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4585414645721608428}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03dd34f4eaed4f94d970a0b298ecda65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
