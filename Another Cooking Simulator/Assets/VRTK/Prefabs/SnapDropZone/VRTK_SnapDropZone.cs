@@ -474,53 +474,28 @@ namespace VRTK
                 //Debug.Log("El padre es " + this.transform.parent + ", y el objeto a snapear es " + interactableObjectCheck.name);
                 int cantPadresObject = getCantPadresInteractableObjectCheck(interactableObjectCheck);
                 int cantPadresThis = getCantPadresThis();
-                //Debug.Log("Cant padres object: " + cantPadresObject);
+                //Debug.Log(interactableObjectCheck.name + " tiene " + cantPadresObject + " padres");
                 //Debug.Log("Cant padres this: " + cantPadresThis);
-                if (cantPadresObject == 0)
+                if (interactableObjectCheck != null && ValidSnapObject(interactableObjectCheck, true))
                 {
-                    if (cantPadresThis == 1)
+                    AddCurrentValidSnapObject(interactableObjectCheck);
+                    if (!isSnapped)
                     {
-                        if (interactableObjectCheck != null && ValidSnapObject(interactableObjectCheck, true) && interactableObjectCheck.transform != this.transform.parent)
+                        ToggleHighlight(interactableObjectCheck, true);
+                        interactableObjectCheck.SetSnapDropZoneHover(this, true);
+                        if (!willSnap)
                         {
-                            AddCurrentValidSnapObject(interactableObjectCheck);
-                            if (!isSnapped)
-                            {
-                                ToggleHighlight(interactableObjectCheck, true);
-                                interactableObjectCheck.SetSnapDropZoneHover(this, true);
-                                if (!willSnap)
-                                {
-                                    OnObjectEnteredSnapDropZone(SetSnapDropZoneEvent(interactableObjectCheck.gameObject));
-                                    //Debug.Log("el nombre de interactableObjectCheck.gameObject es: " + interactableObjectCheck.gameObject.name);  Esto pasa cuando el objeto que estas agarrando entra en la zona del collider de este drop zone
-                                }
-                                willSnap = true;
-                                ToggleHighlightColor();
-                            }
+                            OnObjectEnteredSnapDropZone(SetSnapDropZoneEvent(interactableObjectCheck.gameObject));
+                            //Debug.Log("el nombre de interactableObjectCheck.gameObject es: " + interactableObjectCheck.gameObject.name);  Esto pasa cuando el objeto que estas agarrando entra en la zona del collider de este drop zone
                         }
-                    }
-                    else if (cantPadresThis == 3)
-                    {
-                        if (interactableObjectCheck != null && ValidSnapObject(interactableObjectCheck, true) && interactableObjectCheck.transform != this.transform.parent && interactableObjectCheck.transform != this.transform.parent.transform.parent.transform.parent)
-                        {
-                            AddCurrentValidSnapObject(interactableObjectCheck);
-                            if (!isSnapped)
-                            {
-                                ToggleHighlight(interactableObjectCheck, true);
-                                interactableObjectCheck.SetSnapDropZoneHover(this, true);
-                                if (!willSnap)
-                                {
-                                    OnObjectEnteredSnapDropZone(SetSnapDropZoneEvent(interactableObjectCheck.gameObject));
-                                    //Debug.Log("el nombre de interactableObjectCheck.gameObject es: " + interactableObjectCheck.gameObject.name);  Esto pasa cuando el objeto que estas agarrando entra en la zona del collider de este drop zone
-                                }
-                                willSnap = true;
-                                ToggleHighlightColor();
-                            }
-                        }
+                        willSnap = true;
+                        ToggleHighlightColor();
                     }
                 }
             }
         }
 
-        private int getCantPadresInteractableObjectCheck(VRTK_InteractableObject interactableObjectCheck)
+            private int getCantPadresInteractableObjectCheck(VRTK_InteractableObject interactableObjectCheck)
         {
             int cantPadres = 0;
             if (interactableObjectCheck.transform.parent != null)
