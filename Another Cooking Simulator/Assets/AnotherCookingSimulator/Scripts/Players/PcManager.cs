@@ -95,22 +95,30 @@ public class PcManager : NetworkBehaviour
             Physics.Raycast(camera.transform.position, camera.transform.forward, out whatIHit, distanceToSee);
             if (whatIHit.collider.gameObject.tag == "Interactuable")
             {
-                if (whatIHit.collider.gameObject.name=="btnGenerarPedido")
+                if (whatIHit.collider.gameObject.name=="btnGenerarInterpretacion")
                 {
                     FindObjectOfType<AudioManager>().PlayInPosition("ButtonClick", whatIHit.collider.gameObject.transform.position);
+
+                    _idCombo = Random.Range(1, 4);
+                    PedidoManager.CrearInterpretacion(_idCombo);
 
                     GameObject Boton = whatIHit.collider.gameObject;
                     Boton.GetComponent<Animation>().Play();
                     
                      
-                    _idCombo = Random.Range(1, 4);
-                    PedidoManager.crearPedidoRandom(1);
-                    PedidoManager.CrearInterpretacion(_idCombo);
+                    
                     List<Pedido> pedidos = PedidoManager.getListaPedidos();
                 }
-            }
-            if (whatIHit.collider.gameObject.tag == "Interactuable")
-            {
+                if (whatIHit.collider.gameObject.name== "btnGenerarPedidoRandom")
+                {
+                    FindObjectOfType<AudioManager>().PlayInPosition("ButtonClick", whatIHit.collider.gameObject.transform.position);
+
+                    GameObject Boton = whatIHit.collider.gameObject;
+                    Boton.GetComponent<Animation>().Play();
+
+                    PedidoManager.crearPedidoRandom(1);
+                    List<Pedido> pedidos = PedidoManager.getListaPedidos();
+                }
                 if (whatIHit.collider.gameObject.name == "btnHamburguesaSimple")
                 {
                     Debug.Log("Crear Pedido");

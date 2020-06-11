@@ -6,7 +6,7 @@ using VRTK;
 public class VerificarPedido : MonoBehaviour
 {
     private bool noSeHizo;
-
+    private string strIngredientes;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,10 +23,13 @@ public class VerificarPedido : MonoBehaviour
             {
                 List<VRTK_InteractableObject> hijos = ObtenerTodosLosHijos();
                 noSeHizo = false;
+                
                 for (int i = 0; i < hijos.Count; i++)
                 {
-                    Debug.Log(hijos[i].name);
+                    strIngredientes += hijos[i].name+" ";
                 }
+                PedidoManager.MostrarUltimaInterpretacion(strIngredientes);
+                strIngredientes = "";
             }
         }
         if (noSeHizo == false && ObtenerHijos(snapDropZone).Count == 0)

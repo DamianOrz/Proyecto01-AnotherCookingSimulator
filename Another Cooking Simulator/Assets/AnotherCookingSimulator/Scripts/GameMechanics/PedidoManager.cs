@@ -8,11 +8,20 @@ using TMPro;
 
 public class PedidoManager : MonoBehaviour
 {
-    public GameObject content;
-    public GameObject prefab;
+    public GameObject contentMostrarPedidoAlVR;
+    public GameObject contentMostrarPedidoCliente;
+    public GameObject contentMostrarUltimaInterpretacion;
+    public static GameObject contentMostrarCliente;
+    public static GameObject contentMostrarVR;
+    public static GameObject contentUltimaInterpretacion;
 
-    public static GameObject contentStc;
-    public static GameObject prefabStc;
+    public GameObject prefabVR;
+    public GameObject prefabClientes;
+    public GameObject prefabUltimaInterpretacion;
+    public static GameObject prefabVRStc;
+    public static GameObject prefabClienteStc;
+    public static GameObject prefabUltimaInterpretacionStc;
+
     static int iNumPedido = 1;
     private PedidoManager()
     {
@@ -62,8 +71,13 @@ public class PedidoManager : MonoBehaviour
 
     private void Start()
     {
-        contentStc = content;
-        prefabStc = prefab;
+        contentMostrarVR = contentMostrarPedidoAlVR;
+        contentMostrarCliente = contentMostrarPedidoCliente;
+        contentUltimaInterpretacion = contentMostrarUltimaInterpretacion;
+
+        prefabVRStc = prefabVR;
+        prefabClienteStc = prefabClientes;
+        prefabUltimaInterpretacionStc = prefabUltimaInterpretacion;
     }
     //private List<String> diaUnoOpciones = new List<String>() { "pan, carne, pan", "pan, carne, queso, pan", "pan, queso, carne, pan"};
     //private List<String> diaDosOpciones = new List<String>() { "pan, carne, pan", "pan, carne, queso, pan", "pan, queso, carne, pan", "pan , queso, cebolla carne, pan", "pan, queso, cebolla, carne, bacon, pan" };
@@ -80,6 +94,7 @@ public class PedidoManager : MonoBehaviour
     new List<String>() { "bacon", "queso", "carne", "cebolla" ,"lechuga","tomate"},
     new List<String>() { "bacon", "queso", "carne", "cebolla" ,"lechuga","tomate","ketchup","mayonesa"}
     };
+    private static List<String> _hamburguesasDelCliente = new List<String>(){"Hamburguesa doble","Simple","Hamburguesa con queso","Hamburguesa doble con queso"};
     private static List<String>[] _combosHamburguesas = new List<String>[]
     {
     new List<String>() { "pan","carne","pan"} ,
@@ -90,16 +105,18 @@ public class PedidoManager : MonoBehaviour
 
     public static void crearPedidoRandom(int level)
     {
-        float fIndiceRandom = UnityEngine.Random.Range(0f, 2f);
-        int iIndiceRandom = Convert.ToInt32(fIndiceRandom);
+        int IndiceRandom = UnityEngine.Random.Range(0, 3);
+
         Pedido unPedido = new Pedido();
-        unPedido.SetOrdenIngredientes(_posiblesIngredientes[level-1]);
+        unPedido.SetOrdenIngredientes(_hamburguesasDelCliente[IndiceRandom]);
+        MostrarPedidoDelCliente(unPedido);
+
         _listaPedidos.Add(unPedido);
     }
     public static Pedido CrearInterpretacion(int id)
     {
         Pedido unPedido;
-         unPedido = agarrarUltimoPedido();
+        unPedido = agarrarUltimoPedido();
         switch (id)
         {
             //COMBO 1 = HAMBURGUESA SIMPLE
@@ -122,7 +139,7 @@ public class PedidoManager : MonoBehaviour
             default:
                 break;
         }
-        GenerarPedidoCanvas(unPedido);
+        MostrarPedidoAlDeVR(unPedido);
         return unPedido;
     }
     public static List<Pedido> getListaPedidos()
@@ -137,13 +154,12 @@ public class PedidoManager : MonoBehaviour
         Pedido = _listaPedidos[indice];
         return Pedido;
     }
-    public static void GenerarPedidoCanvas(Pedido unPedido)
+    public static void MostrarPedidoAlDeVR(Pedido unPedido)
     {
-        
         //Cuando se conecte con el boton esta funcion recibirá parámetros
         string textoPedido = "ERROR";
 
-        GameObject pedidoCreado = Instantiate(prefabStc);
+        GameObject pedidoCreado = Instantiate(prefabVRStc);
 
         GameObject panel = pedidoCreado.transform.Find("Panel").gameObject;
 
@@ -155,7 +171,39 @@ public class PedidoManager : MonoBehaviour
 
         panel.transform.Find("strTiempoRestante").gameObject.GetComponent<TMP_Text>().text = "Tiempo Restante:";
 
-        pedidoCreado.transform.SetParent(contentStc.transform, false);
+        pedidoCreado.transform.SetParent(contentMostrarVR.transform, false);
+
+        iNumPedido++;
+    }
+    public static void MostrarPedidoDelCliente(Pedido unPedido)
+    {
+        //Cuando se conecte con el boton esta funcion recibirá parámetros
+        string textoPedido = "ERROR";
+
+        GameObject pedidoCreado = Instantiate(prefabClienteStc);
+
+        GameObject panel = pedidoCreado.transform.Find("Panel").gameObject;
+
+        //BATALLA 1 GANADA CONTRA DAMIAN (SEÑOR FUERZAS DEL MAL), PUNTO PARA SIMI
+        panel.transform.Find("strConsumibles").gameObject.GetComponent<TMP_Text>().text = "" + unPedido.GetOrdenIngredientes();
+
+        pedidoCreado.transform.SetParent(contentMostrarCliente.transform, false);
+
+        iNumPedido++;
+    }
+    public static void MostrarUltimaInterpretacion(String Ingredientes)
+    {
+        //Cuando se conecte con el boton esta funcion recibirá parámetros
+        string textoPedido = "ERROR";
+
+        GameObject pedidoCreado = Instantiate(prefabUltimaInterpretacionStc);
+
+        GameObject panel = pedidoCreado.transform.Find("Panel").gameObject;
+
+        //BATALLA 1 GANADA CONTRA DAMIAN (SEÑOR FUERZAS DEL MAL), PUNTO PARA SIMI
+        panel.transform.Find("strIngredientes").gameObject.GetComponent<TMP_Text>().text = Ingredientes;
+
+        pedidoCreado.transform.SetParent(contentUltimaInterpretacion.transform, false);
 
         iNumPedido++;
     }
