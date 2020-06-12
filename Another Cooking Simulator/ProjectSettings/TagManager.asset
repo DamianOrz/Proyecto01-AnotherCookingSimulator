@@ -14,6 +14,8 @@ TagManager:
   - Interactuable
   - Content
   - Panel
+  - Grabable
+  - Verificacion
   layers:
   - Default
   - TransparentFX

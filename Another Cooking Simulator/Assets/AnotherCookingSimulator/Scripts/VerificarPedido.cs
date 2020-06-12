@@ -26,7 +26,7 @@ public class VerificarPedido : MonoBehaviour
                 
                 for (int i = 0; i < hijos.Count; i++)
                 {
-                    strIngredientes += hijos[i].name+" ";
+                    if (i != 0) strIngredientes += hijos[i].name + " ";
                 }
                 PedidoManager.MostrarUltimaInterpretacion(strIngredientes);
                 strIngredientes = "";

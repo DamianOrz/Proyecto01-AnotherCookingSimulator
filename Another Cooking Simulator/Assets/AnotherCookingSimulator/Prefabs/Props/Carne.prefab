@@ -211,7 +211,7 @@ GameObject:
   - component: {fileID: 2765791086104926969}
   m_Layer: 0
   m_Name: Carne
-  m_TagString: Untagged
+  m_TagString: Grabable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
