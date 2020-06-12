@@ -5,40 +5,51 @@ using VRTK;
 
 public class Verificar : MonoBehaviour
 {
-    bool touchVerificar= false, estaSonando = false;
-    public ParticleSystem grillSmoke;
     GameObject Bandeja;
+    private bool noSeHizo;
+    private string strIngredientes;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        noSeHizo = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (touchVerificar == true)
-        {
 
-        }
     }
     // Cuando un pati toca el horno se cambia a true el bool::touchGrill
     void OnCollisionEnter(Collision collisionInfo)
     {
         if (collisionInfo.collider.tag == "Verificacion")
         {
+            noSeHizo = true;
+            VRTK_SnapDropZone snapDropZone = this.GetComponentInChildren<VRTK_SnapDropZone>();
+            if (ObtenerHijos(snapDropZone).Count != 0)
+            {
+                if (noSeHizo)
+                {
+                    List<VRTK_InteractableObject> hijos = ObtenerTodosLosHijos(snapDropZone);
+                    noSeHizo = false;
+                    for(int i = 0; i < hijos.Count; i++)
+                    {
+                        Debug.Log(hijos[i].name);
+                    }
+                    /*
+                    for (int i = 0; i < hijos.Count; i++)
+                    {
+                        if (i != 0) strIngredientes += hijos[i].name + " ";
+                    }
+                    PedidoManager.MostrarUltimaInterpretacion(strIngredientes);
+                    strIngredientes = "";
+                    */
+                }
+            }
+        }
+    }
 
-        }
-    }
-    // Cuando un pati deja de tocar el horno se cambia a false el bool::touchGrill
-    void OnCollisionExit(Collision collisionInfo)
-    {
-        if (collisionInfo.collider.tag == "Verificacion")
-        {
-            touchVerificar = false;
-        }
-    }
     List<GameObject> listaHamburguesa(GameObject go)
     {
         List<GameObject> listaHamburguesa = new List<GameObject>();
@@ -47,5 +58,37 @@ public class Verificar : MonoBehaviour
             listaHamburguesa.Add(child.GetComponent<GameObject>());
         }
         return listaHamburguesa;
+    }
+    private List<VRTK_InteractableObject> ObtenerTodosLosHijos(VRTK_SnapDropZone snapDropZone)
+    {
+        List<VRTK_InteractableObject> hijos = new List<VRTK_InteractableObject>();
+        VRTK_SnapDropZone objectParaBuscarHijos = snapDropZone;
+        bool tieneHijos = true;
+        do
+        {
+            if (ObtenerHijos(objectParaBuscarHijos).Count != 0)
+            {
+                hijos.Add(ObtenerHijos(objectParaBuscarHijos)[0]);
+                VRTK_SnapDropZone nuevoObject = ObtenerHijos(objectParaBuscarHijos)[0].GetComponentInChildren<VRTK_SnapDropZone>();
+                objectParaBuscarHijos = nuevoObject;
+            }
+            else
+            {
+                tieneHijos = false;
+            }
+        } while (tieneHijos == true);
+        return hijos;
+    }
+    private List<VRTK_InteractableObject> ObtenerHijos(VRTK_SnapDropZone objeto)
+    {
+        List<VRTK_InteractableObject> hijos = new List<VRTK_InteractableObject>();
+        foreach (Transform child in objeto.transform)
+        {
+            if (child.name != "HighlightContainer")
+            {
+                hijos.Add(child.GetComponent<VRTK_InteractableObject>());
+            }
+        }
+        return hijos;
     }
 }
