@@ -42,6 +42,7 @@ public class Verificar : MonoBehaviour
                     }
                     PedidoManager.agarrarUltimoPedido().SetInterpretacionIngredientes(listaNombres);
                     PedidoManager.MostrarUltimaInterpretacion(strIngredientes);
+                    ScoreManager.sobreEscribir(PedidoManager.obtenerPuntaje());
                     strIngredientes = "";
                 }
             }

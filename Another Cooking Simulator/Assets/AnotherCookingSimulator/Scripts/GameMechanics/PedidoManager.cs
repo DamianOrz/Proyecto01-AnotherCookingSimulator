@@ -101,7 +101,7 @@ public class PedidoManager : MonoBehaviour
     new List<String>() { "bacon", "queso", "carne", "cebolla" ,"lechuga","tomate"},
     new List<String>() { "bacon", "queso", "carne", "cebolla" ,"lechuga","tomate","ketchup","mayonesa"}
     };
-    private static List<String> _hamburguesasDelCliente = new List<String>(){"Hamburguesa doble","Simple","Hamburguesa con queso","Hamburguesa doble con queso"};
+    private static List<String> _hamburguesasDelCliente = new List<String>(){"Hamburguesa Simple","Hamburguesa Doble","Hamburguesa con queso","Hamburguesa doble con queso"};
     private static List<String>[] _combosHamburguesas = new List<String>[]
     {
     new List<String>() { "pan","carne","pan"} ,
@@ -110,23 +110,32 @@ public class PedidoManager : MonoBehaviour
     new List<String>() { "pan", "carne", "queso", "carne","pan"}
     };
 
-    public static int corregiradffda()
+    public static int obtenerPuntaje()
     {
         int puntaje=0;
-        
+        puntaje = corregir(agarrarUltimoPedido().GetOrdenIngredientes(),agarrarUltimoPedido().GetInterpretacionIngredientes());
         return puntaje;
     }
-    public int corregir()
+    public static int corregir(List<String> ordenIngredientes, List<String> interpretacion)
     {
-        int J=0;
-        return J;
+        int puntos=0;
+        if(ordenIngredientes.Count == interpretacion.Count)
+        {
+            _correcciones correciones = _correcciones.muyBien;
+            puntos = (int)correciones;
+        }
+        else
+        {
+            _correcciones correcciones = _correcciones.maso;
+            puntos = (int)correcciones;
+        }
+        return puntos;
     }
     public static void crearPedidoRandom(int level)
     {
         int IndiceRandom = UnityEngine.Random.Range(0, 3);
-
         Pedido unPedido = new Pedido();
-        unPedido.SetOrdenIngredientes(_hamburguesasDelCliente[IndiceRandom]);
+        unPedido.SetOrdenIngredientes(_combosHamburguesas[IndiceRandom]);
         MostrarPedidoDelCliente(unPedido);
 
         _listaPedidos.Add(unPedido);
@@ -203,7 +212,7 @@ public class PedidoManager : MonoBehaviour
         GameObject panel = pedidoCreado.transform.Find("Panel").gameObject;
 
         //BATALLA 1 GANADA CONTRA DAMIAN (SEÑOR FUERZAS DEL MAL), PUNTO PARA SIMI
-        panel.transform.Find("strConsumibles").gameObject.GetComponent<TMP_Text>().text = "" + unPedido.GetOrdenIngredientes();
+        panel.transform.Find("strConsumibles").gameObject.GetComponent<TMP_Text>().text = "" + CambiarListaAString(unPedido.GetOrdenIngredientes());
 
         pedidoCreado.transform.SetParent(contentMostrarCliente.transform, false);
 
