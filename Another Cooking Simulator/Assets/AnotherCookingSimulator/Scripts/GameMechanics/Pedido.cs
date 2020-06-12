@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+
 [System.Serializable]
 public class Pedido
 {
@@ -60,7 +61,7 @@ public class Pedido
     }
     public Pedido()
     {
-        this._intIdPedido++;
+
     }
     #endregion
 }

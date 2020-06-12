@@ -32,12 +32,15 @@ public class Verificar : MonoBehaviour
                 if (noSeHizo)
                 {
                     List<VRTK_InteractableObject> hijos = ObtenerTodosLosHijos(snapDropZone);
+                    List<string> listaNombres = new List<string>();
                     noSeHizo = false;
                     string strIngredientes = "";
                     for(int i = 0; i < hijos.Count; i++)
                     {
                         strIngredientes += hijos[i].name + " ";
+                        listaNombres.Add(hijos[i].name);
                     }
+                    PedidoManager.agarrarUltimoPedido().SetInterpretacionIngredientes(listaNombres);
                     PedidoManager.MostrarUltimaInterpretacion(strIngredientes);
                     strIngredientes = "";
                 }

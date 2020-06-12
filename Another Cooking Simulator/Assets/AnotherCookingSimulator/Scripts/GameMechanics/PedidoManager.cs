@@ -69,6 +69,13 @@ public class PedidoManager : MonoBehaviour
         mayonesa=8
     }
 
+    private enum _correcciones
+    {
+        mal = 20,
+        maso =40 ,
+        bien = 70,
+        muyBien = 100,
+    }
     private void Start()
     {
         contentMostrarVR = contentMostrarPedidoAlVR;
@@ -103,6 +110,17 @@ public class PedidoManager : MonoBehaviour
     new List<String>() { "pan", "carne", "queso", "carne","pan"}
     };
 
+    public static int corregiradffda()
+    {
+        int puntaje=0;
+        
+        return puntaje;
+    }
+    public int corregir()
+    {
+        int J=0;
+        return J;
+    }
     public static void crearPedidoRandom(int level)
     {
         int IndiceRandom = UnityEngine.Random.Range(0, 3);
@@ -112,6 +130,7 @@ public class PedidoManager : MonoBehaviour
         MostrarPedidoDelCliente(unPedido);
 
         _listaPedidos.Add(unPedido);
+        unPedido.SetIdPedido(_listaPedidos.Count);
     }
     public static Pedido CrearInterpretacion(int id)
     {
@@ -166,7 +185,7 @@ public class PedidoManager : MonoBehaviour
 
         panel.transform.Find("strNumeroPedido").gameObject.GetComponent<TMP_Text>().text = "Pedido # " + unPedido.GetIdPedido();
 
-        panel.transform.Find("strIngredientes").gameObject.GetComponent<TMP_Text>().text = "A preparar: " + unPedido.GetInterpretacionIngredientes();
+        panel.transform.Find("strIngredientes").gameObject.GetComponent<TMP_Text>().text = "A preparar: " + CambiarListaAString(unPedido.GetInterpretacionIngredientes());
 
         panel.transform.Find("strTiempoRestante").gameObject.GetComponent<TMP_Text>().text = "Tiempo Restante:";
 
@@ -205,6 +224,15 @@ public class PedidoManager : MonoBehaviour
         pedidoCreado.transform.SetParent(contentUltimaInterpretacion.transform, false);
 
         iNumPedido++;
+    }
+    public static string CambiarListaAString(List<String> listaIngredientes)
+    {
+        string Hamburguesa="";
+        foreach (String ingrediente in listaIngredientes)
+        {
+            Hamburguesa += ingrediente+" ";
+        }
+        return Hamburguesa;
     }
     private void CrearOrdenIngredientesRandom(int level)
     {
