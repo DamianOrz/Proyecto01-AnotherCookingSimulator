@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using VRTK;
+using UnityEngine.UI;
 public class PcManager : NetworkBehaviour
 {
     private static int _idCombo;
 
-    private RectTransform crossHair;
-
+    RectTransform crossHair;
+    GameObject Panel;
     Transform destinoHamburguesa;
     public Transform destination;
     
@@ -42,10 +43,14 @@ public class PcManager : NetworkBehaviour
     public float mouseSensitivity = 100f;
 
     float xRotation = 0f;
-    void start()
+    void Start()
     {
+        GameObject canvas = GameObject.Find("Canvas");
+        crossHair = canvas.GetComponent<RectTransform>();
+        Panel = canvas.transform.GetChild(0).gameObject;
+
         Cursor.lockState = CursorLockMode.Locked;
-        destinoHamburguesa = GameObject.FindGameObjectWithTag("Verificacion").gameObject.transform.GetChild(0).gameObject.transform;
+        destinoHamburguesa = GameObject.FindGameObjectWithTag("Verificacion").transform.GetChild(0).transform;
     }
     // Update is called once per frame
     void Update()
@@ -58,6 +63,7 @@ public class PcManager : NetworkBehaviour
         }
         else
         {
+            Panel.active= true;
             GetComponentInChildren<Camera>().enabled = true;
             GetComponentInChildren<AudioListener>().enabled = true;
         }
@@ -100,10 +106,14 @@ public class PcManager : NetworkBehaviour
             {
                 if (whatIHit.collider.gameObject.tag == "Verificacion")
                 {
-                    DropObject(destination.GetChild(0).gameObject);
-                    destination.position = destinoHamburguesa.position;
-                    destination.rotation = destinoHamburguesa.rotation;
+                    GameObject objetoAMover= destination.GetChild(0).gameObject;
+                    Vector3 scale = objetoAMover.transform.localScale;
+
+                    objetoAMover.transform.position = destinoHamburguesa.position;
+                    objetoAMover.transform.rotation = destinoHamburguesa.rotation;
+
                 }
+                DropObject(destination.GetChild(0).gameObject);        
             }
             else
             {
