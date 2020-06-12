@@ -135,7 +135,6 @@ public class PedidoManager : MonoBehaviour
             case 4:
                 unPedido.SetInterpretacionIngredientes(_combosHamburguesas[id - 1]);
                 break;
-
             default:
                 break;
         }

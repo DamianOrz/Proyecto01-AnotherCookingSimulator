@@ -7,7 +7,7 @@ public class Verificar : MonoBehaviour
 {
     GameObject Bandeja;
     private bool noSeHizo;
-    private string strIngredientes;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -33,18 +33,13 @@ public class Verificar : MonoBehaviour
                 {
                     List<VRTK_InteractableObject> hijos = ObtenerTodosLosHijos(snapDropZone);
                     noSeHizo = false;
+                    string strIngredientes = "";
                     for(int i = 0; i < hijos.Count; i++)
                     {
-                        Debug.Log(hijos[i].name);
-                    }
-                    /*
-                    for (int i = 0; i < hijos.Count; i++)
-                    {
-                        if (i != 0) strIngredientes += hijos[i].name + " ";
+                        strIngredientes += hijos[i].name + " ";
                     }
                     PedidoManager.MostrarUltimaInterpretacion(strIngredientes);
                     strIngredientes = "";
-                    */
                 }
             }
         }

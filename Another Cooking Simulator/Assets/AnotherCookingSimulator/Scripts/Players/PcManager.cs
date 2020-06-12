@@ -4,50 +4,68 @@ using UnityEngine;
 using Mirror;
 using VRTK;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
+
 public class PcManager : NetworkBehaviour
 {
     private static int _idCombo;
 
-    RectTransform crossHair;
-    GameObject Panel;
-    Transform destinoHamburguesa;
-    public Transform destination;
-    
-    public CharacterController controller;
-    public Camera camera;
+    //PLAYER
+    private Camera cameraPlayer;
+    private GameObject canvasCrossHair;
+    private RectTransform rectTransformCrossHair;
+    private GameObject panelCrossHair;
+    private Transform destinoHamburguesa;
+    private Transform destination;
+    private CharacterController controller;
+
+    private GameObject canvasTomarPedidos;
     //MOVEMENT
     public float speed = 7f;
     public float gravity = -9.81f;
     public float jumpHeight = 1f;
+    private Vector3 velocity;
 
     //Me fijo si toca piso
-    public Transform groundCheck;
-    public float groundDistance = 0.5f;
+    private Transform groundCheck;
+    private float groundDistance = 0.5f;
     public LayerMask groundMask;
-
-    Vector3 velocity;
-    bool isGrounded;
+    private bool isGrounded;
 
     //INTERACTION
     [Range(0.1f, 15f)]
     public float distanceToSee;
     RaycastHit whatIHit;
-
-    Vector3 position = new Vector3(-6.13f, 1.937f, -5.388f);
-
-    GameObject player;
-
-    [SerializeField] Pedido pedido = new Pedido();
+    private GameObject zonaVerificacionDisponible = null;
 
     //LOOK
     public float mouseSensitivity = 100f;
+    private float xRotation = 0f;
 
-    float xRotation = 0f;
+    //UI
+    private GraphicRaycaster m_Raycaster;
+    private EventSystem m_EventSystem;
+    private PointerEventData m_PointerEventData;
+    //PEDIDO
+    [SerializeField] Pedido pedido = new Pedido();
+
+    
     void Start()
     {
-        GameObject canvas = GameObject.Find("Canvas");
-        crossHair = canvas.GetComponent<RectTransform>();
-        Panel = canvas.transform.GetChild(0).gameObject;
+        controller = this.GetComponent<CharacterController>();
+        cameraPlayer = this.GetComponentInChildren<Camera>();
+        destination = cameraPlayer.transform.GetChild(0);
+        groundCheck = this.transform.GetChild(2);
+
+        canvasCrossHair = GameObject.Find("Canvas");
+        rectTransformCrossHair = canvasCrossHair.GetComponent<RectTransform>();
+
+        canvasTomarPedidos = GameObject.Find("CanvasTomarPedido");
+        canvasTomarPedidos.GetComponent<Canvas>().worldCamera = cameraPlayer;
+
+        //UI
+        m_Raycaster = canvasTomarPedidos.GetComponent<GraphicRaycaster>();
+        m_EventSystem = GetComponent<EventSystem>();
 
         Cursor.lockState = CursorLockMode.Locked;
         destinoHamburguesa = GameObject.FindGameObjectWithTag("Verificacion").transform.GetChild(0).transform;
@@ -63,7 +81,7 @@ public class PcManager : NetworkBehaviour
         }
         else
         {
-            Panel.active= true;
+            canvasCrossHair.transform.GetChild(0).gameObject.SetActive(true);
             GetComponentInChildren<Camera>().enabled = true;
             GetComponentInChildren<AudioListener>().enabled = true;
         }
@@ -98,15 +116,50 @@ public class PcManager : NetworkBehaviour
     }
     void Interaction()
     {
-        Debug.DrawRay(camera.transform.position, camera.transform.forward * distanceToSee, Color.magenta);
+        Debug.DrawRay(cameraPlayer.transform.position, cameraPlayer.transform.forward * distanceToSee, Color.magenta);
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            //Set up the new Pointer Event
+            m_PointerEventData = new PointerEventData(m_EventSystem);
+            //Set the Pointer Event Position to that of the mouse position
+            m_PointerEventData.position = Input.mousePosition;
+
+            //Create a list of Raycast Results
+            List<RaycastResult> results = new List<RaycastResult>();
+
+            //Raycast using the Graphics Raycaster and mouse click position
+            m_Raycaster.Raycast(m_PointerEventData, results);
+
+            //For every result returned, output the name of the GameObject on the Canvas hit by the Ray
+            foreach (RaycastResult result in results)
+            {
+                switch (result.gameObject.name)
+                {
+                    case "btnHamburguesaSimple":
+                        SetIdCombo(1);
+                        break;
+                    case "btnHamburguesaDoble":
+                        SetIdCombo(2);
+                        break;
+                    case "btnHamburguesaSimpleConQueso":
+                        SetIdCombo(3);
+                        break;
+                    case "btnHamburguesaDobleConQueso":
+                        SetIdCombo(4);
+                        break;
+                }
+                 Debug.Log("Hit " + result.gameObject.name);
+            }
+        }
         if (Input.GetKeyDown(KeyCode.E))
         {
-            Physics.Raycast(camera.transform.position, camera.transform.forward, out whatIHit, distanceToSee);
+            Physics.Raycast(cameraPlayer.transform.position, cameraPlayer.transform.forward, out whatIHit, distanceToSee);
             if(destination.childCount > 0)
             {
-                if (whatIHit.collider.gameObject.tag == "Verificacion")
+                if (whatIHit.collider.gameObject.tag == "Verificacion" && zonaVerificacionDisponible==null)
                 {
                     GameObject objetoAMover= destination.GetChild(0).gameObject;
+                    zonaVerificacionDisponible = objetoAMover;
                     Vector3 scale = objetoAMover.transform.localScale;
 
                     objetoAMover.transform.position = destinoHamburguesa.position;
@@ -123,7 +176,6 @@ public class PcManager : NetworkBehaviour
                     {
                         FindObjectOfType<AudioManager>().PlayInPosition("ButtonClick", whatIHit.collider.gameObject.transform.position);
 
-                        _idCombo = Random.Range(1, 4);
                         PedidoManager.CrearInterpretacion(_idCombo);
 
                         GameObject Boton = whatIHit.collider.gameObject;
@@ -141,13 +193,12 @@ public class PcManager : NetworkBehaviour
                         PedidoManager.crearPedidoRandom(1);
                         List<Pedido> pedidos = PedidoManager.getListaPedidos();
                     }
-                    if (whatIHit.collider.gameObject.name == "btnHamburguesaSimple")
+                    if (whatIHit.collider.gameObject.name == "PantallaHacerPedidos")
                     {
-                        Debug.Log("Crear Pedido");
-                        PedidoManager.crearPedidoRandom(1);
-                        List<Pedido> pedidos = PedidoManager.getListaPedidos();
-                        GameObject Boton = whatIHit.collider.gameObject;
-                        Boton.GetComponent<Animation>().Play();
+                        //m_PointerEventData = new PointerEventData(m_EventSystem);
+                        //GraphicRaycaster gr = canvasTomarPedidos.GetComponent<GraphicRaycaster>();
+                        //PedidoManager.crearPedidoRandom(1);
+                        //List<Pedido> pedidos = PedidoManager.getListaPedidos();
                     }
                 }
                 if (whatIHit.collider.gameObject.tag == "Grabable")
@@ -165,12 +216,12 @@ public class PcManager : NetworkBehaviour
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
-        camera.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+        cameraPlayer.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         transform.Rotate(Vector3.up * mouseX);
     }
     void SetCrossHair()
     {
-        crossHair = GetComponent<RectTransform>();
+        rectTransformCrossHair = GetComponent<RectTransform>();
     }
     public static void SetIdCombo(int combo)
     {
@@ -183,6 +234,13 @@ public class PcManager : NetworkBehaviour
         go.transform.position = destination.position;
         go.transform.rotation = destination.rotation;
         go.transform.parent = GameObject.Find("Destination").transform;
+        if(zonaVerificacionDisponible!=null)
+        {
+            if (zonaVerificacionDisponible==go)
+            {
+                zonaVerificacionDisponible = null;
+            }
+        }
     }
     void DropObject(GameObject go)
     {
