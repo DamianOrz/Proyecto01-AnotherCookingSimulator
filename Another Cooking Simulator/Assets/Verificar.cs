@@ -1,16 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using VRTK;
 
 public class Verificar : MonoBehaviour
 {
-    public float tiempoCocinado = 0;
-    //Permito ingresar materiales para el cambio de estado
-    public Material[] material;
-    Renderer rend;
-    bool touchGrill = false, estaSonando = false;
+    bool touchVerificar= false, estaSonando = false;
     public ParticleSystem grillSmoke;
-    public GameObject burger;
+    GameObject Bandeja;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +18,34 @@ public class Verificar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (touchVerificar == true)
+        {
+
+        }
+    }
+    // Cuando un pati toca el horno se cambia a true el bool::touchGrill
+    void OnCollisionEnter(Collision collisionInfo)
+    {
+        if (collisionInfo.collider.tag == "Verificacion")
+        {
+
+        }
+    }
+    // Cuando un pati deja de tocar el horno se cambia a false el bool::touchGrill
+    void OnCollisionExit(Collision collisionInfo)
+    {
+        if (collisionInfo.collider.tag == "Verificacion")
+        {
+            touchVerificar = false;
+        }
+    }
+    List<GameObject> listaHamburguesa(GameObject go)
+    {
+        List<GameObject> listaHamburguesa = new List<GameObject>();
+        foreach (Transform child in go.transform)
+        {
+            listaHamburguesa.Add(child.GetComponent<GameObject>());
+        }
+        return listaHamburguesa;
     }
 }
