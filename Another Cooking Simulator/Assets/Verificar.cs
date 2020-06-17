@@ -40,9 +40,10 @@ public class Verificar : MonoBehaviour
                         strIngredientes += hijos[i].name + " ";
                         listaNombres.Add(hijos[i].name);
                     }
+
                     PedidoManager.agarrarUltimoPedido().SetInterpretacionIngredientes(listaNombres);
                     PedidoManager.MostrarUltimaInterpretacion(strIngredientes);
-                    ScoreManager.sobreEscribir(PedidoManager.obtenerPuntaje());
+                    PedidoManager.cambiarPuntaje();
                     strIngredientes = "";
                 }
             }

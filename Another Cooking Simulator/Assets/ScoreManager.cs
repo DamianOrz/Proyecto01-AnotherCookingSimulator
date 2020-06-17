@@ -5,12 +5,14 @@ using TMPro;
 
 public class ScoreManager : MonoBehaviour
 {
+    public TMP_Text testo;
     private static int SCORE = 0;
     public static TMP_Text texto;
 
     // Start is called before the first frame update
     void Start()
     {
+        texto = testo;
         sobreEscribir(0);
     }
 
@@ -22,6 +24,6 @@ public class ScoreManager : MonoBehaviour
     public static void sobreEscribir(int puntos)
     {
         SCORE += puntos;
-        //texto.text = "Score: " + SCORE.ToString();
+        texto.text = "Score: " + SCORE;
     }
 }

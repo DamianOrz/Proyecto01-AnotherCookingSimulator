@@ -28,48 +28,7 @@ public class PedidoManager : MonoBehaviour
 
     }
 
-    private enum _posiblesIngredientesDia1
-    {
-        carne=1,
-        queso=2
-    }
-    private enum _posiblesIngredientesDia2
-    {
-        carne = 1,
-        queso = 2,
-        panceta = 3,
-        cebolla=4
-    }
-    private enum _posiblesIngredientesDia3
-    {
-        carne = 1,
-        queso = 2,
-        panceta = 3,
-        cebolla = 4,
-        lechuga = 5
-    }
-    private enum _posiblesIngredientesDia4
-    {
-        carne = 1,
-        queso = 2,
-        panceta = 3,
-        cebolla = 4,
-        lechuga = 5,
-        tomate = 6
-    }
-    private enum _posiblesIngredientesDia5
-    {
-        carne = 1,
-        queso = 2,
-        panceta = 3,
-        cebolla = 4,
-        lechuga = 5,
-        tomate = 6,
-        ketchup=7,
-        mayonesa=8
-    }
-
-    private enum _correcciones
+    private enum CORRECCIONES
     {
         mal = 20,
         maso =40 ,
@@ -110,23 +69,22 @@ public class PedidoManager : MonoBehaviour
     new List<String>() { "pan", "carne", "queso", "carne","pan"}
     };
 
-    public static int obtenerPuntaje()
+    public static void cambiarPuntaje()
     {
-        int puntaje=0;
-        puntaje = corregir(agarrarUltimoPedido().GetOrdenIngredientes(),agarrarUltimoPedido().GetInterpretacionIngredientes());
-        return puntaje;
+        int puntaje = correccion(agarrarUltimoPedido().GetOrdenIngredientes(),agarrarUltimoPedido().GetInterpretacionIngredientes());
+        ScoreManager.sobreEscribir(puntaje);
     }
-    public static int corregir(List<String> ordenIngredientes, List<String> interpretacion)
+    public static int correccion(List<String> ordenIngredientes, List<String> interpretacion)
     {
         int puntos=0;
         if(ordenIngredientes.Count == interpretacion.Count)
         {
-            _correcciones correciones = _correcciones.muyBien;
+            CORRECCIONES correciones = CORRECCIONES.muyBien;
             puntos = (int)correciones;
         }
         else
         {
-            _correcciones correcciones = _correcciones.maso;
+            CORRECCIONES correcciones = CORRECCIONES.maso;
             puntos = (int)correcciones;
         }
         return puntos;
@@ -168,6 +126,10 @@ public class PedidoManager : MonoBehaviour
         }
         MostrarPedidoAlDeVR(unPedido);
         return unPedido;
+    }
+    public static void guardarInterpretacionFinalVR()
+    {
+
     }
     public static List<Pedido> getListaPedidos()
     {
