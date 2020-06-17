@@ -156,15 +156,24 @@ public class PcManager : NetworkBehaviour
             Physics.Raycast(cameraPlayer.transform.position, cameraPlayer.transform.forward, out whatIHit, distanceToSee);
             if(destination.childCount > 0)
             {
+                if(whatIHit.collider==null)
+                {
+                    DropObject(destination.GetChild(0).gameObject);
+                    return;
+                }
                 if (whatIHit.collider.gameObject.tag == "Verificacion" && zonaVerificacionDisponible==null)
                 {
-                    GameObject objetoAMover= destination.GetChild(0).gameObject;
-                    zonaVerificacionDisponible = objetoAMover;
-                    Vector3 scale = objetoAMover.transform.localScale;
+                    string nombre = destination.GetChild(0).gameObject.name;
+                    bool isBandeja = nombre.Contains("Bandeja");
+                    if (isBandeja )
+                    {
+                        GameObject objetoAMover= destination.GetChild(0).gameObject;
+                        zonaVerificacionDisponible = objetoAMover;
+                        Vector3 scale = objetoAMover.transform.localScale;
 
-                    objetoAMover.transform.position = destinoHamburguesa.position;
-                    objetoAMover.transform.rotation = destinoHamburguesa.rotation;
-
+                        objetoAMover.transform.position = destinoHamburguesa.position;
+                        objetoAMover.transform.rotation = destinoHamburguesa.rotation;
+                    }
                 }
                 DropObject(destination.GetChild(0).gameObject);        
             }
@@ -203,7 +212,10 @@ public class PcManager : NetworkBehaviour
                 }
                 if (whatIHit.collider.gameObject.tag == "Grabable")
                 {
-                    PickUpObject(whatIHit.collider.gameObject);
+                    if (!whatIHit.collider.gameObject.GetComponent<VRTK_InteractableObject>().IsInSnapDropZone())
+                    {
+                         PickUpObject(whatIHit.collider.gameObject);
+                    }
                 }
             }
         }

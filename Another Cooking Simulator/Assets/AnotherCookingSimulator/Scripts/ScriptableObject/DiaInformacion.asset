@@ -9,7 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc122d3e1d1652f4c865fbd4d6cff599, type: 3}
-  m_Name: Recipe_01
+  m_Script: {fileID: 11500000, guid: 1ae48080c01867f40a29b8c888e50858, type: 3}
+  m_Name: DiaInformacion
   m_EditorClassIdentifier: 
-  parts: 000000000100000000000000
+  dia: 1
+  posiblesIngredientes: 0000000001000000
