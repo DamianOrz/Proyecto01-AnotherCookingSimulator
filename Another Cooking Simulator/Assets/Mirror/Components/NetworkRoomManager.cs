@@ -677,6 +677,13 @@ namespace Mirror
                 GUI.Box(new Rect(10f, 180f, 520f, 150f), "PLAYERS");
         }
 
+        //MIS METODOS
+        public virtual void SetNetworkAddress(string newNetworkAddress)
+        {
+            this.networkAddress = newNetworkAddress;
+        }
+
+
         #endregion
     }
 }
