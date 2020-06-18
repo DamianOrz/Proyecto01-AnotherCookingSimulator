@@ -822,7 +822,7 @@ namespace VRTK
                 Debug.Log("padreTodoEnUnSnap: " + padreTodo.localScale.x + ", " + padreTodo.localScale.y + ", " + padreTodo.localScale.z);
                 currentSnappedObject.transform.localScale.Set(currentSnappedObject.publicPreviousLocalScale.x * padreTodo.localScale.x, currentSnappedObject.publicPreviousLocalScale.y * padreTodo.localScale.y, currentSnappedObject.publicPreviousLocalScale.z * padreTodo.localScale.z);// = currentSnappedObject.publicPreviousLocalScale;
             }*/
-            Debug.Log("mal ahi lo unsnapearon");
+            //Debug.Log("mal ahi lo unsnapearon");
             if (currentSnappedObject != null)
             {
                 ResetPermanentCloneColliders(currentSnappedObject.gameObject);
@@ -863,7 +863,7 @@ namespace VRTK
         protected virtual Vector3 GetNewLocalScale(VRTK_InteractableObject checkObject)
         {
             // If apply scaling is checked then use the drop zone scale to resize the object
-            Debug.Log("checkObject: " + checkObject.transform.localScale.x + ", " + checkObject.transform.localScale.y + ", " + checkObject.transform.localScale.z);
+            //Debug.Log("checkObject: " + checkObject.transform.localScale.x + ", " + checkObject.transform.localScale.y + ", " + checkObject.transform.localScale.z);
             Vector3 newLocalScale = checkObject.transform.localScale;
             if (applyScalingOnSnap)
             {

@@ -6,5 +6,7 @@ using UnityEngine;
 public class DiaInformacion : ScriptableObject
 {
     public int dia;
-    public PosiblesIngredientesManager.POSIBLES_INGREDIENTES [] posiblesIngredientes;
+    public int maxIngredientesEntrePanes;
+
+    public DiaManager.POSIBLES_INGREDIENTES[] posiblesIngredientes;
 }

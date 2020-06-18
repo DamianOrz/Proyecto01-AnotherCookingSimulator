@@ -9,8 +9,8 @@ public class Pedido
     #region Variables Privadas
     private int _intIdPedido = 0;
     private int _intNumMesa;
-    private List<String> _OrdenIngredientes;
-    private List<String> _InterpretacionIngredientes;
+    private int[] _OrdenIngredientes;
+    private int[] _InterpretacionIngredientes;
     #endregion
     #region Getter and Setters 
     public int GetIdPedido()
@@ -31,31 +31,31 @@ public class Pedido
         _intNumMesa = numMesa;
     }
 
-    public List<String> GetOrdenIngredientes()
+    public int[] GetOrdenIngredientes()
     {
         return _OrdenIngredientes;
     }
-    public void SetOrdenIngredientes(List<String> OrdenIngredientes)
+    public void SetOrdenIngredientes(int[] OrdenIngredientes)
     {
         _OrdenIngredientes = OrdenIngredientes;
     }
 
-    public List<String> GetInterpretacionIngredientes()
+    public int[] GetInterpretacionIngredientes()
     {
         return _InterpretacionIngredientes;
     }
-    public void SetInterpretacionIngredientes(List<String> InterpretacionIngredientes)
+    public void SetInterpretacionIngredientes(int[] InterpretacionIngredientes)
     {
         _InterpretacionIngredientes = InterpretacionIngredientes;
     }
     #endregion
     #region Constructors
-    public Pedido(int intId, List<String> OrdenIngredientes)
+    public Pedido(int intId, int[] OrdenIngredientes)
     {
         this._intIdPedido = intId;
         this._OrdenIngredientes = OrdenIngredientes;
     }
-    public Pedido(List<String> OrdenIngredientes)
+    public Pedido(int[] OrdenIngredientes)
     {
         this._OrdenIngredientes = OrdenIngredientes;
     }

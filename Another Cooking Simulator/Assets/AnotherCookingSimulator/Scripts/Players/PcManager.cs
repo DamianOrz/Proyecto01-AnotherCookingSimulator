@@ -199,7 +199,7 @@ public class PcManager : NetworkBehaviour
                         GameObject Boton = whatIHit.collider.gameObject;
                         Boton.GetComponent<Animation>().Play();
 
-                        PedidoManager.crearPedidoRandom(1);
+                        PedidoManager.crearPedidoRandom();
                         List<Pedido> pedidos = PedidoManager.getListaPedidos();
                     }
                     if (whatIHit.collider.gameObject.name == "PantallaHacerPedidos")

@@ -35,6 +35,7 @@ public class PedidoManager : MonoBehaviour
         bien = 70,
         muyBien = 100,
     }
+
     private void Start()
     {
         contentMostrarVR = contentMostrarPedidoAlVR;
@@ -45,9 +46,6 @@ public class PedidoManager : MonoBehaviour
         prefabClienteStc = prefabClientes;
         prefabUltimaInterpretacionStc = prefabUltimaInterpretacion;
     }
-    //private List<String> diaUnoOpciones = new List<String>() { "pan, carne, pan", "pan, carne, queso, pan", "pan, queso, carne, pan"};
-    //private List<String> diaDosOpciones = new List<String>() { "pan, carne, pan", "pan, carne, queso, pan", "pan, queso, carne, pan", "pan , queso, cebolla carne, pan", "pan, queso, cebolla, carne, bacon, pan" };
-    //private List<String> diaTresOpciones = new List<String>() { "pan, carne, pan", "pan, carne, queso, pan", "pan, queso, carne, pan", "pan , queso, cebolla carne, pan", "pan, queso, cebolla, carne, bacon, pan", "pan ,lechuga, queso, cebolla, carne, bacon, pan" };
 
     [SerializeField] private static List<Pedido> _listaPedidos = new List<Pedido>();
 
@@ -61,23 +59,16 @@ public class PedidoManager : MonoBehaviour
     new List<String>() { "bacon", "queso", "carne", "cebolla" ,"lechuga","tomate","ketchup","mayonesa"}
     };
     private static List<String> _hamburguesasDelCliente = new List<String>(){"Hamburguesa Simple","Hamburguesa Doble","Hamburguesa con queso","Hamburguesa doble con queso"};
-    private static List<String>[] _combosHamburguesas = new List<String>[]
-    {
-    new List<String>() { "pan","carne","pan"} ,
-    new List<String>() { "pan", "carne","carne", "pan" },
-    new List<String>() { "pan", "queso", "carne","pan"},
-    new List<String>() { "pan", "carne", "queso", "carne","pan"}
-    };
 
     public static void cambiarPuntaje()
     {
         int puntaje = correccion(agarrarUltimoPedido().GetOrdenIngredientes(),agarrarUltimoPedido().GetInterpretacionIngredientes());
         ScoreManager.sobreEscribir(puntaje);
     }
-    public static int correccion(List<String> ordenIngredientes, List<String> interpretacion)
+    public static int correccion(int[] ordenIngredientes, int[] interpretacion)
     {
         int puntos=0;
-        if(ordenIngredientes.Count == interpretacion.Count)
+        if(ordenIngredientes.Length == interpretacion.Length)
         {
             CORRECCIONES correciones = CORRECCIONES.muyBien;
             puntos = (int)correciones;
@@ -89,37 +80,44 @@ public class PedidoManager : MonoBehaviour
         }
         return puntos;
     }
-    public static void crearPedidoRandom(int level)
+    public static void crearPedidoRandom()
     {
-        int IndiceRandom = UnityEngine.Random.Range(0, 3);
+        int[] posiblesIngredientes=new int[DiaManager.diasInfoStc[0].posiblesIngredientes.Length];
+        for (int i = 0; i < DiaManager.diasInfoStc[0].posiblesIngredientes.Length; i++)
+        {
+            posiblesIngredientes[i]= (int) DiaManager.diasInfoStc[DiaManager.diaActual].posiblesIngredientes[i];
+        }
+
         Pedido unPedido = new Pedido();
-        unPedido.SetOrdenIngredientes(_combosHamburguesas[IndiceRandom]);
+        
+        unPedido.SetOrdenIngredientes(CrearHamburguesaRandom(posiblesIngredientes));
         MostrarPedidoDelCliente(unPedido);
 
         _listaPedidos.Add(unPedido);
         unPedido.SetIdPedido(_listaPedidos.Count);
     }
+
     public static Pedido CrearInterpretacion(int id)
     {
+        
         Pedido unPedido;
         unPedido = agarrarUltimoPedido();
         switch (id)
         {
             //COMBO 1 = HAMBURGUESA SIMPLE
             case 1:
-                unPedido.SetInterpretacionIngredientes(_combosHamburguesas[id - 1]);
+                int[] interpretacionSimple = new int[3] { 0, 1, 0};
+                unPedido.SetInterpretacionIngredientes(interpretacionSimple);
                 break;
             //COMBO 2 = HAMBURGUESA DOBLE
             case 2:
-                unPedido.SetInterpretacionIngredientes(_combosHamburguesas[id - 1]);
+                int[] interpretacionDoble = new int[4] { 0, 1, 1, 0 };
+                unPedido.SetInterpretacionIngredientes(interpretacionDoble);
                 break;
             //COMBO 3 = HAMBURGUESA CON QUESO
             case 3:
-                unPedido.SetInterpretacionIngredientes(_combosHamburguesas[id - 1]);
-                break;
-            //COMBO 4 = HAMBURGUESA DOBLE CON QUESO
-            case 4:
-                unPedido.SetInterpretacionIngredientes(_combosHamburguesas[id - 1]);
+                int[] interpretacionConQueso = new int[4] { 0, 1, 2, 0 };
+                unPedido.SetInterpretacionIngredientes(interpretacionConQueso);
                 break;
             default:
                 break;
@@ -156,7 +154,7 @@ public class PedidoManager : MonoBehaviour
 
         panel.transform.Find("strNumeroPedido").gameObject.GetComponent<TMP_Text>().text = "Pedido # " + unPedido.GetIdPedido();
 
-        panel.transform.Find("strIngredientes").gameObject.GetComponent<TMP_Text>().text = "A preparar: " + CambiarListaAString(unPedido.GetInterpretacionIngredientes());
+        panel.transform.Find("strIngredientes").gameObject.GetComponent<TMP_Text>().text = "A preparar: " + CambiarArrayAString(unPedido.GetInterpretacionIngredientes());
 
         panel.transform.Find("strTiempoRestante").gameObject.GetComponent<TMP_Text>().text = "Tiempo Restante:";
 
@@ -174,13 +172,13 @@ public class PedidoManager : MonoBehaviour
         GameObject panel = pedidoCreado.transform.Find("Panel").gameObject;
 
         //BATALLA 1 GANADA CONTRA DAMIAN (SEÑOR FUERZAS DEL MAL), PUNTO PARA SIMI
-        panel.transform.Find("strConsumibles").gameObject.GetComponent<TMP_Text>().text = "" + CambiarListaAString(unPedido.GetOrdenIngredientes());
+        panel.transform.Find("strConsumibles").gameObject.GetComponent<TMP_Text>().text = "" + CambiarArrayAString(unPedido.GetOrdenIngredientes());
 
         pedidoCreado.transform.SetParent(contentMostrarCliente.transform, false);
 
         iNumPedido++;
     }
-    public static void MostrarUltimaInterpretacion(String Ingredientes)
+    public static void MostrarVerificacion(int[] Ingredientes)
     {
         //Cuando se conecte con el boton esta funcion recibirá parámetros
         string textoPedido = "ERROR";
@@ -190,18 +188,18 @@ public class PedidoManager : MonoBehaviour
         GameObject panel = pedidoCreado.transform.Find("Panel").gameObject;
 
         //BATALLA 1 GANADA CONTRA DAMIAN (SEÑOR FUERZAS DEL MAL), PUNTO PARA SIMI
-        panel.transform.Find("strIngredientes").gameObject.GetComponent<TMP_Text>().text = Ingredientes;
+        panel.transform.Find("strIngredientes").gameObject.GetComponent<TMP_Text>().text = CambiarArrayAString(Ingredientes);
 
         pedidoCreado.transform.SetParent(contentUltimaInterpretacion.transform, false);
 
         iNumPedido++;
     }
-    public static string CambiarListaAString(List<String> listaIngredientes)
+    public static string CambiarArrayAString(int[] listaIngredientes)
     {
         string Hamburguesa="";
-        foreach (String ingrediente in listaIngredientes)
+        foreach (int ingrediente in listaIngredientes)
         {
-            Hamburguesa += ingrediente+" ";
+            Hamburguesa += DiaManager.diasInfoStc[DiaManager.diaActual].posiblesIngredientes[ingrediente].ToString() + " ";
         }
         return Hamburguesa;
     }
@@ -233,28 +231,32 @@ public class PedidoManager : MonoBehaviour
         }
 
     }
-    private int RandomEntre(int min, int max)
+    private static int RandomEntre(int minInclusive, int maxInclusive)
     {
-        int intIndiceRandom = UnityEngine.Random.Range(min, max);
+        int intIndiceRandom = UnityEngine.Random.Range(minInclusive, maxInclusive + 1);
         return intIndiceRandom;
     }
-    private List<String> CrearHamburguesaRandom(int level, int cantidadIngredientes)
+    private static int[] CrearHamburguesaRandom(int[] posiblesIngredientes)
     {
-        bool hayPati=false;
-        List<String> HamburguesaFinal=new List<String>();
-        HamburguesaFinal.Add("Pan");
-        while (hayPati==false)
+        int maxIngredientesEntrePanes = DiaManager.diasInfoStc[DiaManager.diaActual].maxIngredientesEntrePanes;
+        int ingredientesEntrePanes = RandomEntre(1, maxIngredientesEntrePanes);
+        if (ingredientesEntrePanes==2)
         {
-            for (int i = 0; i < cantidadIngredientes; i++)
+
+        }
+        int[] vector = new int[ingredientesEntrePanes+2];
+
+        vector[0] = posiblesIngredientes[0];
+        vector[vector.Length - 1] = posiblesIngredientes[0];
+        vector[RandomEntre(1, ingredientesEntrePanes)] = posiblesIngredientes[1];
+        for (int i = 1; i < vector.Length-1; i++)
+        {
+            if (vector[i] == 0)
             {
-                HamburguesaFinal.Add(_posiblesIngredientes[level][RandomEntre(0,_posiblesIngredientes[level].Count)]);
-            }
-            if (HamburguesaFinal.Contains("carne")==true)
-            {
-                hayPati = true;
+                vector[i] = RandomEntre(1, posiblesIngredientes.Length-1);
             }
         }
-        HamburguesaFinal.Add("Pan");
-        return HamburguesaFinal;
+        return vector;
     }
+
 }
