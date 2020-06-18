@@ -54,10 +54,11 @@ public class Verificar : MonoBehaviour
                             interpretacionDePc[i] = 2;
                         }
                     }
-
-                    PedidoManager.agarrarUltimoPedido().SetInterpretacionIngredientes(interpretacionDePc);
                     PedidoManager.MostrarVerificacion(interpretacionDePc);
                     PedidoManager.cambiarPuntaje();
+                    PedidoManager.agarrarUltimoPedido().SetInterpretacionIngredientes(interpretacionDePc);
+                    
+                    
                     strIngredientes = "";
                 }
             }

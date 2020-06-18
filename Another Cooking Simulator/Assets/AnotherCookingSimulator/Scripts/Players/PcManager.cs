@@ -52,6 +52,7 @@ public class PcManager : NetworkBehaviour
     
     void Start()
     {
+        DiaManager.EmpezarDia();
         controller = this.GetComponent<CharacterController>();
         cameraPlayer = this.GetComponentInChildren<Camera>();
         destination = cameraPlayer.transform.GetChild(0);

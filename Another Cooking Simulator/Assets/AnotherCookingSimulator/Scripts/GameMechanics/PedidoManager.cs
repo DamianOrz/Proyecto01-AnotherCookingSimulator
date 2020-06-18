@@ -49,21 +49,15 @@ public class PedidoManager : MonoBehaviour
 
     [SerializeField] private static List<Pedido> _listaPedidos = new List<Pedido>();
 
-    //List<string>[] posiblesOrdenes = new List<string>[]();
-    private static List<String>[] _posiblesIngredientes = new List<String>[]
-    {
-    new List<String>() { "queso","carne"} ,
-    new List<String>() { "bacon", "queso","carne", "cebolla" },
-    new List<String>() { "bacon", "queso", "carne", "cebolla" ,"lechuga"},
-    new List<String>() { "bacon", "queso", "carne", "cebolla" ,"lechuga","tomate"},
-    new List<String>() { "bacon", "queso", "carne", "cebolla" ,"lechuga","tomate","ketchup","mayonesa"}
-    };
-    private static List<String> _hamburguesasDelCliente = new List<String>(){"Hamburguesa Simple","Hamburguesa Doble","Hamburguesa con queso","Hamburguesa doble con queso"};
-
     public static void cambiarPuntaje()
     {
         int puntaje = correccion(agarrarUltimoPedido().GetOrdenIngredientes(),agarrarUltimoPedido().GetInterpretacionIngredientes());
         ScoreManager.sobreEscribir(puntaje);
+        //Pregunta si ya pasaron todos los clientes
+        if (DiaManager.diasInfoStc[DiaManager.diaActual].clientesEnElDia==_listaPedidos.Count)
+        {
+            DiaManager.FinalizarDia();
+        }
     }
     public static int correccion(int[] ordenIngredientes, int[] interpretacion)
     {
