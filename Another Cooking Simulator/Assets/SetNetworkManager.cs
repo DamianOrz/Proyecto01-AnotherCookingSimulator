@@ -33,12 +33,14 @@ public class SetNetworkManager : MonoBehaviour
         }
         else
         {
-            strNewAddress = newAddress.text;
+            strNewAddress = newAddress.GetParsedText().ToString();
+            strNewAddress = strNewAddress.Substring(0, 17); //Hay algún componente de rich text?
             myNetworkRoomManager.GetComponent<MultiplexTransport>().transports[1] = localTransport;
             myNetworkRoomManager.GetComponent<MultiplexTransport>().transports[0] = steamTransport;
         }
-
-        myNetworkRoomManager.networkAddress = strNewAddress;
+        Debug.Log(strNewAddress);
+        Debug.Log(strNewAddress.Length);
+        myNetworkRoomManager.SetNetworkAddress(strNewAddress);
         myNetworkRoomManager.StartClient();
     }
 
