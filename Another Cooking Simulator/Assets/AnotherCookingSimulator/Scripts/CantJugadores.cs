@@ -35,7 +35,6 @@ public class CantJugadores : NetworkBehaviour
                 else //Solo se podrá entrar acá si el jugador que eligio VR decide dejar el puesto pulsando el boton de nuevo
                 {
                     btnPC.enabled = true;
-
                 }
                 break;
             case 1: //1 Representa un click en el btn de PC
@@ -50,7 +49,6 @@ public class CantJugadores : NetworkBehaviour
                     CmdUpdatePCPlayers();
 
                     btnPC.enabled = true;
-
                 }
                 break;
         }

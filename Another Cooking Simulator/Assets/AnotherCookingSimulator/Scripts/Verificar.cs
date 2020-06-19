@@ -61,6 +61,7 @@ public class Verificar : MonoBehaviour
                         }
                     }
                     PedidoManager.agarrarUltimoPedido().SetInterpretacionIngredientes(interpretacionDeVR);
+                    ClientesManager.seEntregoUnPedido();
                     PedidoManager.MostrarVerificacion(interpretacionDeVR);
                     PedidoManager.cambiarPuntaje();
                     

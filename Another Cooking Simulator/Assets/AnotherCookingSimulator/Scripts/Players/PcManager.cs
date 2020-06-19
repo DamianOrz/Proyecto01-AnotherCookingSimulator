@@ -136,15 +136,19 @@ public class PcManager : NetworkBehaviour
                 switch (result.gameObject.name)
                 {
                     case "btnHamburguesaSimple":
+                        FindObjectOfType<AudioManager>().PlayInPosition("Tap", result.gameObject.transform.position);
                         SetIdCombo(1);
                         break;
                     case "btnHamburguesaDoble":
+                        FindObjectOfType<AudioManager>().PlayInPosition("Tap", result.gameObject.transform.position);
                         SetIdCombo(2);
                         break;
                     case "btnHamburguesaSimpleConQueso":
+                        FindObjectOfType<AudioManager>().PlayInPosition("Tap", result.gameObject.transform.position);
                         SetIdCombo(3);
                         break;
                     case "btnHamburguesaDobleConQueso":
+                        FindObjectOfType<AudioManager>().PlayInPosition("Tap", result.gameObject.transform.position);
                         SetIdCombo(4);
                         break;
                 }

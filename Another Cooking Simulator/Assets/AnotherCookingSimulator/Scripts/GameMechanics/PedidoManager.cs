@@ -83,7 +83,7 @@ public class PedidoManager : MonoBehaviour
         }
 
         Pedido unPedido = new Pedido();
-        
+        FindObjectOfType<AudioManager>().PlayInPosition("Ring", contentMostrarCliente.transform.position);
         unPedido.SetOrdenIngredientes(CrearHamburguesaRandom(posiblesIngredientes));
         MostrarPedidoDelCliente(unPedido);
 
