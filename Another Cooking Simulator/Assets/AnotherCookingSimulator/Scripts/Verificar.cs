@@ -52,6 +52,12 @@ public class Verificar : MonoBehaviour
                         }else if (listaNombres[i].Contains("Queso"))
                         {
                             interpretacionDeVR[i] = 2;
+                        }else if (listaNombres[i].Contains("Cebolla"))
+                        {
+                            interpretacionDeVR[i] = 3;
+                        }else if (listaNombres[i].Contains("Bacon"))
+                        {
+                            interpretacionDeVR[i] = 4;
                         }
                     }
                     PedidoManager.agarrarUltimoPedido().SetInterpretacionIngredientes(interpretacionDeVR);
