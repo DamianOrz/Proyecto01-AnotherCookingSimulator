@@ -40,23 +40,23 @@ public class Verificar : MonoBehaviour
                         strIngredientes += hijos[i].name + " ";
                         listaNombres.Add(hijos[i].name);
                     }
-                    int[] interpretacionDePc = new int[listaNombres.Count];
+                    int[] interpretacionDeVR = new int[listaNombres.Count];
                     for (int i = 0; i < listaNombres.Count; i++)
                     {
                         if (listaNombres[i].Contains("Pan"))
                         {
-                            interpretacionDePc[i] = 0;
+                            interpretacionDeVR[i] = 0;
                         }else if(listaNombres[i].Contains("Carne"))
                         {
-                            interpretacionDePc[i] = 1;
+                            interpretacionDeVR[i] = 1;
                         }else if (listaNombres[i].Contains("Queso"))
                         {
-                            interpretacionDePc[i] = 2;
+                            interpretacionDeVR[i] = 2;
                         }
                     }
-                    PedidoManager.MostrarVerificacion(interpretacionDePc);
+                    PedidoManager.agarrarUltimoPedido().SetInterpretacionIngredientes(interpretacionDeVR);
+                    PedidoManager.MostrarVerificacion(interpretacionDeVR);
                     PedidoManager.cambiarPuntaje();
-                    PedidoManager.agarrarUltimoPedido().SetInterpretacionIngredientes(interpretacionDePc);
                     
                     
                     strIngredientes = "";
