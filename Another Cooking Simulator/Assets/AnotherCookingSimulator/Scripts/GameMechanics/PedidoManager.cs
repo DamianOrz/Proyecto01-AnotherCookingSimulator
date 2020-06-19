@@ -8,25 +8,17 @@ using TMPro;
 
 public class PedidoManager : MonoBehaviour
 {
+    public static PedidoManager instancePedidoManager;
+
     public GameObject contentMostrarPedidoAlVR;
     public GameObject contentMostrarPedidoCliente;
     public GameObject contentMostrarUltimaInterpretacion;
-    public static GameObject contentMostrarCliente;
-    public static GameObject contentMostrarVR;
-    public static GameObject contentUltimaInterpretacion;
 
     public GameObject prefabVR;
     public GameObject prefabClientes;
     public GameObject prefabUltimaInterpretacion;
-    public static GameObject prefabVRStc;
-    public static GameObject prefabClienteStc;
-    public static GameObject prefabUltimaInterpretacionStc;
 
     static int iNumPedido = 1;
-    private PedidoManager()
-    {
-
-    }
 
     private enum CORRECCIONES
     {
@@ -35,31 +27,31 @@ public class PedidoManager : MonoBehaviour
         bien = 70,
         muyBien = 100,
     }
-
-    private void Start()
+    private void Awake()
     {
-        contentMostrarVR = contentMostrarPedidoAlVR;
-        contentMostrarCliente = contentMostrarPedidoCliente;
-        contentUltimaInterpretacion = contentMostrarUltimaInterpretacion;
-
-        prefabVRStc = prefabVR;
-        prefabClienteStc = prefabClientes;
-        prefabUltimaInterpretacionStc = prefabUltimaInterpretacion;
+        if (instancePedidoManager != null && instancePedidoManager != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instancePedidoManager = this;
+        }
     }
 
     [SerializeField] private static List<Pedido> _listaPedidos = new List<Pedido>();
 
-    public static void cambiarPuntaje()
+    public void cambiarPuntaje()
     {
         int puntaje = correccion(agarrarUltimoPedido().GetOrdenIngredientes(),agarrarUltimoPedido().GetInterpretacionIngredientes());
         ScoreManager.sobreEscribir(puntaje);
         //Pregunta si ya pasaron todos los clientes
-        if (DiaManager.diasInfoStc[DiaManager.diaActual].clientesEnElDia==_listaPedidos.Count)
+        if (DiaManager.instanceDiaManager.diasInfo[DiaManager.instanceDiaManager.diaActual].clientesEnElDia==_listaPedidos.Count)
         {
-            DiaManager.FinalizarDia();
+            DiaManager.instanceDiaManager.FinalizarDia();
         }
     }
-    public static int correccion(int[] ordenIngredientes, int[] interpretacion)
+    public int correccion(int[] ordenIngredientes, int[] interpretacion)
     {
         int puntos=0;
         if(ordenIngredientes.Length == interpretacion.Length)
@@ -74,16 +66,16 @@ public class PedidoManager : MonoBehaviour
         }
         return puntos;
     }
-    public static void crearPedidoRandom()
+    public void crearPedidoRandom()
     {
-        int[] posiblesIngredientes=new int[DiaManager.diasInfoStc[0].posiblesIngredientes.Length];
-        for (int i = 0; i < DiaManager.diasInfoStc[0].posiblesIngredientes.Length; i++)
+        int[] posiblesIngredientes=new int[DiaManager.instanceDiaManager.diasInfo[0].posiblesIngredientes.Length];
+        for (int i = 0; i < DiaManager.instanceDiaManager.diasInfo[0].posiblesIngredientes.Length; i++)
         {
-            posiblesIngredientes[i]= (int) DiaManager.diasInfoStc[DiaManager.diaActual].posiblesIngredientes[i];
+            posiblesIngredientes[i]= (int)DiaManager.instanceDiaManager.diasInfo[DiaManager.instanceDiaManager.diaActual].posiblesIngredientes[i];
         }
 
         Pedido unPedido = new Pedido();
-        FindObjectOfType<AudioManager>().PlayInPosition("Ring", contentMostrarCliente.transform.position);
+        FindObjectOfType<AudioManager>().PlayInPosition("Ring",PedidoManager.instancePedidoManager.contentMostrarPedidoCliente.transform.position);
         unPedido.SetOrdenIngredientes(CrearHamburguesaRandom(posiblesIngredientes));
         MostrarPedidoDelCliente(unPedido);
 
@@ -91,7 +83,7 @@ public class PedidoManager : MonoBehaviour
         unPedido.SetIdPedido(_listaPedidos.Count);
     }
 
-    public static Pedido CrearInterpretacion(int id)
+    public Pedido CrearInterpretacion(int id)
     {
         Pedido unPedido;
         unPedido = agarrarUltimoPedido();
@@ -118,28 +110,28 @@ public class PedidoManager : MonoBehaviour
         MostrarPedidoAlDeVR(unPedido);
         return unPedido;
     }
-    public static List<Pedido> getListaPedidos()
+    public List<Pedido> getListaPedidos()
     {
         List<Pedido> pedidos = _listaPedidos;
         return pedidos;
     }
-    public static void LimpiarListaPedidos()
+    public void LimpiarListaPedidos()
     {
         _listaPedidos.Clear();
     }
-    public static Pedido agarrarUltimoPedido()
+    public Pedido agarrarUltimoPedido()
     {
         Pedido Pedido;
         int indice = _listaPedidos.Count-1;
         Pedido = _listaPedidos[indice];
         return Pedido;
     }
-    public static void MostrarPedidoAlDeVR(Pedido unPedido)
+    public void MostrarPedidoAlDeVR(Pedido unPedido)
     {
         //Cuando se conecte con el boton esta funcion recibirá parámetros
         string textoPedido = "ERROR";
 
-        GameObject pedidoCreado = Instantiate(prefabVRStc);
+        GameObject pedidoCreado = Instantiate(instancePedidoManager.prefabVR);
 
         GameObject panel = pedidoCreado.transform.Find("Panel").gameObject;
 
@@ -151,63 +143,63 @@ public class PedidoManager : MonoBehaviour
 
         panel.transform.Find("strTiempoRestante").gameObject.GetComponent<TMP_Text>().text = "Tiempo Restante:";
 
-        pedidoCreado.transform.SetParent(contentMostrarVR.transform, false);
+        pedidoCreado.transform.SetParent(instancePedidoManager.contentMostrarPedidoAlVR.transform, false);
 
         iNumPedido++;
     }
-    public static void MostrarPedidoDelCliente(Pedido unPedido)
+    public void MostrarPedidoDelCliente(Pedido unPedido)
     {
         //Cuando se conecte con el boton esta funcion recibirá parámetros
         string textoPedido = "ERROR";
 
-        GameObject pedidoCreado = Instantiate(prefabClienteStc);
+        GameObject pedidoCreado = Instantiate(instancePedidoManager.prefabClientes);
 
         GameObject panel = pedidoCreado.transform.Find("Panel").gameObject;
 
         //BATALLA 1 GANADA CONTRA DAMIAN (SEÑOR FUERZAS DEL MAL), PUNTO PARA SIMI
         panel.transform.Find("strConsumibles").gameObject.GetComponent<TMP_Text>().text = "" + CambiarArrayAString(unPedido.GetOrdenIngredientes());
 
-        pedidoCreado.transform.SetParent(contentMostrarCliente.transform, false);
+        pedidoCreado.transform.SetParent(instancePedidoManager.contentMostrarPedidoCliente.transform, false);
 
         iNumPedido++;
     }
-    public static void MostrarVerificacion(int[] Ingredientes)
+    public void MostrarVerificacion(int[] Ingredientes)
     {
         //Cuando se conecte con el boton esta funcion recibirá parámetros
         string textoPedido = "ERROR";
 
-        GameObject pedidoCreado = Instantiate(prefabUltimaInterpretacionStc);
+        GameObject pedidoCreado = Instantiate(instancePedidoManager.prefabUltimaInterpretacion);
 
         GameObject panel = pedidoCreado.transform.Find("Panel").gameObject;
 
         //BATALLA 1 GANADA CONTRA DAMIAN (SEÑOR FUERZAS DEL MAL), PUNTO PARA SIMI
         panel.transform.Find("strIngredientes").gameObject.GetComponent<TMP_Text>().text = CambiarArrayAString(Ingredientes);
 
-        pedidoCreado.transform.SetParent(contentUltimaInterpretacion.transform, false);
+        pedidoCreado.transform.SetParent(instancePedidoManager.prefabUltimaInterpretacion.transform, false);
 
         iNumPedido++;
     }
-    public static string CambiarArrayAString(int[] listaIngredientes)
+    public string CambiarArrayAString(int[] listaIngredientes)
     {
-        if (DiaManager.diaActual==1)
+        if (DiaManager.instanceDiaManager.diaActual==1)
         {
 
         }
         string Hamburguesa="";
         foreach (int ingrediente in listaIngredientes)
         {
-            Hamburguesa += DiaManager.diasInfoStc[DiaManager.diaActual].posiblesIngredientes[ingrediente].ToString() + " ";
+            Hamburguesa += DiaManager.instanceDiaManager.diasInfo[DiaManager.instanceDiaManager.diaActual].posiblesIngredientes[ingrediente].ToString() + " ";
         }
         return Hamburguesa;
     }
-    private static int RandomEntre(int minInclusive, int maxInclusive)
+    private int RandomEntre(int minInclusive, int maxInclusive)
     {
         int intIndiceRandom = UnityEngine.Random.Range(minInclusive, maxInclusive + 1);
         return intIndiceRandom;
     }
-    private static int[] CrearHamburguesaRandom(int[] posiblesIngredientes)
+    private int[] CrearHamburguesaRandom(int[] posiblesIngredientes)
     {
-        int maxIngredientesEntrePanes = DiaManager.diasInfoStc[DiaManager.diaActual].maxIngredientesEntrePanes;
+        int maxIngredientesEntrePanes = DiaManager.instanceDiaManager.diasInfo[DiaManager.instanceDiaManager.diaActual].maxIngredientesEntrePanes;
         int ingredientesEntrePanes = RandomEntre(1, maxIngredientesEntrePanes);
         if (ingredientesEntrePanes==2)
         {

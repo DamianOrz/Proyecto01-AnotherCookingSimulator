@@ -51,7 +51,7 @@ public class PcManager : NetworkBehaviour
 
     void Start()
     {
-        DiaManager.EmpezarDia();
+        DiaManager.instanceDiaManager.EmpezarDia();
         controller = this.GetComponent<CharacterController>();
         cameraPlayer = this.GetComponentInChildren<Camera>();
         destination = cameraPlayer.transform.GetChild(0);
@@ -189,12 +189,12 @@ public class PcManager : NetworkBehaviour
                     {
                         FindObjectOfType<AudioManager>().PlayInPosition("ButtonClick", whatIHit.collider.gameObject.transform.position);
 
-                        PedidoManager.CrearInterpretacion(_idCombo);
+                        PedidoManager.instancePedidoManager.CrearInterpretacion(_idCombo);
 
                         GameObject Boton = whatIHit.collider.gameObject;
                         Boton.GetComponent<Animation>().Play();
 
-                        List<Pedido> pedidos = PedidoManager.getListaPedidos();
+                        List<Pedido> pedidos = PedidoManager.instancePedidoManager.getListaPedidos();
                     }
                     if (whatIHit.collider.gameObject.name == "btnGenerarPedidoRandom")
                     {
@@ -202,10 +202,10 @@ public class PcManager : NetworkBehaviour
 
                         GameObject Boton = whatIHit.collider.gameObject;
                         Boton.GetComponent<Animation>().Play();
-                        if (PedidoManager.getListaPedidos().Count< DiaManager.diasInfoStc[DiaManager.diaActual].clientesEnElDia)
+                        if (PedidoManager.instancePedidoManager.getListaPedidos().Count< DiaManager.instanceDiaManager.diasInfo[DiaManager.instanceDiaManager.diaActual].clientesEnElDia)
                         {
-                            PedidoManager.crearPedidoRandom();
-                            List<Pedido> pedidos = PedidoManager.getListaPedidos();
+                            PedidoManager.instancePedidoManager.crearPedidoRandom();
+                            List<Pedido> pedidos = PedidoManager.instancePedidoManager.getListaPedidos();
                         }   
                     }
                     if (whatIHit.collider.gameObject.name == "PantallaHacerPedidos")
@@ -237,6 +237,7 @@ public class PcManager : NetworkBehaviour
         cameraPlayer.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         transform.Rotate(Vector3.up * mouseX);
     }
+
     void SetCrossHair()
     {
         rectTransformCrossHair = GetComponent<RectTransform>();

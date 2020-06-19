@@ -5,18 +5,15 @@ using TMPro;
 
 public class DiaManager : MonoBehaviour
 {
-    public TMP_Text texto;
-    public static TMP_Text textoStc;
+    public static DiaManager instanceDiaManager;
 
-    public GameObject contentMostrarPedidoAlVR;
+    public TMP_Text texto;
+
+    public GameObject contentMostrarPedidoAlVR; 
     public GameObject contentMostrarPedidoCliente;
     public GameObject contentMostrarUltimaInterpretacion;
 
-    public static GameObject contentMostrarCliente;
-    public static GameObject contentMostrarVR;
-    public static GameObject contentUltimaInterpretacion;
-
-    public static int diaActual = -1;
+    public int diaActual = -1;
     private int clientes;
 
     public enum POSIBLES_INGREDIENTES
@@ -30,40 +27,45 @@ public class DiaManager : MonoBehaviour
         TOMATE
     }
 
-    public static DiaInformacion[] diasInfoStc;
     public DiaInformacion[] diasInfo;
+    private void Awake()
+    {
+        if (instanceDiaManager!=null && instanceDiaManager != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instanceDiaManager = this;
+        }
+    }
     void Start()
     {
-        diasInfoStc = diasInfo;
-        textoStc = texto;
-        contentMostrarVR = contentMostrarPedidoAlVR;
-        contentMostrarCliente = contentMostrarPedidoCliente;
-        contentUltimaInterpretacion = contentMostrarUltimaInterpretacion;
     }
 
-    public static void EmpezarDia()
+    public void EmpezarDia()
     {
         diaActual++;
-        textoStc.text = "Dia : " + (diaActual);
+        instanceDiaManager.texto.text = "Dia : " + (diaActual);
     }
-    public static void FinalizarDia()
+    public void FinalizarDia()
     {
         int score = ScoreManager.getScore();
         LimpiarPedidos();
         EmpezarDia();
     }
-    public static void LimpiarPedidos()
+    public void LimpiarPedidos()
     {
-        for (int i = 0; i < DiaManager.diasInfoStc[DiaManager.diaActual].clientesEnElDia; i++)
+        for (int i = 0; i < instanceDiaManager.diasInfo[instanceDiaManager.diaActual].clientesEnElDia; i++)
         {
-            if(contentMostrarVR.transform.childCount==3)
+            if(instanceDiaManager.contentMostrarPedidoAlVR.transform.childCount==3)
             {
 
             }
-            Destroy(contentMostrarVR.transform.GetChild(i).gameObject);
-            Destroy(contentMostrarCliente.transform.GetChild(i).gameObject);
-            Destroy(contentUltimaInterpretacion.transform.GetChild(i).gameObject);
+            Destroy(instanceDiaManager.contentMostrarPedidoAlVR.transform.GetChild(i).gameObject);
+            Destroy(instanceDiaManager.contentMostrarPedidoCliente.transform.GetChild(i).gameObject);
+            Destroy(instanceDiaManager.contentMostrarUltimaInterpretacion.transform.GetChild(i).gameObject);
         }
-        PedidoManager.LimpiarListaPedidos();
+        PedidoManager.instancePedidoManager.LimpiarListaPedidos();
     }
 }

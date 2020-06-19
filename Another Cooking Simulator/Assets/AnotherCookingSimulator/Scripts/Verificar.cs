@@ -60,10 +60,10 @@ public class Verificar : MonoBehaviour
                             interpretacionDeVR[i] = 4;
                         }
                     }
-                    PedidoManager.agarrarUltimoPedido().SetInterpretacionIngredientes(interpretacionDeVR);
-                    ClientesManager.seEntregoUnPedido();
-                    PedidoManager.MostrarVerificacion(interpretacionDeVR);
-                    PedidoManager.cambiarPuntaje();
+                    PedidoManager.instancePedidoManager.agarrarUltimoPedido().SetInterpretacionIngredientes(interpretacionDeVR);
+                    ClientesManager.instanceClientesManager.seEntregoUnPedido();
+                    PedidoManager.instancePedidoManager.MostrarVerificacion(interpretacionDeVR);
+                    PedidoManager.instancePedidoManager.cambiarPuntaje();
                     
                     
                     strIngredientes = "";

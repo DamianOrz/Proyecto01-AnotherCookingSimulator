@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ClientesManager : MonoBehaviour
 {
+    public static ClientesManager instanceClientesManager;
+
     private double tiempo = 0; 
     private int contClientes=0;
     private static int pedidosEntregados = 0;
@@ -11,24 +13,30 @@ public class ClientesManager : MonoBehaviour
     private double tiempoEntreClientes= 5;
     private bool primeraVez=true;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        
+        if(instanceClientesManager!=null && instanceClientesManager!=this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            instanceClientesManager = this;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (DiaManager.diaActual>-1)
+        if (DiaManager.instanceDiaManager.diaActual>-1)
         {
             if (primeraVez)
             {
-                PedidoManager.crearPedidoRandom();
+                PedidoManager.instancePedidoManager.crearPedidoRandom();
                 contClientes++;
                 primeraVez = false;
             }
-            if(!(DiaManager.diasInfoStc[DiaManager.diaActual].clientesEnElDia==contClientes))
+            if(!(DiaManager.instanceDiaManager.diasInfo[DiaManager.instanceDiaManager.diaActual].clientesEnElDia==contClientes))
             {
                 if (contClientes == pedidosEntregados)
                 {
@@ -37,13 +45,13 @@ public class ClientesManager : MonoBehaviour
                 if (tiempo>=tiempoEntreClientes)
                 {
                     contClientes++;
-                    PedidoManager.crearPedidoRandom();
+                    PedidoManager.instancePedidoManager.crearPedidoRandom();
                     tiempo = 0;
                 }
             }
         }
     }
-    public static void seEntregoUnPedido()
+    public void seEntregoUnPedido()
     {
         pedidosEntregados++;
     }
