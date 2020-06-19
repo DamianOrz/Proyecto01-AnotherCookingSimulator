@@ -119,10 +119,6 @@ public class PedidoManager : MonoBehaviour
         MostrarPedidoAlDeVR(unPedido);
         return unPedido;
     }
-    public static void guardarInterpretacionFinalVR()
-    {
-
-    }
     public static List<Pedido> getListaPedidos()
     {
         List<Pedido> pedidos = _listaPedidos;
@@ -196,34 +192,6 @@ public class PedidoManager : MonoBehaviour
             Hamburguesa += DiaManager.diasInfoStc[DiaManager.diaActual].posiblesIngredientes[ingrediente].ToString() + " ";
         }
         return Hamburguesa;
-    }
-    private void CrearOrdenIngredientesRandom(int level)
-    {
-        int cantidadIngredientes;
-       
-        switch (level)
-        {
-            case 1:
-                cantidadIngredientes = RandomEntre(1, 2);
-                
-                break;
-            case 2:
-
-                break;
-            case 3:
-
-                break;
-            case 4:
-
-                break;
-            case 5:
-
-                break;
-            default:
-
-                break;
-        }
-
     }
     private static int RandomEntre(int minInclusive, int maxInclusive)
     {
