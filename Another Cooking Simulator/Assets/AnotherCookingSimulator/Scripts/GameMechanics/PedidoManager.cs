@@ -93,7 +93,6 @@ public class PedidoManager : MonoBehaviour
 
     public static Pedido CrearInterpretacion(int id)
     {
-        
         Pedido unPedido;
         unPedido = agarrarUltimoPedido();
         switch (id)

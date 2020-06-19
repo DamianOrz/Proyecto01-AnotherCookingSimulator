@@ -49,7 +49,6 @@ public class PcManager : NetworkBehaviour
     //PEDIDO
     [SerializeField] Pedido pedido = new Pedido();
 
-    
     void Start()
     {
         DiaManager.EmpezarDia();
@@ -199,11 +198,11 @@ public class PcManager : NetworkBehaviour
 
                         GameObject Boton = whatIHit.collider.gameObject;
                         Boton.GetComponent<Animation>().Play();
-                        if(PedidoManager.getListaPedidos().Count < DiaManager.diasInfoStc[DiaManager.diaActual].clientesEnElDia)
+                        if (PedidoManager.getListaPedidos().Count< DiaManager.diasInfoStc[DiaManager.diaActual].clientesEnElDia)
                         {
                             PedidoManager.crearPedidoRandom();
                             List<Pedido> pedidos = PedidoManager.getListaPedidos();
-                        }
+                        }   
                     }
                     if (whatIHit.collider.gameObject.name == "PantallaHacerPedidos")
                     {
