@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using TMPro;
+using UnityEngine.UI;
 
 public class CantJugadores : NetworkBehaviour
 {
@@ -14,45 +15,63 @@ public class CantJugadores : NetworkBehaviour
 
     public TMP_Text tmpJugadoresVR;
     public TMP_Text tmpJugadoresPC;
+    public Button btnVR;
+    public Button btnPC;
 
 
-    [Command]
-    public void CmdCheckPlayers(int i)
+    public void CheckPlayers(int i)
     {
-        if (i == 0) //0 Representa un click en el btn de VR
+        switch (i)
         {
-            if (iCantVR < iLimiteJugadoresVR)
-            {
-                iCantVR += 1; //Sumo un jugador más
-                CmdUpdateVRPlayers(); //Actualizo el texto
-                CmdSetPlayerAsVR(); //Le asigno al jugador que presionó el boton un id para luego darle el prefab correcto (En este caso VR)
-            }
-            else
-            {
+            case 0: //0 Representa un click en el btn de VR
+                if (iCantVR < iLimiteJugadoresVR)
+                {
+                    CmdSetPlayerAsVR(); //Le asigno al jugador que presionó el boton un id para luego darle el prefab correcto (En este caso VR)
+                    CmdUpdateVRPlayers(); //Actualizo el texto
 
-            }
-        }
-        else if (i == 1) //1 Representa un click en el btn de PC
-        {
-            if (iCantPC < iLimiteJugadoresPC)
-            {
-                iCantPC += 1;
-                CmdUpdatePCPlayers();
-                CmdSetPlayerAsPC();
-            }
+                    btnVR.enabled = true;
+                    btnPC.enabled = false;
+                }
+                else //Solo se podrá entrar acá si el jugador que eligio VR decide dejar el puesto pulsando el boton de nuevo
+                {
+                    btnPC.enabled = true;
+
+                }
+                break;
+            case 1: //1 Representa un click en el btn de PC
+                if (false) //If(jugador.status == jugador pc)
+                {
+                    btnVR.enabled = true;
+
+                }
+                else if (iCantPC < iLimiteJugadoresPC) //Si no tiene asignado ningún rol y hay espacio....
+                {
+                    CmdSetPlayerAsPC();
+                    CmdUpdatePCPlayers();
+
+                    btnPC.enabled = true;
+
+                }
+                break;
         }
     }
 
     [Command]
     void CmdSetPlayerAsVR()
     {
-       //Tengo que asignarle el id y hacer que todos los otros jugadores (menos el player) NO puedan presionar el boton VR 
+        iCantVR += 1;
+        //Tengo que asignarle el id y hacer que todos los otros jugadores (menos el player) NO puedan presionar el boton VR
+        
+        btnVR.enabled = false;
+
     }
 
     [Command]
     void CmdSetPlayerAsPC()
     {
-        //Tengo que asignarle el id y hacer que todos los otros jugadores (menos el player) NO puedan presionar el boton PC 
+        iCantPC += 1;
+        //Tengo que asignarle el id y hacer que todos los otros jugadores (menos el player) NO puedan presionar el boton PC
+        btnPC.enabled = false;
     }
 
     [Command]
