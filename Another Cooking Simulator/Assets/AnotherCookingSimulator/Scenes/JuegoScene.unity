@@ -3585,7 +3585,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &768557780
 Transform:
   m_ObjectHideFlags: 0
@@ -9475,6 +9475,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   texto: {fileID: 1035711328}
+  contentMostrarPedidoAlVR: {fileID: 1368366180}
+  contentMostrarPedidoCliente: {fileID: 233445019}
+  contentMostrarUltimaInterpretacion: {fileID: 1192793265}
   diasInfo:
   - {fileID: 11400000, guid: ebf8b07f799d31443810cf54d9e59c02, type: 2}
   - {fileID: 11400000, guid: f576311703a086449a6a5487826d14c2, type: 2}

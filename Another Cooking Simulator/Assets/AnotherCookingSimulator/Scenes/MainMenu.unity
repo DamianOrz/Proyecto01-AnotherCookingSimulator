@@ -3365,6 +3365,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   newAddress: {fileID: 96359872}
   myNetworkRoomManager: {fileID: 1678351133}
+  mySteamManager: {fileID: 0}
 --- !u!1 &890758361
 GameObject:
   m_ObjectHideFlags: 0
@@ -6420,7 +6421,7 @@ MonoBehaviour:
   - {fileID: 8681103617065013659, guid: b4d35aed20e4c204ab639a0edf15cc3a, type: 3}
   - {fileID: 7147390276511485958, guid: 156fb66e2ffc8b848a4eadc7761d2c86, type: 3}
   - {fileID: 9122676827126895862, guid: 665fe0c8c2572924a9c1ecb79e012bca, type: 3}
-  showRoomGUI: 0
+  showRoomGUI: 1
   minPlayers: 1
   roomPlayerPrefab: {fileID: 8467471082753040350, guid: c42da52323a89cf47b491efd3991aeb5,
     type: 3}
@@ -7824,6 +7825,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   newAddress: {fileID: 0}
   myNetworkRoomManager: {fileID: 1678351133}
+  mySteamManager: {fileID: 0}
 --- !u!1 &2138200681
 GameObject:
   m_ObjectHideFlags: 0

@@ -123,6 +123,10 @@ public class PedidoManager : MonoBehaviour
         List<Pedido> pedidos = _listaPedidos;
         return pedidos;
     }
+    public static void LimpiarListaPedidos()
+    {
+        _listaPedidos.Clear();
+    }
     public static Pedido agarrarUltimoPedido()
     {
         Pedido Pedido;
@@ -185,6 +189,10 @@ public class PedidoManager : MonoBehaviour
     }
     public static string CambiarArrayAString(int[] listaIngredientes)
     {
+        if (DiaManager.diaActual==1)
+        {
+
+        }
         string Hamburguesa="";
         foreach (int ingrediente in listaIngredientes)
         {

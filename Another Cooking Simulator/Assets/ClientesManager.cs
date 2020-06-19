@@ -8,7 +8,7 @@ public class ClientesManager : MonoBehaviour
     private int contClientes=0;
     private static int pedidosEntregados = 0;
 
-    private double tiempoEntreClientes= 10;
+    private double tiempoEntreClientes= 5;
     private bool primeraVez=true;
 
     // Start is called before the first frame update
@@ -30,8 +30,11 @@ public class ClientesManager : MonoBehaviour
             }
             if(!(DiaManager.diasInfoStc[DiaManager.diaActual].clientesEnElDia==contClientes))
             {
-                tiempo += Time.deltaTime;
-                if (tiempo>=tiempoEntreClientes && contClientes==pedidosEntregados)
+                if (contClientes == pedidosEntregados)
+                {
+                    tiempo += Time.deltaTime;
+                }
+                if (tiempo>=tiempoEntreClientes)
                 {
                     contClientes++;
                     PedidoManager.crearPedidoRandom();
