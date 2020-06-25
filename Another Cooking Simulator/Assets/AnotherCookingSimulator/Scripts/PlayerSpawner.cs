@@ -12,21 +12,18 @@ public class PlayerSpawner : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
         searchVrPlayer();
         if (hayPersonajeVR)
         {
             if(isLocalPlayer)
             {
                 CmdSpawnPCPlayer();
-            }
-            
+            }           
         }
         else
         {
             CmdSpawnVRPlayer();
         }
-
     }
 
     // Update is called once per frame

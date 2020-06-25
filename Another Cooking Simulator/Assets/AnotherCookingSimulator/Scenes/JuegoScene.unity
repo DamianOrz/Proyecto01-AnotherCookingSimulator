@@ -3382,7 +3382,7 @@ PrefabInstance:
     - target: {fileID: 4585414645498312671, guid: 66abfd478215eef4cbef89c92ac2e0c4,
         type: 3}
       propertyPath: m_Name
-      value: Bandeja
+      value: Bandeja3
       objectReference: {fileID: 0}
     - target: {fileID: 4585414645498312676, guid: 66abfd478215eef4cbef89c92ac2e0c4,
         type: 3}
@@ -3443,6 +3443,11 @@ PrefabInstance:
         type: 3}
       propertyPath: defaultSnappedInteractableObject
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4585414645721608429, guid: 66abfd478215eef4cbef89c92ac2e0c4,
+        type: 3}
+      propertyPath: applyScalingOnSnap
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4983916937083548893, guid: 66abfd478215eef4cbef89c92ac2e0c4,
         type: 3}
@@ -6802,7 +6807,7 @@ PrefabInstance:
     - target: {fileID: 4585414645498312671, guid: 66abfd478215eef4cbef89c92ac2e0c4,
         type: 3}
       propertyPath: m_Name
-      value: Bandeja
+      value: Bandeja2
       objectReference: {fileID: 0}
     - target: {fileID: 4585414645498312671, guid: 66abfd478215eef4cbef89c92ac2e0c4,
         type: 3}
@@ -8756,7 +8761,7 @@ PrefabInstance:
     - target: {fileID: 4585414645498312671, guid: 66abfd478215eef4cbef89c92ac2e0c4,
         type: 3}
       propertyPath: m_Name
-      value: Bandeja
+      value: Bandeja4
       objectReference: {fileID: 0}
     - target: {fileID: 4585414645498312671, guid: 66abfd478215eef4cbef89c92ac2e0c4,
         type: 3}
@@ -9098,7 +9103,7 @@ PrefabInstance:
     - target: {fileID: 4585414645498312671, guid: 66abfd478215eef4cbef89c92ac2e0c4,
         type: 3}
       propertyPath: m_Name
-      value: Bandeja
+      value: Bandeja1
       objectReference: {fileID: 0}
     - target: {fileID: 4585414645498312671, guid: 66abfd478215eef4cbef89c92ac2e0c4,
         type: 3}
