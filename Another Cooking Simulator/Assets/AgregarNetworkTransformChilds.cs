@@ -19,15 +19,18 @@ public class AgregarNetworkTransformChilds : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(ObtenerHijos(snapDropZone).Count > 0)
-        {
-            if(noSeHizo)
-            {
-                List<VRTK_InteractableObject> hijos = ObtenerHijos(snapDropZone);
-                this.gameObject.AddComponent<NetworkTransformChild>().target=hijos[0].transform;
-                noSeHizo = false;
-            }
-        }
+        //if (DiaManager.instanceDiaManager.diaActual > -1)
+        //{
+        //    if(ObtenerHijos(snapDropZone).Count > 0)
+        //    {
+        //        if(noSeHizo)
+        //        {
+        //            List<VRTK_InteractableObject> hijos = ObtenerHijos(snapDropZone);
+        //            this.gameObject.AddComponent<NetworkTransformChild>().target=hijos[0].transform;
+        //            noSeHizo = false;
+        //        }
+        //    }
+        //}
     }
 
     private List<VRTK_InteractableObject> ObtenerTodosLosHijos(VRTK_SnapDropZone snapDropZone)
