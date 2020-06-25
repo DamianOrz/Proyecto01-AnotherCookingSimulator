@@ -2624,6 +2624,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pan (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 5744627762868715809, guid: 81fed6138b88fac4688f86d1fdf3ee83,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5744627763100501523, guid: 81fed6138b88fac4688f86d1fdf3ee83,
         type: 3}
       propertyPath: defaultSnappedInteractableObject
@@ -2642,6 +2647,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Carne (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2106482936141823128, guid: da199598c16c0c84ca1d22f56ce172be,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2106482936141823137, guid: da199598c16c0c84ca1d22f56ce172be,
         type: 3}
@@ -2708,6 +2718,11 @@ PrefabInstance:
       propertyPath: defaultSnappedInteractableObject
       value: 
       objectReference: {fileID: 1534757840}
+    - target: {fileID: 2106482936627092861, guid: da199598c16c0c84ca1d22f56ce172be,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2765791086104926969, guid: da199598c16c0c84ca1d22f56ce172be,
         type: 3}
       propertyPath: clientAuthority
@@ -3345,6 +3360,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pan (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 5744627762868715809, guid: 81fed6138b88fac4688f86d1fdf3ee83,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5744627763100501523, guid: 81fed6138b88fac4688f86d1fdf3ee83,
         type: 3}
       propertyPath: defaultSnappedInteractableObject
@@ -3359,15 +3379,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2117538897}
     m_Modifications:
-    - target: {fileID: 3255007830711147678, guid: 66abfd478215eef4cbef89c92ac2e0c4,
-        type: 3}
-      propertyPath: sceneId
-      value: 778327653
-      objectReference: {fileID: 0}
     - target: {fileID: 4585414645498312671, guid: 66abfd478215eef4cbef89c92ac2e0c4,
         type: 3}
       propertyPath: m_Name
-      value: Bandeja (3)
+      value: Bandeja
       objectReference: {fileID: 0}
     - target: {fileID: 4585414645498312676, guid: 66abfd478215eef4cbef89c92ac2e0c4,
         type: 3}
@@ -3444,11 +3459,6 @@ PrefabInstance:
       propertyPath: sceneId
       value: 2367666450
       objectReference: {fileID: 0}
-    - target: {fileID: 5899379324474193336, guid: 66abfd478215eef4cbef89c92ac2e0c4,
-        type: 3}
-      propertyPath: sceneId
-      value: 1839951251
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 66abfd478215eef4cbef89c92ac2e0c4, type: 3}
 --- !u!1 &737336403
@@ -3511,6 +3521,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Carne (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2106482936141823128, guid: da199598c16c0c84ca1d22f56ce172be,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2106482936141823137, guid: da199598c16c0c84ca1d22f56ce172be,
         type: 3}
@@ -5281,6 +5296,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pan (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5744627762868715809, guid: 81fed6138b88fac4688f86d1fdf3ee83,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81fed6138b88fac4688f86d1fdf3ee83, type: 3}
 --- !u!1 &1048548371
@@ -5997,6 +6017,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Carne (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 2106482936141823128, guid: da199598c16c0c84ca1d22f56ce172be,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2106482936141823137, guid: da199598c16c0c84ca1d22f56ce172be,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -6555,6 +6580,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pan (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 5744627762868715809, guid: 81fed6138b88fac4688f86d1fdf3ee83,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81fed6138b88fac4688f86d1fdf3ee83, type: 3}
 --- !u!1 &1280212789
@@ -6769,15 +6799,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2117538897}
     m_Modifications:
-    - target: {fileID: 3255007830711147678, guid: 66abfd478215eef4cbef89c92ac2e0c4,
-        type: 3}
-      propertyPath: sceneId
-      value: 2050585646
-      objectReference: {fileID: 0}
     - target: {fileID: 4585414645498312671, guid: 66abfd478215eef4cbef89c92ac2e0c4,
         type: 3}
       propertyPath: m_Name
-      value: Bandeja (2)
+      value: Bandeja
+      objectReference: {fileID: 0}
+    - target: {fileID: 4585414645498312671, guid: 66abfd478215eef4cbef89c92ac2e0c4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4585414645498312676, guid: 66abfd478215eef4cbef89c92ac2e0c4,
         type: 3}
@@ -6853,11 +6883,6 @@ PrefabInstance:
         type: 3}
       propertyPath: sceneId
       value: 208717916
-      objectReference: {fileID: 0}
-    - target: {fileID: 5899379324474193336, guid: 66abfd478215eef4cbef89c92ac2e0c4,
-        type: 3}
-      propertyPath: sceneId
-      value: 14878860
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 66abfd478215eef4cbef89c92ac2e0c4, type: 3}
@@ -8728,15 +8753,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2117538897}
     m_Modifications:
-    - target: {fileID: 3255007830711147678, guid: 66abfd478215eef4cbef89c92ac2e0c4,
-        type: 3}
-      propertyPath: sceneId
-      value: 3166910112
-      objectReference: {fileID: 0}
     - target: {fileID: 4585414645498312671, guid: 66abfd478215eef4cbef89c92ac2e0c4,
         type: 3}
       propertyPath: m_Name
-      value: Bandeja (4)
+      value: Bandeja
+      objectReference: {fileID: 0}
+    - target: {fileID: 4585414645498312671, guid: 66abfd478215eef4cbef89c92ac2e0c4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4585414645498312676, guid: 66abfd478215eef4cbef89c92ac2e0c4,
         type: 3}
@@ -8812,11 +8837,6 @@ PrefabInstance:
         type: 3}
       propertyPath: sceneId
       value: 260542953
-      objectReference: {fileID: 0}
-    - target: {fileID: 5899379324474193336, guid: 66abfd478215eef4cbef89c92ac2e0c4,
-        type: 3}
-      propertyPath: sceneId
-      value: 3981092813
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 66abfd478215eef4cbef89c92ac2e0c4, type: 3}
@@ -9075,20 +9095,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2117538897}
     m_Modifications:
-    - target: {fileID: 3255007830711147678, guid: 66abfd478215eef4cbef89c92ac2e0c4,
-        type: 3}
-      propertyPath: sceneId
-      value: 1580718545
-      objectReference: {fileID: 0}
-    - target: {fileID: 3255007830711147678, guid: 66abfd478215eef4cbef89c92ac2e0c4,
-        type: 3}
-      propertyPath: m_AssetId
-      value: 66abfd478215eef4cbef89c92ac2e0c4
-      objectReference: {fileID: 0}
     - target: {fileID: 4585414645498312671, guid: 66abfd478215eef4cbef89c92ac2e0c4,
         type: 3}
       propertyPath: m_Name
-      value: Bandeja (1)
+      value: Bandeja
+      objectReference: {fileID: 0}
+    - target: {fileID: 4585414645498312671, guid: 66abfd478215eef4cbef89c92ac2e0c4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4585414645498312676, guid: 66abfd478215eef4cbef89c92ac2e0c4,
         type: 3}
@@ -9156,16 +9171,6 @@ PrefabInstance:
       value: 930797202
       objectReference: {fileID: 0}
     - target: {fileID: 5030733769777286945, guid: 66abfd478215eef4cbef89c92ac2e0c4,
-        type: 3}
-      propertyPath: m_AssetId
-      value: 66abfd478215eef4cbef89c92ac2e0c4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5899379324474193336, guid: 66abfd478215eef4cbef89c92ac2e0c4,
-        type: 3}
-      propertyPath: sceneId
-      value: 4179416339
-      objectReference: {fileID: 0}
-    - target: {fileID: 5899379324474193336, guid: 66abfd478215eef4cbef89c92ac2e0c4,
         type: 3}
       propertyPath: m_AssetId
       value: 66abfd478215eef4cbef89c92ac2e0c4
@@ -9259,6 +9264,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Pan (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5744627762868715809, guid: 81fed6138b88fac4688f86d1fdf3ee83,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5744627763100501523, guid: 81fed6138b88fac4688f86d1fdf3ee83,
         type: 3}
@@ -9645,6 +9655,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Queso (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3433928666346859410, guid: 43a7bffd168c52446a5019aa46a09d20,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3433928666346859433, guid: 43a7bffd168c52446a5019aa46a09d20,
         type: 3}
@@ -10112,6 +10127,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pan (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 5744627762868715809, guid: 81fed6138b88fac4688f86d1fdf3ee83,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81fed6138b88fac4688f86d1fdf3ee83, type: 3}
 --- !u!1 &1897309437
@@ -10414,6 +10434,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Carne (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2106482936141823128, guid: da199598c16c0c84ca1d22f56ce172be,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2106482936141823137, guid: da199598c16c0c84ca1d22f56ce172be,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -10479,6 +10504,11 @@ PrefabInstance:
       propertyPath: defaultSnappedInteractableObject
       value: 
       objectReference: {fileID: 1944426268}
+    - target: {fileID: 2106482936627092861, guid: da199598c16c0c84ca1d22f56ce172be,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2765791086104926969, guid: da199598c16c0c84ca1d22f56ce172be,
         type: 3}
       propertyPath: clientAuthority

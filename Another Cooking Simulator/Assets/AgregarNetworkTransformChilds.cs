@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using VRTK;
+using Mirror;
 
-public class AgregarNetworkTransformChilds : MonoBehaviour
+public class AgregarNetworkTransformChilds : NetworkBehaviour
 {
     private VRTK_SnapDropZone snapDropZone;
     private bool noSeHizo;
@@ -18,15 +19,12 @@ public class AgregarNetworkTransformChilds : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(ObtenerHijos(snapDropZone).Count != 0)
+        if(ObtenerHijos(snapDropZone).Count > 0)
         {
             if(noSeHizo)
             {
-                List<VRTK_InteractableObject> hijos = ObtenerTodosLosHijos(snapDropZone);
-                for(int i = 0; i < hijos.Count; i++)
-                {
-                    Debug.Log(hijos[i].name);
-                }
+                List<VRTK_InteractableObject> hijos = ObtenerHijos(snapDropZone);
+                this.gameObject.AddComponent<NetworkTransformChild>().target=hijos[0].transform;
                 noSeHizo = false;
             }
         }
