@@ -9080,6 +9080,11 @@ PrefabInstance:
       propertyPath: sceneId
       value: 1580718545
       objectReference: {fileID: 0}
+    - target: {fileID: 3255007830711147678, guid: 66abfd478215eef4cbef89c92ac2e0c4,
+        type: 3}
+      propertyPath: m_AssetId
+      value: 66abfd478215eef4cbef89c92ac2e0c4
+      objectReference: {fileID: 0}
     - target: {fileID: 4585414645498312671, guid: 66abfd478215eef4cbef89c92ac2e0c4,
         type: 3}
       propertyPath: m_Name
@@ -9145,25 +9150,25 @@ PrefabInstance:
       propertyPath: defaultSnappedInteractableObject
       value: 
       objectReference: {fileID: 602658042}
-    - target: {fileID: 4983916937083548893, guid: 66abfd478215eef4cbef89c92ac2e0c4,
-        type: 3}
-      propertyPath: clientAuthority
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4983916937083548893, guid: 66abfd478215eef4cbef89c92ac2e0c4,
-        type: 3}
-      propertyPath: syncInterval
-      value: 0.1
-      objectReference: {fileID: 0}
     - target: {fileID: 5030733769777286945, guid: 66abfd478215eef4cbef89c92ac2e0c4,
         type: 3}
       propertyPath: sceneId
       value: 930797202
       objectReference: {fileID: 0}
+    - target: {fileID: 5030733769777286945, guid: 66abfd478215eef4cbef89c92ac2e0c4,
+        type: 3}
+      propertyPath: m_AssetId
+      value: 66abfd478215eef4cbef89c92ac2e0c4
+      objectReference: {fileID: 0}
     - target: {fileID: 5899379324474193336, guid: 66abfd478215eef4cbef89c92ac2e0c4,
         type: 3}
       propertyPath: sceneId
       value: 4179416339
+      objectReference: {fileID: 0}
+    - target: {fileID: 5899379324474193336, guid: 66abfd478215eef4cbef89c92ac2e0c4,
+        type: 3}
+      propertyPath: m_AssetId
+      value: 66abfd478215eef4cbef89c92ac2e0c4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 66abfd478215eef4cbef89c92ac2e0c4, type: 3}
