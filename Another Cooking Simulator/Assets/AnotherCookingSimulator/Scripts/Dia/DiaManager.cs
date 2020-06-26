@@ -13,7 +13,7 @@ public class DiaManager : MonoBehaviour
     public GameObject contentMostrarPedidoCliente;
     public GameObject contentMostrarUltimaInterpretacion;
 
-    public int diaActual = 0;
+    public int diaActual = -1;
     private int clientes;
 
     public enum POSIBLES_INGREDIENTES

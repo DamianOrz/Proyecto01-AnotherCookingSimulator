@@ -9,12 +9,12 @@ EditorBuildSettings:
     path: 
     guid: 00000000000000000000000000000000
   - enabled: 1
+    path: Assets/AnotherCookingSimulator/Scenes/JuegoScene.unity
+    guid: ad02aa725fde0564c9f85a1cdfc570c5
+  - enabled: 1
     path: Assets/AnotherCookingSimulator/Scenes/MainMenu.unity
     guid: 50ada39bd45c7a54480441192ce1b11b
   - enabled: 1
     path: Assets/AnotherCookingSimulator/Scenes/RoomScene.unity
     guid: 898089e9f68bee44b84be4d4bda5ef99
-  - enabled: 1
-    path: Assets/AnotherCookingSimulator/Scenes/JuegoScene.unity
-    guid: ad02aa725fde0564c9f85a1cdfc570c5
   m_configObjects: {}

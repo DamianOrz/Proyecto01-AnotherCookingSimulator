@@ -51,7 +51,7 @@ public class PcManager : NetworkBehaviour
 
     void Start()
     {
-        //DiaManager.instanceDiaManager.EmpezarDia();
+        DiaManager.instanceDiaManager.EmpezarDia();
         controller = this.GetComponent<CharacterController>();
         cameraPlayer = this.GetComponentInChildren<Camera>();
         destination = cameraPlayer.transform.GetChild(0);
@@ -114,6 +114,7 @@ public class PcManager : NetworkBehaviour
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
     }
+
     void Interaction()
     {
         Debug.DrawRay(cameraPlayer.transform.position, cameraPlayer.transform.forward * distanceToSee, Color.magenta);
@@ -226,6 +227,7 @@ public class PcManager : NetworkBehaviour
             }
         }
     }
+
     void Look()
     {
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
@@ -242,10 +244,12 @@ public class PcManager : NetworkBehaviour
     {
         rectTransformCrossHair = GetComponent<RectTransform>();
     }
+
     public static void SetIdCombo(int combo)
     {
         _idCombo = combo;
     }
+
     void PickUpObject(GameObject go)
     {
         Transform posicionObjeto = go.transform;
@@ -261,6 +265,7 @@ public class PcManager : NetworkBehaviour
             }
         }
     }
+
     void DropObject(GameObject go)
     {
         //AGREGAR RAYCAST PARA APOYAR
