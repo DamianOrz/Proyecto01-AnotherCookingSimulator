@@ -7,31 +7,23 @@ using Mirror;
 public class AgregarNetworkTransformChilds : NetworkBehaviour
 {
     private VRTK_SnapDropZone snapDropZone;
-    private bool noSeHizo;
 
     // Start is called before the first frame update
     void Start()
     {
         snapDropZone = this.GetComponentInChildren<VRTK_SnapDropZone>();
-        noSeHizo = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //if (DiaManager.instanceDiaManager.diaActual > -1)
-        //{
-        //    if(ObtenerHijos(snapDropZone).Count > 0)
-        //    {
-        //        if(noSeHizo)
-        //        {
-        //            List<VRTK_InteractableObject> hijos = ObtenerHijos(snapDropZone);
-        //            this.gameObject.AddComponent<NetworkTransformChild>().target=hijos[0].transform;
-        //            noSeHizo = false;
-        //        }
-        //    }
-        //}
-    }
+        if (this.name=="Bandeja3" && snapDropZone.GetCurrentSnappedObject() != null)
+        {
+            GameObject currentGameObject = snapDropZone.GetCurrentSnappedObject();
+            this.gameObject.AddComponent<NetworkTransformChild>().target = currentGameObject.GetComponent<Transform>();
+            snapDropZone = currentGameObject.GetComponentInChildren<VRTK_SnapDropZone>();
+        }
+    }   
 
     private List<VRTK_InteractableObject> ObtenerTodosLosHijos(VRTK_SnapDropZone snapDropZone)
     {
@@ -64,5 +56,18 @@ public class AgregarNetworkTransformChilds : NetworkBehaviour
             }
         }
         return hijos;
+    }
+    private VRTK_InteractableObject obtenerHijoDeSnapDropZone(VRTK_SnapDropZone objeto)
+    {
+        VRTK_InteractableObject ingrediente = null;
+        foreach (Transform child in objeto.transform)
+        {
+            if (child.name != "HighlightContainer")
+            {
+                ingrediente = child.GetComponent<VRTK_InteractableObject>();
+            }
+        }
+        
+        return ingrediente;
     }
 }

@@ -443,7 +443,6 @@
                 }
             }
         }
-
         protected virtual void UpdatePosition()
         {
             float moveMod = Time.deltaTime * playerMoveMultiplier * sprintMultiplier;
