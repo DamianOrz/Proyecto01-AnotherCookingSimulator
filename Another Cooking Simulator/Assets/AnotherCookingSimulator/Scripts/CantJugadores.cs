@@ -17,8 +17,14 @@ public class CantJugadores : NetworkBehaviour
     public TMP_Text tmpJugadoresPC;
     public Button btnVR;
     public Button btnPC;
-    private NetworkRoomManager myNetworkLobbyManager = FindObjectOfType<NetworkRoomManager>();
+    private NetworkRoomManager myNetworkLobbyManager;
     public NetworkLobbyPlayer player; //El que pulsó el boton
+
+
+    private void Start()
+    {
+       myNetworkLobbyManager = FindObjectOfType<NetworkRoomManager>();
+    }
 
 
     public void CheckPlayers(int i)

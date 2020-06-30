@@ -19,7 +19,7 @@ public class LobbyPlayerCharacter : NetworkBehaviour
     private void Start()
     {
         playerType = 2;
-        playerName = "Player" + myNetworkRoomPlayer.netId;
+        playerName = "Player" + gameObject.GetComponent<NetworkIdentity>().name;
         
     }
 
