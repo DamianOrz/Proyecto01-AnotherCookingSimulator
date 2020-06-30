@@ -4,25 +4,30 @@ using UnityEngine;
 
 public class LobbyPlayerCharacter : MonoBehaviour
 {
+    //Glosario playerType:
     //0 = VR
     //1 = PC
-    //2 = undefined
-    public int playerID;
+    //2 = undefined --> No eligió aún
+
+    private string playerName; // Player + ID
+    private int playerType; // VR o PC
+    private bool isReady;
+    private bool isHost;
 
     private void Start()
     {
-        playerID = 2;
+        playerType = 2;
     }
 
-
-    public void setID(int id)
+    public void setPlayerType(int id)
     {
-        playerID = id;
+        playerType = id;
     }
-    public int getID()
+    public int getPlayerType()
     {
-        return playerID;
-        
-
+        return playerType;
     }
+
+
+    
 }
