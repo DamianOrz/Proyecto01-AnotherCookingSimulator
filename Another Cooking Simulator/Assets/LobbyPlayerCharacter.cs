@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class LobbyPlayerCharacter : MonoBehaviour
+public class LobbyPlayerCharacter : NetworkBehaviour
 {
     //Glosario playerType:
     //0 = VR
@@ -11,12 +12,15 @@ public class LobbyPlayerCharacter : MonoBehaviour
 
     private string playerName; // Player + ID
     private int playerType; // VR o PC
-    private bool isReady;
+    private bool isReady = false;
     private bool isHost;
+    private NetworkRoomPlayer myNetworkRoomPlayer;
 
     private void Start()
     {
         playerType = 2;
+        playerName = "Player" + myNetworkRoomPlayer.netId;
+        
     }
 
     public void setPlayerType(int id)
@@ -27,7 +31,5 @@ public class LobbyPlayerCharacter : MonoBehaviour
     {
         return playerType;
     }
-
-
     
 }
