@@ -7,8 +7,8 @@ using TMPro;
 public class SetNetworkManager : MonoBehaviour
 {
     public TMP_Text newAddress;
-    private NetworkRoomManager myNetworkRoomManager;
-    private SteamManager mySteamManager;
+    public NetworkRoomManager myNetworkRoomManager;
+    public SteamManager mySteamManager;
 
     private Transport localTransport;
     private Transport steamTransport;
@@ -31,6 +31,7 @@ public class SetNetworkManager : MonoBehaviour
             strNewAddress = "localhost";
             myNetworkRoomManager.GetComponent<MultiplexTransport>().transports[0] = localTransport;
             myNetworkRoomManager.GetComponent<MultiplexTransport>().transports[1] = steamTransport;
+
         }
         else
         {
@@ -44,4 +45,9 @@ public class SetNetworkManager : MonoBehaviour
         myNetworkRoomManager.SetNetworkAddress(strNewAddress);
         myNetworkRoomManager.StartClient();
     }
+
+
+    
+        
+    
 }
