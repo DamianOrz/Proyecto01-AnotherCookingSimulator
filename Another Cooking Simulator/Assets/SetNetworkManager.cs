@@ -16,16 +16,13 @@ public class SetNetworkManager : MonoBehaviour
     Transport transportAUtilizar;
     private string strNewAddress;
 
-    private void Start()
-    {
-        localTransport = myNetworkRoomManager.GetComponent<MultiplexTransport>().transports[0];
-        steamTransport = myNetworkRoomManager.GetComponent<MultiplexTransport>().transports[1];
-    }
-
     public void GetNewAddress()
     {
+        
         myNetworkRoomManager = FindObjectOfType<NetworkRoomManager>();
         mySteamManager = myNetworkRoomManager.GetComponent<SteamManager>();
+        localTransport = myNetworkRoomManager.GetComponent<MultiplexTransport>().transports[0];
+        steamTransport = myNetworkRoomManager.GetComponent<MultiplexTransport>().transports[1];
         if (newAddress is null)
         {
             strNewAddress = "localhost";
