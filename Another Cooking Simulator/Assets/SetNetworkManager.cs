@@ -24,8 +24,6 @@ public class SetNetworkManager : MonoBehaviour
 
     public void GetNewAddress()
     {
-        myNetworkRoomManager = FindObjectOfType<NetworkRoomManager>();
-        mySteamManager = myNetworkRoomManager.GetComponent<SteamManager>();
         if (newAddress is null)
         {
             strNewAddress = "localhost";
