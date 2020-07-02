@@ -10,6 +10,9 @@ public class PcManager : NetworkBehaviour
 {
     private static int _idCombo;
 
+    //ONLINE
+    public NetworkTransformChild ntc;
+
     //PLAYER
     private Camera cameraPlayer;
     private GameObject canvasCrossHair;
@@ -277,7 +280,6 @@ public class PcManager : NetworkBehaviour
 
     void PonerNetworkTransformChild(GameObject go)
     {
-        NetworkTransformChild ntc = this.gameObject.AddComponent<NetworkTransformChild>();
         ntc.target = go.GetComponent<Transform>();
         ntc.setClieltAuthority();
     }

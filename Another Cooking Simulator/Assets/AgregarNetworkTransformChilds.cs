@@ -39,14 +39,14 @@ public class AgregarNetworkTransformChilds : NetworkBehaviour
                 hijos.Add(ObtenerHijos(objectParaBuscarHijos)[0]);
                 VRTK_SnapDropZone nuevoObject = ObtenerHijos(objectParaBuscarHijos)[0].GetComponentInChildren<VRTK_SnapDropZone>();
                 objectParaBuscarHijos = nuevoObject;
-            }
-            else
+            }else
             {
                 tieneHijos = false;
             }
         } while (tieneHijos == true);
         return hijos;
     }
+
     private List<VRTK_InteractableObject> ObtenerHijos(VRTK_SnapDropZone objeto)
     {
         List<VRTK_InteractableObject> hijos = new List<VRTK_InteractableObject>();
@@ -59,6 +59,7 @@ public class AgregarNetworkTransformChilds : NetworkBehaviour
         }
         return hijos;
     }
+
     private VRTK_InteractableObject obtenerHijoDeSnapDropZone(VRTK_SnapDropZone objeto)
     {
         VRTK_InteractableObject ingrediente = null;
