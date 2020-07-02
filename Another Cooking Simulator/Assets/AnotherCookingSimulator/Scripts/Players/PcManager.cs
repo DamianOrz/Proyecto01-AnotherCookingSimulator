@@ -277,7 +277,9 @@ public class PcManager : NetworkBehaviour
 
     void PonerNetworkTransformChild(GameObject go)
     {
-        this.gameObject.AddComponent<NetworkTransformChild>().target = go.GetComponent<Transform>();
+        NetworkTransformChild ntc = this.gameObject.AddComponent<NetworkTransformChild>();
+        ntc.target = go.GetComponent<Transform>();
+        ntc.setClieltAuthority();
     }
     void QuitarNetworkTransformChild()
     {

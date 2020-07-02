@@ -12,7 +12,8 @@ namespace Mirror
     {
         [Header("Target")]
         public Transform target;
-
+        
         protected override Transform targetComponent => target;
+
     }
 }

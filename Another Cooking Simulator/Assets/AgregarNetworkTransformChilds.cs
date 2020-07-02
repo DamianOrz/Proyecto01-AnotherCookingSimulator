@@ -20,7 +20,9 @@ public class AgregarNetworkTransformChilds : NetworkBehaviour
         if (this.name=="Bandeja3" && snapDropZone.GetCurrentSnappedObject() != null)
         {
             GameObject currentGameObject = snapDropZone.GetCurrentSnappedObject();
-            this.gameObject.AddComponent<NetworkTransformChild>().target = currentGameObject.GetComponent<Transform>();
+            NetworkTransformChild ntc = this.gameObject.AddComponent<NetworkTransformChild>();
+            ntc.target = currentGameObject.GetComponent<Transform>();
+            ntc.setClieltAuthority();
             snapDropZone = currentGameObject.GetComponentInChildren<VRTK_SnapDropZone>();
         }
     }   

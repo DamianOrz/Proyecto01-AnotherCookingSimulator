@@ -419,5 +419,10 @@ namespace Mirror
             // draw line between them
             if (start != null && goal != null) DrawLineBetweenDataPoints(start, goal, Color.cyan);
         }
+        //MIS METODOS
+        public void setClieltAuthority()
+        {
+            clientAuthority = true;
+        }
     }
 }
