@@ -159,6 +159,7 @@ public class PcManager : NetworkBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             Physics.Raycast(cameraPlayer.transform.position, cameraPlayer.transform.forward, out whatIHit, distanceToSee);
+            //Pregunto si ya tiene algo agarrado
             if(destination.childCount > 0)
             {
                 if(whatIHit.collider==null)
@@ -180,49 +181,50 @@ public class PcManager : NetworkBehaviour
                         objetoAMover.transform.rotation = destinoHamburguesa.rotation;
                     }
                 }
-                DropObject(destination.GetChild(0).gameObject);        
+                DropObject(destination.GetChild(0).gameObject);
+                return;
             }
-            else
+            //Pregunta si apunta a un objeto interactuable
+            if (whatIHit.collider.gameObject.tag == "Interactuable")
             {
-                if (whatIHit.collider.gameObject.tag == "Interactuable")
+                if (whatIHit.collider.gameObject.name == "btnGenerarInterpretacion")
                 {
-                    if (whatIHit.collider.gameObject.name == "btnGenerarInterpretacion")
-                    {
-                        FindObjectOfType<AudioManager>().PlayInPosition("ButtonClick", whatIHit.collider.gameObject.transform.position);
+                    FindObjectOfType<AudioManager>().PlayInPosition("ButtonClick", whatIHit.collider.gameObject.transform.position);
 
-                        PedidoManager.instancePedidoManager.CrearInterpretacion(_idCombo);
+                    PedidoManager.instancePedidoManager.CrearInterpretacion(_idCombo);
 
-                        GameObject Boton = whatIHit.collider.gameObject;
-                        Boton.GetComponent<Animation>().Play();
+                    GameObject Boton = whatIHit.collider.gameObject;
+                    Boton.GetComponent<Animation>().Play();
 
-                        List<Pedido> pedidos = PedidoManager.instancePedidoManager.getListaPedidos();
-                    }
-                    if (whatIHit.collider.gameObject.name == "btnGenerarPedidoRandom")
-                    {
-                        FindObjectOfType<AudioManager>().PlayInPosition("ButtonClick", whatIHit.collider.gameObject.transform.position);
-
-                        GameObject Boton = whatIHit.collider.gameObject;
-                        Boton.GetComponent<Animation>().Play();
-                        if (PedidoManager.instancePedidoManager.getListaPedidos().Count< DiaManager.instanceDiaManager.diasInfo[DiaManager.instanceDiaManager.diaActual].clientesEnElDia)
-                        {
-                            PedidoManager.instancePedidoManager.crearPedidoRandom();
-                            List<Pedido> pedidos = PedidoManager.instancePedidoManager.getListaPedidos();
-                        }   
-                    }
-                    if (whatIHit.collider.gameObject.name == "PantallaHacerPedidos")
-                    {
-                        //m_PointerEventData = new PointerEventData(m_EventSystem);
-                        //GraphicRaycaster gr = canvasTomarPedidos.GetComponent<GraphicRaycaster>();
-                        //PedidoManager.crearPedidoRandom(1);
-                        //List<Pedido> pedidos = PedidoManager.getListaPedidos();
-                    }
+                    List<Pedido> pedidos = PedidoManager.instancePedidoManager.getListaPedidos();
                 }
-                if (whatIHit.collider.gameObject.tag == "Grabable")
+                if (whatIHit.collider.gameObject.name == "btnGenerarPedidoRandom")
                 {
-                    if (!whatIHit.collider.gameObject.GetComponent<VRTK_InteractableObject>().IsInSnapDropZone())
+                    FindObjectOfType<AudioManager>().PlayInPosition("ButtonClick", whatIHit.collider.gameObject.transform.position);
+
+                    GameObject Boton = whatIHit.collider.gameObject;
+                    Boton.GetComponent<Animation>().Play();
+                    if (PedidoManager.instancePedidoManager.getListaPedidos().Count< DiaManager.instanceDiaManager.diasInfo[DiaManager.instanceDiaManager.diaActual].clientesEnElDia)
                     {
-                         PickUpObject(whatIHit.collider.gameObject);
-                    }
+                        PedidoManager.instancePedidoManager.crearPedidoRandom();
+                        List<Pedido> pedidos = PedidoManager.instancePedidoManager.getListaPedidos();
+                    }   
+                }
+                if (whatIHit.collider.gameObject.name == "PantallaHacerPedidos")
+                {
+                    //m_PointerEventData = new PointerEventData(m_EventSystem);
+                    //GraphicRaycaster gr = canvasTomarPedidos.GetComponent<GraphicRaycaster>();
+                    //PedidoManager.crearPedidoRandom(1);
+                    //List<Pedido> pedidos = PedidoManager.getListaPedidos();
+                }
+            }
+            //Pregunto si esta apuntando a un objeto que se puede agarrar
+            if (whatIHit.collider.gameObject.tag == "Grabable")
+            {
+                if (!whatIHit.collider.gameObject.GetComponent<VRTK_InteractableObject>().IsInSnapDropZone())
+                {
+                    PickUpObject(whatIHit.collider.gameObject);
+                    PonerNetworkTransformChild(whatIHit.collider.gameObject);
                 }
             }
         }
@@ -271,5 +273,14 @@ public class PcManager : NetworkBehaviour
         //AGREGAR RAYCAST PARA APOYAR
         go.transform.parent = null;
         go.GetComponent<Rigidbody>().isKinematic = false;
+    }
+
+    void PonerNetworkTransformChild(GameObject go)
+    {
+        this.gameObject.AddComponent<NetworkTransformChild>().target = go.GetComponent<Transform>();
+    }
+    void QuitarNetworkTransformChild()
+    {
+
     }
 }
