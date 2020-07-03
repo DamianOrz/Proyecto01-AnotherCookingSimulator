@@ -5,7 +5,7 @@ using Mirror;
 using TMPro;
 using UnityEngine.UI;
 
-public class CantJugadores : NetworkBehaviour
+public class PlayerTypeSetter : NetworkBehaviour
 {
     int iCantVR = 0;
     int iCantPC = 0;
@@ -17,13 +17,14 @@ public class CantJugadores : NetworkBehaviour
     public TMP_Text tmpJugadoresPC;
     public Button btnVR;
     public Button btnPC;
-    private NetworkRoomManager myNetworkLobbyManager;
-    public NetworkLobbyPlayer player; //El que pulsó el boton
+    private NetworkRoomManager myNetworkRoomManager;
+    public NetworkRoomPlayer localPlayer; //El que pulsó el boton
 
 
     private void Start()
     {
-       myNetworkLobbyManager = FindObjectOfType<NetworkRoomManager>();
+       myNetworkRoomManager = FindObjectOfType<NetworkRoomManager>();
+       GetLocalPlayer();
     }
 
 
@@ -54,18 +55,19 @@ public class CantJugadores : NetworkBehaviour
                 else if (iCantPC < iLimiteJugadoresPC) //Si no tiene asignado ningún rol y hay espacio....
                 {
                     CmdSetPlayerAsPC();
-                    CmdUpdatePCPlayers();
-
                     btnPC.enabled = true;
                 }
                 break;
         }
+        CmdUpdateVRPlayers();
+        CmdUpdatePCPlayers();
     }
 
     [Command]
     void CmdSetPlayerAsVR()
     {
         iCantVR += 1;
+        localPlayer.GetComponent<LobbyPlayerCharacter>().setPlayerType(0);
         //Tengo que asignarle el id y hacer que todos los otros jugadores (menos el player) NO puedan presionar el boton VR
         
         btnVR.enabled = false;
@@ -73,9 +75,16 @@ public class CantJugadores : NetworkBehaviour
     }
 
     [Command]
+    void CmdUnSetPlayerAsVR()
+    {
+        localPlayer.GetComponent<LobbyPlayerCharacter>().setPlayerType(2); // 2 = undefined
+    }
+
+    [Command]
     void CmdSetPlayerAsPC()
     {
         iCantPC += 1;
+        localPlayer.GetComponent<LobbyPlayerCharacter>().setPlayerType(1);
         //Tengo que asignarle el id y hacer que todos los otros jugadores (menos el player) NO puedan presionar el boton PC
         btnPC.enabled = false;
     }
@@ -92,5 +101,17 @@ public class CantJugadores : NetworkBehaviour
     {
         //Actualizo el texto debajo del boton
         tmpJugadoresVR.text = iCantVR + " / " + iLimiteJugadoresVR;
+    }
+
+    void GetLocalPlayer()
+    {
+        NetworkRoomPlayer[] listOfPlayers = FindObjectsOfType<NetworkRoomPlayer>();
+        foreach (NetworkRoomPlayer aPlayer in listOfPlayers)
+        {
+            if (aPlayer.GetComponent<NetworkIdentity>().isLocalPlayer)
+            {
+                localPlayer = aPlayer;
+            }
+        }
     }
 }
