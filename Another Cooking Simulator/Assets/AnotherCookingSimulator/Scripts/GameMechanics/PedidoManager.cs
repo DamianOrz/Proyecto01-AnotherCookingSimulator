@@ -155,9 +155,9 @@ public class PedidoManager : NetworkBehaviour
         //Cuando se conecte con el boton esta funcion recibirá parámetros
         string textoPedido = "ERROR";
 
-        CmdCrearPedidoDelCliente(unPedido);
+        //CmdCrearPedidoDelCliente(unPedido);
         //GameObject pedidoCreado = Instantiate(instancePedidoManager.prefabClientes);
-
+        CmdCrearPrefabEnCadaCliente(unPedido);
         //GameObject panel = pedidoCreado.transform.Find("Panel").gameObject;
 
         //BATALLA 1 GANADA CONTRA DAMIAN (SEÑOR FUERZAS DEL MAL), PUNTO PARA SIMI
@@ -165,6 +165,7 @@ public class PedidoManager : NetworkBehaviour
         //panel.transform.Find("strConsumibles").gameObject.GetComponent<TMP_Text>().text = "" + CambiarArrayAString(unPedido.GetOrdenIngredientes());
 
         //pedidoCreado.transform.SetParent(instancePedidoManager.contentMostrarPedidoCliente.transform, false);
+        //CmdInsertarHijoAlContent(pedidoCreado, instancePedidoManager.contentMostrarPedidoCliente);
 
         iNumPedido++;
     }
@@ -223,6 +224,32 @@ public class PedidoManager : NetworkBehaviour
             }
         }
         return vector;
+    }
+    [Command]
+    void CmdCrearPrefabEnCadaCliente(Pedido unPedido)
+    {
+        //Validar si el servidor debe hacerlo
+        RpcCrearPrefabYhacerloHijo(unPedido);
+    }
+    [ClientRpc]
+    void RpcCrearPrefabYhacerloHijo(Pedido unPedido)
+    {
+        GameObject pedidoCreado = Instantiate(instancePedidoManager.prefabClientes);
+
+        GameObject panel = pedidoCreado.transform.Find("Panel").gameObject;
+
+        panel.transform.Find("strConsumibles").gameObject.GetComponent<TMP_Text>().text = "" + CambiarArrayAString(unPedido.GetOrdenIngredientes());
+
+        pedidoCreado.transform.SetParent(instancePedidoManager.contentMostrarPedidoCliente.transform, false);
+    }
+    [Command]
+    void CmdInsertarHijoAlContent(GameObject pedidoCreado, GameObject content)
+    {
+        //Server valida si lo tiene que hacer
+        objNetId = pedidoCreado.GetComponent<NetworkIdentity>();
+        objNetId.AssignClientAuthority(connectionToClient);
+        RpcHacerloHijoDelContent(pedidoCreado);
+        objNetId.RemoveClientAuthority(connectionToClient);
     }
     [Command]
     void CmdCrearPedidoDelCliente(Pedido unPedido)
