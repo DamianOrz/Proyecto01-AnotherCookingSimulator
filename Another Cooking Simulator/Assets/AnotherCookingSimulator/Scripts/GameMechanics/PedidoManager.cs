@@ -4,15 +4,18 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Mirror;
 
 
-public class PedidoManager : MonoBehaviour
+public class PedidoManager : NetworkBehaviour
 {
     public static PedidoManager instancePedidoManager;
 
     public GameObject contentMostrarPedidoAlVR;
     public GameObject contentMostrarPedidoCliente;
     public GameObject contentMostrarUltimaInterpretacion;
+
+    private NetworkIdentity objNetId;
 
     public GameObject prefabVR;
     public GameObject prefabClientes;
@@ -152,14 +155,16 @@ public class PedidoManager : MonoBehaviour
         //Cuando se conecte con el boton esta funcion recibirá parámetros
         string textoPedido = "ERROR";
 
-        GameObject pedidoCreado = Instantiate(instancePedidoManager.prefabClientes);
+        CmdCrearPedidoDelCliente(unPedido);
+        //GameObject pedidoCreado = Instantiate(instancePedidoManager.prefabClientes);
 
-        GameObject panel = pedidoCreado.transform.Find("Panel").gameObject;
+        //GameObject panel = pedidoCreado.transform.Find("Panel").gameObject;
 
         //BATALLA 1 GANADA CONTRA DAMIAN (SEÑOR FUERZAS DEL MAL), PUNTO PARA SIMI
-        panel.transform.Find("strConsumibles").gameObject.GetComponent<TMP_Text>().text = "" + CambiarArrayAString(unPedido.GetOrdenIngredientes());
+        
+        //panel.transform.Find("strConsumibles").gameObject.GetComponent<TMP_Text>().text = "" + CambiarArrayAString(unPedido.GetOrdenIngredientes());
 
-        pedidoCreado.transform.SetParent(instancePedidoManager.contentMostrarPedidoCliente.transform, false);
+        //pedidoCreado.transform.SetParent(instancePedidoManager.contentMostrarPedidoCliente.transform, false);
 
         iNumPedido++;
     }
@@ -219,5 +224,23 @@ public class PedidoManager : MonoBehaviour
         }
         return vector;
     }
+    [Command]
+    void CmdCrearPedidoDelCliente(Pedido unPedido)
+    {
+        GameObject pedidoCreado = Instantiate(instancePedidoManager.prefabClientes);
+        GameObject panel = pedidoCreado.transform.Find("Panel").gameObject;
 
+        panel.transform.Find("strConsumibles").gameObject.GetComponent<TMP_Text>().text = "" + CambiarArrayAString(unPedido.GetOrdenIngredientes());
+
+        NetworkServer.Spawn(pedidoCreado);
+        objNetId = pedidoCreado.GetComponent<NetworkIdentity>();
+        objNetId.AssignClientAuthority(connectionToClient);
+        RpcHacerloHijoDelContent(pedidoCreado);
+        objNetId.RemoveClientAuthority(connectionToClient);
+    }
+    [ClientRpc]
+    void RpcHacerloHijoDelContent(GameObject prefab)
+    {
+        prefab.transform.SetParent(instancePedidoManager.contentMostrarPedidoCliente.transform, false);
+    }
 }

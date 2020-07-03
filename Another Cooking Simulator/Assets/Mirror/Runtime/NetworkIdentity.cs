@@ -581,6 +581,11 @@ namespace Mirror
             }
         }
 
+        public void RemoveClientAuthority(NetworkConnection connectionToClient)
+        {
+            throw new NotImplementedException();
+        }
+
         internal void OnStopServer()
         {
             foreach (NetworkBehaviour comp in NetworkBehaviours)
