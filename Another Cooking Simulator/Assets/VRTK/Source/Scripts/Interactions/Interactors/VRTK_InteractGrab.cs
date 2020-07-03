@@ -84,7 +84,6 @@ namespace VRTK
         protected float grabPrecognitionTimer = 0f;
         protected GameObject undroppableGrabbedObject;
         protected Rigidbody originalControllerAttachPoint;
-
         protected VRTK_ControllerReference controllerReference
         {
             get
@@ -566,10 +565,15 @@ namespace VRTK
                 InitUngrabbedObject(true);
             }
         }
-
+        /// <summary>
+        /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected virtual void DoGrabObject(object sender, ControllerInteractionEventArgs e)
         {
             OnGrabButtonPressed(controllerEvents.SetControllerEvent(ref grabPressed, true));
+            //SetearGravity();
             AttemptGrabObject();
         }
 
@@ -611,6 +615,13 @@ namespace VRTK
                     }
                 }
             }
+        }
+        //MIS METODOS
+        protected void SetearGravity()
+        {
+            GameObject go = GetGrabbableObject();
+            go.GetComponent<Rigidbody>().useGravity = true;
+            go.GetComponent<Rigidbody>().isKinematic = true;
         }
     }
 }
