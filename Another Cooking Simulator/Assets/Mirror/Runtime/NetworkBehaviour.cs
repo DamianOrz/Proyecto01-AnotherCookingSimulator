@@ -154,7 +154,7 @@ namespace Mirror
 
                 return -1;
             }
-        }
+        }   
 
         // this gets called in the constructor by the weaver
         // for every SyncObject in the component (e.g. SyncLists).
