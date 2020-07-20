@@ -639,6 +639,7 @@ GameObject:
   - component: {fileID: 187068006}
   - component: {fileID: 187068007}
   - component: {fileID: 187068005}
+  - component: {fileID: 187068008}
   m_Layer: 0
   m_Name: RoomManager
   m_TagString: Untagged
@@ -695,6 +696,25 @@ MonoBehaviour:
   serverOnly: 0
   m_AssetId: 
   hasSpawned: 0
+--- !u!114 &187068008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187068004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9750e782a23da634da75aa9c6fc3f64a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  player1: {fileID: 1546655818}
+  player2: {fileID: 149611891}
+  player3: {fileID: 1299921399}
+  player4: {fileID: 1726304541}
+  player5: {fileID: 1598978325}
 --- !u!1 &251638183
 GameObject:
   m_ObjectHideFlags: 0
@@ -3384,8 +3404,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -306.7, y: 9.3}
-  m_SizeDelta: {x: 1459.1213, y: 915.8492}
+  m_AnchoredPosition: {x: -308, y: 9.3}
+  m_SizeDelta: {x: 1477.7637, y: 915.8492}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1196582207
 MonoBehaviour:
