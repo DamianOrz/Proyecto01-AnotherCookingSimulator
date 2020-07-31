@@ -78,7 +78,7 @@ public class PedidoManager : NetworkBehaviour
         }
 
         Pedido unPedido = new Pedido();
-        FindObjectOfType<AudioManager>().PlayInPosition("Ring",PedidoManager.instancePedidoManager.contentMostrarPedidoCliente.transform.position);
+        FindObjectOfType<AudioManager>().Play("FX-Ring");
         unPedido.SetOrdenIngredientes(CrearHamburguesaRandom(posiblesIngredientes));
         MostrarPedidoDelCliente(unPedido);
 

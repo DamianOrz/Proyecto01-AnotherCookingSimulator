@@ -28,7 +28,7 @@ public class ButtonInteraction : MonoBehaviour
 
     protected virtual void MaxLimitReached(object sender, ControllableEventArgs e)
     {
-        FindObjectOfType<AudioManager>().PlayInPosition("ButtonClick", this.gameObject.transform.position);
+        FindObjectOfType<AudioManager>().Play("FX-ButtonClick");
         Vector3 position = new Vector3(-3f, 1.5f, -2.652f);
         Instantiate(outputOnMax,position,transform.rotation);
     }

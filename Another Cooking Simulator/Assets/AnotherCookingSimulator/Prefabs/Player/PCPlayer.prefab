@@ -247,7 +247,6 @@ GameObject:
   - component: {fileID: 249723439250448849}
   - component: {fileID: 293558156154001435}
   - component: {fileID: 3035012754504090702}
-  - component: {fileID: 3998544182859584027}
   m_Layer: 0
   m_Name: PCPlayer
   m_TagString: Player
@@ -304,7 +303,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  ntc: {fileID: 3998544182859584027}
+  ntc: {fileID: 0}
   speed: 6
   gravity: -9.81
   jumpHeight: 1
@@ -385,22 +384,3 @@ MonoBehaviour:
   localRotationSensitivity: 0.01
   localScaleSensitivity: 0.01
   target: {fileID: 7027861673202467228}
---- !u!114 &3998544182859584027
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8681103617065013659}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 734b48bea0b204338958ee3d885e11f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0
-  clientAuthority: 1
-  localPositionSensitivity: 0.01
-  localRotationSensitivity: 0.01
-  localScaleSensitivity: 0.01
-  target: {fileID: 0}

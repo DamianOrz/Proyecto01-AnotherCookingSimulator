@@ -27,7 +27,7 @@ public class cuandoSeCocina : MonoBehaviour
             if (estaSonando == false)
             {
                 estaSonando = true;
-                FindObjectOfType<AudioManager>().PlayInPosition("Fry",burger.transform.position);
+                FindObjectOfType<AudioManager>().Play("FX-Fry");
             }
             tiempoCocinado += Time.deltaTime;
             cambiarEstado();
@@ -48,6 +48,7 @@ public class cuandoSeCocina : MonoBehaviour
         if (collisionInfo.collider.tag == "SurfaceOfGrill")
         {
             grillSmoke.Stop();
+            FindObjectOfType<AudioManager>().Stop("FX-Fry");
             touchGrill = false;
         }
     }

@@ -55,6 +55,9 @@ public class PcManager : NetworkBehaviour
     void Start()
     {
         DiaManager.instanceDiaManager.EmpezarDia();
+
+        FindObjectOfType<AudioManager>().SwapLobbyMusicToGameMusic("LobbyMusic","GameMusic");
+
         controller = this.GetComponent<CharacterController>();
         cameraPlayer = this.GetComponentInChildren<Camera>();
         destination = cameraPlayer.transform.GetChild(0);
@@ -140,19 +143,19 @@ public class PcManager : NetworkBehaviour
                 switch (result.gameObject.name)
                 {
                     case "btnHamburguesaSimple":
-                        FindObjectOfType<AudioManager>().PlayInPosition("Tap", result.gameObject.transform.position);
+                        FindObjectOfType<AudioManager>().Play("FX-Tap");
                         SetIdCombo(1);
                         break;
                     case "btnHamburguesaDoble":
-                        FindObjectOfType<AudioManager>().PlayInPosition("Tap", result.gameObject.transform.position);
+                        FindObjectOfType<AudioManager>().Play("FX-Tap");
                         SetIdCombo(2);
                         break;
                     case "btnHamburguesaSimpleConQueso":
-                        FindObjectOfType<AudioManager>().PlayInPosition("Tap", result.gameObject.transform.position);
+                        FindObjectOfType<AudioManager>().Play("FX-Tap");
                         SetIdCombo(3);
                         break;
                     case "btnHamburguesaDobleConQueso":
-                        FindObjectOfType<AudioManager>().PlayInPosition("Tap", result.gameObject.transform.position);
+                        FindObjectOfType<AudioManager>().Play("FX-Tap");
                         SetIdCombo(4);
                         break;
                 }
@@ -192,7 +195,7 @@ public class PcManager : NetworkBehaviour
             {
                 if (whatIHit.collider.gameObject.name == "btnGenerarInterpretacion")
                 {
-                    FindObjectOfType<AudioManager>().PlayInPosition("ButtonClick", whatIHit.collider.gameObject.transform.position);
+                    FindObjectOfType<AudioManager>().Play("FX-ButtonClick");
 
                     PedidoManager.instancePedidoManager.CrearInterpretacion(_idCombo);
 
@@ -203,7 +206,7 @@ public class PcManager : NetworkBehaviour
                 }
                 if (whatIHit.collider.gameObject.name == "btnGenerarPedidoRandom")
                 {
-                    FindObjectOfType<AudioManager>().PlayInPosition("ButtonClick", whatIHit.collider.gameObject.transform.position);
+                    FindObjectOfType<AudioManager>().Play("FX-ButtonClick");
 
                     GameObject Boton = whatIHit.collider.gameObject;
                     Boton.GetComponent<Animation>().Play();
