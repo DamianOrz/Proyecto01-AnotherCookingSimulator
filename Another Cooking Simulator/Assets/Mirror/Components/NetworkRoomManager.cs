@@ -611,7 +611,10 @@ namespace Mirror
         /// <summary>
         /// This is a hook to allow custom behaviour when the game client enters the room.
         /// </summary>
-        public virtual void OnRoomClientEnter() { }
+        public virtual void OnRoomClientEnter()
+        {
+            
+        }
 
         /// <summary>
         /// This is a hook to allow custom behaviour when the game client exits the room.
@@ -677,12 +680,18 @@ namespace Mirror
                 GUI.Box(new Rect(10f, 180f, 520f, 150f), "PLAYERS");
         }
 
-        //MIS METODOS
+
+
+
+
+        #endregion
+
+        #region MIS METODOS
+
         public virtual void SetNetworkAddress(string newNetworkAddress)
         {
             this.networkAddress = newNetworkAddress;
         }
-
 
         #endregion
     }
