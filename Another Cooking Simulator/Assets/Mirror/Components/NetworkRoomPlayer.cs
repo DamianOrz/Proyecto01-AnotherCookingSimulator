@@ -176,5 +176,15 @@ namespace Mirror
         }
 
         #endregion
+
+
+        //MIS METODOS
+
+        [Command]
+        public void CmdCUSTOMChangeReadyState(bool readyState)
+        {
+            readyToBegin = readyState;
+        }
+
     }
 }

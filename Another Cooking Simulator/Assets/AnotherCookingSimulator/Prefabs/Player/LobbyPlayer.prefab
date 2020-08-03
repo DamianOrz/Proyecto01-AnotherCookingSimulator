@@ -63,7 +63,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.5
-  showRoomGUI: 1
+  showRoomGUI: 0
   readyToBegin: 0
   index: 0
 --- !u!114 &4979411216813176412
@@ -78,3 +78,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d08f9b3b86fdc8849b53593e98071ccc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1

@@ -41,15 +41,20 @@ public class RoomManagerScript : NetworkBehaviour
     {
         listOfPlayers = myNetworkRoomManager.roomSlots;
         UpdateCanvas();
-
-
     }
 
     private void UpdateCanvas()
     {
         int num = 1;
+
+        player1.SetActive(false);
+        player2.SetActive(false);
+        player3.SetActive(false);
+        player4.SetActive(false);
+        player5.SetActive(false);
+
         foreach (NetworkRoomPlayer p in listOfPlayers)
-        {            
+        {
             switch (num)
             {
                 case 1:
@@ -68,10 +73,11 @@ public class RoomManagerScript : NetworkBehaviour
                     aPlayer = player5;
                     break;
                 default:
-                    aPlayer = player1; //Nunca se debería llegar acá pero es necesario para que funcione la siguiente linea de código
+
                     break;
 
             }
+
             aPlayer.GetComponentInChildren<TMP_Text>().SetText(p.index.ToString());
 
             //myPlayer.gameObject.transform.GetChild(0); --> 0 = fondo, 1 = nombre, 2 = ready
@@ -103,24 +109,14 @@ public class RoomManagerScript : NetworkBehaviour
 
     }
 
-    public void ChangePlayerReadyState()
-    {
-        CmdSetReadyState();
-    }
-
-    public void StartGame()
-    {
-        CmdStartGame();
-    }
-
     [Client]
-    private void CmdSetReadyState()
+    public void SetReadyState()
     {
-        myPlayer.readyToBegin = !myPlayer.readyToBegin;
+        myPlayer.CmdCUSTOMChangeReadyState(!myPlayer.readyToBegin); //Revisar NetworkRoomPlayer para ver funcion, evita que inicie el juego de forma automatica
     }
 
     [Server]
-    private void CmdStartGame() // --> Solo el host puede correr este script
+    public void StartGame() // --> Solo el host puede correr este script
     {
         myNetworkRoomManager.CheckReadyToBegin();
     }
