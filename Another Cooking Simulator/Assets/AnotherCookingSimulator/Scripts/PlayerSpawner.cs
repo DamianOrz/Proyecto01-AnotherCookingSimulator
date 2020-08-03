@@ -42,12 +42,16 @@ public class PlayerSpawner : NetworkBehaviour
     void CmdSpawnVRPlayer()
     {
         GameObject go = Instantiate(VRPlayer);
+        go.transform.parent = this.transform;
+
         NetworkServer.Spawn(go,connectionToClient);
     }
     [Command]
     void CmdSpawnPCPlayer()
     {
         GameObject go = Instantiate(PCPlayer);
+        go.transform.parent = this.transform;
+
         NetworkServer.Spawn(go,connectionToClient);
         go.GetComponent<NetworkIdentity>().AssignClientAuthority(connectionToClient);
     }

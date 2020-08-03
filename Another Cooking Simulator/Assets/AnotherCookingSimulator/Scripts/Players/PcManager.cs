@@ -56,7 +56,7 @@ public class PcManager : NetworkBehaviour
     {
         DiaManager.instanceDiaManager.EmpezarDia();
 
-        FindObjectOfType<AudioManager>().SwapLobbyMusicToGameMusic("LobbyMusic","GameMusic");
+        FindObjectOfType<AudioManager>().SwapLobbyMusicToGameMusic("LobbyMusic", "GameMusic");
 
         controller = this.GetComponent<CharacterController>();
         cameraPlayer = this.GetComponentInChildren<Camera>();
@@ -159,27 +159,27 @@ public class PcManager : NetworkBehaviour
                         SetIdCombo(4);
                         break;
                 }
-                 Debug.Log("Hit " + result.gameObject.name);
+                Debug.Log("Hit " + result.gameObject.name);
             }
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
             Physics.Raycast(cameraPlayer.transform.position, cameraPlayer.transform.forward, out whatIHit, distanceToSee);
             //Pregunto si ya tiene algo agarrado
-            if(destination.childCount > 0)
+            if (destination.childCount > 0)
             {
-                if(whatIHit.collider==null)
+                if (whatIHit.collider == null)
                 {
                     DropObject(destination.GetChild(0).gameObject);
                     return;
                 }
-                if (whatIHit.collider.gameObject.tag == "Verificacion" && zonaVerificacionDisponible==null)
+                if (whatIHit.collider.gameObject.tag == "Verificacion" && zonaVerificacionDisponible == null)
                 {
                     string nombre = destination.GetChild(0).gameObject.name;
                     bool isBandeja = nombre.Contains("Bandeja");
-                    if (isBandeja )
+                    if (isBandeja)
                     {
-                        GameObject objetoAMover= destination.GetChild(0).gameObject;
+                        GameObject objetoAMover = destination.GetChild(0).gameObject;
                         zonaVerificacionDisponible = objetoAMover;
                         Vector3 scale = objetoAMover.transform.localScale;
 
@@ -210,11 +210,11 @@ public class PcManager : NetworkBehaviour
 
                     GameObject Boton = whatIHit.collider.gameObject;
                     Boton.GetComponent<Animation>().Play();
-                    if (PedidoManager.instancePedidoManager.getListaPedidos().Count< DiaManager.instanceDiaManager.diasInfo[DiaManager.instanceDiaManager.diaActual].clientesEnElDia)
+                    if (PedidoManager.instancePedidoManager.getListaPedidos().Count < DiaManager.instanceDiaManager.diasInfo[DiaManager.instanceDiaManager.diaActual].clientesEnElDia)
                     {
                         PedidoManager.instancePedidoManager.crearPedidoRandom();
                         List<Pedido> pedidos = PedidoManager.instancePedidoManager.getListaPedidos();
-                    }   
+                    }
                 }
                 if (whatIHit.collider.gameObject.name == "PantallaHacerPedidos")
                 {
@@ -229,7 +229,7 @@ public class PcManager : NetworkBehaviour
             {
                 if (!whatIHit.collider.gameObject.GetComponent<VRTK_InteractableObject>().IsInSnapDropZone())
                 {
-                    PickUpObject(whatIHit.collider.gameObject);
+                    CmdPickUpObject(whatIHit.collider.gameObject);
                     PonerNetworkTransformChild(whatIHit.collider.gameObject);
                 }
             }
@@ -258,16 +258,18 @@ public class PcManager : NetworkBehaviour
         _idCombo = combo;
     }
 
-    void PickUpObject(GameObject go)
+    [Command]
+    void CmdPickUpObject(GameObject go)
     {
         Transform posicionObjeto = go.transform;
         go.GetComponent<Rigidbody>().isKinematic = true;
         go.transform.position = destination.position;
         go.transform.rotation = destination.rotation;
         go.transform.parent = GameObject.Find("Destination").transform;
-        if(zonaVerificacionDisponible!=null)
+
+        if(zonaVerificacionDisponible != null)
         {
-            if (zonaVerificacionDisponible==go)
+            if (zonaVerificacionDisponible == go)
             {
                 zonaVerificacionDisponible = null;
             }
