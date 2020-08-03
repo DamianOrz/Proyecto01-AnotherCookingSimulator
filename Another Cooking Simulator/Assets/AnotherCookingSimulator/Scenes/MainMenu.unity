@@ -743,8 +743,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 297.9, y: 170.4}
-  m_SizeDelta: {x: 2015.9951, y: 1159.055}
+  m_AnchoredPosition: {x: 467.8, y: 267.7}
+  m_SizeDelta: {x: 3183.9717, y: 1828.5353}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &96359870
 GameObject:
@@ -6436,7 +6436,7 @@ MonoBehaviour:
   - {fileID: 7147390276511485958, guid: 156fb66e2ffc8b848a4eadc7761d2c86, type: 3}
   - {fileID: 9122676827126895862, guid: 665fe0c8c2572924a9c1ecb79e012bca, type: 3}
   - {fileID: 3487898118870219050, guid: 7e6e24dde408635468249153fe7f94f5, type: 3}
-  showRoomGUI: 1
+  showRoomGUI: 0
   minPlayers: 1
   roomPlayerPrefab: {fileID: 8467471082753040350, guid: c42da52323a89cf47b491efd3991aeb5,
     type: 3}

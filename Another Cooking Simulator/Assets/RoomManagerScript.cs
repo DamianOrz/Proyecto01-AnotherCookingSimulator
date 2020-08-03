@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using TMPro;
+using UnityEngine.UI;
 
 public class RoomManagerScript : NetworkBehaviour
 {
     private NetworkRoomManager myNetworkRoomManager;
     private static List<NetworkRoomPlayer> listOfPlayers;
-    GameObject myPlayer;
+    NetworkRoomPlayer myPlayer;
+
+    GameObject aPlayer;
 
     [SerializeField]
     GameObject player1;
@@ -46,31 +49,33 @@ public class RoomManagerScript : NetworkBehaviour
     {
         int num = 1;
         foreach (NetworkRoomPlayer p in listOfPlayers)
-        {
-            string jugador = "player" + num; //player1 --> player2 --> player3
-            
+        {            
             switch (num)
             {
                 case 1:
-                    myPlayer = player1;
+                    aPlayer = player1;
                     break;
                 case 2:
-                    myPlayer = player2;
+                    aPlayer = player2;
                     break;
                 case 3:
-                    myPlayer = player3;
+                    aPlayer = player3;
                     break;
                 case 4:
-                    myPlayer = player4;
+                    aPlayer = player4;
                     break;
                 case 5:
-                    myPlayer = player5;
+                    aPlayer = player5;
                     break;
+                default:
+                    aPlayer = player1; //Nunca se debería llegar acá pero es necesario para que funcione la siguiente linea de código
+                    break;
+
             }
-            myPlayer.GetComponentInChildren<TMP_Text>().SetText(p.index.ToString());
+            aPlayer.GetComponentInChildren<TMP_Text>().SetText(p.index.ToString());
 
             //myPlayer.gameObject.transform.GetChild(0); --> 0 = fondo, 1 = nombre, 2 = ready
-            myPlayer.gameObject.transform.GetChild(1).GetComponent<TMP_Text>().SetText(p.netId.ToString());
+            aPlayer.gameObject.transform.GetChild(1).GetComponent<TMP_Text>().SetText(p.netId.ToString());
 
             string isReady;
             if (p.readyToBegin == true)
@@ -81,11 +86,42 @@ public class RoomManagerScript : NetworkBehaviour
             {
                 isReady = "NOT READY";
             }
-            myPlayer.gameObject.transform.GetChild(2).GetComponent<TMP_Text>().SetText(isReady);
+            aPlayer.gameObject.transform.GetChild(2).GetComponent<TMP_Text>().SetText(isReady);
 
-            myPlayer.SetActive(true);
+            aPlayer.SetActive(true);
+
+
+            //Obtengo MI jugador
+            if (p.isLocalPlayer)
+            {
+                myPlayer = p;
+                aPlayer.transform.GetChild(0).GetComponent<Image>().color = Color.gray;
+            }
 
             num++;
         }
+
+    }
+
+    public void ChangePlayerReadyState()
+    {
+        CmdSetReadyState();
+    }
+
+    public void StartGame()
+    {
+        CmdStartGame();
+    }
+
+    [Client]
+    private void CmdSetReadyState()
+    {
+        myPlayer.readyToBegin = !myPlayer.readyToBegin;
+    }
+
+    [Server]
+    private void CmdStartGame() // --> Solo el host puede correr este script
+    {
+        myNetworkRoomManager.CheckReadyToBegin();
     }
 }
