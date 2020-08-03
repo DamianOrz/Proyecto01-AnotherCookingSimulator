@@ -15,8 +15,10 @@ public class PlayerTypeSetter : NetworkBehaviour
 
     public TMP_Text tmpJugadoresVR;
     public TMP_Text tmpJugadoresPC;
+
     public Button btnVR;
     public Button btnPC;
+
     private NetworkRoomManager myNetworkRoomManager;
     public NetworkRoomPlayer localPlayer; //El que pulsó el boton
 
@@ -24,7 +26,7 @@ public class PlayerTypeSetter : NetworkBehaviour
     private void Start()
     {
        myNetworkRoomManager = FindObjectOfType<NetworkRoomManager>();
-       GetLocalPlayer();
+       //GetLocalPlayer();
     }
 
 
@@ -35,8 +37,8 @@ public class PlayerTypeSetter : NetworkBehaviour
             case 0: //0 Representa un click en el btn de VR
                 if (iCantVR < iLimiteJugadoresVR)
                 {
-                    CmdSetPlayerAsVR(); //Le asigno al jugador que presionó el boton un id para luego darle el prefab correcto (En este caso VR)
-                    CmdUpdateVRPlayers(); //Actualizo el texto
+                    //CmdSetPlayerAsVR(); //Le asigno al jugador que presionó el boton un id para luego darle el prefab correcto (En este caso VR)
+                    //CmdUpdateVRPlayers(); //Actualizo el texto
 
                     btnVR.enabled = true;
                     btnPC.enabled = false;
@@ -54,64 +56,64 @@ public class PlayerTypeSetter : NetworkBehaviour
                 }
                 else if (iCantPC < iLimiteJugadoresPC) //Si no tiene asignado ningún rol y hay espacio....
                 {
-                    CmdSetPlayerAsPC();
+                    //CmdSetPlayerAsPC();
                     btnPC.enabled = true;
                 }
                 break;
         }
-        CmdUpdateVRPlayers();
-        CmdUpdatePCPlayers();
+        //CmdUpdateVRPlayers();
+        //CmdUpdatePCPlayers();
     }
 
-    [Command]
-    void CmdSetPlayerAsVR()
-    {
-        iCantVR += 1;
-        localPlayer.GetComponent<LobbyPlayerCharacter>().setPlayerType(0);
-        //Tengo que asignarle el id y hacer que todos los otros jugadores (menos el player) NO puedan presionar el boton VR
+    //[Command]
+    //void CmdSetPlayerAsVR()
+    //{
+    //    iCantVR += 1;
+    //    localPlayer.GetComponent<LobbyPlayerCharacter>().setPlayerType(0);
+    //    //Tengo que asignarle el id y hacer que todos los otros jugadores (menos el player) NO puedan presionar el boton VR
         
-        btnVR.enabled = false;
+    //    btnVR.enabled = false;
 
-    }
+    //}
 
-    [Command]
-    void CmdUnSetPlayerAsVR()
-    {
-        localPlayer.GetComponent<LobbyPlayerCharacter>().setPlayerType(2); // 2 = undefined
-    }
+    //[Command]
+    //void CmdUnSetPlayerAsVR()
+    //{
+    //    localPlayer.GetComponent<LobbyPlayerCharacter>().setPlayerType(2); // 2 = undefined
+    //}
 
-    [Command]
-    void CmdSetPlayerAsPC()
-    {
-        iCantPC += 1;
-        localPlayer.GetComponent<LobbyPlayerCharacter>().setPlayerType(1);
-        //Tengo que asignarle el id y hacer que todos los otros jugadores (menos el player) NO puedan presionar el boton PC
-        btnPC.enabled = false;
-    }
+    //[Command]
+    //void CmdSetPlayerAsPC()
+    //{
+    //    iCantPC += 1;
+    //    localPlayer.GetComponent<LobbyPlayerCharacter>().setPlayerType(1);
+    //    //Tengo que asignarle el id y hacer que todos los otros jugadores (menos el player) NO puedan presionar el boton PC
+    //    btnPC.enabled = false;
+    //}
 
-    [Command]
-    void CmdUpdatePCPlayers()
-    {
-        //Actualizo el texto debajo del boton
-        tmpJugadoresPC.text = iCantPC + " / " + iLimiteJugadoresPC;
-    }
+    //[Command]
+    //void CmdUpdatePCPlayers()
+    //{
+    //    //Actualizo el texto debajo del boton
+    //    tmpJugadoresPC.text = iCantPC + " / " + iLimiteJugadoresPC;
+    //}
 
-    [Command]
-    void CmdUpdateVRPlayers()
-    {
-        //Actualizo el texto debajo del boton
-        tmpJugadoresVR.text = iCantVR + " / " + iLimiteJugadoresVR;
-    }
+    //[Command]
+    //void CmdUpdateVRPlayers()
+    //{
+    //    //Actualizo el texto debajo del boton
+    //    tmpJugadoresVR.text = iCantVR + " / " + iLimiteJugadoresVR;
+    //}
 
-    void GetLocalPlayer()
-    {
-        NetworkRoomPlayer[] listOfPlayers = FindObjectsOfType<NetworkRoomPlayer>();
-        foreach (NetworkRoomPlayer aPlayer in listOfPlayers)
-        {
-            if (aPlayer.GetComponent<NetworkIdentity>().isLocalPlayer)
-            {
-                localPlayer = aPlayer;
-            }
-        }
-    }
+    //void GetLocalPlayer()
+    //{
+    //    NetworkRoomPlayer[] listOfPlayers = FindObjectsOfType<NetworkRoomPlayer>();
+    //    foreach (NetworkRoomPlayer aPlayer in listOfPlayers)
+    //    {
+    //        if (aPlayer.GetComponent<NetworkIdentity>().isLocalPlayer)
+    //        {
+    //            localPlayer = aPlayer;
+    //        }
+    //    }
+    //}
 }

@@ -36,6 +36,15 @@ namespace Mirror
         [SyncVar]
         public int index;
 
+        [Tooltip("Atributo especial que define el tipo de jugador")]
+        [SyncVar]
+        public int playerType = 2;
+
+        //Glosario playerType:
+        //0 = VR
+        //1 = PC
+        //2 = undefined --> No eligió aún
+
         #region Unity Callbacks
 
         /// <summary>

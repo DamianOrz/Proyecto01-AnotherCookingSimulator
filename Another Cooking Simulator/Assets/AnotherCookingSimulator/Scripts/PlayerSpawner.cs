@@ -60,4 +60,5 @@ public class PlayerSpawner : NetworkBehaviour
             hayPersonajeVR = true;
         }
     }
+    public bool IsLocal() { return isLocalPlayer; }
 }

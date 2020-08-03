@@ -204,9 +204,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 187068005}
-        m_MethodName: CheckPlayers
-        m_Mode: 3
+      - m_Target: {fileID: 187068008}
+        m_MethodName: SetPcPlayer
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -716,6 +716,10 @@ MonoBehaviour:
   player3: {fileID: 1299921399}
   player4: {fileID: 1726304541}
   player5: {fileID: 1598978325}
+  btnVR: {fileID: 307862438}
+  btnPC: {fileID: 67137154}
+  tmpJugadoresVR: {fileID: 1227321201}
+  tmpJugadoresPC: {fileID: 251638185}
 --- !u!114 &187068009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1220,9 +1224,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 187068005}
-        m_MethodName: CheckPlayers
-        m_Mode: 3
+      - m_Target: {fileID: 187068008}
+        m_MethodName: SetVrPlayer
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
