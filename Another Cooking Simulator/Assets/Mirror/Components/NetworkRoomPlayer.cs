@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Mirror
 {
@@ -193,6 +194,12 @@ namespace Mirror
         public void CmdCUSTOMChangeReadyState(bool readyState)
         {
             readyToBegin = readyState;
+        }
+
+        [Command]
+        public void CmdChangePlayerType(int i)
+        {
+            playerType = i;
         }
 
     }

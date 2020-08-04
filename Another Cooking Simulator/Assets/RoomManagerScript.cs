@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class RoomManagerScript : NetworkBehaviour
 {
+    #region VARIABLES
     private NetworkRoomManager myNetworkRoomManager;
     private static List<NetworkRoomPlayer> listOfPlayers;
     NetworkRoomPlayer myPlayer;
@@ -32,14 +33,18 @@ public class RoomManagerScript : NetworkBehaviour
     public TMP_Text tmpJugadoresVR;
     public TMP_Text tmpJugadoresPC;
 
-    int iCantVR = 0;
-    int iCantPC = 0;
+    [SyncVar]
+    public int iCantVR = 0;
 
-    int iLimiteJugadoresVR = 1;
-    int iLimiteJugadoresPC = 4;
+    [SyncVar]
+    public int iCantPC = 0;
 
-    
+    public int iLimiteJugadoresVR = 1;
+    public int iLimiteJugadoresPC = 4;
 
+    #endregion
+
+    #region METODOS MOSTRAR JUGADORES
     // Start is called before the first frame update
     void Awake()
     { //Puede que tenga que mover la funcion de Awake al ClientConnect (o sea, editar el NetworkRoomManager y que en OnCLientConnect o algo así se llame a ShowPlayers(), un metodo publico que puedo crear dentro de esta funcion
@@ -57,6 +62,7 @@ public class RoomManagerScript : NetworkBehaviour
     {
         listOfPlayers = myNetworkRoomManager.roomSlots;
         UpdateCanvas();
+        UpdatePlayerTypeCanvas();
     }
 
     private void UpdateCanvas()
@@ -137,105 +143,105 @@ public class RoomManagerScript : NetworkBehaviour
         myNetworkRoomManager.CheckReadyToBegin();
     }
 
+    #endregion
+
+    #region SELECCION DE EQUIPO
+
     //Glosario playerType:
     //0 = VR
     //1 = PC
     //2 = undefined --> No eligió aún
 
-    public void SetVrPlayer()
-    {
-        if (!(iCantVR < iLimiteJugadoresVR))
-        {
-            return;
-        }
-
-        if(myPlayer.playerType == 2)
-        {
-            iCantVR++;
-        }
-        else
-        {
-            iCantVR++;
-            iCantPC--;
-        }
-
-        CmdUpdateVRButton();
-
-        CmdSetPlayerAsVR();
-        CmdUpdateVRPlayers();
-        
-
-        btnPC.enabled = false;
-    }
-
-    [Client]
-    public void CmdSetPlayerAsVR()
-    {
-        //Seteo el player como tipo VR
-        myPlayer.playerType = 0;
-    }
-
-    [Command]
-    public void CmdUpdateVRButton()
-    {
-        //Desabilito los botones
-        btnVR.enabled = false;
-    }
-
-    [Client]
-    void CmdUpdateVRPlayers()
-    {
-        //Actualizo el texto debajo del boton
-        tmpJugadoresVR.text = iCantVR + " / " + iLimiteJugadoresVR;
-    }
-
+   [Client]
     public void SetPcPlayer()
     {
-        if (!(iCantPC < iLimiteJugadoresPC))
+        if(myPlayer.playerType == 1)
         {
-            return;
+            iCantPC--;
+            myPlayer.CmdChangePlayerType(2);
+            UpdateButtonsStatus();
         }
+        else if (iCantPC < iLimiteJugadoresPC)
+        {
+            if (myPlayer.playerType == 2)
+            {
+                iCantPC++;
+            }
+            else //No debería poder entrar por el momento
+            {
+                iCantPC++;
+                iCantVR--;
+            }
 
-        if (myPlayer.playerType == 2)
-        {
-            iCantPC++;
+            myPlayer.CmdChangePlayerType(1); //myPlayer pasa a ser PC
         }
-        else
+    }
+
+    [Client]
+    public void SetVrPlayer()
+    {
+        if (myPlayer.playerType == 0)
         {
-            iCantPC++;
             iCantVR--;
+            myPlayer.CmdChangePlayerType(2);
+            UpdateButtonsStatus();
         }
-
-        if(iCantPC == iLimiteJugadoresPC)
+        else if (iCantVR < iLimiteJugadoresVR)
         {
-            CmdUpdatePCButton();
-            btnVR.enabled = true;
+
+            myPlayer.CmdChangePlayerType(0); //myPlayer pasa a ser VR
+            iCantVR++;
         }
-
-        CmdSetPlayerAsPC();
-        CmdUpdatePCPlayers();
+        
     }
 
-    [Command]
-    public void CmdUpdatePCButton()
-    {
-        //Desabilito los botones
-        btnPC.enabled = false;
-    }
 
+    //[Command]
     [Client]
-    void CmdSetPlayerAsPC()
+    void UpdateButtonsStatus() //Actualiza para cada persona los botones a activar
     {
-        iCantPC += 1;
-        myPlayer.playerType = 1;
-        //Tengo que asignarle el id y hacer que todos los otros jugadores (menos el player) NO puedan presionar el boton PC
-        btnPC.enabled = false;
+            switch (myPlayer.playerType)
+            {
+                case 0: //VR
+                    btnVR.enabled = true;
+                    btnPC.enabled = false;
+                    break;
+                case 1: //PC
+                    btnVR.enabled = false;
+                    btnPC.enabled = true;
+                    break;
+                case 2: //No tiene clase
+
+                    if (iCantPC < iLimiteJugadoresPC)
+                    {
+                        btnPC.enabled = true;
+                    }
+                    else
+                    {
+                        btnPC.enabled = false;
+                    }
+
+                    if (iCantVR < iLimiteJugadoresVR)
+                    {
+                        btnVR.enabled = true;
+                    }
+                    else
+                    {
+                        btnVR.enabled = false;
+                    }
+                    break;
+            }
     }
 
-    [Client]
-    void CmdUpdatePCPlayers()
+
+    void UpdatePlayerTypeCanvas()
     {
-        //Actualizo el texto debajo del boton
+
         tmpJugadoresPC.text = iCantPC + " / " + iLimiteJugadoresPC;
+        tmpJugadoresVR.text = iCantVR + " / " + iLimiteJugadoresVR;
+
+        UpdateButtonsStatus();
+
     }
+    #endregion
 }

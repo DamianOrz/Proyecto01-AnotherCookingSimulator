@@ -720,6 +720,10 @@ MonoBehaviour:
   btnPC: {fileID: 67137154}
   tmpJugadoresVR: {fileID: 1227321201}
   tmpJugadoresPC: {fileID: 251638185}
+  iCantVR: 0
+  iCantPC: 0
+  iLimiteJugadoresVR: 1
+  iLimiteJugadoresPC: 4
 --- !u!114 &187068009
 MonoBehaviour:
   m_ObjectHideFlags: 0
