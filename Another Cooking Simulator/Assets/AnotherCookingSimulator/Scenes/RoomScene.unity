@@ -185,7 +185,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.8773585, g: 0.71181923, b: 0.4014329, a: 0.9019608}
     m_PressedColor: {r: 0.8867924, g: 0.7165632, b: 0.3973834, a: 1}
     m_SelectedColor: {r: 1, g: 0.8117648, b: 0.45882356, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0.38679248, g: 0.38679248, b: 0.38679248, a: 0}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -204,7 +204,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 187068008}
+      - m_Target: {fileID: 187068005}
         m_MethodName: SetPcPlayer
         m_Mode: 1
         m_Arguments:
@@ -638,8 +638,8 @@ GameObject:
   m_Component:
   - component: {fileID: 187068006}
   - component: {fileID: 187068007}
-  - component: {fileID: 187068008}
   - component: {fileID: 187068009}
+  - component: {fileID: 187068005}
   m_Layer: 0
   m_Name: RoomManager
   m_TagString: Untagged
@@ -647,6 +647,33 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &187068005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187068004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8db925c575671b54a9fb768fd06f76e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  player1: {fileID: 1546655818}
+  player2: {fileID: 149611891}
+  player3: {fileID: 1299921399}
+  player4: {fileID: 1726304541}
+  player5: {fileID: 1598978325}
+  btnVR: {fileID: 307862438}
+  btnPC: {fileID: 67137154}
+  tmpJugadoresVR: {fileID: 1227321201}
+  tmpJugadoresPC: {fileID: 251638185}
+  iCantVR: 0
+  iCantPC: 0
+  iLimiteJugadoresVR: 1
+  iLimiteJugadoresPC: 4
 --- !u!4 &187068006
 Transform:
   m_ObjectHideFlags: 0
@@ -677,33 +704,6 @@ MonoBehaviour:
   serverOnly: 0
   m_AssetId: 
   hasSpawned: 0
---- !u!114 &187068008
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 187068004}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9750e782a23da634da75aa9c6fc3f64a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  player1: {fileID: 1546655818}
-  player2: {fileID: 149611891}
-  player3: {fileID: 1299921399}
-  player4: {fileID: 1726304541}
-  player5: {fileID: 1598978325}
-  btnVR: {fileID: 307862438}
-  btnPC: {fileID: 67137154}
-  tmpJugadoresVR: {fileID: 1227321201}
-  tmpJugadoresPC: {fileID: 251638185}
-  iCantVR: 0
-  iCantPC: 0
-  iLimiteJugadoresVR: 1
-  iLimiteJugadoresPC: 4
 --- !u!114 &187068009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -711,7 +711,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 187068004}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7424c1070fad4ba2a7a96b02fbeb4bb, type: 3}
   m_Name: 
@@ -987,7 +987,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 187068008}
+      - m_Target: {fileID: 187068005}
         m_MethodName: StartGame
         m_Mode: 1
         m_Arguments:
@@ -1189,7 +1189,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.8773585, g: 0.71181923, b: 0.4014329, a: 0.9019608}
     m_PressedColor: {r: 0.8867924, g: 0.7165632, b: 0.3973834, a: 1}
     m_SelectedColor: {r: 1, g: 0.8117648, b: 0.45882356, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0.38679248, g: 0.38679248, b: 0.38679248, a: 0}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -1208,7 +1208,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 187068008}
+      - m_Target: {fileID: 187068005}
         m_MethodName: SetVrPlayer
         m_Mode: 1
         m_Arguments:
@@ -2903,7 +2903,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 187068008}
+      - m_Target: {fileID: 187068005}
         m_MethodName: SetReadyState
         m_Mode: 1
         m_Arguments:

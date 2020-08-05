@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
-using TMPro;
 using UnityEngine.UI;
+using TMPro;
 
 public class RoomManagerScript : NetworkBehaviour
 {
@@ -33,10 +33,10 @@ public class RoomManagerScript : NetworkBehaviour
     public TMP_Text tmpJugadoresVR;
     public TMP_Text tmpJugadoresPC;
 
-    [SyncVar(hook = nameof(CmdOnCountVrChange))]
+    //[SyncVar(hook = nameof(CmdOnCountVrChange))]
     public int iCantVR = 0;
 
-    [SyncVar(hook = nameof(CmdOnCountPCChange))]
+   //[SyncVar(hook = nameof(CmdOnCountPCChange))]
     public int iCantPC = 0;
 
     public int iLimiteJugadoresVR = 1;
@@ -61,6 +61,11 @@ public class RoomManagerScript : NetworkBehaviour
     void Update()
     {
         listOfPlayers = myNetworkRoomManager.roomSlots;
+
+        int[] cantPlayers = myNetworkRoomManager.ObtenerCantJugadoresPorEquipo();
+        iCantVR = cantPlayers[0];
+        iCantPC = cantPlayers[1];
+
         UpdateCanvas();
         UpdatePlayerTypeCanvas();
     }
@@ -194,20 +199,7 @@ public class RoomManagerScript : NetworkBehaviour
             iCantVR++;
         }
     }
-
-    [Command]
-    public void CmdOnCountVrChange(int oldValue, int newValue)
-    {
-        
-        tmpJugadoresVR.text = iCantVR + " / " + iLimiteJugadoresVR;
-    }
-
-    [Command]
-    public void CmdOnCountPCChange(int oldValue, int newValue)
-    {
-        tmpJugadoresPC.text = iCantPC + " / " + iLimiteJugadoresPC;
-    }
-    //[Command]
+   
     public void UpdateButtonsStatus() //Actualiza para cada persona los botones a activar
     {
         switch (myPlayer.playerType)

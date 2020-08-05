@@ -694,6 +694,23 @@ namespace Mirror
             this.networkAddress = newNetworkAddress;
         }
 
+        public int[] ObtenerCantJugadoresPorEquipo()
+        {
+            int[] getPlayers = new int[2];
+            foreach (NetworkRoomPlayer p in roomSlots)
+            {
+                if (p.playerType == 1)
+                {
+                    getPlayers[1]++;
+                }
+                else if (p.playerType == 0)
+                {
+                    getPlayers[0]++;
+                }
+            }
+            return getPlayers;
+        }
+
         #endregion
     }
 }

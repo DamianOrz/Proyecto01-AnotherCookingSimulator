@@ -39,7 +39,7 @@ namespace Mirror
         public int index;
 
         [Tooltip("Atributo especial que define el tipo de jugador")]
-        [SyncVar(hook = nameof(OnPlayerTypeChange))]
+        [SyncVar]
         public int playerType = 2;
 
         //Glosario playerType:
@@ -116,30 +116,6 @@ namespace Mirror
         /// <param name="readyState">Whether the player is ready or not.</param>
         public virtual void OnClientReady(bool readyState) { }
         
-        public virtual void OnPlayerTypeChange(int oldValue, int newValue)
-        {
-            CmdSendType( oldValue, newValue);
-        }
-        [Command]
-        public void CmdSendType(int oldValue, int newType)
-        {
-            if(newType == 0)
-            {
-                RpcUpdateCanvas(1, newType);
-            }else
-            {
-                RpcUpdateCanvas(0, newType);
-            }
-
-            RpcUpdateCanvas(oldValue, newType);
-        }
-        [ClientRpc]
-        public void RpcUpdateCanvas(int iCant, int tipo)
-        {
-            //FindObjectOfType<RoomManagerScript>().UpdatePlayerTypeCanvas();
-            Debug.Log(iCant + " / " + 1);
-            
-        }
         #endregion
 
         #region Optional UI
