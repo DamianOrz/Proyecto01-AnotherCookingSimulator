@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
+//using TMPro;
 
 namespace Mirror
 {
@@ -20,7 +22,6 @@ namespace Mirror
         public bool showRoomGUI = true;
 
         [Header("Diagnostics")]
-
         /// <summary>
         /// Diagnostic flag indicating whether this player is ready for the game to begin.
         /// <para>Invoke CmdChangeReadyState method on the client to set this flag.</para>
@@ -38,7 +39,7 @@ namespace Mirror
         public int index;
 
         [Tooltip("Atributo especial que define el tipo de jugador")]
-        [SyncVar]
+        [SyncVar(hook = nameof(OnPlayerTypeChange))]
         public int playerType = 2;
 
         //Glosario playerType:
@@ -115,7 +116,29 @@ namespace Mirror
         /// </summary>
         /// <param name="readyState">Whether the player is ready or not.</param>
         public virtual void OnClientReady(bool readyState) { }
+        
+        public virtual void OnPlayerTypeChange(int oldValue, int newValue)
+        {
+            CmdSendType( oldValue, newValue);
+        }
+        [Command]
+        public void CmdSendType(int oldValue, int newType)
+        {
+            if(newType == 0)
+            {
+                RpcUpdateCanvas(1, newType);
+            }else
+            {
+                RpcUpdateCanvas(0, newType);
+            }
 
+            RpcUpdateCanvas(oldValue, newType);
+        }
+        [ClientRpc]
+        public void RpcUpdateCanvas(int iCant, int tipo)
+        {
+            //tmpJugadoresVR.text = iCant + " / " + 1;
+        }
         #endregion
 
         #region Optional UI

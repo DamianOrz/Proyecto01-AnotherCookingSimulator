@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-
 namespace Mirror
 {
     /// <summary>

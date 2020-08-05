@@ -33,10 +33,10 @@ public class RoomManagerScript : NetworkBehaviour
     public TMP_Text tmpJugadoresVR;
     public TMP_Text tmpJugadoresPC;
 
-    [SyncVar]
+    [SyncVar(hook = nameof(CmdOnCountVrChange))]
     public int iCantVR = 0;
 
-    [SyncVar]
+    [SyncVar(hook = nameof(CmdOnCountPCChange))]
     public int iCantPC = 0;
 
     public int iLimiteJugadoresVR = 1;
@@ -155,7 +155,7 @@ public class RoomManagerScript : NetworkBehaviour
    [Client]
     public void SetPcPlayer()
     {
-        if(myPlayer.playerType == 1)
+        if(myPlayer.playerType == 1)  //Cuando deselecciona el tipo pc
         {
             iCantPC--;
             myPlayer.CmdChangePlayerType(2);
@@ -192,12 +192,21 @@ public class RoomManagerScript : NetworkBehaviour
             myPlayer.CmdChangePlayerType(0); //myPlayer pasa a ser VR
             iCantVR++;
         }
-        
     }
 
+    [Command]
+    public void CmdOnCountVrChange(int oldValue, int newValue)
+    {
+        
+        tmpJugadoresVR.text = iCantVR + " / " + iLimiteJugadoresVR;
+    }
 
+    [Command]
+    public void CmdOnCountPCChange(int oldValue, int newValue)
+    {
+        tmpJugadoresPC.text = iCantPC + " / " + iLimiteJugadoresPC;
+    }
     //[Command]
-    [Client]
     void UpdateButtonsStatus() //Actualiza para cada persona los botones a activar
     {
             switch (myPlayer.playerType)
@@ -211,7 +220,6 @@ public class RoomManagerScript : NetworkBehaviour
                     btnPC.enabled = true;
                     break;
                 case 2: //No tiene clase
-
                     if (iCantPC < iLimiteJugadoresPC)
                     {
                         btnPC.enabled = true;
@@ -241,7 +249,6 @@ public class RoomManagerScript : NetworkBehaviour
         tmpJugadoresVR.text = iCantVR + " / " + iLimiteJugadoresVR;
 
         UpdateButtonsStatus();
-
     }
     #endregion
 }
