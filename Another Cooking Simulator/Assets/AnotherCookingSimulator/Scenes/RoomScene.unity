@@ -638,7 +638,6 @@ GameObject:
   m_Component:
   - component: {fileID: 187068006}
   - component: {fileID: 187068007}
-  - component: {fileID: 187068005}
   - component: {fileID: 187068008}
   - component: {fileID: 187068009}
   m_Layer: 0
@@ -648,25 +647,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &187068005
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 187068004}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49bf387d14f128849a9cb2db17a2e882, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  tmpJugadoresVR: {fileID: 1227321201}
-  tmpJugadoresPC: {fileID: 1548673006}
-  btnVR: {fileID: 307862438}
-  btnPC: {fileID: 67137154}
-  localPlayer: {fileID: 0}
 --- !u!4 &187068006
 Transform:
   m_ObjectHideFlags: 0

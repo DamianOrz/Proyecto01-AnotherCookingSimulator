@@ -104,7 +104,6 @@ namespace Mirror
         /// <para>Note: isLocalPlayer is not guaranteed to be set until OnStartLocalPlayer is called.</para>
         /// </summary>
         public virtual void OnClientEnterRoom() { }
-
         /// <summary>
         /// This is a hook that is invoked on all player objects when exiting the room.
         /// </summary>
@@ -137,7 +136,9 @@ namespace Mirror
         [ClientRpc]
         public void RpcUpdateCanvas(int iCant, int tipo)
         {
-            //tmpJugadoresVR.text = iCant + " / " + 1;
+            //FindObjectOfType<RoomManagerScript>().UpdatePlayerTypeCanvas();
+            Debug.Log(iCant + " / " + 1);
+            
         }
         #endregion
 

@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
-using TMPro;
 using UnityEngine.UI;
+using TMPro;
 
 public class RoomManagerScript : NetworkBehaviour
 {
@@ -29,9 +29,9 @@ public class RoomManagerScript : NetworkBehaviour
     public Button btnVR;
     public Button btnPC;
 
-    [Header("TMP_Text")]
-    public TMP_Text tmpJugadoresVR;
-    public TMP_Text tmpJugadoresPC;
+    //[Header("TMP_Text")]
+    //public TMP_Text tmpJugadoresVR;
+    //public TMP_Text tmpJugadoresPC;
 
     [SyncVar(hook = nameof(CmdOnCountVrChange))]
     public int iCantVR = 0;
@@ -160,8 +160,9 @@ public class RoomManagerScript : NetworkBehaviour
             iCantPC--;
             myPlayer.CmdChangePlayerType(2);
             UpdateButtonsStatus();
+            return;
         }
-        else if (iCantPC < iLimiteJugadoresPC)
+        if(iCantPC < iLimiteJugadoresPC)
         {
             if (myPlayer.playerType == 2)
             {
@@ -207,44 +208,43 @@ public class RoomManagerScript : NetworkBehaviour
         tmpJugadoresPC.text = iCantPC + " / " + iLimiteJugadoresPC;
     }
     //[Command]
-    void UpdateButtonsStatus() //Actualiza para cada persona los botones a activar
+    public void UpdateButtonsStatus() //Actualiza para cada persona los botones a activar
     {
-            switch (myPlayer.playerType)
-            {
-                case 0: //VR
-                    btnVR.enabled = true;
-                    btnPC.enabled = false;
-                    break;
-                case 1: //PC
-                    btnVR.enabled = false;
+        switch (myPlayer.playerType)
+        {
+            case 0: //VR
+                btnVR.enabled = true;
+                btnPC.enabled = false;
+                break;
+            case 1: //PC
+                btnVR.enabled = false;
+                btnPC.enabled = true;
+                break;
+            case 2: //No tiene clase
+                if (iCantPC < iLimiteJugadoresPC)
+                {
                     btnPC.enabled = true;
-                    break;
-                case 2: //No tiene clase
-                    if (iCantPC < iLimiteJugadoresPC)
-                    {
-                        btnPC.enabled = true;
-                    }
-                    else
-                    {
-                        btnPC.enabled = false;
-                    }
+                }
+                else
+                {
+                    btnPC.enabled = false;
+                }
 
-                    if (iCantVR < iLimiteJugadoresVR)
-                    {
-                        btnVR.enabled = true;
-                    }
-                    else
-                    {
-                        btnVR.enabled = false;
-                    }
-                    break;
-            }
+                if (iCantVR < iLimiteJugadoresVR)
+                {
+                    btnVR.enabled = true;
+                }
+                else
+                {
+                    btnVR.enabled = false;
+                }
+                break;
+        }
     }
 
 
-    void UpdatePlayerTypeCanvas()
+    public void UpdatePlayerTypeCanvas()
     {
-
         tmpJugadoresPC.text = iCantPC + " / " + iLimiteJugadoresPC;
         tmpJugadoresVR.text = iCantVR + " / " + iLimiteJugadoresVR;
 
