@@ -5,6 +5,7 @@ using Mirror;
 using VRTK;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEditor;
 
 public class PcManager : NetworkBehaviour
 {
@@ -21,6 +22,7 @@ public class PcManager : NetworkBehaviour
     private Transform destinoHamburguesa;
     private Transform destination;
     private CharacterController controller;
+    Animator anim;
 
     private GameObject canvasTomarPedidos;
     //MOVEMENT
@@ -63,6 +65,8 @@ public class PcManager : NetworkBehaviour
         destination = cameraPlayer.transform.GetChild(0);
         groundCheck = this.transform.GetChild(2);
 
+        anim = this.GetComponent<Animator>();
+
         canvasCrossHair = GameObject.Find("Canvas");
         rectTransformCrossHair = canvasCrossHair.GetComponent<RectTransform>();
 
@@ -101,6 +105,8 @@ public class PcManager : NetworkBehaviour
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
+        bool isWalking = false;
+
         if (isGrounded && velocity.y < 0)
         {
             velocity.y = -6f;
@@ -109,9 +115,19 @@ public class PcManager : NetworkBehaviour
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 
+        
+
         Vector3 move = transform.right * x + transform.forward * z;
 
+        if (move != new Vector3(0,0,0))
+        {
+            isWalking = true;
+        }
+        anim.SetBool("IsWalking", isWalking);
+        anim.SetBool("IsGrounded", isGrounded);
+
         controller.Move(move * speed * Time.deltaTime);
+        
 
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
@@ -119,6 +135,14 @@ public class PcManager : NetworkBehaviour
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
+
+        
+       
+
+       
+        anim.SetFloat("Speed", -(velocity.y)); //Por ahora siempre es 6/-6
+        
+        
     }
 
     void Interaction()
