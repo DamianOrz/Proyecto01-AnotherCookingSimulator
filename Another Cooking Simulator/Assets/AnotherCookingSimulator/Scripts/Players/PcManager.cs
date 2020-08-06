@@ -65,7 +65,7 @@ public class PcManager : NetworkBehaviour
         destination = cameraPlayer.transform.GetChild(0);
         groundCheck = this.transform.GetChild(2);
 
-        anim = this.GetComponent<Animator>();
+        anim = this.GetComponent<Animator>(); //Se usa para las animaciones de caminar, saltar, etc.
 
         canvasCrossHair = GameObject.Find("Canvas");
         rectTransformCrossHair = canvasCrossHair.GetComponent<RectTransform>();
