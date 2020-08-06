@@ -6,38 +6,49 @@ using Mirror;
 
 public class PlayerSpawner : NetworkBehaviour
 {
+    //Online
+    private NetworkRoomManager myNetworkRoomManager;
+    private NetworkRoomPlayer myPlayer;
+    //Prefabs
     public GameObject VRPlayer;
     public GameObject PCPlayer;
-    static bool hayPersonajeVR;
+
+
     // Start is called before the first frame update
     void Start()
     {
-        searchVrPlayer();
-        if (hayPersonajeVR)
+        
+        if (!isLocalPlayer)
         {
-            if(isLocalPlayer)
+            return;
+        }
+
+        myNetworkRoomManager = FindObjectOfType<NetworkRoomManager>();
+        
+        foreach (NetworkRoomPlayer p in myNetworkRoomManager.roomSlots)
+        {
+            if(p.netId == this.netId-26)
+            {
+                myPlayer = p;
+            }
+        }
+        if(myPlayer.playerType == FindObjectOfType<NetworkRoomPlayer>().playerType)
+        {
+            if(myPlayer.playerType == 0)
+            {
+                CmdSpawnVRPlayer();
+            }else
             {
                 CmdSpawnPCPlayer();
-            }           
-        }
-        else
-        {
-            CmdSpawnVRPlayer();
+            }
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
     }
-    [Command]
-    void CmdGrantAuthority(GameObject target)
-    {
-        // target must have a NetworkIdentity component to be passed through a Command
-        // and must already exist on both server and client
-        target.GetComponent<NetworkIdentity>().AssignClientAuthority(connectionToClient);
-    }
+
     [Command]
     void CmdSpawnVRPlayer()
     {
@@ -46,6 +57,7 @@ public class PlayerSpawner : NetworkBehaviour
 
         NetworkServer.Spawn(go,connectionToClient);
     }
+
     [Command]
     void CmdSpawnPCPlayer()
     {
@@ -55,14 +67,6 @@ public class PlayerSpawner : NetworkBehaviour
         NetworkServer.Spawn(go,connectionToClient);
         go.GetComponent<NetworkIdentity>().AssignClientAuthority(connectionToClient);
     }
-    void searchVrPlayer()
-    {
-        bool seEncontro = false;
-        GameObject obj = GameObject.FindGameObjectWithTag("VRPlayer");
-        if (obj)
-        {
-            hayPersonajeVR = true;
-        }
-    }
-    public bool IsLocal() { return isLocalPlayer; }
+
+    private bool IsLocal() { return isLocalPlayer; }
 }
