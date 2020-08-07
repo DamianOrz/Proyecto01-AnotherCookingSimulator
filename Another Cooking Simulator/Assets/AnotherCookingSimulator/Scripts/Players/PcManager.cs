@@ -53,7 +53,7 @@ public class PcManager : NetworkBehaviour
     private PointerEventData m_PointerEventData;
     //PEDIDO
     [SerializeField] Pedido pedido = new Pedido();
-
+    
     void Start()
     {
         DiaManager.instanceDiaManager.EmpezarDia();

@@ -6429,6 +6429,10 @@ MonoBehaviour:
   authenticator: {fileID: 0}
   playerPrefab: {fileID: 9122676827126895862, guid: 665fe0c8c2572924a9c1ecb79e012bca,
     type: 3}
+  VRPlayer: {fileID: 7147390276511485958, guid: 156fb66e2ffc8b848a4eadc7761d2c86,
+    type: 3}
+  PCPlayer: {fileID: 8681103617065013659, guid: b4d35aed20e4c204ab639a0edf15cc3a,
+    type: 3}
   autoCreatePlayer: 1
   playerSpawnMethod: 1
   spawnPrefabs:
@@ -6445,6 +6449,7 @@ MonoBehaviour:
   GameplayScene: Assets/AnotherCookingSimulator/Scenes/JuegoScene.unity
   allPlayersReady: 0
   roomSlots: []
+  pos: 0
 --- !u!4 &1678351134
 Transform:
   m_ObjectHideFlags: 0

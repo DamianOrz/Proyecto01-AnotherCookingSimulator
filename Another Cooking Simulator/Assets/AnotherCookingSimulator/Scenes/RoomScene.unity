@@ -668,6 +668,7 @@ MonoBehaviour:
   player5: {fileID: 1598978325}
   btnVR: {fileID: 307862438}
   btnPC: {fileID: 67137154}
+  btnStart: {fileID: 255870428}
   tmpJugadoresVR: {fileID: 1227321201}
   tmpJugadoresPC: {fileID: 251638185}
   iCantVR: 0

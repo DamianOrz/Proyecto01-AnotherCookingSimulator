@@ -4,6 +4,7 @@ using UnityEngine;
 using Mirror;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class RoomManagerScript : NetworkBehaviour
 {
@@ -28,6 +29,7 @@ public class RoomManagerScript : NetworkBehaviour
     [Header("Botones")]
     public Button btnVR;
     public Button btnPC;
+    public Button btnStart;
 
     [Header("TMP_Text")]
     public TMP_Text tmpJugadoresVR;
@@ -55,6 +57,8 @@ public class RoomManagerScript : NetworkBehaviour
         player3.SetActive(false);
         player4.SetActive(false);
         player5.SetActive(false);
+
+        btnStart.enabled = false;
     }
 
     // Update is called once per frame
@@ -202,6 +206,10 @@ public class RoomManagerScript : NetworkBehaviour
    
     public void UpdateButtonsStatus() //Actualiza para cada persona los botones a activar
     {
+        if(myPlayer == null)
+        {
+            return;
+        }
         switch (myPlayer.playerType)
         {
             case 0: //VR
@@ -240,7 +248,21 @@ public class RoomManagerScript : NetworkBehaviour
         tmpJugadoresPC.text = iCantPC + " / " + iLimiteJugadoresPC;
         tmpJugadoresVR.text = iCantVR + " / " + iLimiteJugadoresVR;
 
+        UpdateStartButton();
+
         UpdateButtonsStatus();
+    }
+
+    private void UpdateStartButton()
+    {
+        if(iCantVR > 0 || iCantPC > 0)
+        {
+            btnStart.enabled = true;
+        }
+        else
+        {
+            btnStart.enabled = false;
+        }
     }
     #endregion
 }

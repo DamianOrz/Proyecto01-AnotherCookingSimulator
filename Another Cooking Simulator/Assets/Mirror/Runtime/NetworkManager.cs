@@ -132,6 +132,9 @@ namespace Mirror
         [Tooltip("Prefab of the player object. Prefab must have a Network Identity component. May be an empty game object or a full avatar.")]
         public GameObject playerPrefab;
 
+        [Header("Custom player prefabs")]
+        public GameObject VRPlayer;
+        public GameObject PCPlayer;
         /// <summary>
         /// A flag to control whether or not player objects are automatically created on connect, and on scene change.
         /// </summary>

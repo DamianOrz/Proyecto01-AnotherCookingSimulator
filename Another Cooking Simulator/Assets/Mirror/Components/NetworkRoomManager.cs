@@ -26,7 +26,6 @@ namespace Mirror
             public NetworkConnection conn;
             public GameObject roomPlayer;
         }
-
         [Header("Room Settings")]
 
         [FormerlySerializedAs("m_ShowRoomGUI")]
@@ -156,7 +155,8 @@ namespace Mirror
                 return;
             }
 
-            GameObject gamePlayer = OnRoomServerCreateGamePlayer(conn, roomPlayer);
+            GameObject gamePlayer = null;//Prefab
+            
             if (gamePlayer == null)
             {
                 // get start position from base class
@@ -578,6 +578,7 @@ namespace Mirror
         [EditorBrowsable(EditorBrowsableState.Never), Obsolete("Use OnRoomServerSceneLoadedForPlayer(NetworkConnection conn, GameObject roomPlayer, GameObject gamePlayer) instead")]
         public virtual bool OnRoomServerSceneLoadedForPlayer(GameObject roomPlayer, GameObject gamePlayer)
         {
+            
             return true;
         }
 
@@ -592,6 +593,25 @@ namespace Mirror
         /// <returns>False to not allow this player to replace the room player.</returns>
         public virtual bool OnRoomServerSceneLoadedForPlayer(NetworkConnection conn, GameObject roomPlayer, GameObject gamePlayer)
         {
+            //roomPlayer --> Viene de la RoomScene con la informacion del usuario
+            //gamePlayer --> Aún no reemplaza a roomPlayer y fue recien instanciado
+            if (roomPlayer.GetComponent<NetworkRoomPlayer>().playerType == 0)
+            {
+                GameObject go = Instantiate(VRPlayer);
+                go.transform.parent = gamePlayer.transform;
+
+                NetworkServer.Spawn(go, conn);
+                go.GetComponent<NetworkIdentity>().AssignClientAuthority(conn);
+                
+            }
+            else
+            {                
+                GameObject go = Instantiate(PCPlayer);
+                go.transform.parent = gamePlayer.transform;
+
+                NetworkServer.Spawn(go, conn);
+                go.GetComponent<NetworkIdentity>().AssignClientAuthority(conn);
+            }
             return true;
         }
 
