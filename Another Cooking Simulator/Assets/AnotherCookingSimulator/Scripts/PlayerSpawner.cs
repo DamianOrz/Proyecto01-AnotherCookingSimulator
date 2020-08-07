@@ -20,12 +20,10 @@ public class PlayerSpawner : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (!this.transform.GetComponent<NetworkIdentity>().isLocalPlayer)
+        if (this.transform.GetComponent<NetworkIdentity>().isLocalPlayer)
         {
-            gameObject.GetComponentInChildren<Camera>().enabled = false;
-            gameObject.GetComponent<AudioListener>().enabled = false;
+            this.transform.GetChild(0).transform.GetComponentInChildren<Camera>().enabled = false;
+            this.transform.GetChild(0).transform.GetChild(1).GetComponent<AudioListener>().enabled = false;
         }
-
     }
 }

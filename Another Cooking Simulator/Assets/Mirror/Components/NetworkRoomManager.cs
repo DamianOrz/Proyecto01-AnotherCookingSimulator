@@ -598,7 +598,7 @@ namespace Mirror
             if (roomPlayer.GetComponent<NetworkRoomPlayer>().playerType == 0)
             {
                 GameObject go = Instantiate(VRPlayer);
-                gamePlayer.transform.SetParent(go.transform);
+                go.transform.parent = gamePlayer.transform;
 
                 NetworkServer.Spawn(go, conn);
                 go.GetComponent<NetworkIdentity>().AssignClientAuthority(conn);
@@ -607,11 +607,10 @@ namespace Mirror
             else
             {                
                 GameObject go = Instantiate(PCPlayer);
-                gamePlayer.transform.SetParent(go.transform);
+                go.transform.parent = gamePlayer.transform;
 
                 NetworkServer.Spawn(go, conn);
                 go.GetComponent<NetworkIdentity>().AssignClientAuthority(conn);
-                
             }
             return true;
         }
