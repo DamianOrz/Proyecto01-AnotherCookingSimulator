@@ -62,7 +62,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  VRPlayer: {fileID: 7147390276511485958, guid: 156fb66e2ffc8b848a4eadc7761d2c86,
-    type: 3}
-  PCPlayer: {fileID: 8681103617065013659, guid: b4d35aed20e4c204ab639a0edf15cc3a,
-    type: 3}

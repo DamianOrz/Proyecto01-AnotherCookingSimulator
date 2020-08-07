@@ -76,9 +76,6 @@ namespace Mirror
         [Tooltip("List of Room Player objects")]
         public List<NetworkRoomPlayer> roomSlots = new List<NetworkRoomPlayer>();
 
-        [SyncVar]
-        public int pos = 0;
-
         public override void OnValidate()
         {
             // always >= 0
@@ -596,7 +593,26 @@ namespace Mirror
         /// <returns>False to not allow this player to replace the room player.</returns>
         public virtual bool OnRoomServerSceneLoadedForPlayer(NetworkConnection conn, GameObject roomPlayer, GameObject gamePlayer)
         {
+            //roomPlayer --> Viene de la RoomScene con la informacion del usuario
+            //gamePlayer --> Aún no reemplaza a roomPlayer y fue recien instanciado
+            if (roomPlayer.GetComponent<NetworkRoomPlayer>().playerType == 0)
+            {
+                GameObject go = Instantiate(VRPlayer);
+                gamePlayer.transform.SetParent(go.transform);
 
+                NetworkServer.Spawn(go, conn);
+                go.GetComponent<NetworkIdentity>().AssignClientAuthority(conn);
+                
+            }
+            else
+            {                
+                GameObject go = Instantiate(PCPlayer);
+                gamePlayer.transform.SetParent(go.transform);
+
+                NetworkServer.Spawn(go, conn);
+                go.GetComponent<NetworkIdentity>().AssignClientAuthority(conn);
+                
+            }
             return true;
         }
 
