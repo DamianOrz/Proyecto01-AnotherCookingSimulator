@@ -26,7 +26,6 @@ namespace Mirror
             public NetworkConnection conn;
             public GameObject roomPlayer;
         }
-
         [Header("Room Settings")]
 
         [FormerlySerializedAs("m_ShowRoomGUI")]
@@ -76,6 +75,9 @@ namespace Mirror
         /// </summary>
         [Tooltip("List of Room Player objects")]
         public List<NetworkRoomPlayer> roomSlots = new List<NetworkRoomPlayer>();
+
+        [SyncVar]
+        public int pos = 0;
 
         public override void OnValidate()
         {
@@ -156,7 +158,8 @@ namespace Mirror
                 return;
             }
 
-            GameObject gamePlayer = OnRoomServerCreateGamePlayer(conn, roomPlayer);
+            GameObject gamePlayer = null;//Prefab
+            
             if (gamePlayer == null)
             {
                 // get start position from base class
@@ -578,6 +581,7 @@ namespace Mirror
         [EditorBrowsable(EditorBrowsableState.Never), Obsolete("Use OnRoomServerSceneLoadedForPlayer(NetworkConnection conn, GameObject roomPlayer, GameObject gamePlayer) instead")]
         public virtual bool OnRoomServerSceneLoadedForPlayer(GameObject roomPlayer, GameObject gamePlayer)
         {
+            
             return true;
         }
 
@@ -592,6 +596,7 @@ namespace Mirror
         /// <returns>False to not allow this player to replace the room player.</returns>
         public virtual bool OnRoomServerSceneLoadedForPlayer(NetworkConnection conn, GameObject roomPlayer, GameObject gamePlayer)
         {
+
             return true;
         }
 

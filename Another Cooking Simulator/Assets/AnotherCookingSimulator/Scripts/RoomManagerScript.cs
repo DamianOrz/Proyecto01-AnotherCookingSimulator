@@ -206,6 +206,10 @@ public class RoomManagerScript : NetworkBehaviour
    
     public void UpdateButtonsStatus() //Actualiza para cada persona los botones a activar
     {
+        if(myPlayer == null)
+        {
+            return;
+        }
         switch (myPlayer.playerType)
         {
             case 0: //VR

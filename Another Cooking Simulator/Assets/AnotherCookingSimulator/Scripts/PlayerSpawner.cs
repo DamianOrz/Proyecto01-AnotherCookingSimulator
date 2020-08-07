@@ -18,30 +18,17 @@ public class PlayerSpawner : NetworkBehaviour
     void Start()
     {
         
-        if (!isLocalPlayer)
-        {
-            return;
-        }
+        //if (!isLocalPlayer)
+        //{
+        //    return;
+        //}
+        //if (myNetworkRoomManager.roomSlots[0].netIdentity)
+        //{
 
-        myNetworkRoomManager = FindObjectOfType<NetworkRoomManager>();
-        
-        foreach (NetworkRoomPlayer p in myNetworkRoomManager.roomSlots)
-        {
-            if(p.netId == this.netId-26)
-            {
-                myPlayer = p;
-            }
-        }
-        if(myPlayer.playerType == FindObjectOfType<NetworkRoomPlayer>().playerType)
-        {
-            if(myPlayer.playerType == 0)
-            {
-                CmdSpawnVRPlayer();
-            }else
-            {
-                CmdSpawnPCPlayer();
-            }
-        }
+        //}
+        //NetworkConnection conn = ;
+        //myNetworkRoomManager = FindObjectOfType<NetworkRoomManager>();
+        //NetworkServer.ReplacePlayerForConnection(conn, Instantiate(newPrefab));
     }
 
     // Update is called once per frame
@@ -53,16 +40,17 @@ public class PlayerSpawner : NetworkBehaviour
     void CmdSpawnVRPlayer()
     {
         GameObject go = Instantiate(VRPlayer);
-        go.transform.parent = this.transform;
+        //go.transform.parent = this.transform;
 
         NetworkServer.Spawn(go,connectionToClient);
+        go.GetComponent<NetworkIdentity>().AssignClientAuthority(connectionToClient);
     }
 
     [Command]
     void CmdSpawnPCPlayer()
     {
         GameObject go = Instantiate(PCPlayer);
-        go.transform.parent = this.transform;
+        //go.transform.parent = this.transform;
 
         NetworkServer.Spawn(go,connectionToClient);
         go.GetComponent<NetworkIdentity>().AssignClientAuthority(connectionToClient);
