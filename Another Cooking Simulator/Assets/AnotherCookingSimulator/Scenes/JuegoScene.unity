@@ -17844,7 +17844,7 @@ GameObject:
   - component: {fileID: 1993255785}
   m_Layer: 0
   m_Name: GameManager
-  m_TagString: Untagged
+  m_TagString: GameManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17886,6 +17886,7 @@ MonoBehaviour:
     type: 3}
   prefabUltimaInterpretacion: {fileID: 5899877253549592632, guid: 695f9bc4962f54441b8f8a45a02a53f7,
     type: 3}
+  myNetwork: {fileID: 0}
 --- !u!114 &1993255784
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17912,7 +17913,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneId: 2473096041
-  serverOnly: 0
+  serverOnly: 1
   m_AssetId: 
   hasSpawned: 0
 --- !u!1001 &1996354309

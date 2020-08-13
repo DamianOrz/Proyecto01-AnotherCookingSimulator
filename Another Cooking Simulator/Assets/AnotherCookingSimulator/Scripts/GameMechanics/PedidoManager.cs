@@ -21,6 +21,8 @@ public class PedidoManager : NetworkBehaviour
     public GameObject prefabClientes;
     public GameObject prefabUltimaInterpretacion;
 
+    public NetworkLobbyManager myNetwork;
+
     static int iNumPedido = 1;
 
     private enum CORRECCIONES
@@ -40,6 +42,8 @@ public class PedidoManager : NetworkBehaviour
         {
             instancePedidoManager = this;
         }
+
+        myNetwork = FindObjectOfType<NetworkLobbyManager>();
     }
 
     [SerializeField] private static List<Pedido> _listaPedidos = new List<Pedido>();
@@ -152,19 +156,22 @@ public class PedidoManager : NetworkBehaviour
     }
     public void MostrarPedidoDelCliente(Pedido unPedido)
     {
+        
         //Cuando se conecte con el boton esta funcion recibirá parámetros
         string textoPedido = "ERROR";
 
-        //CmdCrearPedidoDelCliente(unPedido);
-        GameObject pedidoCreado = Instantiate(instancePedidoManager.prefabClientes);
+        Debug.Log("Hago Cmd");
+
+        hacerComando(unPedido);
+        //GameObject pedidoCreado = Instantiate(instancePedidoManager.prefabClientes);
         //CmdCrearPrefabEnCadaCliente(unPedido);
-        GameObject panel = pedidoCreado.transform.Find("Panel").gameObject;
+        //GameObject panel = pedidoCreado.transform.Find("Panel").gameObject;
 
         //BATALLA 1 GANADA CONTRA DAMIAN (SEÑOR FUERZAS DEL MAL), PUNTO PARA SIMI
         
-        panel.transform.Find("strConsumibles").gameObject.GetComponent<TMP_Text>().text = "" + CambiarArrayAString(unPedido.GetOrdenIngredientes());
+        //panel.transform.Find("strConsumibles").gameObject.GetComponent<TMP_Text>().text = "" + CambiarArrayAString(unPedido.GetOrdenIngredientes());
 
-        pedidoCreado.transform.SetParent(instancePedidoManager.contentMostrarPedidoCliente.transform, false);
+        //pedidoCreado.transform.SetParent(instancePedidoManager.contentMostrarPedidoCliente.transform, false);
         //CmdInsertarHijoAlContent(pedidoCreado, instancePedidoManager.contentMostrarPedidoCliente);
 
         iNumPedido++;
@@ -226,48 +233,35 @@ public class PedidoManager : NetworkBehaviour
         return vector;
     }
     [Command]
-    void CmdCrearPrefabEnCadaCliente(Pedido unPedido)
+    void CmdCrearPedidoDelCliente(Pedido unPedido)
     {
-        //Validar si el servidor debe hacerlo
-        RpcCrearPrefabYhacerloHijo(unPedido);
+        Debug.Log("Hago RPC");
+         
+        RpcSetPedididoEnCanvas(unPedido);
+        //GameObject pedidoCreado = Instantiate(instancePedidoManager.prefabClientes);
+        //GameObject panel = pedidoCreado.transform.Find("Panel").gameObject;
+
+        //panel.transform.Find("strConsumibles").gameObject.GetComponent<TMP_Text>().text = "" + CambiarArrayAString(unPedido.GetOrdenIngredientes());
+
+        //NetworkServer.Spawn(pedidoCreado);
+        //objNetId = pedidoCreado.GetComponent<NetworkIdentity>();
+        //objNetId.AssignClientAuthority(connectionToClient);
+
+        //objNetId.RemoveClientAuthority(connectionToClient);
+    }
+    [Server]
+    void hacerComando(Pedido unPedido)
+    {
+        CmdCrearPedidoDelCliente(unPedido);
     }
     [ClientRpc]
-    void RpcCrearPrefabYhacerloHijo(Pedido unPedido)
+    void RpcSetPedididoEnCanvas(Pedido unPedido)
     {
         GameObject pedidoCreado = Instantiate(instancePedidoManager.prefabClientes);
-
         GameObject panel = pedidoCreado.transform.Find("Panel").gameObject;
 
         panel.transform.Find("strConsumibles").gameObject.GetComponent<TMP_Text>().text = "" + CambiarArrayAString(unPedido.GetOrdenIngredientes());
 
         pedidoCreado.transform.SetParent(instancePedidoManager.contentMostrarPedidoCliente.transform, false);
-    }
-    [Command]
-    void CmdInsertarHijoAlContent(GameObject pedidoCreado, GameObject content)
-    {
-        //Server valida si lo tiene que hacer
-        objNetId = pedidoCreado.GetComponent<NetworkIdentity>();
-        objNetId.AssignClientAuthority(connectionToClient);
-        RpcHacerloHijoDelContent(pedidoCreado);
-        objNetId.RemoveClientAuthority(connectionToClient);
-    }
-    [Command]
-    void CmdCrearPedidoDelCliente(Pedido unPedido)
-    {
-        GameObject pedidoCreado = Instantiate(instancePedidoManager.prefabClientes);
-        GameObject panel = pedidoCreado.transform.Find("Panel").gameObject;
-
-        panel.transform.Find("strConsumibles").gameObject.GetComponent<TMP_Text>().text = "" + CambiarArrayAString(unPedido.GetOrdenIngredientes());
-
-        NetworkServer.Spawn(pedidoCreado);
-        objNetId = pedidoCreado.GetComponent<NetworkIdentity>();
-        objNetId.AssignClientAuthority(connectionToClient);
-        RpcHacerloHijoDelContent(pedidoCreado);
-        objNetId.RemoveClientAuthority(connectionToClient);
-    }
-    [ClientRpc]
-    void RpcHacerloHijoDelContent(GameObject prefab)
-    {
-        prefab.transform.SetParent(instancePedidoManager.contentMostrarPedidoCliente.transform, false);
     }
 }

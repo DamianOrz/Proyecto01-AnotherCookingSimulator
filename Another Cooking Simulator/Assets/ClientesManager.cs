@@ -27,7 +27,6 @@ public class ClientesManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         if (DiaManager.instanceDiaManager.diaActual>-1)
         {
             if (primeraVez)

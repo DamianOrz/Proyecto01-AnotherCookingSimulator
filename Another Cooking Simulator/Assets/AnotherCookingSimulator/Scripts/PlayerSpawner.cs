@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using Mirror;
+using System;
 
 public class PlayerSpawner : NetworkBehaviour
 {
@@ -10,12 +11,15 @@ public class PlayerSpawner : NetworkBehaviour
     private NetworkRoomManager myNetworkRoomManager;
     private NetworkRoomPlayer myPlayer;
 
+    private GameObject pedidosManager;
+
     [Header("PcPlayerCanvas")]
     private GameObject canvasCrossHair;
     // Start is called before the first frame update
     void Start()
     {
         canvasCrossHair = GameObject.Find("PCPlayerHud");
+        pedidosManager = GameObject.FindGameObjectWithTag("GameManager");
     }
 
     // Update is called once per frame
