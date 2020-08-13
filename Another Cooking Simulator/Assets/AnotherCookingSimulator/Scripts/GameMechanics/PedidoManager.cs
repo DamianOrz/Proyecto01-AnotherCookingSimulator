@@ -156,15 +156,15 @@ public class PedidoManager : NetworkBehaviour
         string textoPedido = "ERROR";
 
         //CmdCrearPedidoDelCliente(unPedido);
-        //GameObject pedidoCreado = Instantiate(instancePedidoManager.prefabClientes);
-        CmdCrearPrefabEnCadaCliente(unPedido);
-        //GameObject panel = pedidoCreado.transform.Find("Panel").gameObject;
+        GameObject pedidoCreado = Instantiate(instancePedidoManager.prefabClientes);
+        //CmdCrearPrefabEnCadaCliente(unPedido);
+        GameObject panel = pedidoCreado.transform.Find("Panel").gameObject;
 
         //BATALLA 1 GANADA CONTRA DAMIAN (SEÑOR FUERZAS DEL MAL), PUNTO PARA SIMI
         
-        //panel.transform.Find("strConsumibles").gameObject.GetComponent<TMP_Text>().text = "" + CambiarArrayAString(unPedido.GetOrdenIngredientes());
+        panel.transform.Find("strConsumibles").gameObject.GetComponent<TMP_Text>().text = "" + CambiarArrayAString(unPedido.GetOrdenIngredientes());
 
-        //pedidoCreado.transform.SetParent(instancePedidoManager.contentMostrarPedidoCliente.transform, false);
+        pedidoCreado.transform.SetParent(instancePedidoManager.contentMostrarPedidoCliente.transform, false);
         //CmdInsertarHijoAlContent(pedidoCreado, instancePedidoManager.contentMostrarPedidoCliente);
 
         iNumPedido++;

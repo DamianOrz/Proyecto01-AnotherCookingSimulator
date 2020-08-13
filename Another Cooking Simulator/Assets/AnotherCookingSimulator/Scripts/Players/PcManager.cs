@@ -56,6 +56,12 @@ public class PcManager : NetworkBehaviour
     
     void Start()
     {
+        if (!transform.root.gameObject.GetComponent<NetworkIdentity>().hasAuthority)
+        {
+            GetComponentInChildren<Camera>().enabled = false;
+            GetComponentInChildren<AudioListener>().enabled = false;
+            return;
+        }
         DiaManager.instanceDiaManager.EmpezarDia();
 
         FindObjectOfType<AudioManager>().SwapLobbyMusicToGameMusic("LobbyMusic", "GameMusic");
@@ -83,7 +89,7 @@ public class PcManager : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!base.hasAuthority)
+        if (!transform.root.gameObject.GetComponent<NetworkIdentity>().hasAuthority)
         {
             GetComponentInChildren<Camera>().enabled = false;
             GetComponentInChildren<AudioListener>().enabled = false;
@@ -136,13 +142,7 @@ public class PcManager : NetworkBehaviour
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
 
-        
-       
-
-       
         anim.SetFloat("Speed", -(velocity.y)); //Por ahora siempre es 6/-6
-        
-        
     }
 
     void Interaction()
@@ -312,6 +312,7 @@ public class PcManager : NetworkBehaviour
         ntc.target = go.GetComponent<Transform>();
         ntc.setClieltAuthority();
     }
+
     void QuitarNetworkTransformChild()
     {
 
