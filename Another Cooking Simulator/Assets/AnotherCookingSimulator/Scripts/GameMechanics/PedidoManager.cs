@@ -35,7 +35,7 @@ public class PedidoManager : NetworkBehaviour
 
     [SerializeField] private static List<Pedido> _listaPedidos = new List<Pedido>(); //Lista con todos los pedidos generados, remover [SerializeField] al finalizar
 
-    #region Awake
+    #region Funciones Básicas
     private void Awake()
     {
         if (instancePedidoManager != null && instancePedidoManager != this)
@@ -49,20 +49,26 @@ public class PedidoManager : NetworkBehaviour
 
         myNetworkRoomManager = FindObjectOfType<NetworkRoomManager>();
     }
-    #endregion
 
-    #region Update
-    private float nextActionTime = 10.0f;
-        public float period = 0.1f;
+    void Start()
+    {
+        //10 minutes is 600 seconds
+        InvokeRepeating("Tick", 0, 10); //Se genera en el segundo 0 y desde ese momento se repite cada 10segs
+    }
+    void Tick()
+    {
+        Debug.Log("Ten minutes have passed");
+        CrearNuevoPedido();
+
+
+
+
+
+    }
 
     void Update()
     {
-        if (Time.time > nextActionTime)
-        {
-            nextActionTime += period;
-            ServerFunctionTest();
-            // execute block of code here
-        }
+
     }
     #endregion
 
@@ -100,21 +106,23 @@ public class PedidoManager : NetworkBehaviour
     #region MetodosPedidos
 
     public void crearPedidoRandom()
-            {
-                int[] posiblesIngredientes=new int[DiaManager.instanceDiaManager.diasInfo[0].posiblesIngredientes.Length];
-                for (int i = 0; i < DiaManager.instanceDiaManager.diasInfo[0].posiblesIngredientes.Length; i++)
-                {
-                    posiblesIngredientes[i]= (int)DiaManager.instanceDiaManager.diasInfo[DiaManager.instanceDiaManager.diaActual].posiblesIngredientes[i];
-                }
+    {
+        int[] posiblesIngredientes = new int[DiaManager.instanceDiaManager.diasInfo[0].posiblesIngredientes.Length];
 
-                Pedido unPedido = new Pedido();
-                FindObjectOfType<AudioManager>().Play("FX-Ring");
-                unPedido.SetOrdenIngredientes(CrearHamburguesaRandom(posiblesIngredientes));
-                MostrarPedidoDelCliente(unPedido);
+        for (int i = 0; i < DiaManager.instanceDiaManager.diasInfo[0].posiblesIngredientes.Length; i++)
+        {
+            posiblesIngredientes[i]= (int)DiaManager.instanceDiaManager.diasInfo[DiaManager.instanceDiaManager.diaActual].posiblesIngredientes[i];
+        }
 
-                _listaPedidos.Add(unPedido);
-                unPedido.SetIdPedido(_listaPedidos.Count);
-            } //Genera un pedido de forma aleatoria
+        Pedido unPedido = new Pedido();
+        FindObjectOfType<AudioManager>().Play("FX-Ring");
+        unPedido.SetOrdenIngredientes(CrearHamburguesaRandom(posiblesIngredientes));
+        //MostrarPedidoDelCliente(unPedido);
+
+        _listaPedidos.Add(unPedido);
+        unPedido.SetIdPedido(_listaPedidos.Count);
+    } //Genera un pedido de forma aleatoria
+
     private int[] CrearHamburguesaRandom(int[] posiblesIngredientes)
     {
         int maxIngredientesEntrePanes = DiaManager.instanceDiaManager.diasInfo[DiaManager.instanceDiaManager.diaActual].maxIngredientesEntrePanes;
@@ -164,8 +172,6 @@ public class PedidoManager : NetworkBehaviour
 
         GameObject panel = pedidoCreado.transform.Find("Panel").gameObject;
 
-        //BATALLA 1 GANADA CONTRA DAMIAN (SEÑOR FUERZAS DEL MAL), PUNTO PARA SIMI
-
         panel.transform.Find("strNumeroPedido").gameObject.GetComponent<TMP_Text>().text = "Pedido # " + unPedido.GetIdPedido();
 
         panel.transform.Find("strIngredientes").gameObject.GetComponent<TMP_Text>().text = "A preparar: " + CambiarArrayAString(unPedido.GetInterpretacionIngredientes());
@@ -184,17 +190,10 @@ public class PedidoManager : NetworkBehaviour
 
         Debug.Log("Hago Cmd");
 
-        //GameObject pedidoCreado = Instantiate(instancePedidoManager.prefabClientes);
-        //CmdCrearPrefabEnCadaCliente(unPedido);
-        //GameObject panel = pedidoCreado.transform.Find("Panel").gameObject;
-
-        //BATALLA 1 GANADA CONTRA DAMIAN (SEÑOR FUERZAS DEL MAL), PUNTO PARA SIMI
-
-        //panel.transform.Find("strConsumibles").gameObject.GetComponent<TMP_Text>().text = "" + CambiarArrayAString(unPedido.GetOrdenIngredientes());
-
-        //pedidoCreado.transform.SetParent(instancePedidoManager.contentMostrarPedidoCliente.transform, false);
-        //CmdInsertarHijoAlContent(pedidoCreado, instancePedidoManager.contentMostrarPedidoCliente);
-
+        GameObject pedidoCreado = Instantiate(instancePedidoManager.prefabClientes);
+        GameObject panel = pedidoCreado.transform.Find("Panel").gameObject;
+        panel.transform.Find("strConsumibles").gameObject.GetComponent<TMP_Text>().text = "" + CambiarArrayAString(unPedido.GetOrdenIngredientes());
+        pedidoCreado.transform.SetParent(instancePedidoManager.contentMostrarPedidoCliente.transform, false);
         iNumPedido++;
 } //Muestra el pedido en el canvas del jugador de PC
 
@@ -258,9 +257,9 @@ public class PedidoManager : NetworkBehaviour
 
         }
         string Hamburguesa="";
-        foreach (int ingrediente in listaIngredientes)
+        foreach (int idIngrediente in listaIngredientes)
         {
-            Hamburguesa += DiaManager.instanceDiaManager.diasInfo[DiaManager.instanceDiaManager.diaActual].posiblesIngredientes[ingrediente].ToString() + " ";
+            Hamburguesa += DiaManager.instanceDiaManager.diasInfo[DiaManager.instanceDiaManager.diaActual].posiblesIngredientes[idIngrediente].ToString() + " ";
         }
         return Hamburguesa;
     } //Convierte un array de int a string (Por ejemplo, '1,2,1' pasa a 'pan,queso,pan')
@@ -271,10 +270,21 @@ public class PedidoManager : NetworkBehaviour
     }
 
     [Server]
-    void ServerFunctionTest()
+    void CrearNuevoPedido()
     {
-        Debug.Log("Funciona correctamente");
-    }
+        instancePedidoManager.crearPedidoRandom();
+        RpcUpdatePlayers(agarrarUltimoPedido());
+
+    } //Crea en el servidor un nuevo pedido y se lo envía a todos los usuarios
+
+    [ClientRpc]
+    void RpcUpdatePlayers(Pedido unPedido)
+    {
+        _listaPedidos.Add(unPedido);
+        Debug.Log(_listaPedidos.Count);
+        MostrarPedidoAlDeVR(unPedido);
+        MostrarPedidoDelCliente(unPedido);
+    } //Los clientes reciben el pedido y actualizan las pantallas
 
 
 }
