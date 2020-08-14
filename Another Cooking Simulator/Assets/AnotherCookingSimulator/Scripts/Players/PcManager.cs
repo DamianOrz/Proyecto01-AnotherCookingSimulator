@@ -62,7 +62,7 @@ public class PcManager : NetworkBehaviour
             GetComponentInChildren<AudioListener>().enabled = false;
             return;
         }
-        DiaManager.instanceDiaManager.EmpezarDia();
+        //DiaManager.instanceDiaManager.EmpezarDia();
 
         FindObjectOfType<AudioManager>().SwapLobbyMusicToGameMusic("LobbyMusic", "GameMusic");
 

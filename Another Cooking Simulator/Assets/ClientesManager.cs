@@ -24,31 +24,30 @@ public class ClientesManager : MonoBehaviour
             instanceClientesManager = this;
         }
     }
+    #region Start
+    private void Start()
+    {
+        InvokeRepeating("Tick", 0f, 25f);
+    }
+    private void Tick()
+    {
+        if (DiaManager.instanceDiaManager.diaActual > -1)
+        {
+            if (!(DiaManager.instanceDiaManager.diasInfo[DiaManager.instanceDiaManager.diaActual].clientesEnElDia == contClientes))
+            {
+                contClientes++;
+                PedidoManager.instancePedidoManager.crearPedidoRandom();
+            }else if (DiaManager.instanceDiaManager.diasInfo[DiaManager.instanceDiaManager.diaActual].clientesEnElDia == contClientes)
+            {
+                DiaManager.instanceDiaManager.FinalizarDia();
+            }
+        }
+    }
+    #endregion
     // Update is called once per frame
     void Update()
     {
-        if (DiaManager.instanceDiaManager.diaActual>-1)
-        {
-            if (primeraVez)
-            {
-                PedidoManager.instancePedidoManager.crearPedidoRandom();
-                contClientes++;
-                primeraVez = false;
-            }
-            if(!(DiaManager.instanceDiaManager.diasInfo[DiaManager.instanceDiaManager.diaActual].clientesEnElDia==contClientes))
-            {
-                if (contClientes == pedidosEntregados)
-                {
-                    tiempo += Time.deltaTime;
-                }
-                if (tiempo>=tiempoEntreClientes)
-                {
-                    contClientes++;
-                    PedidoManager.instancePedidoManager.crearPedidoRandom();
-                    tiempo = 0;
-                }
-            }
-        }
+        
     }
     public void seEntregoUnPedido()
     {

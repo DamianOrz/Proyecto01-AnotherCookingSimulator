@@ -50,22 +50,22 @@ public class PedidoManager : NetworkBehaviour
         myNetworkRoomManager = FindObjectOfType<NetworkRoomManager>();
     }
     #endregion
-
+    
     #region Update
     private float nextActionTime = 10.0f;
         public float period = 0.1f;
 
     void Update()
     {
-        if (Time.time > nextActionTime)
-        {
-            nextActionTime += period;
-            ServerFunctionTest();
-            // execute block of code here
-        }
+        //if (Time.time > nextActionTime)
+        //{
+        //    nextActionTime += period;
+        //    ServerFunctionTest();
+        //    // execute block of code here
+        //}
     }
     #endregion
-
+    
     #region MetodosPuntaje
 
     public void cambiarPuntaje()
@@ -100,21 +100,22 @@ public class PedidoManager : NetworkBehaviour
     #region MetodosPedidos
 
     public void crearPedidoRandom()
-            {
-                int[] posiblesIngredientes=new int[DiaManager.instanceDiaManager.diasInfo[0].posiblesIngredientes.Length];
-                for (int i = 0; i < DiaManager.instanceDiaManager.diasInfo[0].posiblesIngredientes.Length; i++)
-                {
-                    posiblesIngredientes[i]= (int)DiaManager.instanceDiaManager.diasInfo[DiaManager.instanceDiaManager.diaActual].posiblesIngredientes[i];
-                }
+    {
+        int[] posiblesIngredientes=new int[DiaManager.instanceDiaManager.diasInfo[0].posiblesIngredientes.Length];
+        for (int i = 0; i < DiaManager.instanceDiaManager.diasInfo[0].posiblesIngredientes.Length; i++)
+        {
+            posiblesIngredientes[i]= (int)DiaManager.instanceDiaManager.diasInfo[DiaManager.instanceDiaManager.diaActual].posiblesIngredientes[i];
+        }
 
-                Pedido unPedido = new Pedido();
-                FindObjectOfType<AudioManager>().Play("FX-Ring");
-                unPedido.SetOrdenIngredientes(CrearHamburguesaRandom(posiblesIngredientes));
-                MostrarPedidoDelCliente(unPedido);
+        Pedido unPedido = new Pedido();
+        FindObjectOfType<AudioManager>().Play("FX-Ring");
+        unPedido.SetOrdenIngredientes(CrearHamburguesaRandom(posiblesIngredientes));
+        MostrarPedidoDelCliente(unPedido);
 
-                _listaPedidos.Add(unPedido);
-                unPedido.SetIdPedido(_listaPedidos.Count);
-            } //Genera un pedido de forma aleatoria
+        _listaPedidos.Add(unPedido);
+        unPedido.SetIdPedido(_listaPedidos.Count);
+    } //Genera un pedido de forma aleatoria
+
     private int[] CrearHamburguesaRandom(int[] posiblesIngredientes)
     {
         int maxIngredientesEntrePanes = DiaManager.instanceDiaManager.diasInfo[DiaManager.instanceDiaManager.diaActual].maxIngredientesEntrePanes;
@@ -138,15 +139,13 @@ public class PedidoManager : NetworkBehaviour
         return vector;
     } //Genera una hamburguesa de forma aleatoria (según parámetros), se utiliza como parte de la generacion de pedidos.
 
-    public List<Pedido> getListaPedidos()
-    {
-        List<Pedido> pedidos = _listaPedidos;
-        return pedidos;
-    } //Devuelve la lista de pedidos
+    public List<Pedido> getListaPedidos(){ return _listaPedidos;} //Devuelve la lista de pedidos
+
     public void LimpiarListaPedidos()
     {
         _listaPedidos.Clear();
     } //Vacía la lista de pedidos
+
     public Pedido agarrarUltimoPedido()
     {
         Pedido Pedido;
@@ -176,27 +175,25 @@ public class PedidoManager : NetworkBehaviour
 
         iNumPedido++;
     } //Muestra el pedido en el canvas del jugador de VR
+
     public void MostrarPedidoDelCliente(Pedido unPedido)
     {
-
         //Cuando se conecte con el boton esta funcion recibirá parámetros
         string textoPedido = "ERROR";
 
-        Debug.Log("Hago Cmd");
-
-        //GameObject pedidoCreado = Instantiate(instancePedidoManager.prefabClientes);
+        GameObject pedidoCreado = Instantiate(instancePedidoManager.prefabClientes);
         //CmdCrearPrefabEnCadaCliente(unPedido);
-        //GameObject panel = pedidoCreado.transform.Find("Panel").gameObject;
+        GameObject panel = pedidoCreado.transform.Find("Panel").gameObject;
 
         //BATALLA 1 GANADA CONTRA DAMIAN (SEÑOR FUERZAS DEL MAL), PUNTO PARA SIMI
 
-        //panel.transform.Find("strConsumibles").gameObject.GetComponent<TMP_Text>().text = "" + CambiarArrayAString(unPedido.GetOrdenIngredientes());
+        panel.transform.Find("strConsumibles").gameObject.GetComponent<TMP_Text>().text = "" + CambiarArrayAString(unPedido.GetOrdenIngredientes());
 
-        //pedidoCreado.transform.SetParent(instancePedidoManager.contentMostrarPedidoCliente.transform, false);
+        pedidoCreado.transform.SetParent(instancePedidoManager.contentMostrarPedidoCliente.transform, false);
         //CmdInsertarHijoAlContent(pedidoCreado, instancePedidoManager.contentMostrarPedidoCliente);
 
         iNumPedido++;
-} //Muestra el pedido en el canvas del jugador de PC
+    } //Muestra el pedido en el canvas del jugador de PC
 
 
 
@@ -247,7 +244,7 @@ public class PedidoManager : NetworkBehaviour
 
         panel.transform.Find("strIngredientes").gameObject.GetComponent<TMP_Text>().text = CambiarArrayAString(Ingredientes);
 
-        pedidoCreado.transform.SetParent(instancePedidoManager.prefabUltimaInterpretacion.transform, false);
+        pedidoCreado.transform.SetParent(instancePedidoManager.contentMostrarUltimaInterpretacion.transform, false);
 
         iNumPedido++;
     }
