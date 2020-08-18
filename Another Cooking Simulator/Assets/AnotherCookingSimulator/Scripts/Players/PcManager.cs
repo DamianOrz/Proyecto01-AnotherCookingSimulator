@@ -56,13 +56,7 @@ public class PcManager : NetworkBehaviour
     
     void Start()
     {
-        if (!transform.root.gameObject.GetComponent<NetworkIdentity>().hasAuthority)
-        {
-            GetComponentInChildren<Camera>().enabled = false;
-            GetComponentInChildren<AudioListener>().enabled = false;
-            return;
-        }
-        //DiaManager.instanceDiaManager.EmpezarDia();
+        DiaManager.instanceDiaManager.EmpezarDia();
 
         FindObjectOfType<AudioManager>().SwapLobbyMusicToGameMusic("LobbyMusic", "GameMusic");
 
@@ -89,7 +83,7 @@ public class PcManager : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!transform.root.gameObject.GetComponent<NetworkIdentity>().hasAuthority)
+        if (!base.hasAuthority)
         {
             GetComponentInChildren<Camera>().enabled = false;
             GetComponentInChildren<AudioListener>().enabled = false;
@@ -142,7 +136,13 @@ public class PcManager : NetworkBehaviour
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
 
+        
+       
+
+       
         anim.SetFloat("Speed", -(velocity.y)); //Por ahora siempre es 6/-6
+        
+        
     }
 
     void Interaction()
@@ -285,19 +285,13 @@ public class PcManager : NetworkBehaviour
     [Command]
     void CmdPickUpObject(GameObject go)
     {
-        //Validar
-        RpcPickUpObject(go);
-    }
-    [ClientRpc]
-    void RpcPickUpObject(GameObject go)
-    {
         Transform posicionObjeto = go.transform;
         go.GetComponent<Rigidbody>().isKinematic = true;
         go.transform.position = destination.position;
         go.transform.rotation = destination.rotation;
         go.transform.parent = GameObject.Find("Destination").transform;
 
-        if (zonaVerificacionDisponible != null)
+        if(zonaVerificacionDisponible != null)
         {
             if (zonaVerificacionDisponible == go)
             {
@@ -305,6 +299,7 @@ public class PcManager : NetworkBehaviour
             }
         }
     }
+
     void DropObject(GameObject go)
     {
         //AGREGAR RAYCAST PARA APOYAR
@@ -317,7 +312,6 @@ public class PcManager : NetworkBehaviour
         ntc.target = go.GetComponent<Transform>();
         ntc.setClieltAuthority();
     }
-
     void QuitarNetworkTransformChild()
     {
 

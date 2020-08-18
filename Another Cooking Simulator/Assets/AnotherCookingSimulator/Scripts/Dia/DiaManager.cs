@@ -28,7 +28,6 @@ public class DiaManager : MonoBehaviour
     }
 
     public DiaInformacion[] diasInfo;
-
     private void Awake()
     {
         if (instanceDiaManager!=null && instanceDiaManager != this)
@@ -42,7 +41,6 @@ public class DiaManager : MonoBehaviour
     }
     void Start()
     {
-        instanceDiaManager.EmpezarDia();
     }
 
     public void EmpezarDia()
@@ -53,7 +51,7 @@ public class DiaManager : MonoBehaviour
     public void FinalizarDia()
     {
         int score = ScoreManager.getScore();
-        //LimpiarPedidos();
+        LimpiarPedidos();
         EmpezarDia();
     }
     public void LimpiarPedidos()

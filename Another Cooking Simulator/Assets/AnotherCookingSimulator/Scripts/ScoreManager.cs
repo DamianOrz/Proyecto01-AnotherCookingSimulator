@@ -5,14 +5,14 @@ using TMPro;
 
 public class ScoreManager : MonoBehaviour
 {
-    public TMP_Text tmpTexto;
+    public TMP_Text testo;
     public static TMP_Text texto;
     private static int SCORE = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        texto = tmpTexto;
+        texto = testo;
         sobreEscribir(0);
     }
     public static int getScore()

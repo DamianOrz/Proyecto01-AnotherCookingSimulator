@@ -16,7 +16,6 @@ TagManager:
   - Panel
   - Grabable
   - Verificacion
-  - GameManager
   layers:
   - Default
   - TransparentFX

@@ -212,6 +212,7 @@ namespace Mirror
                     player.OnClientExitRoom();
                 }
         }
+
         #region server handlers
 
         /// <summary>

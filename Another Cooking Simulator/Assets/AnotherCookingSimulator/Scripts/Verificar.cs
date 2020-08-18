@@ -46,10 +46,10 @@ public class Verificar : MonoBehaviour
                         if (listaNombres[i].Contains("Pan"))
                         {
                             interpretacionDeVR[i] = 0;
-                        }else if(listaNombres[i].Contains("Paty"))
+                        }else if(listaNombres[i].Contains("Carne"))
                         {
                             interpretacionDeVR[i] = 1;
-                        }else if (listaNombres[i].Contains("Cheddar"))
+                        }else if (listaNombres[i].Contains("Queso"))
                         {
                             interpretacionDeVR[i] = 2;
                         }else if (listaNombres[i].Contains("Cebolla"))
@@ -64,6 +64,7 @@ public class Verificar : MonoBehaviour
                     ClientesManager.instanceClientesManager.seEntregoUnPedido();
                     PedidoManager.instancePedidoManager.MostrarVerificacion(interpretacionDeVR);
                     PedidoManager.instancePedidoManager.cambiarPuntaje();
+                    
                     
                     strIngredientes = "";
                 }

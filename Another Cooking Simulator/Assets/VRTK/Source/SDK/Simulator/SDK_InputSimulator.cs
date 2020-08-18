@@ -229,13 +229,11 @@
             if (!transform.root.gameObject.GetComponent<NetworkIdentity>().hasAuthority)
             {
                 //animator.GetComponent<Animator>().enabled = false;
-                gameObject.GetComponentInChildren<Camera>().enabled = false;
+
                 return;
             }
             else
             {
-                gameObject.GetComponentInChildren<Camera>().enabled = true;
-                
                 //animator.GetComponent<Animator>().enabled = true;
             }
             if (Input.GetKeyDown(toggleControlHints))
