@@ -1726,6 +1726,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4884026849671909549}
   - component: {fileID: 4884026849671909550}
+  - component: {fileID: 5101264800148280639}
   m_Layer: 0
   m_Name: '[VRTK_SDKManager]'
   m_TagString: Untagged
@@ -1774,6 +1775,14 @@ MonoBehaviour:
   - {fileID: 4779039301899434444}
   excludeTargetGroups: 1b0000001a000000
   persistOnLoad: 0
+--- !u!81 &5101264800148280639
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4884026849671909551}
+  m_Enabled: 1
 --- !u!1 &4884026849801594003
 GameObject:
   m_ObjectHideFlags: 0
