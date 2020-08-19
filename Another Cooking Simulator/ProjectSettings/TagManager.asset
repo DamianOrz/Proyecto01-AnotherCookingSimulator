@@ -16,6 +16,7 @@ TagManager:
   - Panel
   - Grabable
   - Verificacion
+  - Teleportable
   layers:
   - Default
   - TransparentFX
