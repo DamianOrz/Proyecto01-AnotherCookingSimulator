@@ -56,8 +56,6 @@ public class PcManager : NetworkBehaviour
     
     void Start()
     {
-        DiaManager.instanceDiaManager.EmpezarDia();
-
         FindObjectOfType<AudioManager>().SwapLobbyMusicToGameMusic("LobbyMusic", "GameMusic");
 
         controller = this.GetComponent<CharacterController>();

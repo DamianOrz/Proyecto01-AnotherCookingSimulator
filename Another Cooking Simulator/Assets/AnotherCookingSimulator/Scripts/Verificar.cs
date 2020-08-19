@@ -46,10 +46,10 @@ public class Verificar : MonoBehaviour
                         if (listaNombres[i].Contains("Pan"))
                         {
                             interpretacionDeVR[i] = 0;
-                        }else if(listaNombres[i].Contains("Carne"))
+                        }else if (listaNombres[i].Contains("Paty"))
                         {
                             interpretacionDeVR[i] = 1;
-                        }else if (listaNombres[i].Contains("Queso"))
+                        }else if (listaNombres[i].Contains("Cheddar"))
                         {
                             interpretacionDeVR[i] = 2;
                         }else if (listaNombres[i].Contains("Cebolla"))
