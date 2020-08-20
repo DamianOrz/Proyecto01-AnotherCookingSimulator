@@ -18,6 +18,8 @@ public class PauseManager : MonoBehaviour {
     
     void Start()
     {
+        QualitySettings.SetQualityLevel(2);
+
         canvas = GetComponent<Canvas>();
         canvas.enabled = false;
 
