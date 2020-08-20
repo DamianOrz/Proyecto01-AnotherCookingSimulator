@@ -56,6 +56,13 @@ public class PcManager : NetworkBehaviour
     
     void Start()
     {
+        if (!transform.root.gameObject.GetComponent<NetworkIdentity>().hasAuthority)
+        {
+            GetComponentInChildren<Camera>().enabled = false;
+            GetComponentInChildren<AudioListener>().enabled = false;
+            return;
+        }
+
         FindObjectOfType<AudioManager>().SwapLobbyMusicToGameMusic("LobbyMusic", "GameMusic");
 
         controller = this.GetComponent<CharacterController>();
@@ -81,7 +88,7 @@ public class PcManager : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!base.hasAuthority)
+        if (!transform.root.gameObject.GetComponent<NetworkIdentity>().hasAuthority)
         {
             GetComponentInChildren<Camera>().enabled = false;
             GetComponentInChildren<AudioListener>().enabled = false;
@@ -252,7 +259,7 @@ public class PcManager : NetworkBehaviour
                 if (!whatIHit.collider.gameObject.GetComponent<VRTK_InteractableObject>().IsInSnapDropZone())
                 {
                     CmdPickUpObject(whatIHit.collider.gameObject);
-                    PonerNetworkTransformChild(whatIHit.collider.gameObject);
+                    //PonerNetworkTransformChild(whatIHit.collider.gameObject);
                 }
             }
         }
@@ -283,6 +290,14 @@ public class PcManager : NetworkBehaviour
     [Command]
     void CmdPickUpObject(GameObject go)
     {
+        Debug.Log("SIMON : ESTOY EN EL SERVER PA!");
+        RpcPickUpInEachClient(go);
+    }
+
+    [ClientRpc]
+    void RpcPickUpInEachClient(GameObject go)
+    {
+        Debug.Log("SIMON : AVISANDO QUE ALGUIEN AGARRO ALGO");
         Transform posicionObjeto = go.transform;
         go.GetComponent<Rigidbody>().isKinematic = true;
         go.transform.position = destination.position;
@@ -296,6 +311,7 @@ public class PcManager : NetworkBehaviour
                 zonaVerificacionDisponible = null;
             }
         }
+        Debug.Log("SIMON : SE TERMINO EL AVISO");
     }
 
     void DropObject(GameObject go)
