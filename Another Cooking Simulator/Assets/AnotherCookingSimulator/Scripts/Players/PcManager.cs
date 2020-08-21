@@ -257,7 +257,7 @@ public class PcManager : NetworkBehaviour
             {
                 if (!whatIHit.collider.gameObject.GetComponent<VRTK_InteractableObject>().IsInSnapDropZone())
                 {
-                    CmdPickUpObject(whatIHit.collider.gameObject);
+                    CmdPickUpObject(whatIHit.collider.gameObject,destination.gameObject);
                     //PonerNetworkTransformChild(whatIHit.collider.gameObject);
                 }
             }
@@ -312,20 +312,21 @@ public class PcManager : NetworkBehaviour
     }
 
     [Command]
-    void CmdPickUpObject(GameObject go)
+    void CmdPickUpObject(GameObject go,GameObject place)
     {
         Debug.Log("SIMON : ESTOY EN EL SERVER PA!");
-        RpcSetAsChild(go);
+        RpcSetAsChild(go,place);
     }
     [ClientRpc]
-    void RpcSetAsChild(GameObject childObject)
+    void RpcSetAsChild(GameObject childObject,GameObject place)
     {
         childObject.SetActive(false);
-        childObject.transform.parent = destination.transform;
+        childObject.transform.parent = this.destination;
         childObject.GetComponent<Rigidbody>().isKinematic = true;
         childObject.transform.position = Vector3.zero; //+ localPos;
         //childObject.transform.rotation = localRot;
         childObject.SetActive(true);
+        childObject.transform.position = new Vector3(0, 0, 0);
     }
     [ClientRpc]
     void RpcPickUpInEachClient(GameObject go)
