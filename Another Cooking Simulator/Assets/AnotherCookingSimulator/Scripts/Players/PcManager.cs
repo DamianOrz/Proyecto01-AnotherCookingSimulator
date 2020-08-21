@@ -324,6 +324,7 @@ public class PcManager : NetworkBehaviour
     void RpcSetAsChild(GameObject childObject,GameObject place)
     {
         childObject.SetActive(false);
+        Debug.Log("SIMON :" + transform.name);
         childObject.transform.parent = this.destination;
         childObject.GetComponent<Rigidbody>().isKinematic = true;
         //childObject.transform.position = new Vector3(0, 0, 0);
