@@ -289,10 +289,11 @@ public class PcManager : NetworkBehaviour
     void SetTabletCrosshair()
     {
         //rectTransformCrossHair = GetComponent<RectTransform>();
-        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Confined;
         foreach (Image i in myCrosshair) //Son varias partes del crosshair separadas
         {
-            i.color = Color.red;
+            //i.color = Color.red;
+            i.enabled = false;
         }
         
     } //Crosshair para cuando se usan las laptops
@@ -300,8 +301,10 @@ public class PcManager : NetworkBehaviour
     void SetCrossHair()
     {
         //rectTransformCrossHair = GetComponent<RectTransform>()
+        Cursor.lockState = CursorLockMode.Locked;
         foreach (Image i in myCrosshair) //Son varias partes del crosshair separadas
         {
+            i.enabled = true;
             i.color = new Color(5, 255, 0); //Verde --> RGB
         };
     }  //Crosshair básico/default

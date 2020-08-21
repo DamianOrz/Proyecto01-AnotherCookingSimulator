@@ -54,15 +54,16 @@ public class PauseManager : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Pause();
+            isCanvasEnabled = !isCanvasEnabled;
             if (isCanvasEnabled)
             {
-                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.lockState = CursorLockMode.Confined;
             }
             else
             {
                 Cursor.lockState = CursorLockMode.None;
             }
-            isCanvasEnabled = !isCanvasEnabled;
+            
         }
     }
     
