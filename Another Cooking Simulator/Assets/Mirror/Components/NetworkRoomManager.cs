@@ -602,7 +602,6 @@ namespace Mirror
 
                 NetworkServer.Spawn(go, conn);
                 go.GetComponent<NetworkIdentity>().AssignClientAuthority(conn);
-                
             }
             else
             {                

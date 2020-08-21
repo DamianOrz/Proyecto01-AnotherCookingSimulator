@@ -52,6 +52,7 @@ public class PcManager : NetworkBehaviour
     private GraphicRaycaster m_Raycaster;
     private EventSystem m_EventSystem;
     private PointerEventData m_PointerEventData;
+
     //PEDIDO
     [SerializeField] Pedido pedido = new Pedido();
     
@@ -144,13 +145,7 @@ public class PcManager : NetworkBehaviour
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
 
-        
-       
-
-       
         anim.SetFloat("Speed", -(velocity.y)); //Por ahora siempre es 6/-6
-        
-        
     }
 
     void Interaction()
@@ -320,9 +315,18 @@ public class PcManager : NetworkBehaviour
     void CmdPickUpObject(GameObject go)
     {
         Debug.Log("SIMON : ESTOY EN EL SERVER PA!");
-        RpcPickUpInEachClient(go);
+        RpcSetAsChild(go);
     }
-
+    [ClientRpc]
+    void RpcSetAsChild(GameObject childObject)
+    {
+        childObject.SetActive(false);
+        childObject.transform.parent = destination.transform;
+        childObject.GetComponent<Rigidbody>().isKinematic = true;
+        childObject.transform.position = Vector3.zero; //+ localPos;
+        //childObject.transform.rotation = localRot;
+        childObject.SetActive(true);
+    }
     [ClientRpc]
     void RpcPickUpInEachClient(GameObject go)
     {
