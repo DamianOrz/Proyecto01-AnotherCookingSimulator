@@ -16,8 +16,9 @@ public class PcManager : NetworkBehaviour
 
     //PLAYER
     private Camera cameraPlayer;
-    private GameObject canvasCrossHair;
+    private GameObject canvasCrosshair;
     private RectTransform rectTransformCrossHair;
+    private Image[] myCrosshair;
     private GameObject panelCrossHair;
     private Transform destinoHamburguesa;
     private Transform destination;
@@ -72,8 +73,10 @@ public class PcManager : NetworkBehaviour
 
         anim = this.GetComponent<Animator>(); //Se usa para las animaciones de caminar, saltar, etc.
 
-        canvasCrossHair = GameObject.Find("Canvas");
-        rectTransformCrossHair = canvasCrossHair.GetComponent<RectTransform>();
+        canvasCrosshair = GameObject.Find("Mira"); //Obtengo el gameobject que tiene mi mira
+        rectTransformCrossHair = canvasCrosshair.GetComponent<RectTransform>();
+        myCrosshair = canvasCrosshair.GetComponentsInChildren<Image>();
+
 
         canvasTomarPedidos = GameObject.Find("CanvasTomarPedido");
         canvasTomarPedidos.GetComponent<Canvas>().worldCamera = cameraPlayer;
@@ -88,7 +91,7 @@ public class PcManager : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!transform.root.gameObject.GetComponent<NetworkIdentity>().hasAuthority)
+        if (!transform.root.gameObject.GetComponent<NetworkIdentity>().hasAuthority) //Si no tiene autoridad se desactiva? Revisar
         {
             GetComponentInChildren<Camera>().enabled = false;
             GetComponentInChildren<AudioListener>().enabled = false;
@@ -96,7 +99,7 @@ public class PcManager : NetworkBehaviour
         }
         else
         {
-            canvasCrossHair.transform.GetChild(0).gameObject.SetActive(true);
+            canvasCrosshair.transform.GetChild(0).gameObject.SetActive(true);
             GetComponentInChildren<Camera>().enabled = true;
             GetComponentInChildren<AudioListener>().enabled = true;
         }
@@ -190,6 +193,7 @@ public class PcManager : NetworkBehaviour
                 }
                 Debug.Log("Hit " + result.gameObject.name);
             }
+            
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -275,12 +279,37 @@ public class PcManager : NetworkBehaviour
 
         cameraPlayer.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         transform.Rotate(Vector3.up * mouseX);
+
+        Physics.Raycast(cameraPlayer.transform.position, cameraPlayer.transform.forward, out whatIHit, distanceToSee);
+        if (whatIHit.collider != null && whatIHit.collider.gameObject.name.Contains("PantallaHacerPedidos"))
+        {
+            SetTabletCrosshair(); //Crosshair para cuando se usan las laptops
+        }
+        else
+        {
+            SetCrossHair(); //Crosshair básico/default
+        }
     }
+
+    void SetTabletCrosshair()
+    {
+        //rectTransformCrossHair = GetComponent<RectTransform>();
+        Cursor.lockState = CursorLockMode.Locked;
+        foreach (Image i in myCrosshair) //Son varias partes del crosshair separadas
+        {
+            i.color = Color.red;
+        }
+        
+    } //Crosshair para cuando se usan las laptops
 
     void SetCrossHair()
     {
-        rectTransformCrossHair = GetComponent<RectTransform>();
-    }
+        //rectTransformCrossHair = GetComponent<RectTransform>()
+        foreach (Image i in myCrosshair) //Son varias partes del crosshair separadas
+        {
+            i.color = new Color(5, 255, 0); //Verde --> RGB
+        };
+    }  //Crosshair básico/default
 
     public static void SetIdCombo(int combo)
     {

@@ -12,6 +12,7 @@ public class PauseManager : MonoBehaviour {
     public AudioMixer masterMixer;
 
     public TMP_Dropdown resolutionDropDown;
+    private bool isCanvasEnabled = false;
 
     Resolution[] resolutions;
     Canvas canvas;
@@ -53,13 +54,21 @@ public class PauseManager : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Pause();
+            if (isCanvasEnabled)
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.None;
+            }
+            isCanvasEnabled = !isCanvasEnabled;
         }
     }
     
     public void Pause()
     {
         canvas.enabled = !canvas.enabled;
-        Cursor.lockState = CursorLockMode.None;
         Time.timeScale = Time.timeScale == 0 ? 1 : 0;
     }
     
