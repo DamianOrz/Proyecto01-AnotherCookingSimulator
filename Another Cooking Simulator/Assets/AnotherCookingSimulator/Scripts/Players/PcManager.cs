@@ -314,7 +314,7 @@ public class PcManager : NetworkBehaviour
     [Command]
     void CmdPickUpObject(GameObject go,GameObject place)
     {
-        Debug.Log("SIMON : ESTOY EN EL SERVER PA!");
+        Debug.Log("This is being executed in the server");
         RpcSetAsChild(go,place);
     }
     [ClientRpc]
@@ -323,11 +323,13 @@ public class PcManager : NetworkBehaviour
         childObject.SetActive(false);
         childObject.transform.parent = this.destination;
         childObject.GetComponent<Rigidbody>().isKinematic = true;
-        childObject.transform.position = Vector3.zero; //+ localPos;
-        //childObject.transform.rotation = localRot;
+        //childObject.transform.position = new Vector3(0, 0, 0);
         childObject.SetActive(true);
-        childObject.transform.position = new Vector3(0, 0, 0);
+        //childObject.transform.rotation = localRot;
     }
+
+
+
     [ClientRpc]
     void RpcPickUpInEachClient(GameObject go)
     {
