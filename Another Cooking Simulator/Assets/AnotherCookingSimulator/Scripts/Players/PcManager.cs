@@ -198,7 +198,7 @@ public class PcManager : NetworkBehaviour
             {
                 if (whatIHit.collider == null)
                 {
-                    DropObject(destination.GetChild(0).gameObject);
+                    CmdDropObject(destination.GetChild(0).gameObject);
                     return;
                 }
                 if (whatIHit.collider.gameObject.tag == "Verificacion" && zonaVerificacionDisponible == null)
@@ -215,7 +215,7 @@ public class PcManager : NetworkBehaviour
                         objetoAMover.transform.rotation = destinoHamburguesa.rotation;
                     }
                 }
-                DropObject(destination.GetChild(0).gameObject);
+                CmdDropObject(gameObject);
                 return;
             }
             //Pregunta si apunta a un objeto interactuable
@@ -263,7 +263,7 @@ public class PcManager : NetworkBehaviour
             }
         }
     }
-
+    #region ONLINE_PickUpObject
     [Command]
     void CmdPickUpObject(GameObject go, GameObject player)
     {
@@ -281,7 +281,28 @@ public class PcManager : NetworkBehaviour
         childObject.SetActive(true);
         //childObject.transform.rotation = localRot;
     }
+    #endregion
 
+    #region ONLINE_DropObject
+    [Command]
+    void CmdDropObject(GameObject player)
+    {
+        Debug.Log("This is being executed in the server");
+        RpcRemoveAsChild(player);
+    }
+    [ClientRpc]
+    void RpcRemoveAsChild(GameObject player)
+    {
+        GameObject destinationDelPlayer = player.transform.GetChild(1).transform.GetChild(0).transform.GetChild(0).gameObject;
+
+        destinationDelPlayer.SetActive(false);
+        Debug.Log("SIMON :" + transform.name);
+        destinationDelPlayer.transform.parent = null;
+        destinationDelPlayer.GetComponent<Rigidbody>().isKinematic = false;
+
+        destinationDelPlayer.SetActive(true);
+    }
+    #endregion
     void Look()
     {
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
