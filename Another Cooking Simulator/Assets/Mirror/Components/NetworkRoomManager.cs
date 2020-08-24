@@ -591,6 +591,7 @@ namespace Mirror
         /// <param name="roomPlayer">The room player object.</param>
         /// <param name="gamePlayer">The game player object.</param>
         /// <returns>False to not allow this player to replace the room player.</returns>
+        int numPCPlayers = 0;
         public virtual bool OnRoomServerSceneLoadedForPlayer(NetworkConnection conn, GameObject roomPlayer, GameObject gamePlayer)
         {
             //roomPlayer --> Viene de la RoomScene con la informacion del usuario
@@ -604,8 +605,11 @@ namespace Mirror
                 go.GetComponent<NetworkIdentity>().AssignClientAuthority(conn);
             }
             else
-            {                
+            {
                 GameObject go = Instantiate(PCPlayer);
+
+                go.name = "PCPlayer " + numPCPlayers;
+
                 go.transform.parent = gamePlayer.transform;
 
                 NetworkServer.Spawn(go, conn);

@@ -257,11 +257,29 @@ public class PcManager : NetworkBehaviour
             {
                 if (!whatIHit.collider.gameObject.GetComponent<VRTK_InteractableObject>().IsInSnapDropZone())
                 {
-                    CmdPickUpObject(whatIHit.collider.gameObject,destination.gameObject);
+                    CmdPickUpObject(whatIHit.collider.gameObject,gameObject);
                     //PonerNetworkTransformChild(whatIHit.collider.gameObject);
                 }
             }
         }
+    }
+
+    [Command]
+    void CmdPickUpObject(GameObject go, GameObject player)
+    {
+        Debug.Log("This is being executed in the server");
+        RpcSetAsChild(go, player);
+    }
+    [ClientRpc]
+    void RpcSetAsChild(GameObject childObject, GameObject player)
+    {
+        childObject.SetActive(false);
+        Debug.Log("SIMON :" + transform.name);
+        childObject.transform.parent = player.transform.GetChild(1).transform.GetChild(0).transform;
+        childObject.GetComponent<Rigidbody>().isKinematic = true;
+        //childObject.transform.position = new Vector3(0, 0, 0);
+        childObject.SetActive(true);
+        //childObject.transform.rotation = localRot;
     }
 
     void Look()
@@ -313,26 +331,6 @@ public class PcManager : NetworkBehaviour
     {
         _idCombo = combo;
     }
-
-    [Command]
-    void CmdPickUpObject(GameObject go,GameObject place)
-    {
-        Debug.Log("This is being executed in the server");
-        RpcSetAsChild(go,place);
-    }
-    [ClientRpc]
-    void RpcSetAsChild(GameObject childObject,GameObject place)
-    {
-        childObject.SetActive(false);
-        Debug.Log("SIMON :" + transform.name);
-        childObject.transform.parent = this.destination;
-        childObject.GetComponent<Rigidbody>().isKinematic = true;
-        //childObject.transform.position = new Vector3(0, 0, 0);
-        childObject.SetActive(true);
-        //childObject.transform.rotation = localRot;
-    }
-
-
 
     [ClientRpc]
     void RpcPickUpInEachClient(GameObject go)
