@@ -278,6 +278,13 @@ public class PcManager : NetworkBehaviour
         childObject.transform.parent = player.transform.GetChild(1).transform.GetChild(0).transform;
         childObject.GetComponent<Rigidbody>().isKinematic = true;
         //childObject.transform.position = new Vector3(0, 0, 0);
+        if (zonaVerificacionDisponible != null)
+        {
+            if (zonaVerificacionDisponible == childObject)
+            {
+                zonaVerificacionDisponible = null;
+            }
+        }
         childObject.SetActive(true);
         //childObject.transform.rotation = localRot;
     }
@@ -303,6 +310,7 @@ public class PcManager : NetworkBehaviour
         destinationDelPlayer.SetActive(true);
     }
     #endregion
+
     void Look()
     {
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
@@ -363,13 +371,7 @@ public class PcManager : NetworkBehaviour
         go.transform.rotation = destination.rotation;
         go.transform.parent = GameObject.Find("Destination").transform;
 
-        if(zonaVerificacionDisponible != null)
-        {
-            if (zonaVerificacionDisponible == go)
-            {
-                zonaVerificacionDisponible = null;
-            }
-        }
+        
         Debug.Log("SIMON : SE TERMINO EL AVISO");
     }
 
