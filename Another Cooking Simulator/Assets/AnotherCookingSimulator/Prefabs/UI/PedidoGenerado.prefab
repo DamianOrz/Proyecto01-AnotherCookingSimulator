@@ -167,6 +167,7 @@ GameObject:
   - component: {fileID: 3803260495930755906}
   - component: {fileID: 6449267436000795376}
   - component: {fileID: 6683059844898314579}
+  - component: {fileID: -1820478819834608856}
   m_Layer: 5
   m_Name: PedidoGenerado
   m_TagString: PedidoACrear
@@ -233,6 +234,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 2
+--- !u!114 &-1820478819834608856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1181560231204797936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  m_AssetId: 
+  hasSpawned: 0
 --- !u!1 &3235157948098498834
 GameObject:
   m_ObjectHideFlags: 0

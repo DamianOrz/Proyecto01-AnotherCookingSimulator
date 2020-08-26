@@ -26,7 +26,7 @@ public class PedidoManager : NetworkBehaviour
     private enum CORRECCIONES
     {
         mal = 20,
-        maso =40 ,
+        maso = 40,
         bien = 70,
         muyBien = 100,
     }
@@ -47,18 +47,18 @@ public class PedidoManager : NetworkBehaviour
 
     public void cambiarPuntaje()
     {
-        int puntaje = correccion(agarrarUltimoPedido().GetOrdenIngredientes(),agarrarUltimoPedido().GetInterpretacionIngredientes());
+        int puntaje = correccion(agarrarUltimoPedido().GetOrdenIngredientes(), agarrarUltimoPedido().GetInterpretacionIngredientes());
         ScoreManager.sobreEscribir(puntaje);
         //Pregunta si ya pasaron todos los clientes
-        if (DiaManager.instanceDiaManager.diasInfo[DiaManager.instanceDiaManager.diaActual].clientesEnElDia==_listaPedidos.Count)
+        if (DiaManager.instanceDiaManager.diasInfo[DiaManager.instanceDiaManager.diaActual].clientesEnElDia == _listaPedidos.Count)
         {
             DiaManager.instanceDiaManager.FinalizarDia();
         }
     }
     public int correccion(int[] ordenIngredientes, int[] interpretacion)
     {
-        int puntos=0;
-        if(ordenIngredientes.Length == interpretacion.Length)
+        int puntos = 0;
+        if (ordenIngredientes.Length == interpretacion.Length)
         {
             CORRECCIONES correciones = CORRECCIONES.muyBien;
             puntos = (int)correciones;
@@ -95,7 +95,7 @@ public class PedidoManager : NetworkBehaviour
         {
             //COMBO 1 = HAMBURGUESA SIMPLE
             case 1:
-                int[] interpretacionSimple = new int[3] { 0, 1, 0};
+                int[] interpretacionSimple = new int[3] { 0, 1, 0 };
                 unPedido.SetInterpretacionIngredientes(interpretacionSimple);
                 break;
             //COMBO 2 = HAMBURGUESA DOBLE
@@ -122,7 +122,7 @@ public class PedidoManager : NetworkBehaviour
     public Pedido agarrarUltimoPedido()
     {
         Pedido Pedido;
-        int indice = _listaPedidos.Count-1;
+        int indice = _listaPedidos.Count - 1;
         Pedido = _listaPedidos[indice];
         return Pedido;
     }
@@ -148,24 +148,35 @@ public class PedidoManager : NetworkBehaviour
 
         iNumPedido++;
     }
+    [Server]
     public void MostrarPedidoDelCliente(Pedido unPedido)
     {
         //Cuando se conecte con el boton esta funcion recibirá parámetros
         string textoPedido = "ERROR";
 
-        //CmdCrearPedidoDelCliente(unPedido);
+
         GameObject pedidoCreado = Instantiate(instancePedidoManager.prefabClientes);
-        //CmdCrearPrefabEnCadaCliente(unPedido);
+
         GameObject panel = pedidoCreado.transform.Find("Panel").gameObject;
 
+
         //BATALLA 1 GANADA CONTRA DAMIAN (SEÑOR FUERZAS DEL MAL), PUNTO PARA SIMI
-        
+
         panel.transform.Find("strConsumibles").gameObject.GetComponent<TMP_Text>().text = "" + CambiarArrayAString(unPedido.GetOrdenIngredientes());
 
         pedidoCreado.transform.SetParent(instancePedidoManager.contentMostrarPedidoCliente.transform, false);
-        //CmdInsertarHijoAlContent(pedidoCreado, instancePedidoManager.contentMostrarPedidoCliente);
+        Debug.Log("SIMONSIMON");
+        NetworkServer.Spawn(pedidoCreado);
 
+        //RpcPonerComoHijoPanel(pedidoCreado);
         iNumPedido++;
+    }
+
+    [ClientRpc]
+    public void RpcPonerComoHijoPanel(GameObject prefabPedido)
+    {
+        Debug.Log("SIMONSIMON");
+        prefabPedido.transform.SetParent(instancePedidoManager.contentMostrarPedidoCliente.transform, false);
     }
     public void MostrarVerificacion(int[] Ingredientes)
     {
@@ -186,11 +197,11 @@ public class PedidoManager : NetworkBehaviour
 
     public string CambiarArrayAString(int[] listaIngredientes)
     {
-        if (DiaManager.instanceDiaManager.diaActual==1)
+        if (DiaManager.instanceDiaManager.diaActual == 1)
         {
 
         }
-        string Hamburguesa="";
+        string Hamburguesa = "";
         foreach (int ingrediente in listaIngredientes)
         {
             Hamburguesa += DiaManager.instanceDiaManager.diasInfo[DiaManager.instanceDiaManager.diaActual].posiblesIngredientes[ingrediente].ToString() + " ";
@@ -206,20 +217,20 @@ public class PedidoManager : NetworkBehaviour
     {
         int maxIngredientesEntrePanes = DiaManager.instanceDiaManager.diasInfo[DiaManager.instanceDiaManager.diaActual].maxIngredientesEntrePanes;
         int ingredientesEntrePanes = RandomEntre(1, maxIngredientesEntrePanes);
-        if (ingredientesEntrePanes==2)
+        if (ingredientesEntrePanes == 2)
         {
 
         }
-        int[] vector = new int[ingredientesEntrePanes+2];
+        int[] vector = new int[ingredientesEntrePanes + 2];
 
         vector[0] = posiblesIngredientes[0];
         vector[vector.Length - 1] = posiblesIngredientes[0];
         vector[RandomEntre(1, ingredientesEntrePanes)] = posiblesIngredientes[1];
-        for (int i = 1; i < vector.Length-1; i++)
+        for (int i = 1; i < vector.Length - 1; i++)
         {
             if (vector[i] == 0)
             {
-                vector[i] = RandomEntre(1, posiblesIngredientes.Length-1);
+                vector[i] = RandomEntre(1, posiblesIngredientes.Length - 1);
             }
         }
         return vector;
