@@ -360,7 +360,7 @@ MonoBehaviour:
   m_FillMethod: 4
   m_FillAmount: 1
   m_FillClockwise: 1
-  m_FillOrigin: 0
+  m_FillOrigin: 2
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!222 &75493164
@@ -653,7 +653,7 @@ MonoBehaviour:
   m_FillMethod: 4
   m_FillAmount: 1
   m_FillClockwise: 1
-  m_FillOrigin: 0
+  m_FillOrigin: 2
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!222 &93572688
@@ -809,6 +809,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 130837072}
+  - component: {fileID: 130837074}
+  - component: {fileID: 130837073}
   m_Layer: 0
   m_Name: LevelSelector
   m_TagString: Untagged
@@ -832,6 +834,40 @@ Transform:
   m_Father: {fileID: 898952564}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &130837073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 130837071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4aa55f084a197884bab81b9f1d63f501, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  btnDay0: {fileID: 75493160}
+  btnDay1: {fileID: 748279419}
+  btnDay2: {fileID: 825384445}
+  btnDay3: {fileID: 93572684}
+  btnDay4: {fileID: 1163293160}
+  btnDay5: {fileID: 2123808305}
+--- !u!114 &130837074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 130837071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 3889643098
+  serverOnly: 1
+  m_AssetId: 
+  hasSpawned: 0
 --- !u!1 &135544281
 GameObject:
   m_ObjectHideFlags: 0
@@ -1029,7 +1065,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_textAlignment: 514
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -1674,8 +1710,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1827471905}
   m_HandleRect: {fileID: 1827471904}
   m_Direction: 0
-  m_Value: -0.00000006446078
-  m_Size: 0.37076202
+  m_Value: 0.000000064460764
+  m_Size: 0.37076196
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2478,7 +2514,6 @@ GameObject:
   - component: {fileID: 598210023}
   - component: {fileID: 598210022}
   - component: {fileID: 598210021}
-  - component: {fileID: 598210020}
   m_Layer: 0
   m_Name: ScrollViewSelector
   m_TagString: Untagged
@@ -2507,22 +2542,6 @@ RectTransform:
   m_AnchoredPosition: {x: 133.63263, y: -56.406666}
   m_SizeDelta: {x: 557.9108, y: 215.16574}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &598210020
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 598210018}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneId: 4265810827
-  serverOnly: 1
-  m_AssetId: 
-  hasSpawned: 0
 --- !u!114 &598210021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2993,7 +3012,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_textAlignment: 514
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -3167,7 +3186,7 @@ MonoBehaviour:
   m_FillMethod: 4
   m_FillAmount: 1
   m_FillClockwise: 1
-  m_FillOrigin: 0
+  m_FillOrigin: 2
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!222 &748279423
@@ -3754,7 +3773,7 @@ MonoBehaviour:
   m_FillMethod: 4
   m_FillAmount: 1
   m_FillClockwise: 1
-  m_FillOrigin: 0
+  m_FillOrigin: 2
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!222 &825384449
@@ -4308,7 +4327,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_textAlignment: 514
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -4885,7 +4904,7 @@ MonoBehaviour:
   m_FillMethod: 4
   m_FillAmount: 1
   m_FillClockwise: 1
-  m_FillOrigin: 0
+  m_FillOrigin: 2
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!222 &1163293164
@@ -4986,7 +5005,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_textAlignment: 514
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -5374,7 +5393,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_textAlignment: 514
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -7305,7 +7324,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_textAlignment: 514
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -7479,7 +7498,7 @@ MonoBehaviour:
   m_FillMethod: 4
   m_FillAmount: 1
   m_FillClockwise: 1
-  m_FillOrigin: 0
+  m_FillOrigin: 2
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!222 &2123808309
