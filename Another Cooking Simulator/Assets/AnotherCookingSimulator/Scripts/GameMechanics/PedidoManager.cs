@@ -157,30 +157,25 @@ public class PedidoManager : NetworkBehaviour
         //Cuando se conecte con el boton esta funcion recibirá parámetros
         string textoPedido = "ERROR";
 
-
         GameObject pedidoCreado = Instantiate(instancePedidoManager.prefabClientes);
 
         GameObject panel = pedidoCreado.transform.Find("Panel").gameObject;
-
+        panel.transform.Find("strConsumibles").gameObject.GetComponent<TMP_Text>().text = "" + CambiarArrayAString(unPedido.GetOrdenIngredientes());
+        pedidoCreado.transform.SetParent(instancePedidoManager.contentMostrarPedidoCliente.transform, false);
 
         //BATALLA 1 GANADA CONTRA DAMIAN (SEÑOR FUERZAS DEL MAL), PUNTO PARA SIMI
-
-        panel.transform.Find("strConsumibles").gameObject.GetComponent<TMP_Text>().text = "" + CambiarArrayAString(unPedido.GetOrdenIngredientes());
-
         NetworkServer.Spawn(pedidoCreado);
 
-        RpcPonerComoHijoPanel(pedidoCreado);
+        RpcPonerComoHijoPanel(unPedido);
 
         //RpcPonerComoHijoPanel(pedidoCreado);
         iNumPedido++;
     }
 
     [ClientRpc]
-    public void RpcPonerComoHijoPanel(GameObject prefabPedido)
+    public void RpcPonerComoHijoPanel(Pedido unPedido)
     {
-        Debug.Log("SIMONSIMON");
-        prefabPedido.transform.SetParent(instancePedidoManager.contentMostrarPedidoCliente.transform, false);
-
+        
     }
     public void MostrarVerificacion(int[] Ingredientes)
     {
