@@ -71,7 +71,6 @@ public class PedidoManager : NetworkBehaviour
         return puntos;
     }
 
-    [Server]
     public void crearPedidoRandom()
     {
         int[] posiblesIngredientes = new int[DiaManager.instanceDiaManager.diasInfo[0].posiblesIngredientes.Length];
@@ -154,29 +153,34 @@ public class PedidoManager : NetworkBehaviour
     [Server]
     public void MostrarPedidoDelCliente(Pedido unPedido)
     {
-        //Cuando se conecte con el boton esta funcion recibirá parámetros
-        string textoPedido = "ERROR";
 
         GameObject pedidoCreado = Instantiate(instancePedidoManager.prefabClientes);
-
-        GameObject panel = pedidoCreado.transform.Find("Panel").gameObject;
-        panel.transform.Find("strConsumibles").gameObject.GetComponent<TMP_Text>().text = "" + CambiarArrayAString(unPedido.GetOrdenIngredientes());
         pedidoCreado.transform.SetParent(instancePedidoManager.contentMostrarPedidoCliente.transform, false);
+        NetworkServer.Spawn(pedidoCreado); //Creo el prefab, le asigno un lugar y lo spawneo globalmente.
+        String strOrden = CambiarArrayAString(unPedido.GetOrdenIngredientes());
 
-        //BATALLA 1 GANADA CONTRA DAMIAN (SEÑOR FUERZAS DEL MAL), PUNTO PARA SIMI
-        NetworkServer.Spawn(pedidoCreado);
+       // GameObject panel = pedidoCreado.transform.Find("Panel").gameObject;
+       //panel.transform.Find("strConsumibles").gameObject.GetComponent<TMP_Text>().text = "" + CambiarArrayAString(unPedido.GetOrdenIngredientes());
 
-        RpcPonerComoHijoPanel(unPedido);
 
-        //RpcPonerComoHijoPanel(pedidoCreado);
+        RpcPonerComoHijoPanel(pedidoCreado, unPedido, strOrden);
         iNumPedido++;
     }
 
     [ClientRpc]
-    public void RpcPonerComoHijoPanel(Pedido unPedido)
+    public void RpcPonerComoHijoPanel(GameObject pedidoCreado, Pedido unPedido, String textoOrdenIngredientes)
     {
-        
+        //Recibe el gameobject + el pedido y edita el gameobject para mostrar esta info
+
+        GameObject panelDelpedido = pedidoCreado.transform.Find("Panel").gameObject;
+        //panelDelpedido.transform.Find("strNumeroPedido").GetComponent<TMP_Text>().text += ""; //TERMINAR
+        panelDelpedido.transform.Find("strConsumibles").GetComponent<TMP_Text>().text += textoOrdenIngredientes;
+
+
     }
+
+
+
     public void MostrarVerificacion(int[] Ingredientes)
     {
         //Cuando se conecte con el boton esta funcion recibirá parámetros
@@ -186,7 +190,6 @@ public class PedidoManager : NetworkBehaviour
 
         GameObject panel = pedidoCreado.transform.Find("Panel").gameObject;
 
-        //BATALLA 1 GANADA CONTRA DAMIAN (SEÑOR FUERZAS DEL MAL), PUNTO PARA SIMI
         panel.transform.Find("strIngredientes").gameObject.GetComponent<TMP_Text>().text = CambiarArrayAString(Ingredientes);
 
         pedidoCreado.transform.SetParent(instancePedidoManager.contentMostrarUltimaInterpretacion.transform, false);
