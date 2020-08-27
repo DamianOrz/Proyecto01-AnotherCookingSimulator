@@ -70,6 +70,7 @@ public class PedidoManager : NetworkBehaviour
         }
         return puntos;
     }
+
     [Server]
     public void crearPedidoRandom()
     {
@@ -166,10 +167,10 @@ public class PedidoManager : NetworkBehaviour
 
         panel.transform.Find("strConsumibles").gameObject.GetComponent<TMP_Text>().text = "" + CambiarArrayAString(unPedido.GetOrdenIngredientes());
 
-        pedidoCreado.transform.SetParent(instancePedidoManager.contentMostrarPedidoCliente.transform, false);
-        
         NetworkServer.Spawn(pedidoCreado);
-        Debug.Log("SIMONSIMON");
+
+        RpcPonerComoHijoPanel(pedidoCreado);
+
         //RpcPonerComoHijoPanel(pedidoCreado);
         iNumPedido++;
     }
@@ -179,6 +180,7 @@ public class PedidoManager : NetworkBehaviour
     {
         Debug.Log("SIMONSIMON");
         prefabPedido.transform.SetParent(instancePedidoManager.contentMostrarPedidoCliente.transform, false);
+
     }
     public void MostrarVerificacion(int[] Ingredientes)
     {
