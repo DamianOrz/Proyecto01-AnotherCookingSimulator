@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class ClientesManager : MonoBehaviour
+public class ClientesManager : NetworkBehaviour
 {
     public static ClientesManager instanceClientesManager;
 
@@ -24,11 +25,12 @@ public class ClientesManager : MonoBehaviour
             instanceClientesManager = this;
         }
     }
-    #region Start
+    [Server]
     private void Start()
     {
         InvokeRepeating("Tick", 0f, 25f);
     }
+    [Server]
     private void Tick()
     {
         if (DiaManager.instanceDiaManager.diaActual > -1)
@@ -44,13 +46,7 @@ public class ClientesManager : MonoBehaviour
             }
         }
     }
-    #endregion
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
+    [Server]
     public void seEntregoUnPedido()
     {
         pedidosEntregados++;

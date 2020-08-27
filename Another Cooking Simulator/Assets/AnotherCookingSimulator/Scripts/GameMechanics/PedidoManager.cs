@@ -70,6 +70,7 @@ public class PedidoManager : NetworkBehaviour
         }
         return puntos;
     }
+    [Server]
     public void crearPedidoRandom()
     {
         int[] posiblesIngredientes = new int[DiaManager.instanceDiaManager.diasInfo[0].posiblesIngredientes.Length];
@@ -148,6 +149,7 @@ public class PedidoManager : NetworkBehaviour
 
         iNumPedido++;
     }
+
     [Server]
     public void MostrarPedidoDelCliente(Pedido unPedido)
     {
@@ -165,9 +167,9 @@ public class PedidoManager : NetworkBehaviour
         panel.transform.Find("strConsumibles").gameObject.GetComponent<TMP_Text>().text = "" + CambiarArrayAString(unPedido.GetOrdenIngredientes());
 
         pedidoCreado.transform.SetParent(instancePedidoManager.contentMostrarPedidoCliente.transform, false);
-        Debug.Log("SIMONSIMON");
+        
         NetworkServer.Spawn(pedidoCreado);
-
+        Debug.Log("SIMONSIMON");
         //RpcPonerComoHijoPanel(pedidoCreado);
         iNumPedido++;
     }

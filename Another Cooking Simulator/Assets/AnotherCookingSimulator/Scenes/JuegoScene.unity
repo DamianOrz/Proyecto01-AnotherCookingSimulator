@@ -2879,7 +2879,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 89.766945}
+  m_AnchoredPosition: {x: 0, y: 89.76702}
   m_SizeDelta: {x: -5.0498047, y: 289.7677}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &202048392
@@ -9738,7 +9738,6 @@ GameObject:
   - component: {fileID: 882960493}
   - component: {fileID: 882960492}
   - component: {fileID: 882960491}
-  - component: {fileID: 882960494}
   m_Layer: 8
   m_Name: Analisis
   m_TagString: Verificacion
@@ -9822,18 +9821,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 882960489}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &882960494
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 882960489}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03dd34f4eaed4f94d970a0b298ecda65, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &887281502
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14496,6 +14483,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9aace235d1abb94296b84a8e6cbe2da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
 --- !u!114 &1241563501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19898,7 +19887,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 171669037}
   m_HandleRect: {fileID: 171669036}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -22170,8 +22159,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1656429179}
   m_HandleRect: {fileID: 1656429178}
   m_Direction: 2
-  m_Value: 0.000001529826
-  m_Size: 0.6235011
+  m_Value: -0.0000020397688
+  m_Size: 0.6042839
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
