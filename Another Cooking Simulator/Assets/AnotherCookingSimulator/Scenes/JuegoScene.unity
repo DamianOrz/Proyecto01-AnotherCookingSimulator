@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.32107878, g: 0.2693825, b: 0.41364413, a: 1}
+  m_IndirectSpecularColor: {r: 0.32066634, g: 0.26886252, b: 0.41332537, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -515,6 +515,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Arbol (18)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d92b688c78f703740b2d85fcb16a1d3b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d92b688c78f703740b2d85fcb16a1d3b, type: 3}
 --- !u!4 &39747183 stripped
@@ -625,6 +630,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Arbol (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d92b688c78f703740b2d85fcb16a1d3b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d92b688c78f703740b2d85fcb16a1d3b, type: 3}
 --- !u!4 &40986017 stripped
@@ -734,6 +744,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Arbol (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d92b688c78f703740b2d85fcb16a1d3b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d92b688c78f703740b2d85fcb16a1d3b, type: 3}
@@ -1915,6 +1930,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Arbol (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d92b688c78f703740b2d85fcb16a1d3b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d92b688c78f703740b2d85fcb16a1d3b, type: 3}
 --- !u!4 &161808042 stripped
@@ -2331,6 +2351,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Arbol (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d92b688c78f703740b2d85fcb16a1d3b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d92b688c78f703740b2d85fcb16a1d3b, type: 3}
 --- !u!4 &166907545 stripped
@@ -2696,6 +2721,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Arbol (29)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d92b688c78f703740b2d85fcb16a1d3b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d92b688c78f703740b2d85fcb16a1d3b, type: 3}
 --- !u!4 &180995559 stripped
@@ -2880,6 +2910,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Arbol (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d92b688c78f703740b2d85fcb16a1d3b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d92b688c78f703740b2d85fcb16a1d3b, type: 3}
 --- !u!4 &184565253 stripped
@@ -3044,7 +3079,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 89.76721}
+  m_AnchoredPosition: {x: 0, y: 89.76703}
   m_SizeDelta: {x: -5.0498047, y: 289.7677}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &202048392
@@ -3827,6 +3862,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Arbol (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d92b688c78f703740b2d85fcb16a1d3b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d92b688c78f703740b2d85fcb16a1d3b, type: 3}
 --- !u!4 &286169582 stripped
@@ -4530,6 +4570,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Arbol (25)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d92b688c78f703740b2d85fcb16a1d3b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d92b688c78f703740b2d85fcb16a1d3b, type: 3}
@@ -5296,6 +5341,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Arbol (19)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d92b688c78f703740b2d85fcb16a1d3b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d92b688c78f703740b2d85fcb16a1d3b, type: 3}
 --- !u!4 &415064237 stripped
@@ -5656,6 +5706,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Arbol (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d92b688c78f703740b2d85fcb16a1d3b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d92b688c78f703740b2d85fcb16a1d3b, type: 3}
@@ -6135,6 +6190,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Arbol (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d92b688c78f703740b2d85fcb16a1d3b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d92b688c78f703740b2d85fcb16a1d3b, type: 3}
@@ -6877,6 +6937,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Arbol (23)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d92b688c78f703740b2d85fcb16a1d3b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d92b688c78f703740b2d85fcb16a1d3b, type: 3}
@@ -7907,6 +7972,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Arbol (24)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d92b688c78f703740b2d85fcb16a1d3b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d92b688c78f703740b2d85fcb16a1d3b, type: 3}
 --- !u!4 &678082502 stripped
@@ -8849,6 +8919,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Arbol (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d92b688c78f703740b2d85fcb16a1d3b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d92b688c78f703740b2d85fcb16a1d3b, type: 3}
 --- !u!4 &733185156 stripped
@@ -9217,6 +9292,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Calle
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4c504c5e97fd5b54f9368f1ca96a3ab4,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c504c5e97fd5b54f9368f1ca96a3ab4, type: 3}
@@ -9977,6 +10057,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Arbol (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d92b688c78f703740b2d85fcb16a1d3b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d92b688c78f703740b2d85fcb16a1d3b, type: 3}
@@ -10809,7 +10894,7 @@ GameObject:
   m_TagString: Escenario
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!65 &933325090
 BoxCollider:
@@ -11026,7 +11111,7 @@ Transform:
   - {fileID: 644192122}
   - {fileID: 8564401762700102080}
   m_Father: {fileID: 1498838766}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &955589643
 GameObject:
@@ -11519,6 +11604,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Arbol (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d92b688c78f703740b2d85fcb16a1d3b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d92b688c78f703740b2d85fcb16a1d3b, type: 3}
@@ -13171,6 +13261,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Arbol (26)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d92b688c78f703740b2d85fcb16a1d3b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d92b688c78f703740b2d85fcb16a1d3b, type: 3}
 --- !u!4 &1102557581 stripped
@@ -14725,6 +14820,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Arbol (17)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d92b688c78f703740b2d85fcb16a1d3b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d92b688c78f703740b2d85fcb16a1d3b, type: 3}
 --- !u!4 &1218064450 stripped
@@ -15290,6 +15390,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Arbol (20)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d92b688c78f703740b2d85fcb16a1d3b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d92b688c78f703740b2d85fcb16a1d3b, type: 3}
@@ -16206,6 +16311,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Arbol (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d92b688c78f703740b2d85fcb16a1d3b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d92b688c78f703740b2d85fcb16a1d3b, type: 3}
@@ -17198,6 +17308,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Arbol (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d92b688c78f703740b2d85fcb16a1d3b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d92b688c78f703740b2d85fcb16a1d3b, type: 3}
 --- !u!4 &1398300590 stripped
@@ -18019,6 +18134,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Arbol (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d92b688c78f703740b2d85fcb16a1d3b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d92b688c78f703740b2d85fcb16a1d3b, type: 3}
@@ -19001,9 +19121,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 947173681}
   - {fileID: 410747274}
   - {fileID: 44428148}
-  - {fileID: 947173681}
   - {fileID: 2042155851}
   - {fileID: 2117538897}
   - {fileID: 2001765611}
@@ -19878,6 +19998,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Arbol
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d92b688c78f703740b2d85fcb16a1d3b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d92b688c78f703740b2d85fcb16a1d3b, type: 3}
@@ -20820,6 +20945,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Arbol (22)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d92b688c78f703740b2d85fcb16a1d3b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d92b688c78f703740b2d85fcb16a1d3b, type: 3}
 --- !u!4 &1631526104 stripped
@@ -20964,6 +21094,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Arbol (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d92b688c78f703740b2d85fcb16a1d3b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d92b688c78f703740b2d85fcb16a1d3b, type: 3}
@@ -21493,6 +21628,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Arbol (28)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d92b688c78f703740b2d85fcb16a1d3b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d92b688c78f703740b2d85fcb16a1d3b, type: 3}
 --- !u!4 &1693689939 stripped
@@ -21949,6 +22089,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Arbol (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d92b688c78f703740b2d85fcb16a1d3b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d92b688c78f703740b2d85fcb16a1d3b, type: 3}
@@ -22777,7 +22922,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1656429178}
   m_Direction: 2
   m_Value: -0.0000020397688
-  m_Size: 0.6902079
+  m_Size: 0.6460605
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -23501,6 +23646,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Arbol (27)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d92b688c78f703740b2d85fcb16a1d3b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d92b688c78f703740b2d85fcb16a1d3b, type: 3}
@@ -25363,6 +25513,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Arbol (21)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d92b688c78f703740b2d85fcb16a1d3b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d92b688c78f703740b2d85fcb16a1d3b, type: 3}
