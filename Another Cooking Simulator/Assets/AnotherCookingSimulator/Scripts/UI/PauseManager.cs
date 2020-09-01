@@ -53,23 +53,34 @@ public class PauseManager : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Pause();
-            isCanvasEnabled = !isCanvasEnabled;
-            if (isCanvasEnabled)
-            {
-                Cursor.lockState = CursorLockMode.Confined;
-            }
-            else
-            {
-                Cursor.lockState = CursorLockMode.None;
-            }
+            //Pause(); --> No queremos pausar el juego en este caso
+            UpdateCanvasStatus();
             
+            
+        }
+    }
+
+
+    private void UpdateCanvasStatus()
+    {
+        canvas.enabled = !canvas.enabled;
+
+        Cursor.lockState = CursorLockMode.None;
+
+        if (canvas.enabled)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.Confined;
+        }
+        else
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
         }
     }
     
     public void Pause()
     {
-        canvas.enabled = !canvas.enabled;
         Time.timeScale = Time.timeScale == 0 ? 1 : 0;
     }
     
@@ -116,8 +127,6 @@ public class PauseManager : MonoBehaviour {
 
     public void goBack()
     {
-        canvas.enabled = !canvas.enabled;
-        Cursor.lockState = CursorLockMode.Locked;
-        Time.timeScale = Time.timeScale == 0 ? 1 : 0;
+        UpdateCanvasStatus();
     }
 }
