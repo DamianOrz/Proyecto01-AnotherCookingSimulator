@@ -13,7 +13,10 @@ public class DiaManager : MonoBehaviour
     public GameObject contentMostrarPedidoCliente;
     public GameObject contentMostrarUltimaInterpretacion;
 
+    private float contadorDelDia = 0;
+
     public int diaActual = -1;
+
     private int clientes;
 
     public enum POSIBLES_INGREDIENTES
@@ -28,6 +31,7 @@ public class DiaManager : MonoBehaviour
     }
 
     public DiaInformacion[] diasInfo;
+
     private void Awake()
     {
         if (instanceDiaManager!=null && instanceDiaManager != this)
@@ -43,11 +47,21 @@ public class DiaManager : MonoBehaviour
     {
         instanceDiaManager.EmpezarDia();
     }
-
+    private void Update()
+    {
+        if (contadorDelDia < instanceDiaManager.diasInfo[instanceDiaManager.diaActual].duracionDelDia)
+        {
+            contadorDelDia += Time.deltaTime;
+        }
+        else {
+            FinalizarDia();
+        }
+    }
     public void EmpezarDia()
     {
+        contadorDelDia = 0;
         diaActual++;
-        instanceDiaManager.texto.text = "Dia : " + (diaActual);
+        instanceDiaManager.texto.text = "Dia : " + diaActual;
     }
     public void FinalizarDia()
     {

@@ -52,7 +52,7 @@ public class PedidoManager : NetworkBehaviour
         //Pregunta si ya pasaron todos los clientes
         if (DiaManager.instanceDiaManager.diasInfo[DiaManager.instanceDiaManager.diaActual].clientesEnElDia == _listaPedidos.Count)
         {
-            DiaManager.instanceDiaManager.FinalizarDia();
+            //DiaManager.instanceDiaManager.FinalizarDia();
         }
     }
     public int correccion(int[] ordenIngredientes, int[] interpretacion)

@@ -28,21 +28,17 @@ public class ClientesManager : NetworkBehaviour
     [Server]
     private void Start()
     {
-        InvokeRepeating("Tick", 0f, 25f);
+        //InvokeRepeating("Tick", 0f, 25f);
     }
     [Server]
     private void Tick()
     {
         if (DiaManager.instanceDiaManager.diaActual > -1)
         {
-            if (!(DiaManager.instanceDiaManager.diasInfo[DiaManager.instanceDiaManager.diaActual].clientesEnElDia == contClientes))
+            if ((DiaManager.instanceDiaManager.diasInfo[DiaManager.instanceDiaManager.diaActual].clientesEnElDia <= contClientes))
             {
                 contClientes++;
                 PedidoManager.instancePedidoManager.crearPedidoRandom();
-            }
-            else if (DiaManager.instanceDiaManager.diasInfo[DiaManager.instanceDiaManager.diaActual].clientesEnElDia == contClientes)
-            {
-                DiaManager.instanceDiaManager.FinalizarDia();
             }
         }
     }

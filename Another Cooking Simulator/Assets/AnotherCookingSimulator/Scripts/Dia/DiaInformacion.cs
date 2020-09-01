@@ -8,6 +8,7 @@ public class DiaInformacion : ScriptableObject
     public int dia;
     public int maxIngredientesEntrePanes;
     public int clientesEnElDia;
+    public int duracionDelDia;
 
     public DiaManager.POSIBLES_INGREDIENTES[] posiblesIngredientes;
 }
