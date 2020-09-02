@@ -28,6 +28,6 @@ public class ScoreManager : MonoBehaviour
     public static void sobreEscribir(int puntos)
     {
         SCORE += puntos;
-        texto.text = "Score: " + SCORE;
+        //texto.text = "Score: " + SCORE;
     }
 }

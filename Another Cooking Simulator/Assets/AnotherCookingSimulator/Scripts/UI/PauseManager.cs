@@ -15,7 +15,7 @@ public class PauseManager : MonoBehaviour {
     private bool isCanvasEnabled = false;
 
     Resolution[] resolutions;
-    Canvas canvas;
+    static Canvas canvas;
     
     void Start()
     {
@@ -54,9 +54,7 @@ public class PauseManager : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             //Pause(); --> No queremos pausar el juego en este caso
-            UpdateCanvasStatus();
-            
-            
+            UpdateCanvasStatus();           
         }
     }
 
@@ -76,6 +74,19 @@ public class PauseManager : MonoBehaviour {
         {
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
+        }
+    }
+
+
+    public static bool isCanvasBeingUsed()
+    {
+        if (canvas.enabled)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
     

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.3206857, g: 0.26888835, b: 0.41333476, a: 1}
+  m_IndirectSpecularColor: {r: 0.32066634, g: 0.26886252, b: 0.41332537, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3310,7 +3310,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 89.767845}
+  m_AnchoredPosition: {x: 0, y: 89.76697}
   m_SizeDelta: {x: -5.0498047, y: 289.7677}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &202048392
@@ -7936,7 +7936,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.0000051860525}
+  m_AnchoredPosition: {x: 0, y: 0.0000013088384}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &637581272
@@ -15990,7 +15990,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: LEVEL CLEARED!!!
+  m_text: DAY FINISHED!!!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7411e9a2673936647b9f636cc53a36a9, type: 2}
   m_sharedMaterial: {fileID: 3976341437251358128, guid: 7411e9a2673936647b9f636cc53a36a9,
@@ -16060,7 +16060,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1228051042}
-    characterCount: 16
+    characterCount: 15
     spriteCount: 0
     spaceCount: 1
     wordCount: 2
@@ -21554,8 +21554,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 171669037}
   m_HandleRect: {fileID: 171669036}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 1
+  m_Value: 0
+  m_Size: 0.99975926
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -23988,8 +23988,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1656429179}
   m_HandleRect: {fileID: 1656429178}
   m_Direction: 2
-  m_Value: -0.0000079890915
-  m_Size: 0.6902035
+  m_Value: 0.000001529826
+  m_Size: 0.69001997
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

@@ -55,10 +55,14 @@ public class DiaManager : MonoBehaviour
     void Start()
     {
         instanceDiaManager.EmpezarDia();
+        canvasAlFinalizarDia.enabled = false;
     }
     private void Update()
     {
-        if (canvasAlFinalizarDia.enabled) return;
+        if (canvasAlFinalizarDia.enabled)
+        {
+            return;
+        }
         tiempo.text =(instanceDiaManager.diasInfo[instanceDiaManager.diaActual].duracionDelDia - contadorDelDia).ToString();
         if (contadorDelDia < instanceDiaManager.diasInfo[instanceDiaManager.diaActual].duracionDelDia)
         {
@@ -68,6 +72,21 @@ public class DiaManager : MonoBehaviour
             FinalizarDia();
         }
     }
+
+    public bool isCanvasBeingUsed()
+    {
+        if (canvasAlFinalizarDia.enabled)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+
+
     public void EmpezarDia()
     {
         contadorDelDia = 0;

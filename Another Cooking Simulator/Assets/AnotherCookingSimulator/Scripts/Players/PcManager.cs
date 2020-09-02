@@ -9,6 +9,9 @@ using UnityEditor;
 
 public class PcManager : NetworkBehaviour
 {
+    #region DeclaracionVariables
+    
+
     private static int _idCombo;
 
     //ONLINE
@@ -55,7 +58,8 @@ public class PcManager : NetworkBehaviour
 
     //PEDIDO
     [SerializeField] Pedido pedido = new Pedido();
-    
+    #endregion
+
     void Start()
     {
         if (!transform.root.gameObject.GetComponent<NetworkIdentity>().hasAuthority)
@@ -92,7 +96,7 @@ public class PcManager : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!transform.root.gameObject.GetComponent<NetworkIdentity>().hasAuthority) //Si no tiene autoridad se desactiva? Revisar
+        if (!transform.root.gameObject.GetComponent<NetworkIdentity>().hasAuthority)
         {
             GetComponentInChildren<Camera>().enabled = false;
             GetComponentInChildren<AudioListener>().enabled = false;
@@ -104,10 +108,13 @@ public class PcManager : NetworkBehaviour
             GetComponentInChildren<Camera>().enabled = true;
             GetComponentInChildren<AudioListener>().enabled = true;
         }
-        SetCrossHair();
         Movement();
-        Interaction();
-        Look();
+        if (!PauseManager.isCanvasBeingUsed() && !DiaManager.instanceDiaManager.isCanvasBeingUsed())
+        {
+            SetCrossHair();
+            Interaction();
+            Look();
+        }
     }
 
     void Movement()
@@ -188,7 +195,7 @@ public class PcManager : NetworkBehaviour
                 }
                 Debug.Log("Hit " + result.gameObject.name);
             }
-            
+
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -257,11 +264,12 @@ public class PcManager : NetworkBehaviour
             {
                 if (!whatIHit.collider.gameObject.GetComponent<VRTK_InteractableObject>().IsInSnapDropZone())
                 {
-                    CmdPickUpObject(whatIHit.collider.gameObject,gameObject);
+                    CmdPickUpObject(whatIHit.collider.gameObject, gameObject);
                     //PonerNetworkTransformChild(whatIHit.collider.gameObject);
                 }
             }
         }
+
     }
     #region ONLINE_PickUpObject
     [Command]
