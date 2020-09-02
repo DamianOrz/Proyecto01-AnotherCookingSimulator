@@ -28,19 +28,28 @@ public class ClientesManager : NetworkBehaviour
     [Server]
     private void Start()
     {
-        //InvokeRepeating("Tick", 0f, 25f);
+        
     }
     [Server]
     private void Tick()
     {
         if (DiaManager.instanceDiaManager.diaActual > -1)
         {
-            if ((DiaManager.instanceDiaManager.diasInfo[DiaManager.instanceDiaManager.diaActual].clientesEnElDia <= contClientes))
-            {
-                contClientes++;
-                PedidoManager.instancePedidoManager.crearPedidoRandom();
-            }
+            //Valido si paso el limite de clientes de ese dia
+            if (DiaManager.instanceDiaManager.diasInfo[DiaManager.instanceDiaManager.diaActual].clientesEnElDia <= contClientes) return;
+
+            contClientes++;
+            PedidoManager.instancePedidoManager.crearPedidoRandom();
         }
+    }
+    public void playInvokeRepeating(float cadaTantoTiempo)
+    {
+        contClientes = 0;
+        InvokeRepeating("Tick", 0f, cadaTantoTiempo);
+    }
+    public void cancelInvokeRepeating()
+    {
+        CancelInvoke("Tick");
     }
     [Server]
     public void seEntregoUnPedido()

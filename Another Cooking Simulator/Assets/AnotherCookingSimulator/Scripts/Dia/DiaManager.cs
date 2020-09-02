@@ -1,14 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class DiaManager : MonoBehaviour
 {
     public static DiaManager instanceDiaManager;
 
     public TMP_Text texto;
-
+    
     public GameObject contentMostrarPedidoAlVR; 
     public GameObject contentMostrarPedidoCliente;
     public GameObject contentMostrarUltimaInterpretacion;
@@ -31,6 +33,13 @@ public class DiaManager : MonoBehaviour
     }
 
     public DiaInformacion[] diasInfo;
+    //Mostrar Clock
+    public TMP_Text tiempo;
+    //Canvas finalizacion del dia
+    public TMP_Text titulo;
+    public Canvas canvasAlFinalizarDia;
+    public TMP_Text mostrarPuntos;
+
 
     private void Awake()
     {
@@ -49,6 +58,8 @@ public class DiaManager : MonoBehaviour
     }
     private void Update()
     {
+        if (canvasAlFinalizarDia.enabled) return;
+        tiempo.text =(instanceDiaManager.diasInfo[instanceDiaManager.diaActual].duracionDelDia - contadorDelDia).ToString();
         if (contadorDelDia < instanceDiaManager.diasInfo[instanceDiaManager.diaActual].duracionDelDia)
         {
             contadorDelDia += Time.deltaTime;
@@ -60,14 +71,49 @@ public class DiaManager : MonoBehaviour
     public void EmpezarDia()
     {
         contadorDelDia = 0;
+
         diaActual++;
         instanceDiaManager.texto.text = "Dia : " + diaActual;
+
+        //Empiezo la emision de pedidos
+        ClientesManager.instanceClientesManager.playInvokeRepeating(3f);
+
+        //Apago el canvas
+        UpdateCanvasStatus();
+    }
+    public void Pause()
+    {
+        Time.timeScale = Time.timeScale == 0 ? 1 : 0;
     }
     public void FinalizarDia()
     {
+        //Paro la emision de pedidos
+        ClientesManager.instanceClientesManager.cancelInvokeRepeating();
+
+        //Muestro canvas y muestro puntos
         int score = ScoreManager.getScore();
+        mostrarPuntos.text = score.ToString();
+        titulo.text = "Dia " + diaActual + " finalizado!!!";
+        //Pause();
+        UpdateCanvasStatus();
         //LimpiarPedidos();
-        EmpezarDia();
+    }
+    private void UpdateCanvasStatus()
+    {
+        canvasAlFinalizarDia.enabled = !canvasAlFinalizarDia.enabled;
+
+        Cursor.lockState = CursorLockMode.None;
+
+        if (canvasAlFinalizarDia.enabled)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.Confined;
+        }
+        else
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
     }
     public void LimpiarPedidos()
     {
