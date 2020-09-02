@@ -76,7 +76,7 @@ public class DiaManager : MonoBehaviour
         instanceDiaManager.texto.text = "Dia : " + diaActual;
 
         //Empiezo la emision de pedidos
-        ClientesManager.instanceClientesManager.playInvokeRepeating(3f);
+        ClientesManager.instanceClientesManager.playInvokeRepeating(instanceDiaManager.diasInfo[instanceDiaManager.diaActual].ratioDePedidos);
 
         //Apago el canvas
         UpdateCanvasStatus();
