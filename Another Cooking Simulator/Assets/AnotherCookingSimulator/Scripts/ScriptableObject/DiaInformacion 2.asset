@@ -15,5 +15,6 @@ MonoBehaviour:
   dia: 2
   maxIngredientesEntrePanes: 3
   clientesEnElDia: 2
-  duracionDelDia: 10
+  duracionDelDia: 60
+  ratioDePedidos: 20
   posiblesIngredientes: 0000000001000000020000000300000004000000
