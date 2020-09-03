@@ -149,6 +149,7 @@ public class RoomManagerScript : NetworkBehaviour
     [Server]
     public void StartGame() // --> Solo el host puede correr este script
     {
+        myNetworkRoomManager = FindObjectOfType<NetworkRoomManager>();
         myNetworkRoomManager.CheckReadyToBegin();
     }
 

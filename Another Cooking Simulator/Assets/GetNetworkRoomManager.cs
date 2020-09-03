@@ -18,9 +18,12 @@ public class GetNetworkRoomManager : NetworkBehaviour
         
     }
 
+    [Server]
     public void ReturnToMainMenu()
     {
+        myNetworkRoomManager = FindObjectOfType<NetworkRoomManager>();
         myNetworkRoomManager.StopHost();
-        
     }
+
+
 }
