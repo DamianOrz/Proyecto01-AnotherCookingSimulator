@@ -333,7 +333,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 75493163}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 130837073}
+        m_MethodName: LevelChanged
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 75493162}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &75493163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -626,7 +637,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 93572687}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 130837073}
+        m_MethodName: LevelChanged
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 93572686}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &93572687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1742,8 +1764,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1827471905}
   m_HandleRect: {fileID: 1827471904}
   m_Direction: 0
-  m_Value: -0.00000044396378
-  m_Size: 0.9075943
+  m_Value: -0.00000044396418
+  m_Size: 0.90759444
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3315,7 +3337,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 748279422}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 130837073}
+        m_MethodName: LevelChanged
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 748279421}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &748279422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3902,7 +3935,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 825384448}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 130837073}
+        m_MethodName: LevelChanged
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 825384447}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &825384448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5335,7 +5379,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1163293163}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 130837073}
+        m_MethodName: LevelChanged
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1163293162}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1163293163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8128,7 +8183,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2123808308}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 130837073}
+        m_MethodName: LevelChanged
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2123808307}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 5
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2123808308
 MonoBehaviour:
   m_ObjectHideFlags: 0
