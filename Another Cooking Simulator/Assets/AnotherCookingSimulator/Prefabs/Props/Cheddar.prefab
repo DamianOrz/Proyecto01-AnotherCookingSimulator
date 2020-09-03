@@ -273,6 +273,7 @@ GameObject:
   - component: {fileID: 6101350714495484568}
   - component: {fileID: 8952022735712675408}
   - component: {fileID: 4149188510738671071}
+  - component: {fileID: 114509141343100450}
   m_Layer: 0
   m_Name: Cheddar
   m_TagString: Grabable
@@ -473,6 +474,19 @@ MonoBehaviour:
   localPositionSensitivity: 0.01
   localRotationSensitivity: 0.01
   localScaleSensitivity: 0.01
+--- !u!114 &114509141343100450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5728527316646658829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e56997b450acd884790f6bb4ced817de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: cheddar
 --- !u!1 &6145825537026895564
 GameObject:
   m_ObjectHideFlags: 0

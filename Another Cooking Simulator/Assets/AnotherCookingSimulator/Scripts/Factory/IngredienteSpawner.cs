@@ -8,9 +8,13 @@ public class IngredienteSpawner : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.M))
+        if (Input.GetKey(KeyCode.V))
         {
             _ingredienteFactory.Create("carne");
+        }
+        if (Input.GetKey(KeyCode.C))
+        {
+            _ingredienteFactory.Create("cheddar");
         }
     }
 }
