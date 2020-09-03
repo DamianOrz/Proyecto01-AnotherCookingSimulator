@@ -16,14 +16,18 @@ public class ReturnToLobby : NetworkBehaviour
     
     public void BackToLobby()
     {
-        RpcBackToLobby3();
-        
-        
+        BackToLobby2();
     }
 
 
-    [Command]
-    private void BackToLobby1()
+    [Server]
+    private void BackToLobby2()
+    {
+        RpcBackToLobby3();
+    }
+
+    [Client]
+    private void BackToLobby4()
     {
         myNetworkRoomManager = FindObjectOfType<NetworkRoomManager>();
         myNetworkRoomManager.ServerChangeScene(myNetworkRoomManager.RoomScene);
@@ -33,7 +37,7 @@ public class ReturnToLobby : NetworkBehaviour
     [ClientRpc]
     private void RpcBackToLobby3()
     {
-        BackToLobby();
+        BackToLobby4();
     }
 
     
