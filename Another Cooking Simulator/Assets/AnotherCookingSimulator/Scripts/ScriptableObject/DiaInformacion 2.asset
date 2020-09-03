@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ae48080c01867f40a29b8c888e50858, type: 3}
   m_Name: DiaInformacion 2
   m_EditorClassIdentifier: 
-  dia: 2
-  maxIngredientesEntrePanes: 3
-  clientesEnElDia: 2
-  duracionDelDia: 60
-  ratioDePedidos: 20
-  posiblesIngredientes: 0000000001000000020000000300000004000000
+  dia: 0
+  maxIngredientesEntrePanes: 0
+  clientesEnElDia: 0
+  duracionDelDia: 0
+  ratioDePedidos: 0
+  posiblesIngredientes: 

@@ -52,19 +52,23 @@ public class DiaManager : MonoBehaviour
             instanceDiaManager = this;
         }
     }
+
     void Start()
     {
         instanceDiaManager.EmpezarDia();
         canvasAlFinalizarDia.enabled = false;
     }
+
     private void Update()
     {
         if (canvasAlFinalizarDia.enabled)
         {
             return;
         }
+
         tiempo.text =(instanceDiaManager.diasInfo[instanceDiaManager.diaActual].duracionDelDia - contadorDelDia).ToString();
-        if (contadorDelDia < instanceDiaManager.diasInfo[instanceDiaManager.diaActual].duracionDelDia)
+
+        if (contadorDelDia < instanceDiaManager.diasInfo[instanceDiaManager.diaActual].duracionDelDia && !isCanvasBeingUsed())
         {
             contadorDelDia += Time.deltaTime;
         }
@@ -75,17 +79,10 @@ public class DiaManager : MonoBehaviour
 
     public bool isCanvasBeingUsed()
     {
-        if (canvasAlFinalizarDia.enabled)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        if (canvasAlFinalizarDia.enabled) return true;
+
+        return false;
     }
-
-
 
     public void EmpezarDia()
     {
@@ -100,10 +97,12 @@ public class DiaManager : MonoBehaviour
         //Apago el canvas
         UpdateCanvasStatus();
     }
+
     public void Pause()
     {
         Time.timeScale = Time.timeScale == 0 ? 1 : 0;
     }
+
     public void FinalizarDia()
     {
         //Paro la emision de pedidos
@@ -115,6 +114,9 @@ public class DiaManager : MonoBehaviour
         titulo.text = "Dia " + diaActual + " finalizado!!!";
         //Pause();
         UpdateCanvasStatus();
+        limpiarContent();
+
+        
         //LimpiarPedidos();
     }
     private void UpdateCanvasStatus()
@@ -134,6 +136,16 @@ public class DiaManager : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
         }
     }
+
+    public void limpiarContent()
+    {
+        int cantOfChild = PedidoManager.instancePedidoManager.contentMostrarPedidoCliente.transform.childCount;
+        for (int i = 0; i < cantOfChild; i++)
+        {
+            Destroy(PedidoManager.instancePedidoManager.contentMostrarPedidoCliente.transform.GetChild(i).gameObject);
+        }
+    }
+
     public void LimpiarPedidos()
     {
         for (int i = 0; i < instanceDiaManager.diasInfo[instanceDiaManager.diaActual].clientesEnElDia; i++)

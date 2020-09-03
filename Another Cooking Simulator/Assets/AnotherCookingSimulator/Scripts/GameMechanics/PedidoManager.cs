@@ -150,23 +150,28 @@ public class PedidoManager : NetworkBehaviour
         iNumPedido++;
     }
 
-    [Server]
+    
     public void MostrarPedidoDelCliente(Pedido unPedido)
     {
-
         GameObject pedidoCreado = Instantiate(instancePedidoManager.prefabClientes);
+        GameObject panel = pedidoCreado.transform.Find("Panel").gameObject;
+        
+        string strOrden = CambiarArrayAString(unPedido.GetOrdenIngredientes());
+        panel.transform.Find("strConsumibles").gameObject.GetComponent<TMP_Text>().text = strOrden;
+
+
         pedidoCreado.transform.SetParent(instancePedidoManager.contentMostrarPedidoCliente.transform, false);
-        NetworkServer.Spawn(pedidoCreado); //Creo el prefab, le asigno un lugar y lo spawneo globalmente.
-        String strOrden = CambiarArrayAString(unPedido.GetOrdenIngredientes());
 
-       // GameObject panel = pedidoCreado.transform.Find("Panel").gameObject;
-       //panel.transform.Find("strConsumibles").gameObject.GetComponent<TMP_Text>().text = "" + CambiarArrayAString(unPedido.GetOrdenIngredientes());
+        spawnServer(pedidoCreado);
+        //RpcPonerComoHijoPanel(pedidoCreado, unPedido, strOrden);
 
-
-        RpcPonerComoHijoPanel(pedidoCreado, unPedido, strOrden);
         iNumPedido++;
     }
-
+    [Server]
+    public void spawnServer(GameObject pedidoCreado)
+    {
+        NetworkServer.Spawn(pedidoCreado);
+    }
     [ClientRpc]
     public void RpcPonerComoHijoPanel(GameObject pedidoCreado, Pedido unPedido, String textoOrdenIngredientes)
     {
