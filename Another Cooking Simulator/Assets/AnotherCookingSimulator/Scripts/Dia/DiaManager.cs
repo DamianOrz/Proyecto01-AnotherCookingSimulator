@@ -4,12 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using Mirror;
 
-public class DiaManager : MonoBehaviour
+public class DiaManager : NetworkBehaviour
 {
     public static DiaManager instanceDiaManager;
-
-    public TMP_Text texto;
+    [SyncVar]
+    public TMP_Text textoDia;
     
     public GameObject contentMostrarPedidoAlVR; 
     public GameObject contentMostrarPedidoCliente;
@@ -34,13 +35,14 @@ public class DiaManager : MonoBehaviour
 
     public DiaInformacion[] diasInfo;
     //Mostrar Clock
+    [SyncVar]
     public TMP_Text tiempo;
     //Canvas finalizacion del dia
     public TMP_Text titulo;
     public Canvas canvasAlFinalizarDia;
     public TMP_Text mostrarPuntos;
 
-
+    [Server]
     private void Awake()
     {
         if (instanceDiaManager!=null && instanceDiaManager != this)
@@ -52,13 +54,13 @@ public class DiaManager : MonoBehaviour
             instanceDiaManager = this;
         }
     }
-
+    [Server]
     void Start()
     {
         instanceDiaManager.EmpezarDia();
         canvasAlFinalizarDia.enabled = false;
     }
-
+    [Server]
     private void Update()
     {
         if (canvasAlFinalizarDia.enabled)
@@ -76,33 +78,38 @@ public class DiaManager : MonoBehaviour
             FinalizarDia();
         }
     }
-
+    [Server]
     public bool isCanvasBeingUsed()
     {
         if (canvasAlFinalizarDia.enabled) return true;
 
         return false;
     }
-
+    [Server]
     public void EmpezarDia()
     {
         contadorDelDia = 0;
 
         diaActual++;
-        instanceDiaManager.texto.text = "Dia : " + diaActual;
-
+        //instanceDiaManager.textoDia.text = "Dia : " + diaActual;
+        RpcPrintDiaActual();
         //Empiezo la emision de pedidos
         ClientesManager.instanceClientesManager.playInvokeRepeating(instanceDiaManager.diasInfo[instanceDiaManager.diaActual].ratioDePedidos);
 
         //Apago el canvas
         UpdateCanvasStatus();
     }
-
+    [ClientRpc]
+    private void RpcPrintDiaActual()
+    {
+        instanceDiaManager.textoDia.text = "Dia : " + diaActual;
+    }
+    [Server]
     public void Pause()
     {
         Time.timeScale = Time.timeScale == 0 ? 1 : 0;
     }
-
+    [Server]
     public void FinalizarDia()
     {
         //Paro la emision de pedidos
@@ -111,7 +118,8 @@ public class DiaManager : MonoBehaviour
         //Muestro canvas y muestro puntos
         int score = ScoreManager.getScore();
         mostrarPuntos.text = score.ToString();
-        titulo.text = "Dia " + diaActual + " finalizado!!!";
+
+        RpcPrintFinalizacionDelDia();
         //Pause();
         UpdateCanvasStatus();
         limpiarContent();
@@ -119,6 +127,12 @@ public class DiaManager : MonoBehaviour
         
         //LimpiarPedidos();
     }
+    [ClientRpc]
+    public void RpcPrintFinalizacionDelDia()
+    {
+        titulo.text = "Dia " + diaActual + " finalizado!!!";
+    }
+    [Server]
     private void UpdateCanvasStatus()
     {
         canvasAlFinalizarDia.enabled = !canvasAlFinalizarDia.enabled;
@@ -136,7 +150,7 @@ public class DiaManager : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
         }
     }
-
+    [Server]
     public void limpiarContent()
     {
         int cantOfChild = PedidoManager.instancePedidoManager.contentMostrarPedidoCliente.transform.childCount;
@@ -145,7 +159,7 @@ public class DiaManager : MonoBehaviour
             Destroy(PedidoManager.instancePedidoManager.contentMostrarPedidoCliente.transform.GetChild(i).gameObject);
         }
     }
-
+    [Server]
     public void LimpiarPedidos()
     {
         for (int i = 0; i < instanceDiaManager.diasInfo[instanceDiaManager.diaActual].clientesEnElDia; i++)
