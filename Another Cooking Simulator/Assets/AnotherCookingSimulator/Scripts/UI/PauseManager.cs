@@ -51,6 +51,7 @@ public class PauseManager : MonoBehaviour {
 
     void Update()
     {
+        if (DiaManager.instanceDiaManager.isCanvasBeingUsed()) return;
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             //Pause(); --> No queremos pausar el juego en este caso
