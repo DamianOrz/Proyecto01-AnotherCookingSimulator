@@ -13,20 +13,30 @@ public class ReturnToLobby : NetworkBehaviour
 
     }
 
-    [Server]
+    
     public void BackToLobby()
+    {
+        RpcBackToLobby3();
+        
+        
+    }
+
+
+    [Command]
+    private void BackToLobby1()
     {
         myNetworkRoomManager = FindObjectOfType<NetworkRoomManager>();
         myNetworkRoomManager.ServerChangeScene(myNetworkRoomManager.RoomScene);
-        RpcBackToLobby();
     }
 
 
     [ClientRpc]
-    private void RpcBackToLobby()
+    private void RpcBackToLobby3()
     {
-        SceneManager.LoadScene(myNetworkRoomManager.RoomScene);
+        BackToLobby();
     }
+
+    
 
     // Update is called once per frame
     void Update()
