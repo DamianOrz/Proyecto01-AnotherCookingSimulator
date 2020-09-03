@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using UnityEngine.SceneManagement;
 
 public class ReturnToLobby : NetworkBehaviour
 {
@@ -24,7 +25,7 @@ public class ReturnToLobby : NetworkBehaviour
     [ClientRpc]
     private void RpcBackToLobby()
     {
-        Debug.Log("AAAAAAAAA");
+        SceneManager.LoadScene(myNetworkRoomManager.RoomScene);
     }
 
     // Update is called once per frame
