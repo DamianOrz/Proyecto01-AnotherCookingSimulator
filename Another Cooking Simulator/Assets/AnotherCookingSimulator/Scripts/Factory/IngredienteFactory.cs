@@ -1,27 +1,18 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using Object = UnityEngine.Object;
 
-public class IngredienteFactory : MonoBehaviour
+public class IngredienteFactory
 {
-    [SerializeField] private Ingrediente _carne;
-    [SerializeField] private Ingrediente _cheddar;
+    private IngredienteConfiguration _ingredienteConfiguration;
 
-    [SerializeField] private Ingrediente[] _ingredientes;
-    private Dictionary<string, Ingrediente> _idToIngrediente;
-
-    private void Awake()
+    public IngredienteFactory(IngredienteConfiguration ingredienteConfiguration)
     {
-        _idToIngrediente = new Dictionary<string, Ingrediente>();
-        foreach (var ingrediente in _ingredientes)
-        {
-            _idToIngrediente.Add(ingrediente.Id, ingrediente);
-        }
+        _ingredienteConfiguration = ingredienteConfiguration;
     }
+
     public Ingrediente Create(string id)
     {
-        _idToIngrediente.TryGetValue(id, out var ingrediente);
-        return Instantiate(ingrediente);
+        var ingrediente = _ingredienteConfiguration.getIngredientePrefabById(id);
+
+        return Object.Instantiate(ingrediente);
     }
 }
