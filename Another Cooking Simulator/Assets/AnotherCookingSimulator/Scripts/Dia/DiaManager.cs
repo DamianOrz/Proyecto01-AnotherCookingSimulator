@@ -97,7 +97,22 @@ public class DiaManager : NetworkBehaviour
         //Apago el canvas
         UpdateCanvasStatus();
     }
+    [Server]
+    public void EmpezarDiaServer()
+    {
+        RpcEmpezarDia();
+    }
+    [ClientRpc]
+    public void RpcEmpezarDia()
+    {
+        contadorDelDia = 0;
+        diaActual++;
+        instanceDiaManager.textoDia.text = "Dia : " + diaActual;
+        ClientesManager.instanceClientesManager.playInvokeRepeating(instanceDiaManager.diasInfo[instanceDiaManager.diaActual].ratioDePedidos);
 
+        //Apago el canvas
+        UpdateCanvasStatus();
+    }
     public void Pause()
     {
         Time.timeScale = Time.timeScale == 0 ? 1 : 0;
