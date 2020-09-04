@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.3206857, g: 0.26888835, b: 0.41333476, a: 1}
+  m_IndirectSpecularColor: {r: 0.32066634, g: 0.26886252, b: 0.41332537, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3310,7 +3310,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 89.76711}
+  m_AnchoredPosition: {x: 0, y: 89.76709}
   m_SizeDelta: {x: -5.0498047, y: 289.7677}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &202048392
@@ -7936,7 +7936,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.0000431519}
+  m_AnchoredPosition: {x: 0, y: -0.0000058205605}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &637581272
@@ -21649,7 +21649,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 171669036}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.9998271
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -23647,6 +23647,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1811565760}
   - component: {fileID: 1811565761}
+  - component: {fileID: 1811565762}
   m_Layer: 0
   m_Name: DiaManager
   m_TagString: Untagged
@@ -23695,6 +23696,22 @@ MonoBehaviour:
   titulo: {fileID: 1228051042}
   canvasAlFinalizarDia: {fileID: 1335342569}
   mostrarPuntos: {fileID: 1941879623}
+--- !u!114 &1811565762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1811565759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 1902890598
+  serverOnly: 0
+  m_AssetId: 
+  hasSpawned: 0
 --- !u!1 &1815697354
 GameObject:
   m_ObjectHideFlags: 0
@@ -24085,7 +24102,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1656429178}
   m_Direction: 2
   m_Value: -0.0000020397688
-  m_Size: 0.6902079
+  m_Size: 0.6900731
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
