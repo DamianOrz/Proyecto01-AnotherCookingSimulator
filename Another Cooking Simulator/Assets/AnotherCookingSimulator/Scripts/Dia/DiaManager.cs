@@ -9,7 +9,7 @@ using Mirror;
 public class DiaManager : NetworkBehaviour
 {
     public static DiaManager instanceDiaManager;
-    [SyncVar]
+
     public TMP_Text textoDia;
     
     public GameObject contentMostrarPedidoAlVR; 
@@ -35,7 +35,7 @@ public class DiaManager : NetworkBehaviour
 
     public DiaInformacion[] diasInfo;
     //Mostrar Clock
-    [SyncVar]
+
     public TMP_Text tiempo;
     //Canvas finalizacion del dia
     public TMP_Text titulo;
