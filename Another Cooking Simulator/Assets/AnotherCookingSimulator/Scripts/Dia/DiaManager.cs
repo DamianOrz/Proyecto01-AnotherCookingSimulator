@@ -11,8 +11,8 @@ public class DiaManager : NetworkBehaviour
     public static DiaManager instanceDiaManager;
 
     public TMP_Text textoDia;
-    
-    public GameObject contentMostrarPedidoAlVR; 
+
+    public GameObject contentMostrarPedidoAlVR;
     public GameObject contentMostrarPedidoCliente;
     public GameObject contentMostrarUltimaInterpretacion;
 
@@ -42,10 +42,9 @@ public class DiaManager : NetworkBehaviour
     public Canvas canvasAlFinalizarDia;
     public TMP_Text mostrarPuntos;
 
-    [Server]
     private void Awake()
     {
-        if (instanceDiaManager!=null && instanceDiaManager != this)
+        if (instanceDiaManager != null && instanceDiaManager != this)
         {
             Destroy(gameObject);
         }
@@ -54,13 +53,12 @@ public class DiaManager : NetworkBehaviour
             instanceDiaManager = this;
         }
     }
-    [Server]
     void Start()
     {
         instanceDiaManager.EmpezarDia();
         canvasAlFinalizarDia.enabled = false;
     }
-    [Server]
+
     private void Update()
     {
         if (canvasAlFinalizarDia.enabled)
@@ -68,47 +66,43 @@ public class DiaManager : NetworkBehaviour
             return;
         }
 
-        tiempo.text =(instanceDiaManager.diasInfo[instanceDiaManager.diaActual].duracionDelDia - contadorDelDia).ToString();
+        tiempo.text = (instanceDiaManager.diasInfo[instanceDiaManager.diaActual].duracionDelDia - contadorDelDia).ToString();
 
         if (contadorDelDia < instanceDiaManager.diasInfo[instanceDiaManager.diaActual].duracionDelDia && !isCanvasBeingUsed())
         {
             contadorDelDia += Time.deltaTime;
         }
-        else {
+        else
+        {
             FinalizarDia();
         }
     }
+
     public bool isCanvasBeingUsed()
     {
         if (canvasAlFinalizarDia.enabled) return true;
 
         return false;
     }
-    [Server]
     public void EmpezarDia()
     {
         contadorDelDia = 0;
 
         diaActual++;
         //instanceDiaManager.textoDia.text = "Dia : " + diaActual;
-        RpcPrintDiaActual();
+        instanceDiaManager.textoDia.text = "Dia : " + diaActual;
         //Empiezo la emision de pedidos
         ClientesManager.instanceClientesManager.playInvokeRepeating(instanceDiaManager.diasInfo[instanceDiaManager.diaActual].ratioDePedidos);
 
         //Apago el canvas
         UpdateCanvasStatus();
     }
-    [ClientRpc]
-    private void RpcPrintDiaActual()
-    {
-        instanceDiaManager.textoDia.text = "Dia : " + diaActual;
-    }
-    [Server]
+
     public void Pause()
     {
         Time.timeScale = Time.timeScale == 0 ? 1 : 0;
     }
-    [Server]
+
     public void FinalizarDia()
     {
         //Paro la emision de pedidos
@@ -117,21 +111,14 @@ public class DiaManager : NetworkBehaviour
         //Muestro canvas y muestro puntos
         int score = ScoreManager.getScore();
         mostrarPuntos.text = score.ToString();
-
-        RpcPrintFinalizacionDelDia();
+        titulo.text = "Dia " + diaActual + " finalizado!!!";
         //Pause();
         UpdateCanvasStatus();
         limpiarContent();
 
-        
+
         //LimpiarPedidos();
     }
-    [ClientRpc]
-    public void RpcPrintFinalizacionDelDia()
-    {
-        titulo.text = "Dia " + diaActual + " finalizado!!!";
-    }
-    [Server]
     private void UpdateCanvasStatus()
     {
         canvasAlFinalizarDia.enabled = !canvasAlFinalizarDia.enabled;
@@ -149,7 +136,7 @@ public class DiaManager : NetworkBehaviour
             Cursor.lockState = CursorLockMode.Locked;
         }
     }
-    [Server]
+
     public void limpiarContent()
     {
         int cantOfChild = PedidoManager.instancePedidoManager.contentMostrarPedidoCliente.transform.childCount;
@@ -158,12 +145,12 @@ public class DiaManager : NetworkBehaviour
             Destroy(PedidoManager.instancePedidoManager.contentMostrarPedidoCliente.transform.GetChild(i).gameObject);
         }
     }
-    [Server]
+
     public void LimpiarPedidos()
     {
         for (int i = 0; i < instanceDiaManager.diasInfo[instanceDiaManager.diaActual].clientesEnElDia; i++)
         {
-            if(instanceDiaManager.contentMostrarPedidoAlVR.transform.childCount==3)
+            if (instanceDiaManager.contentMostrarPedidoAlVR.transform.childCount == 3)
             {
 
             }
