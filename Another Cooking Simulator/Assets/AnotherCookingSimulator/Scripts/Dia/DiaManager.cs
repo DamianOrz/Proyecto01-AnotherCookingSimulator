@@ -78,7 +78,6 @@ public class DiaManager : NetworkBehaviour
             FinalizarDia();
         }
     }
-    [Server]
     public bool isCanvasBeingUsed()
     {
         if (canvasAlFinalizarDia.enabled) return true;
