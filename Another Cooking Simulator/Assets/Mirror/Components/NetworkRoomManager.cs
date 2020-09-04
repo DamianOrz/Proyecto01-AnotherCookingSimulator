@@ -606,13 +606,21 @@ namespace Mirror
             }
             else
             {
-                GameObject go = Instantiate(PCPlayer);
+                GameObject go = Instantiate(PCPlayer, new Vector3(57,2,2), Quaternion.identity);
 
                 go.name = "PCPlayer " + numPCPlayers;
 
                 go.transform.parent = gamePlayer.transform;
 
+                float x = (float)57.79;
+                float y = (float)1.28;
+                float z = (float)1.225478;
+                Vector3 posicion = new Vector3(x,y,z);
+
+                go.transform.position.Set(x,y,z);
+
                 NetworkServer.Spawn(go, conn);
+
                 go.GetComponent<NetworkIdentity>().AssignClientAuthority(conn);
             }
             return true;
