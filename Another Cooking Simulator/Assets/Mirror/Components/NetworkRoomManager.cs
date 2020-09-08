@@ -156,7 +156,7 @@ namespace Mirror
             }
 
             GameObject gamePlayer = null;//Prefab
-            
+
             if (gamePlayer == null)
             {
                 // get start position from base class
@@ -578,7 +578,7 @@ namespace Mirror
         [EditorBrowsable(EditorBrowsableState.Never), Obsolete("Use OnRoomServerSceneLoadedForPlayer(NetworkConnection conn, GameObject roomPlayer, GameObject gamePlayer) instead")]
         public virtual bool OnRoomServerSceneLoadedForPlayer(GameObject roomPlayer, GameObject gamePlayer)
         {
-            
+
             return true;
         }
 
@@ -606,18 +606,19 @@ namespace Mirror
             }
             else
             {
-                GameObject go = Instantiate(PCPlayer, new Vector3(57,2,2), Quaternion.identity);
+                GameObject go = Instantiate(PCPlayer);
+                //GameObject go = Instantiate(PCPlayer, new Vector3(57,2,2), Quaternion.identity);
 
                 go.name = "PCPlayer " + numPCPlayers;
 
                 go.transform.parent = gamePlayer.transform;
 
-                float x = (float)57.79;
-                float y = (float)1.28;
-                float z = (float)1.225478;
-                Vector3 posicion = new Vector3(x,y,z);
+                //float x = (float)57.79;
+                //float y = (float)1.28;
+                //float z = (float)1.225478;
+                //Vector3 posicion = new Vector3(x,y,z);
 
-                go.transform.position.Set(x,y,z);
+                //go.transform.position.Set(x,y,z);
 
                 NetworkServer.Spawn(go, conn);
 
@@ -645,7 +646,7 @@ namespace Mirror
         /// </summary>
         public virtual void OnRoomClientEnter()
         {
-            
+
         }
 
         /// <summary>
