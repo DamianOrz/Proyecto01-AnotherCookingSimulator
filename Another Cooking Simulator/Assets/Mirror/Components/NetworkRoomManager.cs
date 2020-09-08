@@ -598,7 +598,8 @@ namespace Mirror
             //gamePlayer --> Aún no reemplaza a roomPlayer y fue recien instanciado
             if (roomPlayer.GetComponent<NetworkRoomPlayer>().playerType == 0)
             {
-                GameObject go = Instantiate(VRPlayer);
+                GameObject go = Instantiate(VRPlayer, new Vector3(21, 2f, -7), Quaternion.identity);
+                go.name = "VRPlayer";
                 go.transform.parent = gamePlayer.transform;
 
                 NetworkServer.Spawn(go, conn);
@@ -606,19 +607,18 @@ namespace Mirror
             }
             else
             {
-                GameObject go = Instantiate(PCPlayer);
-                //GameObject go = Instantiate(PCPlayer, new Vector3(57,2,2), Quaternion.identity);
+                GameObject go = Instantiate(PCPlayer, new Vector3(57,2,2), Quaternion.identity);
 
                 go.name = "PCPlayer " + numPCPlayers;
 
                 go.transform.parent = gamePlayer.transform;
 
-                //float x = (float)57.79;
-                //float y = (float)1.28;
-                //float z = (float)1.225478;
-                //Vector3 posicion = new Vector3(x,y,z);
+                float x = (float)57.79;
+                float y = (float)1.28;
+                float z = (float)1.225478;
+                Vector3 posicion = new Vector3(x,y,z);
 
-                //go.transform.position.Set(x,y,z);
+                go.transform.position.Set(x,y,z);
 
                 NetworkServer.Spawn(go, conn);
 

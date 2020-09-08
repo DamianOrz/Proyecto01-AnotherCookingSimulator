@@ -2,7 +2,7 @@
 namespace VRTK
 {
     using UnityEngine;
-    using Mirror;
+    //using Mirror;
     /// <summary>
     /// Determines if the Interact Touch can initiate a grab with the touched Interactable Object.
     /// </summary>
@@ -26,7 +26,7 @@ namespace VRTK
     /// `VRTK/Examples/014_Controller_SnappingObjectsOnGrab` demonstrates the different mechanisms for snapping a grabbed object to the controller.
     /// </example>
     [AddComponentMenu("VRTK/Scripts/Interactions/Interactors/VRTK_InteractGrab")]
-    public class VRTK_InteractGrab : NetworkBehaviour
+    public class VRTK_InteractGrab : MonoBehaviour //NetowrkBehaviour
     {
         [Header("Grab Settings")]
 
@@ -78,7 +78,7 @@ namespace VRTK
         protected VRTK_ControllerEvents.ButtonAlias savedGrabButton = VRTK_ControllerEvents.ButtonAlias.Undefined;
         protected bool grabPressed;
 
-        private NetworkIdentity objNetId;
+        //private NetworkIdentity objNetId;
 
         protected GameObject grabbedObject = null;
         protected bool influencingGrabbedObject = false;
@@ -575,13 +575,13 @@ namespace VRTK
         protected virtual void DoGrabObject(object sender, ControllerInteractionEventArgs e)
         {
             OnGrabButtonPressed(controllerEvents.SetControllerEvent(ref grabPressed, true));
-            SetearGravity();
+            //SetearGravity();
             AttemptGrabObject();
         }
 
         protected virtual void DoReleaseObject(object sender, ControllerInteractionEventArgs e)
         {
-            SacarGravity();
+            //SacarGravity();
             AttemptReleaseObject();
             OnGrabButtonReleased(controllerEvents.SetControllerEvent(ref grabPressed, false));
         }
@@ -619,6 +619,7 @@ namespace VRTK
                 }
             }
         }
+        /*
         //MIS METODOS
         protected void SetearGravity()
         {
@@ -650,5 +651,7 @@ namespace VRTK
             go.GetComponent<Rigidbody>().useGravity = true;
             go.GetComponent<Rigidbody>().isKinematic = false;
         }
+        //
+        */
     }
 }
