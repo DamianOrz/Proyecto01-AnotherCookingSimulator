@@ -220,13 +220,6 @@ public class PcManager : NetworkBehaviour
                         List<Pedido> pedidos = PedidoManager.instancePedidoManager.getListaPedidos();
                     }
                 }
-                if (whatIHit.collider.gameObject.name == "PantallaHacerPedidos")
-                {
-                    //m_PointerEventData = new PointerEventData(m_EventSystem);
-                    //GraphicRaycaster gr = canvasTomarPedidos.GetComponent<GraphicRaycaster>();
-                    //PedidoManager.crearPedidoRandom(1);
-                    //List<Pedido> pedidos = PedidoManager.getListaPedidos();
-                }
             }
             //Pregunto si esta apuntando a un objeto que se puede agarrar
             if (whatIHit.collider.gameObject.tag == "Grabable")
