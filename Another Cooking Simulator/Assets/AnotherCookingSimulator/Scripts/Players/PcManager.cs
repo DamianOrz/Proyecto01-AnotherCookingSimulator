@@ -240,7 +240,7 @@ public class PcManager : NetworkBehaviour
     {
         Debug.Log("This is being executed in the server");
         RpcSetAsChild(go, player);
-        RpcAddNetworkTransformChild(go, player);
+        //RpcAddNetworkTransformChild(go, player);
     }
 
     [ClientRpc]
@@ -276,7 +276,7 @@ public class PcManager : NetworkBehaviour
     void CmdDropObject(GameObject player)
     {
         Debug.Log("This is being executed in the server");
-        RpcRemoveNetworkTransformChild(player);
+        //RpcRemoveNetworkTransformChild(player);
         RpcRemoveAsChild(player);
     }
 
