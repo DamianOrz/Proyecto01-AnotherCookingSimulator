@@ -206,6 +206,7 @@ public class PcManager : NetworkBehaviour
                 CmdDropObject(gameObject);
                 return;
             }
+            if (whatIHit.collider == null) return;
             //Pregunta si apunta a un objeto interactuable
             if (whatIHit.collider.gameObject.tag == "Interactuable")
             {
