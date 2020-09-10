@@ -1,5 +1,5 @@
 ﻿using Object = UnityEngine.Object;
-
+using UnityEngine;
 public class IngredienteFactory
 {
     private IngredienteConfiguration _ingredienteConfiguration;
@@ -9,10 +9,10 @@ public class IngredienteFactory
         _ingredienteConfiguration = ingredienteConfiguration;
     }
 
-    public Ingrediente Create(string id)
+    public Ingrediente CreateWithPosition(string id, Vector3 position)
     {
         var ingrediente = _ingredienteConfiguration.getIngredientePrefabById(id);
 
-        return Object.Instantiate(ingrediente);
+        return Object.Instantiate(ingrediente, position, Quaternion.identity);
     }
 }

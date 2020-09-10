@@ -320,6 +320,7 @@ GameObject:
   - component: {fileID: 3885903794227227961}
   - component: {fileID: 7473853014041603738}
   - component: {fileID: 927062119934773969}
+  - component: {fileID: 5690614458842954348}
   m_Layer: 0
   m_Name: PanInferior
   m_TagString: Grabable
@@ -520,6 +521,19 @@ MonoBehaviour:
   localPositionSensitivity: 0.01
   localRotationSensitivity: 0.01
   localScaleSensitivity: 0.01
+--- !u!114 &5690614458842954348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4128190076276702906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0055aebc1d276ac4496e9d9f6b5ec9e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: panInferior
 --- !u!1 &5715405204522599458
 GameObject:
   m_ObjectHideFlags: 0

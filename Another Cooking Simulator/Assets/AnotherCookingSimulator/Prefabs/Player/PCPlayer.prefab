@@ -898,7 +898,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7255874992839985492}
   m_LocalRotation: {x: 0.0006492548, y: 0.9964178, z: -0.08420675, w: 0.007774205}
-  m_LocalPosition: {x: -0.06998068, y: -0.18207088, z: 0.6735345}
+  m_LocalPosition: {x: -0.365, y: -0.207, z: 0.524}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8557569956667069112}
@@ -1044,7 +1044,7 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 256
-  distanceToSee: 5.73
+  distanceToSee: 1.7
   mouseSensitivity: 200
 --- !u!114 &2918585379329053316
 MonoBehaviour:

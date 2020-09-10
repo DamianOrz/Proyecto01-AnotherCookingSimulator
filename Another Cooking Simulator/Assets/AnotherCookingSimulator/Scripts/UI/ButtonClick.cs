@@ -4,20 +4,34 @@ using UnityEngine;
 
 public class ButtonClick : MonoBehaviour
 {
+    private int _idCombo;
+
     public void CrearInterpretacionHS()
     {
-        PcManager.SetIdCombo(1);
+        FindObjectOfType<AudioManager>().Play("FX-Tap");
+        SetIdCombo(1);
     }
     public void CrearInterpretacionHD()
     {
-        PcManager.SetIdCombo(2);
+        FindObjectOfType<AudioManager>().Play("FX-Tap");
+        SetIdCombo(2);
     }
     public void CrearInterpretacionHQ()
     {
-        PcManager.SetIdCombo(3);
+        FindObjectOfType<AudioManager>().Play("FX-Tap");
+        SetIdCombo(3);
     }
     public void CrearInterpretacionHDQ()
     {
-        PcManager.SetIdCombo(4);
+        FindObjectOfType<AudioManager>().Play("FX-Tap");
+        SetIdCombo(4);
+    }
+    public void SetIdCombo(int combo)
+    {
+        _idCombo = combo;
+    }
+    public void CrearInterpretacion()
+    {
+        PedidoManager.instancePedidoManager.CrearInterpretacion(_idCombo);
     }
 }

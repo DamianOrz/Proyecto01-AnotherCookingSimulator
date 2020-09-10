@@ -28,6 +28,7 @@ public class PcManager : NetworkBehaviour
     private CharacterController controller;
     Animator anim;
 
+    private GameObject canvasSpawnIngrediente;
     private GameObject canvasTomarPedidos;
     //MOVEMENT
     public float speed = 7f;
@@ -52,6 +53,7 @@ public class PcManager : NetworkBehaviour
     private float xRotation = 0f;
 
     //UI
+    private GraphicRaycaster spawn_Raycaster;
     private GraphicRaycaster m_Raycaster;
     private EventSystem m_EventSystem;
     private PointerEventData m_PointerEventData;
@@ -82,6 +84,9 @@ public class PcManager : NetworkBehaviour
         rectTransformCrossHair = canvasCrosshair.GetComponent<RectTransform>();
         myCrosshair = canvasCrosshair.GetComponentsInChildren<Image>();
 
+        canvasSpawnIngrediente = GameObject.Find("CanvasSpawnIngrediente");
+        canvasSpawnIngrediente.GetComponent<Canvas>().worldCamera = cameraPlayer;
+        spawn_Raycaster = canvasSpawnIngrediente.GetComponent<GraphicRaycaster>();
 
         canvasTomarPedidos = GameObject.Find("CanvasTomarPedido");
         canvasTomarPedidos.GetComponent<Canvas>().worldCamera = cameraPlayer;
@@ -171,31 +176,6 @@ public class PcManager : NetworkBehaviour
             //Raycast using the Graphics Raycaster and mouse click position
             m_Raycaster.Raycast(m_PointerEventData, results);
 
-            //For every result returned, output the name of the GameObject on the Canvas hit by the Ray
-            foreach (RaycastResult result in results)
-            {
-                switch (result.gameObject.name)
-                {
-                    case "btnHamburguesaSimple":
-                        FindObjectOfType<AudioManager>().Play("FX-Tap");
-                        SetIdCombo(1);
-                        break;
-                    case "btnHamburguesaDoble":
-                        FindObjectOfType<AudioManager>().Play("FX-Tap");
-                        SetIdCombo(2);
-                        break;
-                    case "btnHamburguesaSimpleConQueso":
-                        FindObjectOfType<AudioManager>().Play("FX-Tap");
-                        SetIdCombo(3);
-                        break;
-                    case "btnHamburguesaDobleConQueso":
-                        FindObjectOfType<AudioManager>().Play("FX-Tap");
-                        SetIdCombo(4);
-                        break;
-                }
-                Debug.Log("Hit " + result.gameObject.name);
-            }
-
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -205,7 +185,7 @@ public class PcManager : NetworkBehaviour
             {
                 if (whatIHit.collider == null)
                 {
-                    CmdDropObject(destination.GetChild(0).gameObject);
+                    CmdDropObject(gameObject);
                     return;
                 }
                 if (whatIHit.collider.gameObject.tag == "Verificacion" && zonaVerificacionDisponible == null)
@@ -228,17 +208,6 @@ public class PcManager : NetworkBehaviour
             //Pregunta si apunta a un objeto interactuable
             if (whatIHit.collider.gameObject.tag == "Interactuable")
             {
-                if (whatIHit.collider.gameObject.name == "btnGenerarInterpretacion")
-                {
-                    FindObjectOfType<AudioManager>().Play("FX-ButtonClick");
-
-                    PedidoManager.instancePedidoManager.CrearInterpretacion(_idCombo);
-
-                    GameObject Boton = whatIHit.collider.gameObject;
-                    Boton.GetComponent<Animation>().Play();
-
-                    List<Pedido> pedidos = PedidoManager.instancePedidoManager.getListaPedidos();
-                }
                 if (whatIHit.collider.gameObject.name == "btnGenerarPedidoRandom")
                 {
                     FindObjectOfType<AudioManager>().Play("FX-ButtonClick");
@@ -284,6 +253,7 @@ public class PcManager : NetworkBehaviour
         childObject.SetActive(false);
         Debug.Log("SIMON :" + transform.name);
         childObject.transform.parent = player.transform.GetChild(1).transform.GetChild(0).transform;
+        childObject.transform.localPosition = new Vector3(0f, 0f, 0f);
         childObject.GetComponent<Rigidbody>().isKinematic = true;
         //childObject.transform.position = new Vector3(0, 0, 0);
         if (zonaVerificacionDisponible != null)
@@ -331,7 +301,7 @@ public class PcManager : NetworkBehaviour
         transform.Rotate(Vector3.up * mouseX);
 
         Physics.Raycast(cameraPlayer.transform.position, cameraPlayer.transform.forward, out whatIHit, distanceToSee);
-        if (whatIHit.collider != null && whatIHit.collider.gameObject.name.Contains("PantallaHacerPedidos"))
+        if (whatIHit.collider != null && (whatIHit.collider.gameObject.name.Contains("PantallaHacerPedidos") || whatIHit.collider.gameObject.name.Contains("PantallaSpawnearIngredientes")))
         {
             SetTabletCrosshair(); //Crosshair para cuando se usan las laptops
         }
