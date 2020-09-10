@@ -6,6 +6,7 @@ using VRTK;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEditor;
+using System;
 
 public class PcManager : NetworkBehaviour
 {
@@ -239,7 +240,16 @@ public class PcManager : NetworkBehaviour
     {
         Debug.Log("This is being executed in the server");
         RpcSetAsChild(go, player);
+        RpcAddNetworkTransformChild(go, player);
     }
+
+    [ClientRpc]
+    private void RpcAddNetworkTransformChild(GameObject go, GameObject player)
+    {
+        NetworkTransformChild setObjectAsChild = player.AddComponent<NetworkTransformChild>();
+        setObjectAsChild.target = go.transform;
+    }
+
     [ClientRpc]
     void RpcSetAsChild(GameObject childObject, GameObject player)
     {
@@ -266,8 +276,22 @@ public class PcManager : NetworkBehaviour
     void CmdDropObject(GameObject player)
     {
         Debug.Log("This is being executed in the server");
+        RpcRemoveNetworkTransformChild(player);
         RpcRemoveAsChild(player);
     }
+
+    [ClientRpc]
+    private void RpcRemoveNetworkTransformChild(GameObject player)
+    {
+        foreach (NetworkTransformChild  ntc in player.GetComponents<NetworkTransformChild>())
+        {
+            if (ntc.target == player.transform.GetChild(1).transform.GetChild(0).transform.GetChild(0).transform)
+            {
+                Destroy(ntc);
+            }
+        }
+    }
+
     [ClientRpc]
     void RpcRemoveAsChild(GameObject player)
     {
