@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class IngredienteSpawner : MonoBehaviour
+public class IngredienteSpawner : NetworkBehaviour
 {
     [SerializeField] private IngredienteConfiguration _ingredienteConfiguration;
     private IngredienteFactory _ingredienteFactory;
@@ -17,28 +18,29 @@ public class IngredienteSpawner : MonoBehaviour
     {
         _ingredienteFactory = new IngredienteFactory(Instantiate(_ingredienteConfiguration));
     }
-    private void Update()
-    {
-        if (Input.GetKey(KeyCode.V))
-        {
-            _ingredienteFactory.CreateWithPosition("carne", new Vector3(29.44f, 3.416f, -8.7951f));
-        }
-    }
     public void SpawnCarne()
     {
-        _ingredienteFactory.CreateWithPosition("carne", _positionSpawnCarne);
+        Object objeto = _ingredienteFactory.CreateWithPosition("carne", _positionSpawnCarne);
+        GameObject a = ((GameObject)objeto);
+        NetworkServer.Spawn(a);
     }
     public void SpawnPanSuperior()
     {
-        _ingredienteFactory.CreateWithPosition("panSuperior", _positionSpawnPanSuperior);
+        Object objeto = _ingredienteFactory.CreateWithPosition("panSuperior", _positionSpawnPanSuperior);
+        GameObject a = ((GameObject)objeto);
+        NetworkServer.Spawn(a);
     }
     public void SpawnPanInferior()
     {
-        _ingredienteFactory.CreateWithPosition("panInferior", _positionSpawnPanInferior);
+        Object objeto = _ingredienteFactory.CreateWithPosition("panInferior", _positionSpawnPanInferior);
+        GameObject a = ((GameObject)objeto);
+        NetworkServer.Spawn(a);
     }
     public void SpawnCheddar()
     {
-        _ingredienteFactory.CreateWithPosition("cheddar", _positionSpawnCheddar);
+        Object objeto = _ingredienteFactory.CreateWithPosition("cheddar", _positionSpawnCheddar);
+        GameObject a = ((GameObject)objeto);
+        NetworkServer.Spawn(a);
     }
 
 }

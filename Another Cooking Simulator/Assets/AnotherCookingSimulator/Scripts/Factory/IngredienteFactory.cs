@@ -1,5 +1,6 @@
 ﻿using Object = UnityEngine.Object;
 using UnityEngine;
+
 public class IngredienteFactory
 {
     private IngredienteConfiguration _ingredienteConfiguration;
@@ -13,6 +14,6 @@ public class IngredienteFactory
     {
         var ingrediente = _ingredienteConfiguration.getIngredientePrefabById(id);
 
-        return Object.Instantiate(ingrediente, position, Quaternion.identity);
+        return Object.Instantiate(ingrediente, position, Quaternion.identity);;
     }
 }
