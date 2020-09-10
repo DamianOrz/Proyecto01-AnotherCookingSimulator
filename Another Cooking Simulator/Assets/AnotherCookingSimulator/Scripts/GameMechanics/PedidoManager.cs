@@ -183,7 +183,6 @@ public class PedidoManager : NetworkBehaviour
         GameObject pedidoCreado = Instantiate(instancePedidoManager.prefabClientes);
         GameObject panel = pedidoCreado.transform.Find("Panel").gameObject;
         panel.transform.Find("strConsumibles").gameObject.GetComponent<TMP_Text>().text = ordenIngredientes;
-        Debug.Log("SIMON: LOS INGRENDIENTES ESTAN LLEGANDO Y SON:" + pedidoCreado.transform.GetChild(0).transform.Find("strConsumibles").gameObject.GetComponent<TMP_Text>().text);
         pedidoCreado.transform.SetParent(instancePedidoManager.contentMostrarPedidoCliente.transform, false);
     }
     #endregion
