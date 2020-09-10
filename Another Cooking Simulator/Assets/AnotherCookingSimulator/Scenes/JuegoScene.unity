@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.32103172, g: 0.2562075, b: 0.41129574, a: 1}
+  m_IndirectSpecularColor: {r: 0.3211032, g: 0.2694233, b: 0.41366473, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -202,8 +202,13 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1656429179}
   m_HandleRect: {fileID: 1216770465}
   m_Direction: 2
+<<<<<<< HEAD
+  m_Value: -0.0000015298276
+  m_Size: 0.69015115
+=======
   m_Value: 0.00000033996167
-  m_Size: 0.6902081
+  m_Size: 0.69003934
+>>>>>>> 9164856fb13fe967ebe6cc667ab85c4af2210b71
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3602,7 +3607,11 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 89.76735}
+<<<<<<< HEAD
+  m_AnchoredPosition: {x: 0, y: 89.76708}
+=======
+  m_AnchoredPosition: {x: 0, y: 89.767136}
+>>>>>>> 9164856fb13fe967ebe6cc667ab85c4af2210b71
   m_SizeDelta: {x: -5.0498047, y: 289.7677}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &201825328
@@ -11830,6 +11839,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 803a0ed613699374f8616f15de0fc2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   _ingredienteConfiguration: {fileID: 11400000, guid: 34abfe5fe9c2af24ab985a89602c5d57,
     type: 2}
   _positionSpawnCarne: {x: 30.008, y: 3.968, z: -8.917}
@@ -16762,7 +16773,11 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 89.767006}
+<<<<<<< HEAD
+  m_AnchoredPosition: {x: 0, y: 89.76723}
+=======
+  m_AnchoredPosition: {x: 0, y: 89.76676}
+>>>>>>> 9164856fb13fe967ebe6cc667ab85c4af2210b71
   m_SizeDelta: {x: -5.0498047, y: 289.7677}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1165009281
@@ -24614,8 +24629,13 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 171669037}
   m_HandleRect: {fileID: 171669036}
   m_Direction: 2
+<<<<<<< HEAD
   m_Value: 1.0000004
-  m_Size: 0.65761
+  m_Size: 0.65761006
+=======
+  m_Value: 1
+  m_Size: 0.6576099
+>>>>>>> 9164856fb13fe967ebe6cc667ab85c4af2210b71
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -27520,8 +27540,12 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1656429179}
   m_HandleRect: {fileID: 1656429178}
   m_Direction: 2
-  m_Value: -0.000006289287
-  m_Size: 0.6902079
+  m_Value: -0.0000020397688
+<<<<<<< HEAD
+  m_Size: 0.69014895
+=======
+  m_Size: 0.6900387
+>>>>>>> 9164856fb13fe967ebe6cc667ab85c4af2210b71
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -29290,7 +29314,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneId: 2473096041
-  serverOnly: 1
+  serverOnly: 0
   m_AssetId: 
   hasSpawned: 0
 --- !u!1001 &1995001283
