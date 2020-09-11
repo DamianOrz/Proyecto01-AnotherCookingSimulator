@@ -32,6 +32,9 @@ public class ButtonClick : MonoBehaviour
     }
     public void CrearInterpretacion()
     {
+        if (_idCombo == 0) return;
+
         PedidoManager.instancePedidoManager.CrearInterpretacion(_idCombo);
+        _idCombo = 0;
     }
 }

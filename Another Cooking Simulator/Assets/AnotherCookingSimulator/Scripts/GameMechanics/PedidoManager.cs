@@ -55,7 +55,7 @@ public class PedidoManager : NetworkBehaviour
             //DiaManager.instanceDiaManager.FinalizarDia();
         }
     }
-    public int correccion(int[] ordenIngredientes, int[] interpretacion)
+    private int correccion(int[] ordenIngredientes, int[] interpretacion)
     {
         int puntos = 0;
         if (ordenIngredientes.Length == interpretacion.Length)
@@ -87,7 +87,7 @@ public class PedidoManager : NetworkBehaviour
         _listaPedidos.Add(unPedido);
         unPedido.SetIdPedido(_listaPedidos.Count);
     } //Genera un pedido de forma aleatoria
-
+    
     public Pedido CrearInterpretacion(int id)
     {
         Pedido unPedido;
@@ -109,13 +109,17 @@ public class PedidoManager : NetworkBehaviour
                 int[] interpretacionConQueso = new int[4] { 0, 1, 2, 0 };
                 unPedido.SetInterpretacionIngredientes(interpretacionConQueso);
                 break;
+            case 4:
+                int[] interpretacionDobleConQueso = new int[5] { 0, 1, 2, 1, 0 };
+                unPedido.SetInterpretacionIngredientes(interpretacionDobleConQueso);
+                break;
             default:
                 break;
         }
         MostrarPedidoAlDeVR(unPedido);
         return unPedido;
     }
-    public List<Pedido> getListaPedidos() { return _listaPedidos; } //Devuelve la lista de pedidos
+    private List<Pedido> getListaPedidos() { return _listaPedidos; } //Devuelve la lista de pedidos
     public void LimpiarListaPedidos()
     {
         _listaPedidos.Clear();
@@ -130,79 +134,94 @@ public class PedidoManager : NetworkBehaviour
 
     public void MostrarPedidoAlDeVR(Pedido unPedido)
     {
-        //Cuando se conecte con el boton esta funcion recibirá parámetros
-        string textoPedido = "ERROR";
-
-        GameObject pedidoCreado = Instantiate(instancePedidoManager.prefabVR);
-
-        GameObject panel = pedidoCreado.transform.Find("Panel").gameObject;
-
-        //BATALLA 1 GANADA CONTRA DAMIAN (SEÑOR FUERZAS DEL MAL), PUNTO PARA SIMI
-
-        panel.transform.Find("strNumeroPedido").gameObject.GetComponent<TMP_Text>().text = "Pedido # " + unPedido.GetIdPedido();
-
-        panel.transform.Find("strIngredientes").gameObject.GetComponent<TMP_Text>().text = "A preparar: " + CambiarArrayAString(unPedido.GetInterpretacionIngredientes());
-
-        panel.transform.Find("strTiempoRestante").gameObject.GetComponent<TMP_Text>().text = "Tiempo Restante:";
-
-        pedidoCreado.transform.SetParent(instancePedidoManager.contentMostrarPedidoAlVR.transform, false);
-
-        iNumPedido++;
-    }
-
-
-    public void MostrarPedidoDelCliente(Pedido unPedido)
-    {
+        //Agarro orden de ingredientes
         string strOrden = CambiarArrayAString(unPedido.GetOrdenIngredientes());
-        sincronizarPedidoEnPantalla(strOrden);
-        //GameObject pedidoCreado = Instantiate(instancePedidoManager.prefabClientes);
-        //GameObject panel = pedidoCreado.transform.Find("Panel").gameObject;
-
-        //string strOrden = CambiarArrayAString(unPedido.GetOrdenIngredientes());
-        //panel.transform.Find("strConsumibles").gameObject.GetComponent<TMP_Text>().text = strOrden;
-
-
-        //pedidoCreado.transform.SetParent(instancePedidoManager.contentMostrarPedidoCliente.transform, false);
-
-        //spawnServer(pedidoCreado);
-        //RpcPonerComoHijoPanel(pedidoCreado, unPedido, strOrden);
+        //Ejecuto funcion server y le mando los ingredientes
+        SincronizarPedidoEnPantalla(unPedido.GetIdPedido(), strOrden);
 
         iNumPedido++;
     }
-    #region OnlinePedidos
-    [Server]
-    public void sincronizarPedidoEnPantalla(string ordenDeIngredientes)
+
+    private void MostrarPedidoDelCliente(Pedido unPedido)
     {
-        RpcMostrarPedidoACadaCliente(ordenDeIngredientes);
+        //Agarro orden de ingredientes
+        string strOrden = CambiarArrayAString(unPedido.GetOrdenIngredientes());
+        //Ejecuto funcion server y le mando los ingredientes
+        SincronizarPedidoEnPantalla(-1, strOrden);
+
+        iNumPedido++;
     }
-    [ClientRpc]
-    public void RpcMostrarPedidoACadaCliente(string ordenIngredientes)
-    {
-        Debug.Log("SIMON: LLEGOALCLIENTE");
-        Debug.Log("SIMON: LLEGO AL CLIENTE EL STRING: " + ordenIngredientes);
-        GameObject pedidoCreado = Instantiate(instancePedidoManager.prefabClientes);
-        GameObject panel = pedidoCreado.transform.Find("Panel").gameObject;
-        panel.transform.Find("strConsumibles").gameObject.GetComponent<TMP_Text>().text = ordenIngredientes;
-        pedidoCreado.transform.SetParent(instancePedidoManager.contentMostrarPedidoCliente.transform, false);
-    }
-    #endregion
+
     public void MostrarVerificacion(int[] Ingredientes)
     {
-        //Cuando se conecte con el boton esta funcion recibirá parámetros
-        string textoPedido = "ERROR";
-
-        GameObject pedidoCreado = Instantiate(instancePedidoManager.prefabUltimaInterpretacion);
-
-        GameObject panel = pedidoCreado.transform.Find("Panel").gameObject;
-
-        panel.transform.Find("strIngredientes").gameObject.GetComponent<TMP_Text>().text = CambiarArrayAString(Ingredientes);
-
-        pedidoCreado.transform.SetParent(instancePedidoManager.contentMostrarUltimaInterpretacion.transform, false);
+        //Agarro orden de ingredientes
+        string strOrden = CambiarArrayAString(Ingredientes);
+        //Ejecuto funcion server y le mando los ingredientes
+        SincronizarPedidoEnPantalla(-2, strOrden);
 
         iNumPedido++;
     }
+
+    #region OnlinePedidos
     [Server]
-    public string CambiarArrayAString(int[] listaIngredientes)
+    private void SincronizarPedidoEnPantalla(int idPedido, string ordenDeIngredientes)
+    {
+        //Ejecuto un rpc para ejecutar el codigo en todos los clientes(mando orden)
+        if(idPedido == -1)
+        {
+            RpcMostrarPedidoACadaCliente(ordenDeIngredientes);
+            return;
+        }
+        if (idPedido == -2)
+        {
+            RpcMostrarVerificacion(ordenDeIngredientes);
+            return;
+        }
+        RpcMostrarPedidoAVR(idPedido, ordenDeIngredientes);
+    }
+    [ClientRpc]
+    private void RpcMostrarPedidoACadaCliente(string ordenIngredientes)
+    {
+        //Instancio el prefab del cliente
+        GameObject pedidoCreado = Instantiate(instancePedidoManager.prefabClientes);
+        //Busco el panel
+        GameObject panel = pedidoCreado.transform.Find("Panel").gameObject;
+        //Le inserto el orden de ingredientes al prefab
+        panel.transform.Find("strConsumibles").gameObject.GetComponent<TMP_Text>().text = ordenIngredientes;
+        //Lo hago hijo de la pantalla para que se vea
+        pedidoCreado.transform.SetParent(instancePedidoManager.contentMostrarPedidoCliente.transform, false);
+    }
+    [ClientRpc]
+    private void RpcMostrarVerificacion(string ordenIngredientes)
+    {
+        //Instancio el prefab del cliente
+        GameObject pedidoCreado = Instantiate(instancePedidoManager.prefabUltimaInterpretacion);
+        //Busco el panel
+        GameObject panel = pedidoCreado.transform.Find("Panel").gameObject;
+        //Le inserto el orden de ingredientes al prefab
+        panel.transform.Find("strConsumibles").gameObject.GetComponent<TMP_Text>().text = ordenIngredientes;
+        //Lo hago hijo de la pantalla para que se vea
+        pedidoCreado.transform.SetParent(instancePedidoManager.contentMostrarUltimaInterpretacion.transform, false);
+    }
+    [ClientRpc]
+    private void RpcMostrarPedidoAVR(int idPedido, string ordenIngredientes)
+    {
+        //Instancio el prefab del cliente
+        GameObject pedidoCreado = Instantiate(instancePedidoManager.prefabVR);
+        //Busco el panel
+        GameObject panel = pedidoCreado.transform.Find("Panel").gameObject;
+        //Le inserto la informacion
+        panel.transform.Find("strNumeroPedido").gameObject.GetComponent<TMP_Text>().text = "Pedido # " + idPedido;
+
+        panel.transform.Find("strIngredientes").gameObject.GetComponent<TMP_Text>().text = "A preparar: " + ordenIngredientes;
+
+        panel.transform.Find("strTiempoRestante").gameObject.GetComponent<TMP_Text>().text = "Tiempo Restante:";
+        //Lo hago hijo de la pantalla del de VR para que se vea
+        pedidoCreado.transform.SetParent(instancePedidoManager.contentMostrarPedidoAlVR.transform, false);
+    }
+    #endregion
+
+    private string CambiarArrayAString(int[] listaIngredientes)
     {
         if (DiaManager.instanceDiaManager.diaActual == 1)
         {
