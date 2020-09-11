@@ -20,27 +20,27 @@ public class IngredienteSpawner : NetworkBehaviour
     }
     public void SpawnCarne()
     {
-        Object objeto = _ingredienteFactory.CreateWithPosition("carne", _positionSpawnCarne);
-        GameObject a = ((GameObject)objeto);
-        NetworkServer.Spawn(a);
+        GameObject objeto = _ingredienteFactory.CreateWithPosition("carne", _positionSpawnCarne).gameObject;
+        SpawnIngrediente(objeto);
     }
     public void SpawnPanSuperior()
     {
-        Object objeto = _ingredienteFactory.CreateWithPosition("panSuperior", _positionSpawnPanSuperior);
-        GameObject a = ((GameObject)objeto);
-        NetworkServer.Spawn(a);
+        GameObject objeto = _ingredienteFactory.CreateWithPosition("panSuperior", _positionSpawnPanSuperior).gameObject;
+        SpawnIngrediente(objeto);
     }
     public void SpawnPanInferior()
     {
-        Object objeto = _ingredienteFactory.CreateWithPosition("panInferior", _positionSpawnPanInferior);
-        GameObject a = ((GameObject)objeto);
-        NetworkServer.Spawn(a);
+        GameObject objeto = _ingredienteFactory.CreateWithPosition("panInferior", _positionSpawnPanInferior).gameObject;
+        SpawnIngrediente(objeto);
     }
     public void SpawnCheddar()
     {
-        Object objeto = _ingredienteFactory.CreateWithPosition("cheddar", _positionSpawnCheddar);
-        GameObject a = ((GameObject)objeto);
-        NetworkServer.Spawn(a);
+        GameObject objeto = _ingredienteFactory.CreateWithPosition("cheddar", _positionSpawnCheddar).gameObject;
+        SpawnIngrediente(objeto);
     }
-
+    [Server]
+    public void SpawnIngrediente(GameObject ingrediente)
+    {
+        NetworkServer.Spawn(ingrediente);
+    }
 }

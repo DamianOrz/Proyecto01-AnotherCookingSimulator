@@ -15,7 +15,7 @@ public class IngredienteFactory : NetworkBehaviour
     {
         var ingrediente = _ingredienteConfiguration.getIngredientePrefabById(id);
 
-        return Object.Instantiate(ingrediente, position, Quaternion.identity);;
+        return Instantiate(ingrediente, position, Quaternion.identity);;
     }
     //[Server]
     //public Ingrediente SpawnIngrediente(Ingrediente ingrediente,Vector3 position)
