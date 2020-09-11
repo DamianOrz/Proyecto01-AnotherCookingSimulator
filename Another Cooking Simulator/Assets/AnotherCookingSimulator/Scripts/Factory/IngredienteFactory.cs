@@ -1,7 +1,8 @@
 ﻿using Object = UnityEngine.Object;
 using UnityEngine;
+using Mirror;
 
-public class IngredienteFactory
+public class IngredienteFactory : NetworkBehaviour
 {
     private IngredienteConfiguration _ingredienteConfiguration;
 
@@ -16,4 +17,11 @@ public class IngredienteFactory
 
         return Object.Instantiate(ingrediente, position, Quaternion.identity);;
     }
+    //[Server]
+    //public Ingrediente SpawnIngrediente(Ingrediente ingrediente,Vector3 position)
+    //{
+    //    Ingrediente ingredienteASpawnear = Instantiate(ingrediente, position, Quaternion.identity);
+    //    NetworkServer.Spawn(ingredienteASpawnear.gameObject);
+    //    return ingredienteASpawnear;
+    //}
 }

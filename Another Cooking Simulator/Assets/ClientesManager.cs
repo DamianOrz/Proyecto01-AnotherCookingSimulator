@@ -11,6 +11,7 @@ public class ClientesManager : NetworkBehaviour
     private int contClientes=0;
     private static int pedidosEntregados = 0;
 
+    private bool primeraVezDelTick = true;
     private double tiempoEntreClientes= 5;
     private bool primeraVez=true;
 
@@ -45,7 +46,7 @@ public class ClientesManager : NetworkBehaviour
     public void playInvokeRepeating(float cadaTantoTiempo)
     {
         contClientes = 0;
-        InvokeRepeating("Tick", 0f, cadaTantoTiempo);
+        InvokeRepeating("Tick", 10f, cadaTantoTiempo);
     }
     public void cancelInvokeRepeating()
     {

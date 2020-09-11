@@ -206,21 +206,10 @@ public class PcManager : NetworkBehaviour
                 CmdDropObject(gameObject);
                 return;
             }
+            if (whatIHit.collider == null) return;
             //Pregunta si apunta a un objeto interactuable
             if (whatIHit.collider.gameObject.tag == "Interactuable")
             {
-                if (whatIHit.collider.gameObject.name == "btnGenerarPedidoRandom")
-                {
-                    FindObjectOfType<AudioManager>().Play("FX-ButtonClick");
-
-                    GameObject Boton = whatIHit.collider.gameObject;
-                    Boton.GetComponent<Animation>().Play();
-                    if (PedidoManager.instancePedidoManager.getListaPedidos().Count < DiaManager.instanceDiaManager.diasInfo[DiaManager.instanceDiaManager.diaActual].clientesEnElDia)
-                    {
-                        PedidoManager.instancePedidoManager.crearPedidoRandom();
-                        List<Pedido> pedidos = PedidoManager.instancePedidoManager.getListaPedidos();
-                    }
-                }
             }
             //Pregunto si esta apuntando a un objeto que se puede agarrar
             if (whatIHit.collider.gameObject.tag == "Grabable")

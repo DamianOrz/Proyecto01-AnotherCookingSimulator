@@ -150,42 +150,42 @@ public class PedidoManager : NetworkBehaviour
         iNumPedido++;
     }
 
-    
+
     public void MostrarPedidoDelCliente(Pedido unPedido)
     {
-        GameObject pedidoCreado = Instantiate(instancePedidoManager.prefabClientes);
-        GameObject panel = pedidoCreado.transform.Find("Panel").gameObject;
-        
         string strOrden = CambiarArrayAString(unPedido.GetOrdenIngredientes());
-        panel.transform.Find("strConsumibles").gameObject.GetComponent<TMP_Text>().text = strOrden;
+        sincronizarPedidoEnPantalla(strOrden);
+        //GameObject pedidoCreado = Instantiate(instancePedidoManager.prefabClientes);
+        //GameObject panel = pedidoCreado.transform.Find("Panel").gameObject;
+
+        //string strOrden = CambiarArrayAString(unPedido.GetOrdenIngredientes());
+        //panel.transform.Find("strConsumibles").gameObject.GetComponent<TMP_Text>().text = strOrden;
 
 
-        pedidoCreado.transform.SetParent(instancePedidoManager.contentMostrarPedidoCliente.transform, false);
+        //pedidoCreado.transform.SetParent(instancePedidoManager.contentMostrarPedidoCliente.transform, false);
 
-        spawnServer(pedidoCreado);
+        //spawnServer(pedidoCreado);
         //RpcPonerComoHijoPanel(pedidoCreado, unPedido, strOrden);
 
         iNumPedido++;
     }
+    #region OnlinePedidos
     [Server]
-    public void spawnServer(GameObject pedidoCreado)
+    public void sincronizarPedidoEnPantalla(string ordenDeIngredientes)
     {
-        NetworkServer.Spawn(pedidoCreado);
+        RpcMostrarPedidoACadaCliente(ordenDeIngredientes);
     }
     [ClientRpc]
-    public void RpcPonerComoHijoPanel(GameObject pedidoCreado, Pedido unPedido, String textoOrdenIngredientes)
+    public void RpcMostrarPedidoACadaCliente(string ordenIngredientes)
     {
-        //Recibe el gameobject + el pedido y edita el gameobject para mostrar esta info
-
-        GameObject panelDelpedido = pedidoCreado.transform.Find("Panel").gameObject;
-        //panelDelpedido.transform.Find("strNumeroPedido").GetComponent<TMP_Text>().text += ""; //TERMINAR
-        panelDelpedido.transform.Find("strConsumibles").GetComponent<TMP_Text>().text += textoOrdenIngredientes;
-
-
+        Debug.Log("SIMON: LLEGOALCLIENTE");
+        Debug.Log("SIMON: LLEGO AL CLIENTE EL STRING: " + ordenIngredientes);
+        GameObject pedidoCreado = Instantiate(instancePedidoManager.prefabClientes);
+        GameObject panel = pedidoCreado.transform.Find("Panel").gameObject;
+        panel.transform.Find("strConsumibles").gameObject.GetComponent<TMP_Text>().text = ordenIngredientes;
+        pedidoCreado.transform.SetParent(instancePedidoManager.contentMostrarPedidoCliente.transform, false);
     }
-
-
-
+    #endregion
     public void MostrarVerificacion(int[] Ingredientes)
     {
         //Cuando se conecte con el boton esta funcion recibirá parámetros
@@ -201,7 +201,7 @@ public class PedidoManager : NetworkBehaviour
 
         iNumPedido++;
     }
-
+    [Server]
     public string CambiarArrayAString(int[] listaIngredientes)
     {
         if (DiaManager.instanceDiaManager.diaActual == 1)
