@@ -6,31 +6,31 @@ public class ButtonClick : MonoBehaviour
 {
     private int _idCombo;
 
-    public void CrearInterpretacionHS()
+    private void CrearInterpretacionHS()
     {
         FindObjectOfType<AudioManager>().Play("FX-Tap");
         SetIdCombo(1);
     }
-    public void CrearInterpretacionHD()
+    private void CrearInterpretacionHD()
     {
         FindObjectOfType<AudioManager>().Play("FX-Tap");
         SetIdCombo(2);
     }
-    public void CrearInterpretacionHQ()
+    private void CrearInterpretacionHQ()
     {
         FindObjectOfType<AudioManager>().Play("FX-Tap");
         SetIdCombo(3);
     }
-    public void CrearInterpretacionHDQ()
+    private void CrearInterpretacionHDQ()
     {
         FindObjectOfType<AudioManager>().Play("FX-Tap");
         SetIdCombo(4);
     }
-    public void SetIdCombo(int combo)
+    private void SetIdCombo(int combo)
     {
         _idCombo = combo;
     }
-    public void CrearInterpretacion()
+    private void CrearInterpretacion()
     {
         if (_idCombo == 0) return;
 
