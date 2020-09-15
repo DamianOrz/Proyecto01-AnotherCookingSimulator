@@ -167,17 +167,20 @@ public class PedidoManager : NetworkBehaviour
     private void SincronizarPedidoEnPantalla(int idPedido, string ordenDeIngredientes)
     {
         //Ejecuto un rpc para ejecutar el codigo en todos los clientes(mando orden)
-        if(idPedido == -1)
+        if (idPedido == -1)
         {
             RpcMostrarPedidoACadaCliente(ordenDeIngredientes);
             return;
         }
-        if (idPedido == -2)
+        else if (idPedido == -2)
         {
             RpcMostrarVerificacion(ordenDeIngredientes);
             return;
         }
-        RpcMostrarPedidoAVR(idPedido, ordenDeIngredientes);
+        else
+        {
+            RpcMostrarPedidoAVR(idPedido, ordenDeIngredientes);
+        }
     }
     [ClientRpc]
     private void RpcMostrarPedidoACadaCliente(string ordenIngredientes)
@@ -187,6 +190,8 @@ public class PedidoManager : NetworkBehaviour
         //Busco el panel
         GameObject panel = pedidoCreado.transform.Find("Panel").gameObject;
         //Le inserto el orden de ingredientes al prefab
+
+        Debug.Log("SIMON: Los ingrediente son :"+ ordenIngredientes);
         panel.transform.Find("strConsumibles").gameObject.GetComponent<TMP_Text>().text = ordenIngredientes;
         //Lo hago hijo de la pantalla para que se vea
         pedidoCreado.transform.SetParent(instancePedidoManager.contentMostrarPedidoCliente.transform, false);
