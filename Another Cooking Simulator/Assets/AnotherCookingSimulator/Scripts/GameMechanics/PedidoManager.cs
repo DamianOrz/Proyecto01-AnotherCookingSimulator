@@ -135,7 +135,7 @@ public class PedidoManager : NetworkBehaviour
     public void MostrarPedidoAlDeVR(Pedido unPedido)
     {
         //Agarro orden de ingredientes
-        string strOrden = CambiarArrayAString(unPedido.GetOrdenIngredientes());
+        string strOrden = CambiarArrayAString(unPedido.GetInterpretacionIngredientes());
         //Ejecuto funcion server y le mando los ingredientes
         SincronizarPedidoEnPantalla(unPedido.GetIdPedido(), strOrden);
 
