@@ -98,6 +98,7 @@ public class PedidoManager : NetworkBehaviour
             case 1:
                 int[] interpretacionSimple = new int[3] { 0, 1, 0 };
                 unPedido.SetInterpretacionIngredientes(interpretacionSimple);
+                Debug.Log("SIMON: SE CREA LA INTERPRETACION");
                 break;
             //COMBO 2 = HAMBURGUESA DOBLE
             case 2:
