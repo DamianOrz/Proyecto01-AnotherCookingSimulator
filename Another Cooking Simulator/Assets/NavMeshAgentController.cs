@@ -14,12 +14,12 @@ public class NavMeshAgentController : MonoBehaviour
     {
         vehicle = GetComponent<NavMeshAgent>();
         objective = GetRandomGameBoardLocation();
+        GenerateNewObjective();
     }
 
     // Update is called once per frame
     void Update()
     {
-        vehicle.destination = objective;
        if (vehicle.pathStatus == NavMeshPathStatus.PathComplete && vehicle.remainingDistance == 0)
        {
             GenerateNewObjective();
@@ -29,6 +29,7 @@ public class NavMeshAgentController : MonoBehaviour
     private void GenerateNewObjective()
     {
         objective = GetRandomGameBoardLocation();
+        vehicle.destination = objective;
     }
 
     private Vector3 GetRandomGameBoardLocation()
