@@ -11,7 +11,6 @@ using System;
 public class PcManager : NetworkBehaviour
 {
     #region DeclaracionVariables
-    
 
     private static int _idCombo;
 
@@ -59,6 +58,10 @@ public class PcManager : NetworkBehaviour
     private EventSystem m_EventSystem;
     private PointerEventData m_PointerEventData;
 
+    //Material
+    [SerializeField] private Material isSeeing;
+    [SerializeField] private Material original;
+    private Renderer rendDeLaMesa = null;
     //PEDIDO
     [SerializeField] Pedido pedido = new Pedido();
     #endregion
@@ -137,11 +140,11 @@ public class PcManager : NetworkBehaviour
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 
-        
+
 
         Vector3 move = transform.right * x + transform.forward * z;
 
-        if (move != new Vector3(0,0,0))
+        if (move != new Vector3(0, 0, 0))
         {
             isWalking = true;
         }
@@ -149,7 +152,7 @@ public class PcManager : NetworkBehaviour
         anim.SetBool("IsGrounded", isGrounded);
 
         controller.Move(move * speed * Time.deltaTime);
-        
+
 
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
@@ -202,6 +205,12 @@ public class PcManager : NetworkBehaviour
                         objetoAMover.transform.position = destinoHamburguesa.position;
                         objetoAMover.transform.rotation = destinoHamburguesa.rotation;
                     }
+                }
+                if (whatIHit.collider.gameObject.tag == "Mesa")
+                {
+                    //PutObjectOnTheTable(gameObject,whatIHit);
+                    CmdPutObjectOnTheTable(gameObject, whatIHit.point);
+                    return;
                 }
                 CmdDropObject(gameObject);
                 return;
@@ -259,7 +268,23 @@ public class PcManager : NetworkBehaviour
         Debug.Log("This is being executed in the server");
         RpcRemoveAsChild(player);
     }
-
+    [Command]
+    void CmdPutObjectOnTheTable(GameObject player, Vector3 point)
+    {
+        RpcPutObjectOnTheTable(player, point);
+    }
+    [ClientRpc]
+    void RpcPutObjectOnTheTable(GameObject player, Vector3 point)
+    {
+        Debug.Log("SIMON: EL PUNTO ES : " + point);
+        GameObject destinationDelPlayer = player.transform.GetChild(1).transform.GetChild(0).transform.GetChild(0).gameObject;
+        Debug.Log("SIMON: EL INGREDIENTE ES : " + destinationDelPlayer.gameObject.name);
+        destinationDelPlayer.SetActive(false);
+        destinationDelPlayer.transform.parent = null;
+        destinationDelPlayer.GetComponent<Rigidbody>().isKinematic = false;
+        destinationDelPlayer.transform.position = new Vector3(point.x, point.y + 0.01f, point.z);
+        destinationDelPlayer.SetActive(true);
+    }
     [ClientRpc]
     void RpcRemoveAsChild(GameObject player)
     {
@@ -273,7 +298,16 @@ public class PcManager : NetworkBehaviour
         destinationDelPlayer.SetActive(true);
     }
     #endregion
-
+    private void PutObjectOnTheTable(GameObject player, RaycastHit whatIhit)
+    {
+        Vector3 point = whatIHit.point;
+        GameObject destinationDelPlayer = player.transform.GetChild(1).transform.GetChild(0).transform.GetChild(0).gameObject;
+        destinationDelPlayer.SetActive(false);
+        destinationDelPlayer.transform.parent = null;
+        destinationDelPlayer.GetComponent<Rigidbody>().isKinematic = false;
+        destinationDelPlayer.transform.position = new Vector3(point.x, point.y + 0.01f, point.z);
+        destinationDelPlayer.SetActive(true);
+    }
     void Look()
     {
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
@@ -286,6 +320,14 @@ public class PcManager : NetworkBehaviour
         transform.Rotate(Vector3.up * mouseX);
 
         Physics.Raycast(cameraPlayer.transform.position, cameraPlayer.transform.forward, out whatIHit, distanceToSee);
+        if (whatIHit.collider == null)
+        {
+            if (rendDeLaMesa != null)
+            {
+                rendDeLaMesa.sharedMaterial = original;
+            }
+            return;
+        }
         if (whatIHit.collider != null && (whatIHit.collider.gameObject.name.Contains("PantallaHacerPedidos") || whatIHit.collider.gameObject.name.Contains("PantallaSpawnearIngredientes")))
         {
             SetTabletCrosshair(); //Crosshair para cuando se usan las laptops
@@ -294,8 +336,23 @@ public class PcManager : NetworkBehaviour
         {
             SetCrossHair(); //Crosshair básico/default
         }
+        IluminarMesa();
     }
-
+    private void IluminarMesa()
+    {
+        if (whatIHit.collider.gameObject.tag == "Mesa" && destination.childCount > 0)
+        {
+            rendDeLaMesa = whatIHit.collider.gameObject.GetComponent<Renderer>();
+            rendDeLaMesa.sharedMaterial = isSeeing;
+        }
+        else
+        {
+            if (rendDeLaMesa != null)
+            {
+                rendDeLaMesa.sharedMaterial = original;
+            }
+        }
+    }
     void SetTabletCrosshair()
     {
         //rectTransformCrossHair = GetComponent<RectTransform>();
@@ -305,7 +362,7 @@ public class PcManager : NetworkBehaviour
             //i.color = Color.red;
             i.enabled = false;
         }
-        
+
     } //Crosshair para cuando se usan las laptops
 
     void SetCrossHair()
@@ -334,7 +391,7 @@ public class PcManager : NetworkBehaviour
         go.transform.rotation = destination.rotation;
         go.transform.parent = GameObject.Find("Destination").transform;
 
-        
+
         Debug.Log("SIMON : SE TERMINO EL AVISO");
     }
 
