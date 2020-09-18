@@ -41,6 +41,7 @@ public class DiaManager : NetworkBehaviour
     public TMP_Text titulo;
     public Canvas canvasAlFinalizarDia;
     public TMP_Text mostrarPuntos;
+    public GameObject prefabVehicle1; //El auto verde
 
     private void Awake()
     {
@@ -93,7 +94,6 @@ public class DiaManager : NetworkBehaviour
         instanceDiaManager.textoDia.text = "Dia : " + diaActual;
         //Empiezo la emision de pedidos
         ClientesManager.instanceClientesManager.playInvokeRepeating(instanceDiaManager.diasInfo[instanceDiaManager.diaActual].ratioDePedidos);
-
         //Apago el canvas
         UpdateCanvasStatus();
     }
@@ -109,6 +109,15 @@ public class DiaManager : NetworkBehaviour
         diaActual++;
         instanceDiaManager.textoDia.text = "Dia : " + diaActual;
         ClientesManager.instanceClientesManager.playInvokeRepeating(instanceDiaManager.diasInfo[instanceDiaManager.diaActual].ratioDePedidos);
+
+        /*
+        GameObject go;
+        for (int i = 0; i < 5; i++)
+        {
+            go = Instantiate(prefabVehicle1);
+            go.transform.position = new Vector3(0.3f, 6, 60);
+            NetworkServer.Spawn(go);
+        }*/
 
         //Apago el canvas
         UpdateCanvasStatus();
