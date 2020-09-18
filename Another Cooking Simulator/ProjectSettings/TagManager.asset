@@ -17,6 +17,7 @@ TagManager:
   - Grabable
   - Verificacion
   - Teleportable
+  - Mesa
   layers:
   - Default
   - TransparentFX
