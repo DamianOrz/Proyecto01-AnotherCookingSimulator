@@ -3,17 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Mirror;
 
-public class NavMeshAgentController : MonoBehaviour
+public class NavMeshAgentController : NetworkBehaviour
 {
     NavMeshAgent vehicle;
     Vector3 objective;
+    BoxCollider myCollider;
 
     // Start is called before the first frame update
+
+    [Server]
     void Start()
     {
         vehicle = GetComponent<NavMeshAgent>();
         objective = GetRandomGameBoardLocation();
+        myCollider = GetComponent<BoxCollider>();
         GenerateNewObjective();
     }
 
@@ -26,6 +31,7 @@ public class NavMeshAgentController : MonoBehaviour
        }
     }
 
+    [Server]
     private void GenerateNewObjective()
     {
         objective = GetRandomGameBoardLocation();
@@ -60,5 +66,26 @@ public class NavMeshAgentController : MonoBehaviour
         }
 
         return point;
+    }
+
+    [Server]
+    private void OnTriggerEnter(Collider c)
+    {
+        float velocity = 1000.0f;
+        if (c.tag == "Player")
+        {
+            RpcAddForce(c.gameObject, velocity);
+        }
+    }
+
+    [ClientRpc]
+    private void RpcAddForce(GameObject go, float force)
+    {
+        go.GetComponent<Rigidbody>().AddForce(Vector3.up * force, ForceMode.VelocityChange);
+    }
+
+    [Server]
+    void OnTriggerExit(Collider c)
+    {
     }
 }
