@@ -23,6 +23,7 @@ public class NavMeshAgentController : NetworkBehaviour
     }
 
     // Update is called once per frame
+    [Server]
     void Update()
     {
        if (vehicle.pathStatus == NavMeshPathStatus.PathComplete && vehicle.remainingDistance == 0)
@@ -68,24 +69,26 @@ public class NavMeshAgentController : NetworkBehaviour
         return point;
     }
 
-    [Server]
+    //[Server]
     private void OnTriggerEnter(Collider c)
     {
         float velocity = 1000.0f;
         if (c.tag == "Player")
         {
-            RpcAddForce(c.gameObject, velocity);
+//RpcAddForce(c.gameObject, velocity);
+            c.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * 1000f, ForceMode.VelocityChange);
         }
     }
 
-    [ClientRpc]
+    //[ClientRpc]
     private void RpcAddForce(GameObject go, float force)
     {
         go.GetComponent<Rigidbody>().AddForce(Vector3.up * force, ForceMode.VelocityChange);
     }
 
-    [Server]
+    //[Server]
     void OnTriggerExit(Collider c)
     {
+        RpcAddForce(c.gameObject, 1000f);
     }
 }
