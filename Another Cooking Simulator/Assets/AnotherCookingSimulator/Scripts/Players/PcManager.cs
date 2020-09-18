@@ -157,7 +157,6 @@ public class PcManager : NetworkBehaviour
 
         controller.Move(move * speed * Time.deltaTime);
 
-
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
         if (Input.GetButtonDown("Jump") && isGrounded)

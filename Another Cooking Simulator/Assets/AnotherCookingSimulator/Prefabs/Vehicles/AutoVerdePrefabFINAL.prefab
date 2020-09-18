@@ -73,6 +73,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  followPlayer: 0
+  controller: {fileID: 5766744981080076563, guid: b4d35aed20e4c204ab639a0edf15cc3a,
+    type: 3}
 --- !u!65 &5472982211297534048
 BoxCollider:
   m_ObjectHideFlags: 0

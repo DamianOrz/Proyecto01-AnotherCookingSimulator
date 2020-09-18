@@ -13,7 +13,7 @@ public class NavMeshAgentController : NetworkBehaviour
     public bool followPlayer = false;
     NetworkRoomManager myNetworkRoomManager;
     Transform playerTransform;
-
+    public CharacterController controller;
     // Start is called before the first frame update
 
     [Server]
@@ -92,8 +92,9 @@ public class NavMeshAgentController : NetworkBehaviour
         float velocity = 1000.0f;
         if (c.tag == "Player")
         {
+            controller.enabled = false;
 //RpcAddForce(c.gameObject, velocity);
-            c.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * 1000f, ForceMode.VelocityChange);
+            c.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * 10f, ForceMode.Impulse);
         }
     }
 
