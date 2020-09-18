@@ -32,6 +32,7 @@ public class PcManager : NetworkBehaviour
     private GameObject canvasTomarPedidos;
     //MOVEMENT
     public float speed = 7f;
+    public float sprintSpeed = 12;
     public float gravity = -9.81f;
     public float jumpHeight = 1f;
     private Vector3 velocity;
@@ -128,6 +129,11 @@ public class PcManager : NetworkBehaviour
 
     void Movement()
     {
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            speed = sprintSpeed;
+        }
+        else { speed = 7; }
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
         bool isWalking = false;
@@ -139,8 +145,6 @@ public class PcManager : NetworkBehaviour
 
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
-
-
 
         Vector3 move = transform.right * x + transform.forward * z;
 

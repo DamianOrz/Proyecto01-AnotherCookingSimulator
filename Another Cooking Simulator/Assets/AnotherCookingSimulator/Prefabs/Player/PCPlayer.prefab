@@ -1040,6 +1040,7 @@ MonoBehaviour:
   syncInterval: 0.1
   ntc: {fileID: 0}
   speed: 6
+  spintSpeed: 10
   gravity: -9.81
   jumpHeight: 1
   groundMask:
