@@ -10,6 +10,9 @@ public class NavMeshAgentController : NetworkBehaviour
     NavMeshAgent vehicle;
     Vector3 objective;
     BoxCollider myCollider;
+    public bool followPlayer = false;
+    NetworkRoomManager myNetworkRoomManager;
+    Transform playerTransform;
 
     // Start is called before the first frame update
 
@@ -17,7 +20,16 @@ public class NavMeshAgentController : NetworkBehaviour
     void Start()
     {
         vehicle = GetComponent<NavMeshAgent>();
-        objective = GetRandomGameBoardLocation();
+        myNetworkRoomManager = FindObjectOfType<NetworkRoomManager>();
+        if (!followPlayer)
+        {
+            objective = GetRandomGameBoardLocation();
+        }
+        else
+        {
+            playerTransform = myNetworkRoomManager.roomSlots[0].transform;
+            objective = new Vector3(playerTransform.position.x, playerTransform.position.y, playerTransform.position.z);
+        }
         myCollider = GetComponent<BoxCollider>();
         GenerateNewObjective();
     }
@@ -26,8 +38,13 @@ public class NavMeshAgentController : NetworkBehaviour
     [Server]
     void Update()
     {
-       if (vehicle.pathStatus == NavMeshPathStatus.PathComplete && vehicle.remainingDistance == 0)
-       {
+        if(followPlayer)
+        {
+            objective = new Vector3(playerTransform.position.x, playerTransform.position.y, playerTransform.position.z);
+        }
+
+       if (vehicle.remainingDistance == 0) //vehicle.pathStatus == NavMeshPathStatus.PathComplete && vehicle.remainingDistance == 0
+        {
             GenerateNewObjective();
        }
     }
