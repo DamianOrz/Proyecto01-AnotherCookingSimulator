@@ -92,9 +92,13 @@ public class NavMeshAgentController : NetworkBehaviour
         float velocity = 1000.0f;
         if (c.tag == "Player")
         {
-            controller.enabled = false;
-//RpcAddForce(c.gameObject, velocity);
+            //RpcAddForce(c.gameObject, velocity);
+            Rigidbody a = c.gameObject.AddComponent<Rigidbody>();
+            a.useGravity = true;
+            a.isKinematic = false;
+            c.gameObject.GetComponent<CharacterController>().enabled = false;
             c.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * 10f, ForceMode.Impulse);
+            
         }
     }
 
@@ -107,6 +111,8 @@ public class NavMeshAgentController : NetworkBehaviour
     //[Server]
     void OnTriggerExit(Collider c)
     {
-        RpcAddForce(c.gameObject, 1000f);
+        //RpcAddForce(c.gameObject, 1000f);
+        c.gameObject.GetComponent<CharacterController>().enabled = true;
+        Destroy(c.gameObject.GetComponent<Rigidbody>());
     }
 }
