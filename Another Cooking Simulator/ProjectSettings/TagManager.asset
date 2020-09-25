@@ -18,6 +18,7 @@ TagManager:
   - Verificacion
   - Teleportable
   - Mesa
+  - ContentMostrarHamburguesa
   layers:
   - Default
   - TransparentFX

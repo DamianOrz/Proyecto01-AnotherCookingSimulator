@@ -3,11 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TomarPedido : MonoBehaviour
 {
     private int _idCombo;
     private List<int> _interpretacionDePC = new List<int>();
+
+    //Mostrar el progreso de la interpretacion del de pc
+    [SerializeField]private GameObject _prefabIngrediente;
+    private GameObject _contenedor;
+    private const int aumento = 30;
+    private int _alturaY = -92;
+    private bool _actualizarHamburguesa = false;
+    [SerializeField]private Texture[] Ingredientes;
 
     //Añadir ingredientes a interpretacion
     public void AñadirPatyAInterpretacion()
@@ -29,6 +38,7 @@ public class TomarPedido : MonoBehaviour
     {
         FindObjectOfType<AudioManager>().Play("FX-Tap");
         AñadirIngredienteAInterpretacion(4);
+        
     }
     public void AñadirLechugaAInterpretacion()
     {
@@ -45,6 +55,7 @@ public class TomarPedido : MonoBehaviour
     private void AñadirIngredienteAInterpretacion(int idIngrediente)
     {
         _interpretacionDePC.Add(idIngrediente);
+        _actualizarHamburguesa = true;
     }
 
     public void SendInterpretacion()
@@ -70,5 +81,21 @@ public class TomarPedido : MonoBehaviour
         }
         interpretacion[interpretacion.Length - 1] = 0;
         return interpretacion;
+    }
+
+    private void Start()
+    {
+        _contenedor = GameObject.FindGameObjectWithTag("ContentMostrarHamburguesa");
+    }
+
+    private void Update()
+    {
+        if (!_actualizarHamburguesa) return;
+        GameObject ingrediente = Instantiate(_prefabIngrediente);
+        ingrediente.GetComponent<RawImage>().texture = Ingredientes[_interpretacionDePC[_interpretacionDePC.Count-1]];
+        ingrediente.GetComponent<RectTransform>().position = new Vector3(9f,_alturaY , 0f);
+        _alturaY = _alturaY + aumento;
+        ingrediente.transform.SetParent(_contenedor.transform, false);
+        _actualizarHamburguesa = false;
     }
 }

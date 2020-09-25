@@ -98,9 +98,6 @@ public class PcManager : NetworkBehaviour
         orderCreatorCanvas = GameObject.Find("OrderCreatorCanvas");
         orderCreatorCanvas.GetComponent<Canvas>().worldCamera = cameraPlayer;
 
-        canvasTomarPedidos = GameObject.Find("CanvasTomarPedido");
-        canvasTomarPedidos.GetComponent<Canvas>().worldCamera = cameraPlayer;
-
         //UI
         m_Raycaster = canvasTomarPedidos.GetComponent<GraphicRaycaster>();
         m_Raycaster = orderCreatorCanvas.GetComponent<GraphicRaycaster>();
