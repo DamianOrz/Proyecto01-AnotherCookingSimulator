@@ -99,7 +99,6 @@ public class PcManager : NetworkBehaviour
         orderCreatorCanvas.GetComponent<Canvas>().worldCamera = cameraPlayer;
 
         //UI
-        m_Raycaster = canvasTomarPedidos.GetComponent<GraphicRaycaster>();
         m_Raycaster = orderCreatorCanvas.GetComponent<GraphicRaycaster>();
         m_EventSystem = GetComponent<EventSystem>();
 

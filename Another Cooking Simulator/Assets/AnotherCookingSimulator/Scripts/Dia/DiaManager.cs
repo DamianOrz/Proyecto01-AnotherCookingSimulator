@@ -22,6 +22,8 @@ public class DiaManager : NetworkBehaviour
 
     private int clientes;
 
+    private NetworkRoomManager myNetworkRoomManager;
+
     public enum POSIBLES_INGREDIENTES
     {
         PAN,
@@ -50,6 +52,7 @@ public class DiaManager : NetworkBehaviour
         if (instanceDiaManager != null && instanceDiaManager != this)
         {
             Destroy(gameObject);
+            diaActual = myNetworkRoomManager.GetLevel(); //Devuelve el dia/nivel que se está jugando
         }
         else
         {
@@ -103,7 +106,7 @@ public class DiaManager : NetworkBehaviour
 
         diaActual++;
         //instanceDiaManager.textoDia.text = "Dia : " + diaActual;
-        instanceDiaManager.textoDia.text = "Dia : " + diaActual;
+        //instanceDiaManager.textoDia.text = "Dia : " + diaActual; --> Dami lo rompió
         //Empiezo la emision de pedidos
         ClientesManager.instanceClientesManager.playInvokeRepeating(instanceDiaManager.diasInfo[instanceDiaManager.diaActual].ratioDePedidos);
         //Apago el canvas

@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 public class TomarPedido : MonoBehaviour
 {
-    private int _idCombo;
     private List<int> _interpretacionDePC = new List<int>();
 
     //Mostrar el progreso de la interpretacion del de pc
@@ -16,7 +15,10 @@ public class TomarPedido : MonoBehaviour
     private const int aumento = 30;
     private int _alturaY = -92;
     private bool _actualizarHamburguesa = false;
-    [SerializeField]private Texture[] Ingredientes;
+    [SerializeField]
+    private Texture[] Ingredientes;
+
+    public GameObject topBunImgPrefab;
 
     //Añadir ingredientes a interpretacion
     public void AñadirPatyAInterpretacion()
@@ -60,9 +62,16 @@ public class TomarPedido : MonoBehaviour
 
     public void SendInterpretacion()
     {
+
         if (_interpretacionDePC.Count <= 0) return;
         int[] interpretacion;
-        
+
+        GameObject a = Instantiate(topBunImgPrefab); //Creo el pan superior
+        a.transform.SetParent(_contenedor.transform); //Lo pongo como hijo del contenedor que tiene a los otros panes
+        a.transform.localPosition = new Vector3(9, 200, 0); //Falta arreglar la posición.
+        a.transform.localScale = new Vector3(1, 1, 1);
+        a.transform.localRotation = new Quaternion(0, 0, 0, 0);
+
         AñadirPanesAInterpretacion();
         interpretacion = AñadirPanesAInterpretacion();
 
