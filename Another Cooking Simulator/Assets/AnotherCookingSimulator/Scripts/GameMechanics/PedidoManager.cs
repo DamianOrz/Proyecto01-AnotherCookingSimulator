@@ -88,35 +88,11 @@ public class PedidoManager : NetworkBehaviour
         unPedido.SetIdPedido(_listaPedidos.Count);
     } //Genera un pedido de forma aleatoria
     
-    public Pedido CrearInterpretacion(int id)
+    public Pedido CrearInterpretacion(int[] interpretacion)
     {
         Pedido unPedido;
         unPedido = agarrarUltimoPedido();
-        switch (id)
-        {
-            //COMBO 1 = HAMBURGUESA SIMPLE
-            case 1:
-                int[] interpretacionSimple = new int[3] { 0, 1, 0 };
-                unPedido.SetInterpretacionIngredientes(interpretacionSimple);
-                Debug.Log("SIMON: SE CREA LA INTERPRETACION");
-                break;
-            //COMBO 2 = HAMBURGUESA DOBLE
-            case 2:
-                int[] interpretacionDoble = new int[4] { 0, 1, 1, 0 };
-                unPedido.SetInterpretacionIngredientes(interpretacionDoble);
-                break;
-            //COMBO 3 = HAMBURGUESA CON QUESO
-            case 3:
-                int[] interpretacionConQueso = new int[4] { 0, 1, 2, 0 };
-                unPedido.SetInterpretacionIngredientes(interpretacionConQueso);
-                break;
-            case 4:
-                int[] interpretacionDobleConQueso = new int[5] { 0, 1, 2, 1, 0 };
-                unPedido.SetInterpretacionIngredientes(interpretacionDobleConQueso);
-                break;
-            default:
-                break;
-        }
+        unPedido.SetInterpretacionIngredientes(interpretacion);
         MostrarPedidoAlDeVR(unPedido);
         return unPedido;
     }

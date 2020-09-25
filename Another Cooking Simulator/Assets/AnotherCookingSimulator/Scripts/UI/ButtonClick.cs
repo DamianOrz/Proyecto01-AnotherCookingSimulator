@@ -38,7 +38,7 @@ public class ButtonClick : MonoBehaviour
     {
         if (_idCombo == 0) return;
         Debug.Log("SIMON: SE MANDA SOLICITUD PARA CREAR LA INTERPRETACION CON EL COMBO " + _idCombo);
-        PedidoManager.instancePedidoManager.CrearInterpretacion(_idCombo);
+        //PedidoManager.instancePedidoManager.CrearInterpretacion(_idCombo);
         _idCombo = 0;
     }
 }
