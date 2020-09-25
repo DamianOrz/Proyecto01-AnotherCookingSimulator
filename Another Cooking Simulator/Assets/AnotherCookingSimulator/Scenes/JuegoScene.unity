@@ -202,8 +202,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1656429179}
   m_HandleRect: {fileID: 1216770465}
   m_Direction: 2
-  m_Value: 0.00000033996167
-  m_Size: 0.6897915
+  m_Value: -0.0000015298276
+  m_Size: 0.5845095
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3046,6 +3046,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58085620ee08d924da06e948025f58dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _prefabIngrediente: {fileID: 4901882793250198283, guid: 0cf8ba14297c38546a7f181d6feaca07,
+    type: 3}
+  Ingredientes:
+  - {fileID: 2800000, guid: 568b24998c40d75448aba8cc89606207, type: 3}
+  - {fileID: 2800000, guid: 151c78bfb7bde7e4d81630dee43c0aba, type: 3}
+  - {fileID: 2800000, guid: 4377fc8053754d44bba2dd850d2ab7e2, type: 3}
+  - {fileID: 2800000, guid: 4f26ce57b7a58ed4f95819f705965306, type: 3}
+  - {fileID: 2800000, guid: d3ebce42e3161f74388a1b8609aacc82, type: 3}
+  - {fileID: 2800000, guid: 66d5d6ea0e6433d449d8c3cc79ad10d3, type: 3}
 --- !u!1001 &149815602
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7748,7 +7757,7 @@ GameObject:
   - component: {fileID: 337016279}
   m_Layer: 5
   m_Name: Content
-  m_TagString: Untagged
+  m_TagString: ContentMostrarHamburguesa
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16340,7 +16349,7 @@ PrefabInstance:
     - target: {fileID: 4470858122938297458, guid: dd50b9c3d8e721740bf13e3abef14486,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.15666246
+      value: 0.15675342
       objectReference: {fileID: 0}
     - target: {fileID: 4470858122938297458, guid: dd50b9c3d8e721740bf13e3abef14486,
         type: 3}
@@ -23657,7 +23666,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 89.76676}
+  m_AnchoredPosition: {x: 0, y: 89.76725}
   m_SizeDelta: {x: -5.0498047, y: 289.7677}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1165009281
@@ -34364,8 +34373,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 171669037}
   m_HandleRect: {fileID: 171669036}
   m_Direction: 2
-  m_Value: 1.0000004
-  m_Size: 0.65761
+  m_Value: 1.0000007
+  m_Size: 0.65761006
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -42937,7 +42946,7 @@ PrefabInstance:
     - target: {fileID: 4470858122938297458, guid: dd50b9c3d8e721740bf13e3abef14486,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.15665019
+      value: 0.15674174
       objectReference: {fileID: 0}
     - target: {fileID: 4470858122938297458, guid: dd50b9c3d8e721740bf13e3abef14486,
         type: 3}
