@@ -37,6 +37,8 @@ public class DiaManager : NetworkBehaviour
     //Mostrar Clock
 
     public TMP_Text tiempo;
+    public Image relojTiempoRestante;
+
     //Canvas finalizacion del dia
     public TMP_Text titulo;
     public Canvas canvasAlFinalizarDia;
@@ -67,7 +69,17 @@ public class DiaManager : NetworkBehaviour
             return;
         }
 
-        tiempo.text = (instanceDiaManager.diasInfo[instanceDiaManager.diaActual].duracionDelDia - contadorDelDia).ToString();
+        //Los paso a int
+        int iContador = (int)contadorDelDia;
+
+        float fDuracionDia = instanceDiaManager.diasInfo[instanceDiaManager.diaActual].duracionDelDia;
+        int iDuracionDia = (int)fDuracionDia;
+
+        
+
+        tiempo.text = (iDuracionDia - iContador).ToString();
+        float FillAmount = (fDuracionDia - contadorDelDia) / fDuracionDia;
+        relojTiempoRestante.fillAmount = FillAmount;
 
         if (contadorDelDia < instanceDiaManager.diasInfo[instanceDiaManager.diaActual].duracionDelDia && !isCanvasBeingUsed())
         {
