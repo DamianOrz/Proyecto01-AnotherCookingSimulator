@@ -54,7 +54,7 @@ public class LevelSelectorManager : NetworkBehaviour
     private void cmdUpdateLevel(string sLevel)
     {
         int iLevel;
-        if (sLevel == "Tutorial")
+        if (sLevel == "Tutorial") //El unico caso, por ahora, en el que el nombre del nivel es distinto al id
         {
             iLevel = 0;
         }
