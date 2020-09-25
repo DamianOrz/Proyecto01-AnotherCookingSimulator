@@ -1045,7 +1045,7 @@ MonoBehaviour:
   jumpHeight: 1
   groundMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 4294967295
   distanceToSee: 1.7
   mouseSensitivity: 200
   isSeeing: {fileID: 2100000, guid: c7f018131eff5af4985e7921a3e1c13a, type: 2}

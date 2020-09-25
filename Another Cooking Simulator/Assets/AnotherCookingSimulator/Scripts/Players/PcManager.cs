@@ -29,6 +29,7 @@ public class PcManager : NetworkBehaviour
     Animator anim;
 
     private GameObject canvasSpawnIngrediente;
+    private GameObject orderCreatorCanvas;
     private GameObject canvasTomarPedidos;
     //MOVEMENT
     public float speed = 7f;
@@ -93,11 +94,16 @@ public class PcManager : NetworkBehaviour
         canvasSpawnIngrediente.GetComponent<Canvas>().worldCamera = cameraPlayer;
         spawn_Raycaster = canvasSpawnIngrediente.GetComponent<GraphicRaycaster>();
 
+
+        orderCreatorCanvas = GameObject.Find("OrderCreatorCanvas");
+        orderCreatorCanvas.GetComponent<Canvas>().worldCamera = cameraPlayer;
+
         canvasTomarPedidos = GameObject.Find("CanvasTomarPedido");
         canvasTomarPedidos.GetComponent<Canvas>().worldCamera = cameraPlayer;
 
         //UI
         m_Raycaster = canvasTomarPedidos.GetComponent<GraphicRaycaster>();
+        m_Raycaster = orderCreatorCanvas.GetComponent<GraphicRaycaster>();
         m_EventSystem = GetComponent<EventSystem>();
 
         Cursor.lockState = CursorLockMode.Locked;
@@ -331,7 +337,7 @@ public class PcManager : NetworkBehaviour
             }
             return;
         }
-        if (whatIHit.collider != null && (whatIHit.collider.gameObject.name.Contains("PantallaHacerPedidos") || whatIHit.collider.gameObject.name.Contains("PantallaSpawnearIngredientes")))
+        if (whatIHit.collider != null && (whatIHit.collider.gameObject.name.Contains("PantallaHacerPedidos") || whatIHit.collider.gameObject.name.Contains("PantallaSpawnearIngredientes")) || whatIHit.collider.gameObject.name.Contains("CajaRegistradora"))
         {
             SetTabletCrosshair(); //Crosshair para cuando se usan las laptops
         }
