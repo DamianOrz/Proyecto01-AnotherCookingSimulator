@@ -76,6 +76,11 @@ namespace Mirror
         [Tooltip("List of Room Player objects")]
         public List<NetworkRoomPlayer> roomSlots = new List<NetworkRoomPlayer>();
 
+        [Header("Parametros CUSTOM")]
+
+        [Tooltip("Parametro CUSTOM con el cual se selecciona el nivel a jugar")]
+        public int LevelSelected = 0;
+
         public override void OnValidate()
         {
             // always >= 0
@@ -741,6 +746,16 @@ namespace Mirror
                 }
             }
             return getPlayers;
+        }
+
+        public void SetLevel(int iLevel)
+        {
+            LevelSelected = iLevel;
+        }
+
+        public int GetLevel()
+        {
+            return LevelSelected;
         }
 
         #endregion

@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Mirror;
 
-public class LevelSelectorManager : MonoBehaviour
+public class LevelSelectorManager : NetworkBehaviour
 {
+    private NetworkRoomManager myNetworkRoomManager;
     public GameObject btnDay0; //Tutorial
     public GameObject btnDay1;
     public GameObject btnDay2;
@@ -16,6 +18,7 @@ public class LevelSelectorManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        myNetworkRoomManager = FindObjectOfType<NetworkRoomManager>();
         btnDay0.GetComponent<Button>().Select();
     }
 
@@ -43,6 +46,32 @@ public class LevelSelectorManager : MonoBehaviour
 
         btnSelected.interactable = false;
 
+        cmdUpdateLevel(btnSelected.GetComponentInChildren<TMP_Text>().text.ToString());
+
+    }
+
+    [Server]
+    private void cmdUpdateLevel(string sLevel)
+    {
+        int iLevel;
+        if (sLevel == "Tutorial")
+        {
+            iLevel = 0;
+        }
+        else
+        {
+            iLevel = int.Parse(sLevel);
+        }
+        myNetworkRoomManager.SetLevel(iLevel);
+        RpcLevelUpdated(iLevel);
+    }
+
+
+    [ClientRpc]
+    private void RpcLevelUpdated(int iLevel)
+    {
+        //Por ahora no lo usamos pero los clientes verán el nivel seleccionado
+        myNetworkRoomManager.LevelSelected = iLevel;
     }
 
 
