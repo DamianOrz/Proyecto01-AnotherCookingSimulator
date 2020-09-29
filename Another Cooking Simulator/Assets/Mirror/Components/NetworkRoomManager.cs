@@ -599,6 +599,7 @@ namespace Mirror
         int numPCPlayers = 0;
         public virtual bool OnRoomServerSceneLoadedForPlayer(NetworkConnection conn, GameObject roomPlayer, GameObject gamePlayer)
         {
+
             //roomPlayer --> Viene de la RoomScene con la informacion del usuario
             //gamePlayer --> Aún no reemplaza a roomPlayer y fue recien instanciado
             if (roomPlayer.GetComponent<NetworkRoomPlayer>().playerType == 0)
@@ -757,7 +758,6 @@ namespace Mirror
         {
             return LevelSelected;
         }
-
         #endregion
     }
 }
