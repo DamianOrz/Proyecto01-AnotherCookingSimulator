@@ -49,6 +49,7 @@ public class DiaManager : NetworkBehaviour
 
     private void Awake()
     {
+        myNetworkRoomManager = FindObjectOfType<NetworkRoomManager>();
         if (instanceDiaManager != null && instanceDiaManager != this)
         {
             Destroy(gameObject);
@@ -100,28 +101,30 @@ public class DiaManager : NetworkBehaviour
 
         return false;
     }
+
     public void EmpezarDia()
     {
         contadorDelDia = 0;
 
-        diaActual++;
+        diaActual = myNetworkRoomManager.GetLevel();
         //instanceDiaManager.textoDia.text = "Dia : " + diaActual;
-        //instanceDiaManager.textoDia.text = "Dia : " + diaActual; --> Dami lo rompió
         //Empiezo la emision de pedidos
         ClientesManager.instanceClientesManager.playInvokeRepeating(instanceDiaManager.diasInfo[instanceDiaManager.diaActual].ratioDePedidos);
         //Apago el canvas
         UpdateCanvasStatus();
     }
+
     [Server]
     public void EmpezarDiaServer()
     {
         RpcEmpezarDia();
     }
+
     [ClientRpc]
     public void RpcEmpezarDia()
     {
         contadorDelDia = 0;
-        diaActual++;
+        diaActual = myNetworkRoomManager.LevelSelected;
         instanceDiaManager.textoDia.text = "Dia : " + diaActual;
         ClientesManager.instanceClientesManager.playInvokeRepeating(instanceDiaManager.diasInfo[instanceDiaManager.diaActual].ratioDePedidos);
 
@@ -137,6 +140,7 @@ public class DiaManager : NetworkBehaviour
         //Apago el canvas
         UpdateCanvasStatus();
     }
+
     public void Pause()
     {
         Time.timeScale = Time.timeScale == 0 ? 1 : 0;
@@ -158,6 +162,7 @@ public class DiaManager : NetworkBehaviour
 
         //LimpiarPedidos();
     }
+
     private void UpdateCanvasStatus()
     {
         canvasAlFinalizarDia.enabled = !canvasAlFinalizarDia.enabled;
@@ -198,5 +203,10 @@ public class DiaManager : NetworkBehaviour
             Destroy(instanceDiaManager.contentMostrarUltimaInterpretacion.transform.GetChild(i).gameObject);
         }
         PedidoManager.instancePedidoManager.LimpiarListaPedidos();
+    }
+
+    public void setearNivel(int i)
+    {
+        diaActual = i;
     }
 }

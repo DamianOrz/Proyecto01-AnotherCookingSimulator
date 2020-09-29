@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -203,7 +203,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1216770465}
   m_Direction: 2
   m_Value: 0.00000033996167
-  m_Size: 0.6901821
+  m_Size: 0.6901959
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1321,7 +1321,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 65411284eec555e42825a1788c3a979c, type: 2}
+  - {fileID: 2100000, guid: 4f5937aec7ff391449a485450e6cc4b4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4975,8 +4975,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 199557989}
-  m_LocalRotation: {x: -0.6257618, y: -0.32927525, z: -0.3292752, w: 0.62576187}
-  m_LocalPosition: {x: 23.907343, y: 0.33007497, z: -4.440895}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 23.95, y: 0.5, z: -7.97}
   m_LocalScale: {x: 100, y: 100, z: 100.000046}
   m_Children:
   - {fileID: 296525777}
@@ -4986,7 +4986,7 @@ Transform:
   - {fileID: 873272730}
   m_Father: {fileID: 2001765611}
   m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -55.507004}
+  m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 0}
 --- !u!1 &201562762
 GameObject:
   m_ObjectHideFlags: 0
@@ -14940,7 +14940,7 @@ PrefabInstance:
     - target: {fileID: 4730261598203554184, guid: 28a30d4ca58b9be4ea93cf17f9b750ba,
         type: 3}
       propertyPath: m_Name
-      value: Mesa (1)
+      value: Mesa (2)
       objectReference: {fileID: 0}
     - target: {fileID: 4730261598203554184, guid: 28a30d4ca58b9be4ea93cf17f9b750ba,
         type: 3}
@@ -15025,6 +15025,25 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 697660864}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &697660866 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4730261598203554184, guid: 28a30d4ca58b9be4ea93cf17f9b750ba,
+    type: 3}
+  m_PrefabInstance: {fileID: 697660864}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &697660867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 697660866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0af31c81e116edd449ecec775ad80bc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 2
 --- !u!1 &702213594
 GameObject:
   m_ObjectHideFlags: 0
@@ -16383,7 +16402,7 @@ PrefabInstance:
     - target: {fileID: 4470858122938297458, guid: dd50b9c3d8e721740bf13e3abef14486,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.16028988
+      value: 0.16159451
       objectReference: {fileID: 0}
     - target: {fileID: 4470858122938297458, guid: dd50b9c3d8e721740bf13e3abef14486,
         type: 3}
@@ -17058,7 +17077,7 @@ PrefabInstance:
     - target: {fileID: 4730261598203554184, guid: 28a30d4ca58b9be4ea93cf17f9b750ba,
         type: 3}
       propertyPath: m_Name
-      value: Mesa (2)
+      value: Mesa (3)
       objectReference: {fileID: 0}
     - target: {fileID: 4730261598203554184, guid: 28a30d4ca58b9be4ea93cf17f9b750ba,
         type: 3}
@@ -17143,6 +17162,25 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 822715202}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &822715204 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4730261598203554184, guid: 28a30d4ca58b9be4ea93cf17f9b750ba,
+    type: 3}
+  m_PrefabInstance: {fileID: 822715202}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &822715205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 822715204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0af31c81e116edd449ecec775ad80bc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 3
 --- !u!1 &822923522
 GameObject:
   m_ObjectHideFlags: 0
@@ -18056,7 +18094,7 @@ PrefabInstance:
     - target: {fileID: 4730261598203554184, guid: 28a30d4ca58b9be4ea93cf17f9b750ba,
         type: 3}
       propertyPath: m_Name
-      value: Mesa (3)
+      value: Mesa (4)
       objectReference: {fileID: 0}
     - target: {fileID: 4730261598203554184, guid: 28a30d4ca58b9be4ea93cf17f9b750ba,
         type: 3}
@@ -18141,6 +18179,25 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 869972354}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &869972356 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4730261598203554184, guid: 28a30d4ca58b9be4ea93cf17f9b750ba,
+    type: 3}
+  m_PrefabInstance: {fileID: 869972354}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &869972357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 869972356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0af31c81e116edd449ecec775ad80bc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 4
 --- !u!1 &873272729
 GameObject:
   m_ObjectHideFlags: 0
@@ -23585,7 +23642,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 89.76675}
+  m_AnchoredPosition: {x: 0, y: 89.76678}
   m_SizeDelta: {x: -5.0498047, y: 289.7677}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1165009281
@@ -27214,7 +27271,7 @@ PrefabInstance:
     - target: {fileID: 4730261598203554184, guid: 28a30d4ca58b9be4ea93cf17f9b750ba,
         type: 3}
       propertyPath: m_Name
-      value: Mesa (4)
+      value: Mesa (5)
       objectReference: {fileID: 0}
     - target: {fileID: 4730261598203554184, guid: 28a30d4ca58b9be4ea93cf17f9b750ba,
         type: 3}
@@ -27299,6 +27356,25 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1317664033}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1317664035 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4730261598203554184, guid: 28a30d4ca58b9be4ea93cf17f9b750ba,
+    type: 3}
+  m_PrefabInstance: {fileID: 1317664033}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1317664036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1317664035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0af31c81e116edd449ecec775ad80bc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 5
 --- !u!1 &1318467692
 GameObject:
   m_ObjectHideFlags: 0
@@ -30695,7 +30771,7 @@ PrefabInstance:
     - target: {fileID: 4730261598203554184, guid: 28a30d4ca58b9be4ea93cf17f9b750ba,
         type: 3}
       propertyPath: m_Name
-      value: Mesa (5)
+      value: Mesa (6)
       objectReference: {fileID: 0}
     - target: {fileID: 4730261598203554184, guid: 28a30d4ca58b9be4ea93cf17f9b750ba,
         type: 3}
@@ -30780,6 +30856,25 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1434841718}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1434841720 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4730261598203554184, guid: 28a30d4ca58b9be4ea93cf17f9b750ba,
+    type: 3}
+  m_PrefabInstance: {fileID: 1434841718}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1434841721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1434841720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0af31c81e116edd449ecec775ad80bc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 6
 --- !u!1001 &1434849820
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34293,7 +34388,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 171669036}
   m_Direction: 2
   m_Value: 1.0000004
-  m_Size: 0.65761
+  m_Size: 0.65761006
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -37915,6 +38010,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ebf8b07f799d31443810cf54d9e59c02, type: 2}
   - {fileID: 11400000, guid: f576311703a086449a6a5487826d14c2, type: 2}
   - {fileID: 11400000, guid: 763ed145bb543034086cd538bb6e2e1b, type: 2}
+  - {fileID: 11400000, guid: 8f464a295734f7d4082f9a320acf2ad6, type: 2}
+  - {fileID: 11400000, guid: 2e7fce7d20c1f884596ff36e66126fe0, type: 2}
+  - {fileID: 11400000, guid: 1808ebacfd4507f48b98b4593138e50e, type: 2}
   tiempo: {fileID: 514777633}
   relojTiempoRestante: {fileID: 1285679156}
   titulo: {fileID: 1228051042}
@@ -42794,7 +42892,7 @@ PrefabInstance:
     - target: {fileID: 4470858122938297458, guid: dd50b9c3d8e721740bf13e3abef14486,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.1602782
+      value: 0.16158283
       objectReference: {fileID: 0}
     - target: {fileID: 4470858122938297458, guid: dd50b9c3d8e721740bf13e3abef14486,
         type: 3}
@@ -43989,7 +44087,7 @@ PrefabInstance:
     - target: {fileID: 4730261598203554184, guid: 28a30d4ca58b9be4ea93cf17f9b750ba,
         type: 3}
       propertyPath: m_Name
-      value: Mesa
+      value: Mesa (1)
       objectReference: {fileID: 0}
     - target: {fileID: 4730261598203554184, guid: 28a30d4ca58b9be4ea93cf17f9b750ba,
         type: 3}
@@ -44068,6 +44166,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28a30d4ca58b9be4ea93cf17f9b750ba, type: 3}
+--- !u!1 &2337748672919913971 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4730261598203554184, guid: 28a30d4ca58b9be4ea93cf17f9b750ba,
+    type: 3}
+  m_PrefabInstance: {fileID: 2337748672919913970}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2337748672919913972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2337748672919913971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0af31c81e116edd449ecec775ad80bc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 1
 --- !u!4 &2344078678739806944 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6479151038651960020, guid: d113b23aed38c0f4fbc1c241c809bfeb,

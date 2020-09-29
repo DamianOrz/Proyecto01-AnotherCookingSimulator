@@ -7383,6 +7383,7 @@ MonoBehaviour:
   GameplayScene: Assets/AnotherCookingSimulator/Scenes/JuegoScene.unity
   allPlayersReady: 0
   roomSlots: []
+  LevelSelected: 1
 --- !u!4 &1678351134
 Transform:
   m_ObjectHideFlags: 0
