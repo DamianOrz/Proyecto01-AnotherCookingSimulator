@@ -79,11 +79,16 @@ public class DialogoManager : MonoBehaviour
     }
     private void mostrarCuadro(Dialogo dialogo)
     {
-        imageOfCanvas.sprite = listaImagenes[dialogo.GetIdImage()[_contDeCuadros]];
+        GameObject panel = canvasDialogo.transform.Find("Panel").gameObject;
+        Animation introAnimation = panel.GetComponent<Animation>();
+        introAnimation.Play();
+
+
+
+        //imageOfCanvas.sprite = listaImagenes[dialogo.GetIdImage()[_contDeCuadros]]; --> Mejor no
         mensaje.text = dialogo.GetMsg()[_contDeCuadros];
 
         UpdateCursor();
-
         _contDeCuadros++;
     }
     private void UpdateCursor()

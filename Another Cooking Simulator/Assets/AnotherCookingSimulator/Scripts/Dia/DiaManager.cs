@@ -47,11 +47,9 @@ public class DiaManager : NetworkBehaviour
     public TMP_Text mostrarPuntos;
     public GameObject prefabVehicle1; //El auto verde
 
-    //Canvas
-    private GameObject _canvasOrderCreator;
-    private List<Button> _buttonList = new List<Button>();
     private void Awake()
     {
+        myNetworkRoomManager = FindObjectOfType<NetworkRoomManager>();
         if (instanceDiaManager != null && instanceDiaManager != this)
         {
             Destroy(gameObject);
@@ -66,14 +64,6 @@ public class DiaManager : NetworkBehaviour
     {
         instanceDiaManager.EmpezarDia();
         canvasAlFinalizarDia.enabled = false;
-        _canvasOrderCreator = GameObject.Find("LeftColumn").transform.GetChild(1).gameObject;
-        foreach (Transform child in _canvasOrderCreator.transform)
-        {
-            if(child.gameObject.name.Contains("btn"))
-            {
-                _buttonList.Add(child.GetComponent<Button>());
-            }
-        }
     }
 
     private void Update()
@@ -82,7 +72,7 @@ public class DiaManager : NetworkBehaviour
         {
             return;
         }
-        UpdateOrderCreatorCanvas();
+
         //Los paso a int
         int iContador = (int)contadorDelDia;
 
@@ -105,40 +95,36 @@ public class DiaManager : NetworkBehaviour
         }
     }
 
-    private void UpdateOrderCreatorCanvas()
-    {
-        POSIBLES_INGREDIENTES[] listaDePosiblesIngredientesDelDia= diasInfo[diaActual].posiblesIngredientes;
-    }
-
     public bool isCanvasBeingUsed()
     {
         if (canvasAlFinalizarDia.enabled) return true;
 
         return false;
     }
+
     public void EmpezarDia()
     {
         contadorDelDia = 0;
 
-        diaActual++;
-
+        diaActual = myNetworkRoomManager.GetLevel();
         //instanceDiaManager.textoDia.text = "Dia : " + diaActual;
-        //instanceDiaManager.textoDia.text = "Dia : " + diaActual; --> Dami lo rompió
         //Empiezo la emision de pedidos
         ClientesManager.instanceClientesManager.playInvokeRepeating(instanceDiaManager.diasInfo[instanceDiaManager.diaActual].ratioDePedidos);
         //Apago el canvas
         UpdateCanvasStatus();
     }
+
     [Server]
     public void EmpezarDiaServer()
     {
         RpcEmpezarDia();
     }
+
     [ClientRpc]
     public void RpcEmpezarDia()
     {
         contadorDelDia = 0;
-        diaActual++;
+        diaActual = myNetworkRoomManager.LevelSelected;
         instanceDiaManager.textoDia.text = "Dia : " + diaActual;
         ClientesManager.instanceClientesManager.playInvokeRepeating(instanceDiaManager.diasInfo[instanceDiaManager.diaActual].ratioDePedidos);
 
@@ -154,6 +140,7 @@ public class DiaManager : NetworkBehaviour
         //Apago el canvas
         UpdateCanvasStatus();
     }
+
     public void Pause()
     {
         Time.timeScale = Time.timeScale == 0 ? 1 : 0;
@@ -175,6 +162,7 @@ public class DiaManager : NetworkBehaviour
 
         //LimpiarPedidos();
     }
+
     private void UpdateCanvasStatus()
     {
         canvasAlFinalizarDia.enabled = !canvasAlFinalizarDia.enabled;
@@ -215,5 +203,10 @@ public class DiaManager : NetworkBehaviour
             Destroy(instanceDiaManager.contentMostrarUltimaInterpretacion.transform.GetChild(i).gameObject);
         }
         PedidoManager.instancePedidoManager.LimpiarListaPedidos();
+    }
+
+    public void setearNivel(int i)
+    {
+        diaActual = i;
     }
 }

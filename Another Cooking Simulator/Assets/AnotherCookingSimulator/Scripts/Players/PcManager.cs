@@ -214,7 +214,9 @@ public class PcManager : NetworkBehaviour
                 if (whatIHit.collider.gameObject.tag == "Mesa")
                 {
                     //PutObjectOnTheTable(gameObject,whatIHit);
-                    CmdPutObjectOnTheTable(gameObject, whatIHit.point);
+                    int iMesaId = whatIHit.collider.gameObject.GetComponent<MesaIdentifier>().id;
+                    Debug.Log("[LOCAL][DAMIAN] La mesa en la que se dejó el pedido es: " + iMesaId);
+                    CmdPutObjectOnTheTable(gameObject, whatIHit.point, iMesaId);
                     return;
                 }
                 CmdDropObject(gameObject);
@@ -274,9 +276,12 @@ public class PcManager : NetworkBehaviour
         RpcRemoveAsChild(player);
     }
     [Command]
-    void CmdPutObjectOnTheTable(GameObject player, Vector3 point)
+    void CmdPutObjectOnTheTable(GameObject player, Vector3 point, int iMesaId)
     {
         RpcPutObjectOnTheTable(player, point);
+
+        //Se debe hacer verificacion del pedido para saber si se entregó en la mesa correcta:
+        //FALTA HACER EL CODIGO
     }
     [ClientRpc]
     void RpcPutObjectOnTheTable(GameObject player, Vector3 point)
