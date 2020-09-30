@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -202,8 +202,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1656429179}
   m_HandleRect: {fileID: 1216770465}
   m_Direction: 2
-  m_Value: -0.57650787
-  m_Size: 0
+  m_Value: -0.0000049294445
+  m_Size: 0.59538877
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2945,6 +2945,7 @@ GameObject:
   - component: {fileID: 149087789}
   - component: {fileID: 149087788}
   - component: {fileID: 149087791}
+  - component: {fileID: 149087792}
   m_Layer: 5
   m_Name: OrderCreatorCanvas
   m_TagString: Interactuable
@@ -3046,10 +3047,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58085620ee08d924da06e948025f58dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   _prefabIngrediente: {fileID: 4901882793250198283, guid: 0cf8ba14297c38546a7f181d6feaca07,
     type: 3}
   _maxIngredientes: 5
-  _ingredientes: []
+  _ingredientes:
+  - {fileID: 2800000, guid: 568b24998c40d75448aba8cc89606207, type: 3}
+  - {fileID: 2800000, guid: 151c78bfb7bde7e4d81630dee43c0aba, type: 3}
+  - {fileID: 2800000, guid: 4377fc8053754d44bba2dd850d2ab7e2, type: 3}
+  - {fileID: 2800000, guid: 4f26ce57b7a58ed4f95819f705965306, type: 3}
+  - {fileID: 2800000, guid: d3ebce42e3161f74388a1b8609aacc82, type: 3}
+  - {fileID: 2800000, guid: 66d5d6ea0e6433d449d8c3cc79ad10d3, type: 3}
+--- !u!114 &149087792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 149087786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 2283156906
+  serverOnly: 0
+  m_AssetId: 
+  hasSpawned: 0
 --- !u!1001 &149815602
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16395,7 +16420,7 @@ PrefabInstance:
     - target: {fileID: 4470858122938297458, guid: dd50b9c3d8e721740bf13e3abef14486,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.21381795
+      value: 0.21393597
       objectReference: {fileID: 0}
     - target: {fileID: 4470858122938297458, guid: dd50b9c3d8e721740bf13e3abef14486,
         type: 3}
@@ -23709,7 +23734,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 141.5188}
+  m_AnchoredPosition: {x: 0, y: 89.76752}
   m_SizeDelta: {x: -5.0498047, y: 289.7677}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1165009281
@@ -34454,7 +34479,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 171669037}
   m_HandleRect: {fileID: 171669036}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 1.0000004
   m_Size: 0.65761
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -43109,7 +43134,7 @@ PrefabInstance:
     - target: {fileID: 4470858122938297458, guid: dd50b9c3d8e721740bf13e3abef14486,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.21380568
+      value: 0.21392429
       objectReference: {fileID: 0}
     - target: {fileID: 4470858122938297458, guid: dd50b9c3d8e721740bf13e3abef14486,
         type: 3}

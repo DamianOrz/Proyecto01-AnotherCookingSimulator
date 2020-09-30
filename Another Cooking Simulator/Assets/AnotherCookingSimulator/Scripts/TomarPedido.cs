@@ -112,7 +112,6 @@ public class TomarPedido : NetworkBehaviour
         }else
         {
             AñadirIngredienteServer(_interpretacionDePC[_interpretacionDePC.Count - 1]);
-            _alturaY = _alturaY + _aumento;
             //GameObject ingrediente = Instantiate(_prefabIngrediente);
             //ingrediente.GetComponent<RawImage>().texture = _ingredientes[_interpretacionDePC[_interpretacionDePC.Count-1]];
             //ingrediente.GetComponent<RectTransform>().position = new Vector3(9f,_alturaY , 0f);
@@ -133,7 +132,7 @@ public class TomarPedido : NetworkBehaviour
         GameObject ingrediente = Instantiate(_prefabIngrediente);
         ingrediente.GetComponent<RawImage>().texture = _ingredientes[indexIngrediente];
         ingrediente.GetComponent<RectTransform>().position = new Vector3(9f, _alturaY, 0f);
-
+        _alturaY = _alturaY + _aumento;
         ingrediente.transform.SetParent(_contenedor.transform, false);
     }
     private void LimpiarIngredientes()
