@@ -12,13 +12,12 @@ public class TomarPedido : MonoBehaviour
     //Mostrar el progreso de la interpretacion del de pc
     [SerializeField]private GameObject _prefabIngrediente;
     private GameObject _contenedor;
-    private const int aumento = 30;
+    [SerializeField] private int _maxIngredientes = 5;
+    private const int _aumento = 30;
     private int _alturaY = -92;
     private bool _actualizarHamburguesa = false;
-    [SerializeField]
-    private Texture[] Ingredientes;
 
-    public GameObject topBunImgPrefab;
+    [SerializeField]private Texture[] _ingredientes;
 
     //Añadir ingredientes a interpretacion
     public void AñadirPatyAInterpretacion()
@@ -52,10 +51,12 @@ public class TomarPedido : MonoBehaviour
     public void LimpiarInterpretacion()
     {
         _interpretacionDePC.Clear();
+        _actualizarHamburguesa = true;
     }
 
     private void AñadirIngredienteAInterpretacion(int idIngrediente)
     {
+        if (_interpretacionDePC.Count > _maxIngredientes) return;
         _interpretacionDePC.Add(idIngrediente);
         _actualizarHamburguesa = true;
     }
@@ -66,11 +67,14 @@ public class TomarPedido : MonoBehaviour
         if (_interpretacionDePC.Count <= 0) return;
         int[] interpretacion;
 
-        GameObject a = Instantiate(topBunImgPrefab); //Creo el pan superior
-        a.transform.SetParent(_contenedor.transform); //Lo pongo como hijo del contenedor que tiene a los otros panes
-        a.transform.localPosition = new Vector3(9, 200, 0); //Falta arreglar la posición.
-        a.transform.localScale = new Vector3(1, 1, 1);
-        a.transform.localRotation = new Quaternion(0, 0, 0, 0);
+        GameObject panSuperior = Instantiate(_prefabIngrediente); //Creo el pan superior
+
+        panSuperior.GetComponent<RawImage>().texture = _ingredientes[0];
+        panSuperior.transform.SetParent(_contenedor.transform, false);
+        //a.transform.SetParent(_contenedor.transform); //Lo pongo como hijo del contenedor que tiene a los otros panes
+        //a.transform.localPosition = new Vector3(9, 200, 0); //Falta arreglar la posición.
+        //a.transform.localScale = new Vector3(1, 1, 1);
+        //a.transform.localRotation = new Quaternion(0, 0, 0, 0);
 
         AñadirPanesAInterpretacion();
         interpretacion = AñadirPanesAInterpretacion();
@@ -100,11 +104,28 @@ public class TomarPedido : MonoBehaviour
     private void Update()
     {
         if (!_actualizarHamburguesa) return;
-        GameObject ingrediente = Instantiate(_prefabIngrediente);
-        ingrediente.GetComponent<RawImage>().texture = Ingredientes[_interpretacionDePC[_interpretacionDePC.Count-1]];
-        ingrediente.GetComponent<RectTransform>().position = new Vector3(9f,_alturaY , 0f);
-        _alturaY = _alturaY + aumento;
-        ingrediente.transform.SetParent(_contenedor.transform, false);
+        if (_interpretacionDePC.Count == 0)
+        {
+            LimpiarIngredientes();
+        }else
+        {
+            GameObject ingrediente = Instantiate(_prefabIngrediente);
+            ingrediente.GetComponent<RawImage>().texture = _ingredientes[_interpretacionDePC[_interpretacionDePC.Count-1]];
+            ingrediente.GetComponent<RectTransform>().position = new Vector3(9f,_alturaY , 0f);
+            _alturaY = _alturaY + _aumento;
+            ingrediente.transform.SetParent(_contenedor.transform, false);
+        }
         _actualizarHamburguesa = false;
+    }
+    private void LimpiarIngredientes()
+    {
+        foreach (Transform child in _contenedor.transform)
+        {
+            if (!(child.gameObject.name == "PanInferior"))
+            {
+                Destroy(child.gameObject);
+            }
+        }
+        _alturaY = -92;
     }
 }

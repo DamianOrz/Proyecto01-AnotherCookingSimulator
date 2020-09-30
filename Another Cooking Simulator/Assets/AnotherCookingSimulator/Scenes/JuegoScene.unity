@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -202,8 +202,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1656429179}
   m_HandleRect: {fileID: 1216770465}
   m_Direction: 2
-  m_Value: 0.00000033996167
-  m_Size: 0.6901821
+  m_Value: -0.0000084990415
+  m_Size: 0.5865899
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3048,15 +3048,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _prefabIngrediente: {fileID: 4901882793250198283, guid: 0cf8ba14297c38546a7f181d6feaca07,
     type: 3}
-  Ingredientes:
+  _maxIngredientes: 5
+  _ingredientes:
   - {fileID: 2800000, guid: 568b24998c40d75448aba8cc89606207, type: 3}
   - {fileID: 2800000, guid: 151c78bfb7bde7e4d81630dee43c0aba, type: 3}
   - {fileID: 2800000, guid: 4377fc8053754d44bba2dd850d2ab7e2, type: 3}
   - {fileID: 2800000, guid: 4f26ce57b7a58ed4f95819f705965306, type: 3}
   - {fileID: 2800000, guid: d3ebce42e3161f74388a1b8609aacc82, type: 3}
   - {fileID: 2800000, guid: 66d5d6ea0e6433d449d8c3cc79ad10d3, type: 3}
-  topBunImgPrefab: {fileID: 8302646117780985321, guid: 89e8993b328661640897d2344eae5d46,
-    type: 3}
 --- !u!1001 &149815602
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16383,7 +16382,7 @@ PrefabInstance:
     - target: {fileID: 4470858122938297458, guid: dd50b9c3d8e721740bf13e3abef14486,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.16028988
+      value: 0.16070592
       objectReference: {fileID: 0}
     - target: {fileID: 4470858122938297458, guid: dd50b9c3d8e721740bf13e3abef14486,
         type: 3}
@@ -23585,7 +23584,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 89.76675}
+  m_AnchoredPosition: {x: 0, y: 89.76811}
   m_SizeDelta: {x: -5.0498047, y: 289.7677}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1165009281
@@ -42794,7 +42793,7 @@ PrefabInstance:
     - target: {fileID: 4470858122938297458, guid: dd50b9c3d8e721740bf13e3abef14486,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.1602782
+      value: 0.16069365
       objectReference: {fileID: 0}
     - target: {fileID: 4470858122938297458, guid: dd50b9c3d8e721740bf13e3abef14486,
         type: 3}
