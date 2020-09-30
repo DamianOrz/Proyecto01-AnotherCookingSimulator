@@ -13,7 +13,6 @@ public class NavMeshAgentController : NetworkBehaviour
     public bool followPlayer = false;
     NetworkRoomManager myNetworkRoomManager;
     Transform playerTransform;
-    public CharacterController controller;
     // Start is called before the first frame update
 
     [Server]
@@ -43,7 +42,7 @@ public class NavMeshAgentController : NetworkBehaviour
             objective = new Vector3(playerTransform.position.x, playerTransform.position.y, playerTransform.position.z);
         }
 
-       if (vehicle.remainingDistance == 0) //vehicle.pathStatus == NavMeshPathStatus.PathComplete && vehicle.remainingDistance == 0
+       if (vehicle.nextPosition == vehicle.transform.position) //vehicle.pathStatus == NavMeshPathStatus.PathComplete && vehicle.remainingDistance == 0
         {
             GenerateNewObjective();
        }
