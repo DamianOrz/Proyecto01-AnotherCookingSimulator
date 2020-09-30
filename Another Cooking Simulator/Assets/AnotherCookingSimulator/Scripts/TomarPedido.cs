@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using Mirror;
 
-public class TomarPedido : MonoBehaviour
+public class TomarPedido : NetworkBehaviour
 {
     private List<int> _interpretacionDePC = new List<int>();
 
@@ -14,6 +15,7 @@ public class TomarPedido : MonoBehaviour
     private GameObject _contenedor;
     [SerializeField] private int _maxIngredientes = 5;
     private const int _aumento = 30;
+    [SyncVar]
     private int _alturaY = -92;
     private bool _actualizarHamburguesa = false;
 
@@ -109,13 +111,30 @@ public class TomarPedido : MonoBehaviour
             LimpiarIngredientes();
         }else
         {
-            GameObject ingrediente = Instantiate(_prefabIngrediente);
-            ingrediente.GetComponent<RawImage>().texture = _ingredientes[_interpretacionDePC[_interpretacionDePC.Count-1]];
-            ingrediente.GetComponent<RectTransform>().position = new Vector3(9f,_alturaY , 0f);
+            AñadirIngredienteServer(_interpretacionDePC[_interpretacionDePC.Count - 1]);
             _alturaY = _alturaY + _aumento;
-            ingrediente.transform.SetParent(_contenedor.transform, false);
+            //GameObject ingrediente = Instantiate(_prefabIngrediente);
+            //ingrediente.GetComponent<RawImage>().texture = _ingredientes[_interpretacionDePC[_interpretacionDePC.Count-1]];
+            //ingrediente.GetComponent<RectTransform>().position = new Vector3(9f,_alturaY , 0f);
+            //_alturaY = _alturaY + _aumento;
+            //ingrediente.transform.SetParent(_contenedor.transform, false);
         }
         _actualizarHamburguesa = false;
+    }
+    [Server]
+    public void AñadirIngredienteServer(int indexIngrediente)
+    {
+        RpcAñadirIngredienteAlCanvas(indexIngrediente);
+    }
+
+    [ClientRpc]
+    private void RpcAñadirIngredienteAlCanvas(int indexIngrediente)
+    {
+        GameObject ingrediente = Instantiate(_prefabIngrediente);
+        ingrediente.GetComponent<RawImage>().texture = _ingredientes[indexIngrediente];
+        ingrediente.GetComponent<RectTransform>().position = new Vector3(9f, _alturaY, 0f);
+
+        ingrediente.transform.SetParent(_contenedor.transform, false);
     }
     private void LimpiarIngredientes()
     {

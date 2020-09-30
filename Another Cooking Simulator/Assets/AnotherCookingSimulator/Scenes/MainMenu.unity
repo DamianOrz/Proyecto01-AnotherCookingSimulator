@@ -99,7 +99,7 @@ LightmapSettings:
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: 43fee89eaf9eb114ba747427efa0dbe2,
     type: 2}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -7375,6 +7375,7 @@ MonoBehaviour:
   - {fileID: 4128190076276702906, guid: d78a3006d1c95ac49849b035057fc189, type: 3}
   - {fileID: 5728527316646658829, guid: 00ae98bbf1681ad4ea51b5468802f8f3, type: 3}
   - {fileID: 1359442515245167136, guid: 406f764e5023aca438364f058781967f, type: 3}
+  - {fileID: 4901882793250198283, guid: 0cf8ba14297c38546a7f181d6feaca07, type: 3}
   showRoomGUI: 0
   minPlayers: 1
   roomPlayerPrefab: {fileID: 8467471082753040350, guid: c42da52323a89cf47b491efd3991aeb5,
