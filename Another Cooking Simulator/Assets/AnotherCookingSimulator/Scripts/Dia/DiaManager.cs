@@ -47,6 +47,10 @@ public class DiaManager : NetworkBehaviour
     public TMP_Text mostrarPuntos;
     public GameObject prefabVehicle1; //El auto verde
 
+    //Canvas
+    private GameObject _canvasOrderCreator;
+    private List<Button> _buttonList = new List<Button>();
+
     private void Awake()
     {
         myNetworkRoomManager = FindObjectOfType<NetworkRoomManager>();
@@ -59,6 +63,14 @@ public class DiaManager : NetworkBehaviour
         {
             instanceDiaManager = this;
         }
+        _canvasOrderCreator = GameObject.Find("LeftColumn").gameObject;
+        foreach (Transform child in _canvasOrderCreator.transform)
+        {
+            if (child.gameObject.name.Contains("btn"))
+            {
+                _buttonList.Add(child.GetComponent<Button>());
+            }
+        }   
     }
     void Start()
     {
@@ -72,7 +84,6 @@ public class DiaManager : NetworkBehaviour
         {
             return;
         }
-
         //Los paso a int
         int iContador = (int)contadorDelDia;
 
@@ -94,7 +105,18 @@ public class DiaManager : NetworkBehaviour
             FinalizarDia();
         }
     }
-
+    private void UpdateOrderCreatorCanvas()
+    {
+        POSIBLES_INGREDIENTES[] listaDePosiblesIngredientesDelDia = diasInfo[diaActual].posiblesIngredientes;
+        for (int i = 1; i < _buttonList.Count; i++)
+        {
+            _buttonList[i].interactable = false;
+        }
+        for (int i = 1; i < listaDePosiblesIngredientesDelDia.Length; i++)
+        {
+            _buttonList[(int)listaDePosiblesIngredientesDelDia[i]].interactable = true;
+        }
+    }
     public bool isCanvasBeingUsed()
     {
         if (canvasAlFinalizarDia.enabled) return true;
@@ -111,6 +133,7 @@ public class DiaManager : NetworkBehaviour
         //Empiezo la emision de pedidos
         ClientesManager.instanceClientesManager.playInvokeRepeating(instanceDiaManager.diasInfo[instanceDiaManager.diaActual].ratioDePedidos);
         //Apago el canvas
+        UpdateOrderCreatorCanvas();
         UpdateCanvasStatus();
     }
 
@@ -125,6 +148,7 @@ public class DiaManager : NetworkBehaviour
     {
         contadorDelDia = 0;
         diaActual = myNetworkRoomManager.LevelSelected;
+        UpdateOrderCreatorCanvas();
         instanceDiaManager.textoDia.text = "Dia : " + diaActual;
         ClientesManager.instanceClientesManager.playInvokeRepeating(instanceDiaManager.diasInfo[instanceDiaManager.diaActual].ratioDePedidos);
 
