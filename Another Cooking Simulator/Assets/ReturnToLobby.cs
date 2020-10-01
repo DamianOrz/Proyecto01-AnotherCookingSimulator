@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using UnityEngine.SceneManagement;
+using System;
 
 public class ReturnToLobby : NetworkBehaviour
 {
@@ -13,31 +14,24 @@ public class ReturnToLobby : NetworkBehaviour
 
     }
 
-    
     public void BackToLobby()
     {
-        BackToLobby2();
-    }
-
-
-    [Server]
-    private void BackToLobby2()
-    {
-        RpcBackToLobby3();
+        myNetworkRoomManager = FindObjectOfType<NetworkRoomManager>();
+        ClientBackToLobby();
+        BackToLobby3();
     }
 
     [Client]
-    private void BackToLobby4()
+    private void ClientBackToLobby()
     {
-        myNetworkRoomManager = FindObjectOfType<NetworkRoomManager>();
-        myNetworkRoomManager.ServerChangeScene(myNetworkRoomManager.RoomScene);
+        myNetworkRoomManager.StopClient();
     }
 
-
-    [ClientRpc]
-    private void RpcBackToLobby3()
+    [Server]
+    private void BackToLobby3()
     {
-        BackToLobby4();
+        //myNetworkRoomManager.ServerChangeScene(myNetworkRoomManager.RoomScene);
+        myNetworkRoomManager.StopHost();
     }
 
     
