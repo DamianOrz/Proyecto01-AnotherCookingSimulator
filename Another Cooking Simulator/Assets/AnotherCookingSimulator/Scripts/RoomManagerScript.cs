@@ -58,7 +58,7 @@ public class RoomManagerScript : NetworkBehaviour
         player4.SetActive(false);
         player5.SetActive(false);
 
-        btnStart.enabled = false;
+        btnStart.interactable = false;
     }
 
     // Update is called once per frame
@@ -214,30 +214,30 @@ public class RoomManagerScript : NetworkBehaviour
         switch (myPlayer.playerType)
         {
             case 0: //VR
-                btnVR.enabled = true;
-                btnPC.enabled = false;
+                btnVR.interactable = true;
+                btnPC.interactable = false;
                 break;
             case 1: //PC
-                btnVR.enabled = false;
-                btnPC.enabled = true;
+                btnVR.interactable = false;
+                btnPC.interactable = true;
                 break;
             case 2: //No tiene clase
                 if (iCantPC < iLimiteJugadoresPC)
                 {
-                    btnPC.enabled = true;
+                    btnPC.interactable = true;
                 }
                 else
                 {
-                    btnPC.enabled = false;
+                    btnPC.interactable = false;
                 }
 
                 if (iCantVR < iLimiteJugadoresVR)
                 {
-                    btnVR.enabled = true;
+                    btnVR.interactable = true;
                 }
                 else
                 {
-                    btnVR.enabled = false;
+                    btnVR.interactable = false;
                 }
                 break;
         }
@@ -258,11 +258,11 @@ public class RoomManagerScript : NetworkBehaviour
     {
         if(iCantVR > 0 || iCantPC > 0)
         {
-            btnStart.enabled = true;
+            btnStart.interactable = true;
         }
         else
         {
-            btnStart.enabled = false;
+            btnStart.interactable = false;
         }
     }
     #endregion
