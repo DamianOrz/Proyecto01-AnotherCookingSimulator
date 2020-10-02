@@ -21,7 +21,7 @@ public class PcManager : NetworkBehaviour
     private Camera cameraPlayer;
     private GameObject canvasCrosshair;
     private RectTransform rectTransformCrossHair;
-    private Image[] myCrosshair;
+    private RawImage myCrosshair;
     private GameObject panelCrossHair;
     private Transform destinoHamburguesa;
     private Transform destination;
@@ -88,7 +88,7 @@ public class PcManager : NetworkBehaviour
 
         canvasCrosshair = GameObject.Find("Mira"); //Obtengo el gameobject que tiene mi mira
         rectTransformCrossHair = canvasCrosshair.GetComponent<RectTransform>();
-        myCrosshair = canvasCrosshair.GetComponentsInChildren<Image>();
+        myCrosshair = canvasCrosshair.GetComponentInChildren<RawImage>();
 
         canvasSpawnIngrediente = GameObject.Find("CanvasSpawnIngrediente");
         canvasSpawnIngrediente.GetComponent<Canvas>().worldCamera = cameraPlayer;
@@ -338,7 +338,7 @@ public class PcManager : NetworkBehaviour
             }
             return;
         }
-        if (whatIHit.collider != null && (whatIHit.collider.gameObject.name.Contains("PantallaHacerPedidos") || whatIHit.collider.gameObject.name.Contains("PantallaSpawnearIngredientes")) || whatIHit.collider.gameObject.name.Contains("CajaRegistradora"))
+        else if (whatIHit.collider != null && (whatIHit.collider.gameObject.tag == "Interactuable") && (whatIHit.collider.gameObject.name.Contains("PantallaHacerPedidos") || whatIHit.collider.gameObject.name.Contains("PantallaSpawnearIngredientes")) || whatIHit.collider.gameObject.name.Contains("CajaRegistradora"))
         {
             SetTabletCrosshair(); //Crosshair para cuando se usan las laptops
         }
@@ -366,24 +366,19 @@ public class PcManager : NetworkBehaviour
     void SetTabletCrosshair()
     {
         //rectTransformCrossHair = GetComponent<RectTransform>();
+        Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
-        foreach (Image i in myCrosshair) //Son varias partes del crosshair separadas
-        {
-            //i.color = Color.red;
-            i.enabled = false;
-        }
+        myCrosshair.enabled = false;
+
 
     } //Crosshair para cuando se usan las laptops
 
     void SetCrossHair()
     {
         //rectTransformCrossHair = GetComponent<RectTransform>()
+        Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        foreach (Image i in myCrosshair) //Son varias partes del crosshair separadas
-        {
-            i.enabled = true;
-            i.color = new Color(5, 255, 0); //Verde --> RGB
-        };
+        myCrosshair.enabled = true;
     }  //Crosshair básico/default
 
     public static void SetIdCombo(int combo)

@@ -57,12 +57,12 @@ public class DiaManager : NetworkBehaviour
         if (instanceDiaManager != null && instanceDiaManager != this)
         {
             Destroy(gameObject);
-            diaActual = myNetworkRoomManager.GetLevel(); //Devuelve el dia/nivel que se está jugando
         }
         else
         {
             instanceDiaManager = this;
         }
+        diaActual = myNetworkRoomManager.GetLevel(); //Devuelve el dia/nivel que se está jugando
         _canvasOrderCreator = GameObject.Find("LeftColumn").gameObject;
         foreach (Transform child in _canvasOrderCreator.transform)
         {

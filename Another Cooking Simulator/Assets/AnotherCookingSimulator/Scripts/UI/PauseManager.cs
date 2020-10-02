@@ -66,7 +66,7 @@ public class PauseManager : MonoBehaviour {
 
         Cursor.lockState = CursorLockMode.None;
 
-        if (canvas.enabled)
+        if (canvas.enabled == true)
         {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.Confined;
@@ -81,7 +81,7 @@ public class PauseManager : MonoBehaviour {
 
     public static bool isCanvasBeingUsed()
     {
-        if (canvas.enabled)
+        if (canvas.enabled == true)
         {
             return true;
         }
