@@ -31,6 +31,8 @@ public class PcManager : NetworkBehaviour
     private GameObject canvasSpawnIngrediente;
     private GameObject orderCreatorCanvas;
     private GameObject canvasTomarPedidos;
+    private GameObject ordersMonitor;
+
     //MOVEMENT
     public float speed = 7f;
     public float sprintSpeed = 12;
@@ -97,7 +99,8 @@ public class PcManager : NetworkBehaviour
 
         orderCreatorCanvas = GameObject.Find("OrderCreatorCanvas");
         orderCreatorCanvas.GetComponent<Canvas>().worldCamera = cameraPlayer;
-
+        ordersMonitor = GameObject.Find("OrdersMonitorCanvas");
+        ordersMonitor.GetComponent<Canvas>().worldCamera = cameraPlayer;
         //UI
         m_Raycaster = orderCreatorCanvas.GetComponent<GraphicRaycaster>();
         m_EventSystem = GetComponent<EventSystem>();
