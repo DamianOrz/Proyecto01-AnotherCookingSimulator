@@ -41,8 +41,8 @@ public class DialogoManager : MonoBehaviour
         if (DiaManager.instanceDiaManager.isCanvasBeingUsed()) return;
         if (Input.GetKeyDown(KeyCode.KeypadEnter))
         {
-            int[] idImages = new int[4] { 0, 1, 2, 3 };
-            string[] dialogos = new string[4] { "Esto es una prueba", "Este es el segundo cuadro", "Holaaa", "holaaa2" };
+            int[] idImages = new int[3] { 0, 1, 2};
+            string[] dialogos = new string[3] { "Bienvenido al tutorial! Soy el dueño del Restaurante ACS.", "Aca aprenderas a hacer las tareas en tu nuevo trabajo aqui.", "Lo primero que tenes que aprender es a moverte por el espacio asi no te mandas ninguna cagada, mira el poster de en frente tuyo para saber como hacerlo."};
             hacerDialogo(idImages, dialogos.Length, dialogos);
         }
         if (canvasDialogo.enabled)
@@ -81,9 +81,7 @@ public class DialogoManager : MonoBehaviour
     {
         GameObject panel = canvasDialogo.transform.Find("Panel").gameObject;
         Animation introAnimation = panel.GetComponent<Animation>();
-        introAnimation.Play();
-
-
+        if (_contDeCuadros == 0) introAnimation.Play();
 
         //imageOfCanvas.sprite = listaImagenes[dialogo.GetIdImage()[_contDeCuadros]]; --> Mejor no
         mensaje.text = dialogo.GetMsg()[_contDeCuadros];

@@ -613,8 +613,8 @@ namespace Mirror
             }
             else
             {
-                GameObject go = Instantiate(PCPlayer, new Vector3(57,2,2), Quaternion.identity);
-
+                GameObject go = Instantiate(PCPlayer, new Vector3(60.48884f, 1.389489f, -9.319752f), Quaternion.identity);
+                
                 go.name = "PCPlayer " + numPCPlayers;
 
                 go.transform.parent = gamePlayer.transform;

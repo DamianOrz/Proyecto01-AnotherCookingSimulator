@@ -83,7 +83,7 @@ public class PcManager : NetworkBehaviour
         cameraPlayer = this.GetComponentInChildren<Camera>();
         destination = cameraPlayer.transform.GetChild(0);
         groundCheck = this.transform.GetChild(2);
-
+        gameObject.transform.GetChild(0).transform.rotation.Set(0, 177.436f, 0, 0);
         anim = this.GetComponent<Animator>(); //Se usa para las animaciones de caminar, saltar, etc.
 
         canvasCrosshair = GameObject.Find("Mira"); //Obtengo el gameobject que tiene mi mira
