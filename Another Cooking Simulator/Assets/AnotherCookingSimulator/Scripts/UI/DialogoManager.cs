@@ -34,17 +34,20 @@ public class DialogoManager : MonoBehaviour
         mensaje = panel.transform.GetComponentInChildren<TMP_Text>();
         imageOfCanvas = panel.transform.GetChild(0).transform.GetComponent<Image>();
         canvasDialogo.enabled = false;
+        int[] idImages = new int[7] { 0, 1, 2, 3, 0, 1, 2 };
+        string[] dialogos = new string[7] { "Bienvenido al tutorial! Soy el dueño del Restaurante ACS.",
+                "Aca aprenderas a hacer las tareas en tu nuevo trabajo aqui.",
+                "Lo primero que tenes que aprender es a moverte por el espacio asi no te mandas ninguna cagada, mira el poster de atras tuyo para saber como hacerlo.",
+                "Ahora que ya te sabes mover, quiero pedir una hamburguesa simple, acercate a la pantalla y tomame el pedido",
+                "Ahora que ya tomaste el pedido, ve a buscar la hamburguesa en la mesa de en frente",
+                "Ahora llevala a la parte violeta del mostrador anterior para que me la pueda comer pa",
+                "Esta un poco cruda pero para ser la primera vez zafa, ahora ya puedes salir por la puerta y a la izquierda veras el restaurante" };
+        hacerDialogo(idImages, dialogos.Length, dialogos);
     }
 
     private void Update()
     {
         if (DiaManager.instanceDiaManager.isCanvasBeingUsed()) return;
-        if (Input.GetKeyDown(KeyCode.KeypadEnter))
-        {
-            int[] idImages = new int[3] { 0, 1, 2};
-            string[] dialogos = new string[3] { "Bienvenido al tutorial! Soy el dueño del Restaurante ACS.", "Aca aprenderas a hacer las tareas en tu nuevo trabajo aqui.", "Lo primero que tenes que aprender es a moverte por el espacio asi no te mandas ninguna cagada, mira el poster de en frente tuyo para saber como hacerlo."};
-            hacerDialogo(idImages, dialogos.Length, dialogos);
-        }
         if (canvasDialogo.enabled)
         {
             if (Input.GetKeyDown(KeyCode.J))
