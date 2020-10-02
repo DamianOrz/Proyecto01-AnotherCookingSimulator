@@ -139,7 +139,13 @@ public class PcManager : NetworkBehaviour
             speed = sprintSpeed;
         }
         else { speed = 7; }
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+
+        //isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        isGrounded = Physics.Raycast(transform.position, -Vector3.up, (float)(this.transform.position.y) + 0.1f);
+        if (isGrounded == true && transform.position.y >= 7)
+        {
+            isGrounded = false;
+        }
 
         bool isWalking = false;
 
