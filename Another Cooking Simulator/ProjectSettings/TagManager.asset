@@ -19,6 +19,7 @@ TagManager:
   - Teleportable
   - Mesa
   - ContentMostrarHamburguesa
+  - Pedido
   layers:
   - Default
   - TransparentFX

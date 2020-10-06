@@ -222,9 +222,13 @@ public class PcManager : NetworkBehaviour
                 }
                 if (whatIHit.collider.gameObject.tag == "Mesa")
                 {
-                    //PutObjectOnTheTable(gameObject,whatIHit);
                     int iMesaId = whatIHit.collider.gameObject.GetComponent<MesaIdentifier>().id;
-                    Debug.Log("[LOCAL][DAMIAN] La mesa en la que se dejó el pedido es: " + iMesaId);
+                    //PutObjectOnTheTable(gameObject,whatIHit);
+                    if(destination.GetChild(0).gameObject.name.Contains("Bandeja"))
+                    {
+                        PedidoManager.instancePedidoManager.EvaluarPedido(iMesaId, destination.GetChild(0).gameObject);
+                        Debug.Log("[LOCAL][DAMIAN] La mesa en la que se dejó el pedido es: " + iMesaId); 
+                    }
                     CmdPutObjectOnTheTable(gameObject, whatIHit.point, iMesaId);
                     return;
                 }

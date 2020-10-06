@@ -152,7 +152,7 @@ GameObject:
   - component: {fileID: 5912477404348525713}
   m_Layer: 0
   m_Name: Bandeja 1
-  m_TagString: Untagged
+  m_TagString: Pedido
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -1,11 +1,11 @@
-﻿    using UnityEngine.Audio;
+﻿using UnityEngine.Audio;
 using System;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Mirror;
-
+using Random = System.Random;
 
 public class PedidoManager : NetworkBehaviour
 {
@@ -44,7 +44,7 @@ public class PedidoManager : NetworkBehaviour
     }
 
     [SerializeField] private static List<Pedido> _listaPedidos = new List<Pedido>();
-
+    private List<int> _listaDeMesasDisponibles = new List<int>() {1, 2, 3, 4, 5, 6};
     public void cambiarPuntaje()
     {
         int puntaje = correccion(agarrarUltimoPedido().GetOrdenIngredientes(), agarrarUltimoPedido().GetInterpretacionIngredientes());
@@ -82,12 +82,20 @@ public class PedidoManager : NetworkBehaviour
         Pedido unPedido = new Pedido();
         FindObjectOfType<AudioManager>().Play("FX-Ring");
         unPedido.SetOrdenIngredientes(CrearHamburguesaRandom(posiblesIngredientes));
+        unPedido.SetNumMesa(idMesaDisponible(_listaDeMesasDisponibles));
         MostrarPedidoDelCliente(unPedido);
 
         _listaPedidos.Add(unPedido);
         unPedido.SetIdPedido(_listaPedidos.Count);
     } //Genera un pedido de forma aleatoria
-    
+    private int idMesaDisponible(List<int> mesasDisponibles)
+    {
+        var random = new Random();
+        int index = random.Next(mesasDisponibles.Count);
+        int numeroDeMesa = mesasDisponibles[index - 1];
+        mesasDisponibles.RemoveAt(index-1);
+        return numeroDeMesa;
+    }
     public Pedido CrearInterpretacion(int[] interpretacion)
     {
         Pedido unPedido;
@@ -114,7 +122,7 @@ public class PedidoManager : NetworkBehaviour
         //Agarro orden de ingredientes
         string strOrden = CambiarArrayAString(unPedido.GetInterpretacionIngredientes());
         //Ejecuto funcion server y le mando los ingredientes
-        SincronizarPedidoEnPantalla(unPedido.GetIdPedido(), strOrden);
+        SincronizarPedidoEnPantalla(unPedido.GetIdPedido(), strOrden, unPedido.GetNumMesa());
 
         iNumPedido++;
     }
@@ -123,8 +131,9 @@ public class PedidoManager : NetworkBehaviour
     {
         //Agarro orden de ingredientes
         string strOrden = CambiarArrayAString(unPedido.GetOrdenIngredientes());
+        
         //Ejecuto funcion server y le mando los ingredientes
-        SincronizarPedidoEnPantalla(-1, strOrden);
+        SincronizarPedidoEnPantalla(-1, strOrden, unPedido.GetNumMesa());
 
         iNumPedido++;
     }
@@ -134,19 +143,19 @@ public class PedidoManager : NetworkBehaviour
         //Agarro orden de ingredientes
         string strOrden = CambiarArrayAString(Ingredientes);
         //Ejecuto funcion server y le mando los ingredientes
-        SincronizarPedidoEnPantalla(-2, strOrden);
+        SincronizarPedidoEnPantalla(-2, strOrden, -1);
 
         iNumPedido++;
     }
 
     #region OnlinePedidos
     [Server]
-    private void SincronizarPedidoEnPantalla(int idPedido, string ordenDeIngredientes)
+    private void SincronizarPedidoEnPantalla(int idPedido, string ordenDeIngredientes, int numMesa)
     {
         //Ejecuto un rpc para ejecutar el codigo en todos los clientes(mando orden)
         if (idPedido == -1)
         {
-            RpcMostrarPedidoACadaCliente(ordenDeIngredientes);
+            RpcMostrarPedidoACadaCliente(ordenDeIngredientes, numMesa);
             return;
         }
         else if (idPedido == -2)
@@ -160,7 +169,7 @@ public class PedidoManager : NetworkBehaviour
         }
     }
     [ClientRpc]
-    private void RpcMostrarPedidoACadaCliente(string ordenIngredientes)
+    private void RpcMostrarPedidoACadaCliente(string ordenIngredientes, int numMesa)
     {
         //Instancio el prefab del cliente
         GameObject pedidoCreado = Instantiate(instancePedidoManager.prefabClientes);
@@ -170,6 +179,7 @@ public class PedidoManager : NetworkBehaviour
 
         Debug.Log("SIMON: Los ingrediente son :"+ ordenIngredientes);
         panel.transform.Find("strConsumibles").gameObject.GetComponent<TMP_Text>().text = ordenIngredientes;
+        panel.transform.Find("strNumMesa").gameObject.GetComponent<TMP_Text>().text = "Numero de mesa: " + numMesa;
         //Lo hago hijo de la pantalla para que se vea
         pedidoCreado.transform.SetParent(instancePedidoManager.contentMostrarPedidoCliente.transform, false);
     }
@@ -242,5 +252,29 @@ public class PedidoManager : NetworkBehaviour
             }
         }
         return vector;
+    }
+
+    public void EvaluarPedido(int idMesa, GameObject pedido)
+    {
+        int seEncontroPedido= BuscarPedidoEnEstaMesa(idMesa);
+        if(seEncontroPedido == -1)
+        {
+            int[] idImages = new int[1] { 0};
+            string[] dialogos = new string[1] { "No hay ningun pedido en esta mesa"};
+            DialogoManager.instanceDialogoInformacion.hacerDialogo(idImages, dialogos.Length, dialogos);
+            return;
+        }
+        
+    }
+
+    private int BuscarPedidoEnEstaMesa(int idMesa)
+    {
+        int i = 0;
+        while (i<_listaPedidos.Count)
+        {
+            if (_listaPedidos[i].GetNumMesa() == idMesa) return i;
+            i++;
+        }
+        return i = -1;
     }
 }
