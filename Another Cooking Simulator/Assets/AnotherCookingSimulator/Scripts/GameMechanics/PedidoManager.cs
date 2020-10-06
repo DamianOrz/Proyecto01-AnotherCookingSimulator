@@ -256,6 +256,25 @@ public class PedidoManager : NetworkBehaviour
 
     public void EvaluarPedido(int idMesa, GameObject pedido)
     {
+        int seEncontroPedido= BuscarPedidoEnEstaMesa(idMesa);
+        if(seEncontroPedido == -1)
+        {
+            int[] idImages = new int[1] { 0};
+            string[] dialogos = new string[1] { "No hay ningun pedido en esta mesa"};
+            DialogoManager.instanceDialogoInformacion.hacerDialogo(idImages, dialogos.Length, dialogos);
+            return;
+        }
+        
+    }
 
+    private int BuscarPedidoEnEstaMesa(int idMesa)
+    {
+        int i = 0;
+        while (i<_listaPedidos.Count)
+        {
+            if (_listaPedidos[i].GetNumMesa() == idMesa) return i;
+            i++;
+        }
+        return i = -1;
     }
 }
