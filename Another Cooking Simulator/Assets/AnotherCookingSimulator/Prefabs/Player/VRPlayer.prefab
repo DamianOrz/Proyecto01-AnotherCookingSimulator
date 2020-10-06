@@ -2062,7 +2062,7 @@ MonoBehaviour:
   navMeshData: {fileID: 0}
   navMeshLimitDistance: 0
   snapToNearestFloor: 1
-  applyPlayareaParentOffset: 0
+  applyPlayareaParentOffset: 1
   customRaycast: {fileID: 0}
   normalLerpTime: 0.1
   minSpeedMps: 50
@@ -2320,7 +2320,7 @@ MonoBehaviour:
   navMeshData: {fileID: 0}
   navMeshLimitDistance: 0
   snapToNearestFloor: 1
-  applyPlayareaParentOffset: 0
+  applyPlayareaParentOffset: 1
   customRaycast: {fileID: 0}
   normalLerpTime: 0.1
   minSpeedMps: 50
