@@ -45,9 +45,9 @@ public class PedidoManager : NetworkBehaviour
 
     [SerializeField] private static List<Pedido> _listaPedidos = new List<Pedido>();
     private List<int> _listaDeMesasDisponibles = new List<int>() {1, 2, 3, 4, 5, 6};
-    public void cambiarPuntaje()
+    public void cambiarPuntaje(int indice, int[] interpretacionVR)
     {
-        int puntaje = correccion(agarrarUltimoPedido().GetOrdenIngredientes(), agarrarUltimoPedido().GetInterpretacionIngredientes());
+        int puntaje = correccion(_listaPedidos[indice].GetOrdenIngredientes(), interpretacionVR);
         ScoreManager.sobreEscribir(puntaje);
         //Pregunta si ya pasaron todos los clientes
         if (DiaManager.instanceDiaManager.diasInfo[DiaManager.instanceDiaManager.diaActual].clientesEnElDia == _listaPedidos.Count)
@@ -256,15 +256,16 @@ public class PedidoManager : NetworkBehaviour
 
     public void EvaluarPedido(int idMesa, GameObject pedido)
     {
-        int seEncontroPedido= BuscarPedidoEnEstaMesa(idMesa);
-        if(seEncontroPedido == -1)
+        int indice= BuscarPedidoEnEstaMesa(idMesa);
+        if(indice == -1)
         {
             int[] idImages = new int[1] { 0};
             string[] dialogos = new string[1] { "No hay ningun pedido en esta mesa"};
             DialogoManager.instanceDialogoInformacion.hacerDialogo(idImages, dialogos.Length, dialogos);
             return;
-        }
-        
+        } //No se encontro un pedido con ese id de mesa
+        Pedido unPedido = _listaPedidos[indice]; //Pedido con el id de la mesa que se encontro
+        Verificar.instanceVerificar.Evaluar(pedido, indice);
     }
 
     private int BuscarPedidoEnEstaMesa(int idMesa)

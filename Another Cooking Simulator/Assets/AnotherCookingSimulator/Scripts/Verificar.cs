@@ -5,10 +5,21 @@ using VRTK;
 
 public class Verificar : MonoBehaviour
 {
+    public static Verificar instanceVerificar;
     GameObject Bandeja;
     private bool noSeHizo;
-    
 
+    private void Awake()
+    {
+        if (instanceVerificar != null && instanceVerificar != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instanceVerificar = this;
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -16,62 +27,66 @@ public class Verificar : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    //void Update()
+    //{
 
-    }
-    // Cuando un pati toca el horno se cambia a true el bool::touchGrill
-    void OnCollisionEnter(Collision collisionInfo)
+    //}
+    //void OnCollisionEnter(Collision collisionInfo)
+    //{
+    //    if (collisionInfo.collider.tag == "Verificacion")
+    //    {
+            
+    //        VRTK_SnapDropZone snapDropZone = this.GetComponentInChildren<VRTK_SnapDropZone>();
+            
+    //    }
+    //}
+    public void Evaluar(GameObject pedidoAVerificar, int indiceEnListaPedidos)
     {
-        if (collisionInfo.collider.tag == "Verificacion")
+        noSeHizo = true;
+        VRTK_SnapDropZone snapDropZone = pedidoAVerificar.GetComponentInChildren<VRTK_SnapDropZone>();
+        if (ObtenerHijos(snapDropZone).Count != 0)
         {
-            noSeHizo = true;
-            VRTK_SnapDropZone snapDropZone = this.GetComponentInChildren<VRTK_SnapDropZone>();
-            if (ObtenerHijos(snapDropZone).Count != 0)
+            if (noSeHizo)
             {
-                if (noSeHizo)
+                List<VRTK_InteractableObject> hijos = ObtenerTodosLosHijos(snapDropZone);
+                List<string> listaNombres = new List<string>();
+                noSeHizo = false;
+                string strIngredientes = "";
+                for(int i = 0; i < hijos.Count; i++)
                 {
-                    List<VRTK_InteractableObject> hijos = ObtenerTodosLosHijos(snapDropZone);
-                    List<string> listaNombres = new List<string>();
-                    noSeHizo = false;
-                    string strIngredientes = "";
-                    for(int i = 0; i < hijos.Count; i++)
-                    {
-                        strIngredientes += hijos[i].name + " ";
-                        listaNombres.Add(hijos[i].name);
-                    }
-                    int[] interpretacionDeVR = new int[listaNombres.Count];
-                    for (int i = 0; i < listaNombres.Count; i++)
-                    {
-                        if (listaNombres[i].Contains("Pan"))
-                        {
-                            interpretacionDeVR[i] = 0;
-                        }else if (listaNombres[i].Contains("Paty"))
-                        {
-                            interpretacionDeVR[i] = 1;
-                        }else if (listaNombres[i].Contains("Cheddar"))
-                        {
-                            interpretacionDeVR[i] = 2;
-                        }else if (listaNombres[i].Contains("Cebolla"))
-                        {
-                            interpretacionDeVR[i] = 3;
-                        }else if (listaNombres[i].Contains("Bacon"))
-                        {
-                            interpretacionDeVR[i] = 4;
-                        }
-                    }
-                    PedidoManager.instancePedidoManager.agarrarUltimoPedido().SetInterpretacionIngredientes(interpretacionDeVR);
-                    ClientesManager.instanceClientesManager.seEntregoUnPedido();
-                    PedidoManager.instancePedidoManager.MostrarVerificacion(interpretacionDeVR);
-                    PedidoManager.instancePedidoManager.cambiarPuntaje();
-                    
-                    
-                    strIngredientes = "";
+                    strIngredientes += hijos[i].name + " ";
+                    listaNombres.Add(hijos[i].name);
                 }
+                int[] interpretacionDeVR = new int[listaNombres.Count];
+                for (int i = 0; i < listaNombres.Count; i++)
+                {
+                    if (listaNombres[i].Contains("Pan"))
+                    {
+                        interpretacionDeVR[i] = 0;
+                    }else if (listaNombres[i].Contains("Paty"))
+                    {
+                        interpretacionDeVR[i] = 1;
+                    }else if (listaNombres[i].Contains("Cheddar"))
+                    {
+                        interpretacionDeVR[i] = 2;
+                    }else if (listaNombres[i].Contains("Cebolla"))
+                    {
+                        interpretacionDeVR[i] = 3;
+                    }else if (listaNombres[i].Contains("Bacon"))
+                    {
+                        interpretacionDeVR[i] = 4;
+                    }
+                }
+                //PedidoManager.instancePedidoManager.agarrarUltimoPedido().SetInterpretacionIngredientes(interpretacionDeVR);
+                ClientesManager.instanceClientesManager.seEntregoUnPedido();//Se avisa que ya se entrego un pedido al cliente manager
+                //PedidoManager.instancePedidoManager.MostrarVerificacion(interpretacionDeVR);//Mostrar en el canvas
+                PedidoManager.instancePedidoManager.cambiarPuntaje(indiceEnListaPedidos, interpretacionDeVR);
+                    
+                    
+                strIngredientes = "";
             }
         }
     }
-
     List<GameObject> listaHamburguesa(GameObject go)
     {
         List<GameObject> listaHamburguesa = new List<GameObject>();
