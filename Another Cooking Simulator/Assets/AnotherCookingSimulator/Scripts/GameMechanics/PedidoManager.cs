@@ -47,8 +47,14 @@ public class PedidoManager : NetworkBehaviour
     private List<int> _listaDeMesasDisponibles = new List<int>() {1, 2, 3, 4, 5, 6};
     public void cambiarPuntaje(int indice, int[] interpretacionVR)
     {
-        int puntaje = correccion(_listaPedidos[indice].GetOrdenIngredientes(), interpretacionVR);
-        ScoreManager.sobreEscribir(puntaje);
+        int puntaje = correccion(_listaPedidos[indice].GetOrdenIngredientes(), interpretacionVR); //Correccion
+        
+        ScoreManager.sobreEscribir(puntaje); //Sumar el score
+        int[] idImages = new int[1] { 1 };
+        string[] dialogos = new string[1] { "Obtuviste " + puntaje + " puntos" };
+        DialogoManager.instanceDialogoInformacion.hacerDialogo(idImages, dialogos.Length, dialogos); // Mostrar dialogo
+        _listaDeMesasDisponibles.Add(_listaPedidos[indice].GetNumMesa()); //Añadimos la mesa a la lista de mesas disponibles
+        _listaPedidos.RemoveAt(indice); //Sacar pedido de la lista de pedidos
         //Pregunta si ya pasaron todos los clientes
         if (DiaManager.instanceDiaManager.diasInfo[DiaManager.instanceDiaManager.diaActual].clientesEnElDia == _listaPedidos.Count)
         {
@@ -73,7 +79,9 @@ public class PedidoManager : NetworkBehaviour
 
     public void crearPedidoRandom()
     {
+        if (_listaDeMesasDisponibles.Count <= 0) return;
         int[] posiblesIngredientes = new int[DiaManager.instanceDiaManager.diasInfo[0].posiblesIngredientes.Length];
+
         for (int i = 0; i < DiaManager.instanceDiaManager.diasInfo[0].posiblesIngredientes.Length; i++)
         {
             posiblesIngredientes[i] = (int)DiaManager.instanceDiaManager.diasInfo[DiaManager.instanceDiaManager.diaActual].posiblesIngredientes[i];
@@ -82,18 +90,17 @@ public class PedidoManager : NetworkBehaviour
         Pedido unPedido = new Pedido();
         FindObjectOfType<AudioManager>().Play("FX-Ring");
         unPedido.SetOrdenIngredientes(CrearHamburguesaRandom(posiblesIngredientes));
-        unPedido.SetNumMesa(idMesaDisponible(_listaDeMesasDisponibles));
+        unPedido.SetNumMesa(IdMesaDisponible(_listaDeMesasDisponibles));
         MostrarPedidoDelCliente(unPedido);
 
         _listaPedidos.Add(unPedido);
         unPedido.SetIdPedido(_listaPedidos.Count);
     } //Genera un pedido de forma aleatoria
-    private int idMesaDisponible(List<int> mesasDisponibles)
+    private int IdMesaDisponible(List<int> mesasDisponibles)
     {
-        var random = new Random();
-        int index = random.Next(mesasDisponibles.Count);
-        int numeroDeMesa = mesasDisponibles[index - 1];
-        mesasDisponibles.RemoveAt(index-1);
+        int index = RandomEntre(0,_listaDeMesasDisponibles.Count-1);
+        int numeroDeMesa = mesasDisponibles[index];
+        mesasDisponibles.RemoveAt(index);
         return numeroDeMesa;
     }
     public Pedido CrearInterpretacion(int[] interpretacion)

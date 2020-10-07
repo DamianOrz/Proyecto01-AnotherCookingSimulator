@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using System.IO;
 
 public class DialogoManager : MonoBehaviour
 {
@@ -15,6 +16,10 @@ public class DialogoManager : MonoBehaviour
     private Image imageOfCanvas;
     private Dialogo elDialogo = new Dialogo();
     private int _contDeCuadros = -1;
+
+    [SerializeField]
+    //private string _questionPath;
+    //private DialogoCollection _dialogosCollection;
 
     private void Awake()
     {
@@ -29,6 +34,7 @@ public class DialogoManager : MonoBehaviour
     }
     private void Start()
     {
+        //CargarDialogos();
         canvasDialogo = GetComponent<Canvas>();
         GameObject panel = canvasDialogo.transform.Find("Panel").gameObject;
         mensaje = panel.transform.GetComponentInChildren<TMP_Text>();
@@ -44,6 +50,15 @@ public class DialogoManager : MonoBehaviour
                 "Esta un poco cruda pero para ser la primera vez zafa, ahora ya puedes salir por la puerta y a la izquierda veras el restaurante" };
         hacerDialogo(idImages, dialogos.Length, dialogos);
     }
+
+    //private void CargarDialogos()
+    //{
+    //    using (StreamReader stream = new StreamReader(_questionPath))
+    //    {
+    //        string json = stream.ReadToEnd();
+    //        _dialogosCollection = JsonUtility.FromJson<DialogoCollection>(json);
+    //    }
+    //}
 
     private void Update()
     {
