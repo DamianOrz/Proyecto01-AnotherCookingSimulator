@@ -25,8 +25,8 @@ public class ActivateVRMode : MonoBehaviour
 
     public void DeleteGameobject()
     {
-        //GameObject a = GameObject.Find("MainMenuCanvas");
-        //canvas.gameObject.SetActive(true);
+        GameObject a = GameObject.Find("MainMenuCanvas");
+        a.gameObject.SetActive(true);
         GameObject b = this.transform.root.gameObject;
         Destroy(b);
     }
