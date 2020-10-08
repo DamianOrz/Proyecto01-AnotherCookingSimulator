@@ -1955,7 +1955,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4884026849801594003}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 64e104da36bd3b04b90c6ae969ac66dc, type: 3}
   m_Name: 
@@ -1975,7 +1975,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grabButton: 7
   grabPrecognition: 0
-  throwMultiplier: 1
+  throwMultiplier: 2
   createRigidBodyWhenNotTouching: 0
   controllerAttachPoint: {fileID: 0}
   controllerEvents: {fileID: 0}
@@ -2089,10 +2089,10 @@ MonoBehaviour:
   blinkTransitionSpeed: 0.6
   distanceBlinkDelay: 0
   headsetPositionCompensation: 1
-  targetListPolicy: {fileID: 0}
+  targetListPolicy: {fileID: 4961672652803825890}
   navMeshData: {fileID: 0}
   navMeshLimitDistance: 0
-  snapToNearestFloor: 0
+  snapToNearestFloor: 1
   applyPlayareaParentOffset: 0
   customRaycast: {fileID: 0}
   normalLerpTime: 0.1
@@ -2196,7 +2196,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4884026849973266782}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 64e104da36bd3b04b90c6ae969ac66dc, type: 3}
   m_Name: 
@@ -2216,7 +2216,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grabButton: 7
   grabPrecognition: 0
-  throwMultiplier: 1
+  throwMultiplier: 2
   createRigidBodyWhenNotTouching: 0
   controllerAttachPoint: {fileID: 0}
   controllerEvents: {fileID: 0}
@@ -2330,10 +2330,10 @@ MonoBehaviour:
   blinkTransitionSpeed: 0.6
   distanceBlinkDelay: 0
   headsetPositionCompensation: 1
-  targetListPolicy: {fileID: 0}
+  targetListPolicy: {fileID: 4961672652803825890}
   navMeshData: {fileID: 0}
   navMeshLimitDistance: 0
-  snapToNearestFloor: 0
+  snapToNearestFloor: 1
   applyPlayareaParentOffset: 0
   customRaycast: {fileID: 0}
   normalLerpTime: 0.1
@@ -2350,8 +2350,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4884026850997641377}
-  - component: {fileID: 3346296365167356361}
   - component: {fileID: 4961672652803825890}
+  - component: {fileID: 9071530578096069314}
   m_Layer: 0
   m_Name: '[VRTK_Scripts]'
   m_TagString: Untagged
@@ -2375,7 +2375,23 @@ Transform:
   m_Father: {fileID: 7578214640803230312}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3346296365167356361
+--- !u!114 &4961672652803825890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4884026850997641378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ed2aa1a29b92ca4f84a26a5f6e9218b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  operation: 1
+  checkType: 1
+  identifiers:
+  - Teleportable
+--- !u!114 &9071530578096069314
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2388,8 +2404,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enableTeleport: 1
-  targetListPolicy: {fileID: 4961672652803825890}
-  enableBodyCollisions: 0
+  targetListPolicy: {fileID: 0}
+  enableBodyCollisions: 1
   ignoreGrabbedCollisions: 1
   ignoreCollisionsWith: []
   headsetYOffset: 0.2
@@ -2410,22 +2426,6 @@ MonoBehaviour:
   customPlayAreaRigidbody: {fileID: 0}
   customBodyColliderContainer: {fileID: 0}
   customFootColliderContainer: {fileID: 0}
---- !u!114 &4961672652803825890
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4884026850997641378}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ed2aa1a29b92ca4f84a26a5f6e9218b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  operation: 1
-  checkType: 1
-  identifiers:
-  - Teleportable
 --- !u!1 &7057737126519170983
 GameObject:
   m_ObjectHideFlags: 0
@@ -2632,7 +2632,7 @@ MonoBehaviour:
   virtualGreenScreenApplyDepthCulling: 0
   virtualGreenScreenDepthTolerance: 0.2
   mrcActivationMode: 0
-  _trackingOriginType: 1
+  _trackingOriginType: 0
   usePositionTracking: 1
   useRotationTracking: 1
   useIPDInPositionTracking: 1
@@ -2668,8 +2668,8 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 2
-  m_Radius: 0.5
+  m_Height: 0
+  m_Radius: 0
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
