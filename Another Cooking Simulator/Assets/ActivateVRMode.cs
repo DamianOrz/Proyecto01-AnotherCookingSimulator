@@ -21,6 +21,14 @@ public class ActivateVRMode : MonoBehaviour
     public void ShowVR()
     {
         Instantiate(vrZonePrefab);
+        GameObject vrZone = GameObject.Find("VRPrefab(Clone)");
+
+        vrZone.GetComponent<ActivateVRMode>().setCanvas(this.transform.root.gameObject);
+    }
+
+    public void setCanvas(GameObject newCanvas)
+    {
+        canvas = newCanvas;
     }
 
     public void DeleteGameobject()

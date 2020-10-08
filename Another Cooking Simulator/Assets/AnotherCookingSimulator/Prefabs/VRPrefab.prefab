@@ -652,7 +652,7 @@ GameObject:
   - component: {fileID: 1041249984755177680}
   m_Layer: 0
   m_Name: btnHost
-  m_TagString: Untagged
+  m_TagString: Interactuable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -976,7 +976,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 1041249985046982927}
   m_OnClick:
     m_PersistentCalls:

@@ -604,7 +604,7 @@ namespace Mirror
             //gamePlayer --> Aún no reemplaza a roomPlayer y fue recien instanciado
             if (roomPlayer.GetComponent<NetworkRoomPlayer>().playerType == 0)
             {
-                GameObject go = Instantiate(VRPlayer, new Vector3(23, 3f, -10), Quaternion.identity);
+                GameObject go = Instantiate(VRPlayer, new Vector3(23, 1.6f, -10), Quaternion.identity);
                 go.name = "VRPlayer";
                 go.transform.parent = gamePlayer.transform;
 

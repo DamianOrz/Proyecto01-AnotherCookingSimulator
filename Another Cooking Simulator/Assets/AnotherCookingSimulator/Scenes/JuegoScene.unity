@@ -202,7 +202,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1656429179}
   m_HandleRect: {fileID: 1216770465}
   m_Direction: 2
-  m_Value: -0.0000049294445
+  m_Value: -0.000010198851
   m_Size: 0.6902081
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -8252,8 +8252,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 363743051}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 0.0029831, y: 0.0011277, z: -0.0068}
-  m_LocalScale: {x: 0.0004222541, y: 0.000037878428, z: 0.0008463314}
+  m_LocalPosition: {x: 0.0029747, y: 0.0011717, z: -0.0068}
+  m_LocalScale: {x: 0.00037853836, y: 0.000037878428, z: 0.00075827056}
   m_Children: []
   m_Father: {fileID: 1087017343}
   m_RootOrder: 1
@@ -10667,7 +10667,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: c9a9ef7ae9b29504ab9a1f0c48978e8f, type: 3}
   - {fileID: 21300000, guid: d2004f50cbccc1749b31d8bfd83c3528, type: 3}
   - {fileID: 21300000, guid: 5b8cb3179f3822745a720ee2acd56e3a, type: 3}
-  _questionPath: Assets/AnotherCookingSimulator/Scripts/Dialogo/Dialogos.json
 --- !u!114 &463522387
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25176,7 +25175,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 89.767555}
+  m_AnchoredPosition: {x: 0, y: 89.76843}
   m_SizeDelta: {x: -5.0498047, y: 289.7677}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1165009281
@@ -36325,7 +36324,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 171669036}
   m_Direction: 2
   m_Value: 1.0000004
-  m_Size: 0.6576099
+  m_Size: 0.65761006
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
