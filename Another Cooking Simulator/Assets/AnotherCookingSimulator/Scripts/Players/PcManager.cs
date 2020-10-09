@@ -99,8 +99,8 @@ public class PcManager : NetworkBehaviour
 
         orderCreatorCanvas = GameObject.Find("OrderCreatorCanvas");
         orderCreatorCanvas.GetComponent<Canvas>().worldCamera = cameraPlayer;
-        ordersMonitor = GameObject.Find("OrdersMonitorCanvas");
-        ordersMonitor.GetComponent<Canvas>().worldCamera = cameraPlayer;
+        //ordersMonitor = GameObject.Find("OrdersMonitorCanvas");
+        //ordersMonitor.GetComponent<Canvas>().worldCamera = cameraPlayer;
         //UI
         m_Raycaster = orderCreatorCanvas.GetComponent<GraphicRaycaster>();
         m_EventSystem = GetComponent<EventSystem>();
@@ -183,6 +183,9 @@ public class PcManager : NetworkBehaviour
         Debug.DrawRay(cameraPlayer.transform.position, cameraPlayer.transform.forward * distanceToSee, Color.magenta);
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
+            Physics.Raycast(cameraPlayer.transform.position, cameraPlayer.transform.forward, out whatIHit, distanceToSee);
+            if ( whatIHit.collider == null) return;
+            if (whatIHit.collider.gameObject.tag != "Interactuable") return;
             //Set up the new Pointer Event
             m_PointerEventData = new PointerEventData(m_EventSystem);
             //Set the Pointer Event Position to that of the mouse position

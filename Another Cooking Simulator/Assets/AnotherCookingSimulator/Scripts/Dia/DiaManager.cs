@@ -64,7 +64,7 @@ public class DiaManager : NetworkBehaviour
         }
         diaActual = myNetworkRoomManager.GetLevel(); //Devuelve el dia/nivel que se está jugando
         _canvasOrderCreator = GameObject.Find("LeftColumn").gameObject;
-        foreach (Transform child in _canvasOrderCreator.transform)
+        foreach (Transform child in _canvasOrderCreator.transform.GetChild(0).transform)
         {
             if (child.gameObject.name.Contains("btn"))
             {

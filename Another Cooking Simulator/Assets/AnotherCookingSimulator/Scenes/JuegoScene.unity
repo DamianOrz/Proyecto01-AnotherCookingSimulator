@@ -202,8 +202,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1656429179}
   m_HandleRect: {fileID: 1216770465}
   m_Direction: 2
-  m_Value: -0.0000049294445
-  m_Size: 0.6276047
+  m_Value: 0.00000033996167
+  m_Size: 0.6901629
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3513,7 +3513,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 697574423}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -9108,7 +9108,7 @@ RectTransform:
   m_Children:
   - {fileID: 1512007372}
   m_Father: {fileID: 697574423}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -13774,7 +13774,7 @@ RectTransform:
   m_Children:
   - {fileID: 1955414559}
   m_Father: {fileID: 697574423}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -15882,12 +15882,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 388621717}
   - {fileID: 151356290}
   - {fileID: 874707304}
-  - {fileID: 620125582}
   - {fileID: 1737698955}
+  - {fileID: 388621717}
   - {fileID: 1326575112}
+  - {fileID: 620125582}
   - {fileID: 461846377}
   - {fileID: 1070912535}
   m_Father: {fileID: 1001063815}
@@ -19567,7 +19567,7 @@ RectTransform:
   m_Children:
   - {fileID: 108270530}
   m_Father: {fileID: 697574423}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -25264,7 +25264,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 89.7676}
+  m_AnchoredPosition: {x: 0, y: 89.76693}
   m_SizeDelta: {x: -5.0498047, y: 289.7677}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1165009281
@@ -29590,7 +29590,7 @@ RectTransform:
   m_Children:
   - {fileID: 1041031201}
   m_Father: {fileID: 697574423}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -36413,7 +36413,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 171669036}
   m_Direction: 2
   m_Value: 1.0000004
-  m_Size: 0.65761
+  m_Size: 0.6576099
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -38321,7 +38321,7 @@ RectTransform:
   m_Children:
   - {fileID: 269751459}
   m_Father: {fileID: 697574423}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
