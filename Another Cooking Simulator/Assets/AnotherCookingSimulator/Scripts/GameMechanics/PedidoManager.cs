@@ -47,7 +47,7 @@ public class PedidoManager : NetworkBehaviour
     private List<int> _listaDeMesasDisponibles = new List<int>() {1, 2, 3, 4, 5, 6};
     public void cambiarPuntaje(int indice, int[] interpretacionVR)
     {
-        int puntaje = correccion(_listaPedidos[indice].GetOrdenIngredientes(), interpretacionVR); //Correccion
+        int puntaje = correccion(_listaPedidos[indice].GetOrdenIngredientes(), interpretacionVR, _listaPedidos[indice]); //Correccion
         
         ScoreManager.sobreEscribir(puntaje); //Sumar el score
         int[] idImages = new int[1] { 1 };
@@ -55,27 +55,57 @@ public class PedidoManager : NetworkBehaviour
         DialogoManager.instanceDialogoInformacion.hacerDialogo(idImages, dialogos.Length, dialogos); // Mostrar dialogo
         _listaDeMesasDisponibles.Add(_listaPedidos[indice].GetNumMesa()); //Añadimos la mesa a la lista de mesas disponibles
         _listaPedidos.RemoveAt(indice); //Sacar pedido de la lista de pedidos
+        
         //Pregunta si ya pasaron todos los clientes
         if (DiaManager.instanceDiaManager.diasInfo[DiaManager.instanceDiaManager.diaActual].clientesEnElDia == _listaPedidos.Count)
         {
             //DiaManager.instanceDiaManager.FinalizarDia();
         }
     }
-    private int correccion(int[] ordenIngredientes, int[] interpretacion)
+    private int correccion(int[] ordenIngredientes, int[] interpretacion, Pedido elPedido)
     {
         int puntos = 0;
         if (ordenIngredientes.Length == interpretacion.Length)
         {
+            puntos += 20;
+            if (EstanLosIngredientesBien(ordenIngredientes, interpretacion))
+            {
+                elPedido.AñadirObservacion("Alto trabajito te mandaste, nada que decir!!");
+                puntos += 120;
+            }
+            else{
+                elPedido.AñadirObservacion("No estan todos los ingredientes que pedi!!");
+            }
             CORRECCIONES correciones = CORRECCIONES.muyBien;
-            puntos = (int)correciones;
+            puntos += 10;
         }
         else
         {
+            elPedido.AñadirObservacion("No esta la cantidad de ingredientes que pedi campeon!");
+            
             CORRECCIONES correcciones = CORRECCIONES.maso;
             puntos = (int)correcciones;
         }
         return puntos;
     }
+
+    private bool EstanLosIngredientesBien(int[] ordenIngredientes, int[] interpretacion)
+    {
+        bool seEncontroElIngrediente = false;
+        int indice;
+        for (int i = 1; i < interpretacion.Length - 1; i++)
+        {
+            indice = 1;
+            while (!seEncontroElIngrediente && indice < interpretacion.Length)
+            {
+                if (ordenIngredientes[i] == interpretacion[indice]) seEncontroElIngrediente = true;
+                indice++;
+            }
+            if (!seEncontroElIngrediente) return false;
+        }
+        return true;
+    }
+
 
     public void crearPedidoRandom()
     {
@@ -273,6 +303,18 @@ public class PedidoManager : NetworkBehaviour
         } //No se encontro un pedido con ese id de mesa
         Pedido unPedido = _listaPedidos[indice]; //Pedido con el id de la mesa que se encontro
         Verificar.instanceVerificar.Evaluar(pedido, indice);
+        MostrarObservaciones(unPedido);
+    }
+
+    private void MostrarObservaciones(Pedido unPedido)
+    {
+        string[] observacionesArray = unPedido.GetObservaciones().ToArray();
+        List<int> idsOfImages = new List<int>();
+        for (int i = 0; i < observacionesArray.Length; i++)
+        {
+            idsOfImages.Add(RandomEntre(0, 3));
+        }
+        DialogoManager.instanceDialogoInformacion.hacerDialogo(idsOfImages.ToArray(), observacionesArray.Length, observacionesArray);
     }
 
     private int BuscarPedidoEnEstaMesa(int idMesa)

@@ -11,6 +11,7 @@ public class Pedido
     private int _intNumMesa;
     private int[] _OrdenIngredientes;
     private int[] _InterpretacionIngredientes;
+    private List<string> _Observasiones = new List<string>();
     #endregion
     #region Getter and Setters 
     public int GetIdPedido()
@@ -47,6 +48,15 @@ public class Pedido
     public void SetInterpretacionIngredientes(int[] InterpretacionIngredientes)
     {
         _InterpretacionIngredientes = InterpretacionIngredientes;
+    }
+
+    public List<string> GetObservaciones()
+    {
+        return _Observasiones;
+    }
+    public void AñadirObservacion(string observacion)
+    {
+        _Observasiones.Add(observacion);
     }
     #endregion
     #region Constructors
