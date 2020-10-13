@@ -18,8 +18,9 @@ public class DialogoManager : MonoBehaviour
     private int _contDeCuadros = -1;
 
     [SerializeField]
+    private TextAsset TextAsset;
     //private string _questionPath;
-    //private DialogoCollection _dialogosCollection;
+    private Dialogo[] _Dialogos;
 
     private void Awake()
     {
@@ -51,14 +52,10 @@ public class DialogoManager : MonoBehaviour
         //hacerDialogo(idImages, dialogos.Length, dialogos);
     }
 
-    //private void CargarDialogos()
-    //{
-    //    using (StreamReader stream = new StreamReader(_questionPath))
-    //    {
-    //        string json = stream.ReadToEnd();
-    //        _dialogosCollection = JsonUtility.FromJson<DialogoCollection>(json);
-    //    }
-    //}
+    private void CargarDialogos()
+    {
+        _Dialogos = JsonUtility.FromJson<Dialogo[]>(TextAsset.ToString());
+    }
 
     private void Update()
     {
