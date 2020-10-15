@@ -30,6 +30,7 @@ public class RoomManagerScript : NetworkBehaviour
     public Button btnVR;
     public Button btnPC;
     public Button btnStart;
+    public Button btnReady;
 
     [Header("TMP_Text")]
     public TMP_Text tmpJugadoresVR;
@@ -59,6 +60,7 @@ public class RoomManagerScript : NetworkBehaviour
         player5.SetActive(false);
 
         btnStart.interactable = false;
+        btnReady.interactable = false;
     }
 
     // Update is called once per frame
@@ -169,6 +171,11 @@ public class RoomManagerScript : NetworkBehaviour
         {
             iCantPC--;
             myPlayer.CmdChangePlayerType(2);
+            btnReady.interactable = false;
+            if (myPlayer.readyToBegin)
+            {
+                SetReadyState();
+            }
             UpdateButtonsStatus();
             return;
         }
@@ -185,6 +192,7 @@ public class RoomManagerScript : NetworkBehaviour
             }
 
             myPlayer.CmdChangePlayerType(1); //myPlayer pasa a ser PC
+            btnReady.interactable = true;
         }
     }
 
@@ -195,12 +203,18 @@ public class RoomManagerScript : NetworkBehaviour
         {
             iCantVR--;
             myPlayer.CmdChangePlayerType(2);
+            btnReady.interactable = false;
+            if (myPlayer.readyToBegin)
+            {
+                SetReadyState();
+            }
             UpdateButtonsStatus();
         }
         else if (iCantVR < iLimiteJugadoresVR)
         {
 
             myPlayer.CmdChangePlayerType(0); //myPlayer pasa a ser VR
+            btnReady.interactable = true;
             iCantVR++;
         }
     }
