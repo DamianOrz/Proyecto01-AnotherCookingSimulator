@@ -270,7 +270,7 @@ public class PcManager : NetworkBehaviour
         Debug.Log("SIMON :" + transform.name);
         childObject.transform.parent = player.transform.GetChild(1).transform.GetChild(0).transform;
         childObject.transform.localPosition = new Vector3(0f, 0f, 0f);
-        childObject.GetComponent<MeshCollider>().enabled = false;
+        childObject.GetComponent<Collider>().enabled = false;
         childObject.GetComponent<Rigidbody>().isKinematic = true;
         //childObject.transform.position = new Vector3(0, 0, 0);
         if (zonaVerificacionDisponible != null)
@@ -308,7 +308,7 @@ public class PcManager : NetworkBehaviour
         Debug.Log("SIMON: EL INGREDIENTE ES : " + destinationDelPlayer.gameObject.name);
         destinationDelPlayer.SetActive(false);
         destinationDelPlayer.transform.parent = null;
-        destinationDelPlayer.GetComponent<MeshCollider>().enabled = true;
+        destinationDelPlayer.GetComponent<Collider>().enabled = true;
         destinationDelPlayer.GetComponent<Rigidbody>().isKinematic = false;
         destinationDelPlayer.transform.position = new Vector3(point.x, point.y + 0.01f, point.z);
         destinationDelPlayer.SetActive(true);
@@ -321,7 +321,7 @@ public class PcManager : NetworkBehaviour
         destinationDelPlayer.SetActive(false);
         Debug.Log("SIMON :" + transform.name);
         destinationDelPlayer.transform.parent = null;
-        destinationDelPlayer.GetComponent<MeshCollider>().enabled = true;
+        destinationDelPlayer.GetComponent<Collider>().enabled = true;
         destinationDelPlayer.GetComponent<Rigidbody>().isKinematic = false;
 
         destinationDelPlayer.SetActive(true);
