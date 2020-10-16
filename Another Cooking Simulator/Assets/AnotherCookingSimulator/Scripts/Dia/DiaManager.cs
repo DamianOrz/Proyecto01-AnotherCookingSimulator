@@ -133,7 +133,7 @@ public class DiaManager : NetworkBehaviour
         //Empiezo la emision de pedidos
         ClientesManager.instanceClientesManager.playInvokeRepeating(instanceDiaManager.diasInfo[instanceDiaManager.diaActual].ratioDePedidos);
         //Apago el canvas
-        UpdateOrderCreatorCanvas();
+        //UpdateOrderCreatorCanvas();
         UpdateCanvasStatus();
     }
 

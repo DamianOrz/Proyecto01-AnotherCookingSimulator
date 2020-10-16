@@ -100,6 +100,7 @@ public class TomarPedido : NetworkBehaviour
 
     private void Start()
     {
+        GetComponent<NetworkIdentity>().AssignClientAuthority(this.GetComponent<NetworkIdentity>().connectionToClient);
         _contenedor = GameObject.FindGameObjectWithTag("ContentMostrarHamburguesa");
     }
 
@@ -139,7 +140,7 @@ public class TomarPedido : NetworkBehaviour
     {
         foreach (Transform child in _contenedor.transform)
         {
-            if (!(child.gameObject.name == "PanInferior"))
+            if (!(child.gameObject.name == "PanInferior" || child.gameObject.name == "PanSuperior"))
             {
                 Destroy(child.gameObject);
             }
