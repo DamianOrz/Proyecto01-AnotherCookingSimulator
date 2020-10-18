@@ -68,6 +68,7 @@ public class PcManager : NetworkBehaviour
     private Renderer rendDeLaMesa = null;
     //PEDIDO
     [SerializeField] Pedido pedido = new Pedido();
+
     #endregion
 
     void Start()
@@ -111,25 +112,25 @@ public class PcManager : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!transform.root.gameObject.GetComponent<NetworkIdentity>().hasAuthority)
-        {
-            GetComponentInChildren<Camera>().enabled = false;
-            GetComponentInChildren<AudioListener>().enabled = false;
-            return;
-        }
-        else
-        {
-            canvasCrosshair.transform.GetChild(0).gameObject.SetActive(true);
-            GetComponentInChildren<Camera>().enabled = true;
-            GetComponentInChildren<AudioListener>().enabled = true;
-        }
-        Movement();
-        if (!PauseManager.isCanvasBeingUsed() && !DiaManager.instanceDiaManager.isCanvasBeingUsed())
-        {
-            SetCrossHair();
-            Interaction();
-            Look();
-        }
+            if (!transform.root.gameObject.GetComponent<NetworkIdentity>().hasAuthority)
+            {
+                GetComponentInChildren<Camera>().enabled = false;
+                GetComponentInChildren<AudioListener>().enabled = false;
+                return;
+            }
+            else
+            {
+                canvasCrosshair.transform.GetChild(0).gameObject.SetActive(true);
+                GetComponentInChildren<Camera>().enabled = true;
+                GetComponentInChildren<AudioListener>().enabled = true;
+            }
+            Movement();
+            if (!PauseManager.isCanvasBeingUsed() && !DiaManager.instanceDiaManager.isCanvasBeingUsed())
+            {
+                SetCrossHair();
+                Interaction();
+                Look();
+            }
     }
 
     void Movement()
@@ -304,15 +305,32 @@ public class PcManager : NetworkBehaviour
     void RpcPutObjectOnTheTable(GameObject player, Vector3 point)
     {
         Debug.Log("SIMON: EL PUNTO ES : " + point);
-        GameObject destinationDelPlayer = player.transform.GetChild(1).transform.GetChild(0).transform.GetChild(0).gameObject;
-        Debug.Log("SIMON: EL INGREDIENTE ES : " + destinationDelPlayer.gameObject.name);
-        destinationDelPlayer.SetActive(false);
-        destinationDelPlayer.transform.parent = null;
-        destinationDelPlayer.GetComponent<Collider>().enabled = true;
-        destinationDelPlayer.GetComponent<Rigidbody>().isKinematic = false;
-        destinationDelPlayer.transform.position = new Vector3(point.x, point.y + 0.01f, point.z);
-        destinationDelPlayer.SetActive(true);
+        GameObject objetoAgarrado = player.transform.GetChild(1).transform.GetChild(0).transform.GetChild(0).gameObject;
+        Debug.Log("SIMON: EL INGREDIENTE ES : " + objetoAgarrado.gameObject.name);
+        objetoAgarrado.SetActive(false);
+        objetoAgarrado.transform.parent = null;
+        objetoAgarrado.GetComponent<Collider>().enabled = true;
+        objetoAgarrado.GetComponent<Rigidbody>().isKinematic = true;
+        objetoAgarrado.transform.position = new Vector3(point.x, point.y + 0.1f, point.z);
+        objetoAgarrado.transform.rotation = new Quaternion(0, 0, 0, 0);
+        objetoAgarrado.SetActive(true);
+        AudioSource a = objetoAgarrado.GetComponent<AudioSource>();
+        a.Play();
+        while(a.isPlaying)
+        {
+            //AUDIO PLAYING
+        }
+        Destroy(objetoAgarrado);
     }
+
+    IEnumerator WaitForSeconds(float time)
+    {
+        //NO FUNCIONA, REVISAR
+        //yield on a new YieldInstruction that waits for 5 seconds.
+        yield return new WaitForSeconds(time);
+    }
+
+
     [ClientRpc]
     void RpcRemoveAsChild(GameObject player)
     {

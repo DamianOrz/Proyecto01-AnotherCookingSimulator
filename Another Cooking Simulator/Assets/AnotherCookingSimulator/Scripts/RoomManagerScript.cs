@@ -268,9 +268,18 @@ public class RoomManagerScript : NetworkBehaviour
         UpdateButtonsStatus();
     }
 
+    [Server]
     private void UpdateStartButton()
     {
-        if(iCantVR > 0 || iCantPC > 0)
+        bool allPlayersReady = true;
+        foreach (NetworkRoomPlayer player in myNetworkRoomManager.roomSlots)
+        {
+            if (!player.readyToBegin)
+            {
+                allPlayersReady = false;
+            }
+        }
+        if(allPlayersReady)
         {
             btnStart.interactable = true;
         }
