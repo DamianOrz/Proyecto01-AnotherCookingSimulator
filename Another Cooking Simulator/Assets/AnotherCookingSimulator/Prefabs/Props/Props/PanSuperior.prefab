@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 4508320589298020346}
   - component: {fileID: 8914819070645710217}
   - component: {fileID: 5594058094666880893}
+  - component: {fileID: -5046187234483072938}
   m_Layer: 0
   m_Name: PanSuperior
   m_TagString: Grabable
@@ -232,6 +233,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _id: panSuperior
+--- !u!114 &-5046187234483072938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3988271453623618293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abc4b5dd2be1cea4aaea2850b910d3f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nearTouchHighlight: {r: 1, g: 0, b: 0.7606497, a: 0.25882354}
+  touchHighlight: {r: 0, g: 0, b: 0, a: 0}
+  grabHighlight: {r: 0, g: 0, b: 0, a: 0}
+  useHighlight: {r: 0, g: 0, b: 0, a: 0}
+  objectToMonitor: {fileID: 0}
+  objectToHighlight: {fileID: 0}
+  objectHighlighter: {fileID: 0}
+  objectToAffect: {fileID: 0}
 --- !u!1 &9093574321538261609
 GameObject:
   m_ObjectHideFlags: 0

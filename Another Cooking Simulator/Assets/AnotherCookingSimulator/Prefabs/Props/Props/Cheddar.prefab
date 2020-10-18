@@ -274,6 +274,7 @@ GameObject:
   - component: {fileID: 8952022735712675408}
   - component: {fileID: 4149188510738671071}
   - component: {fileID: 114509141343100450}
+  - component: {fileID: 665333500054971377}
   m_Layer: 0
   m_Name: Cheddar
   m_TagString: Grabable
@@ -487,6 +488,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _id: cheddar
+--- !u!114 &665333500054971377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5728527316646658829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abc4b5dd2be1cea4aaea2850b910d3f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nearTouchHighlight: {r: 1, g: 0, b: 0.7606497, a: 0.25882354}
+  touchHighlight: {r: 0, g: 0, b: 0, a: 0}
+  grabHighlight: {r: 0, g: 0, b: 0, a: 0}
+  useHighlight: {r: 0, g: 0, b: 0, a: 0}
+  objectToMonitor: {fileID: 0}
+  objectToHighlight: {fileID: 0}
+  objectHighlighter: {fileID: 0}
+  objectToAffect: {fileID: 0}
 --- !u!1 &6145825537026895564
 GameObject:
   m_ObjectHideFlags: 0
