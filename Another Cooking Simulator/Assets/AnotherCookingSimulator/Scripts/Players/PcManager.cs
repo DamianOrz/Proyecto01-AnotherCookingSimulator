@@ -309,18 +309,23 @@ public class PcManager : NetworkBehaviour
         Debug.Log("SIMON: EL INGREDIENTE ES : " + objetoAgarrado.gameObject.name);
         objetoAgarrado.SetActive(false);
         objetoAgarrado.transform.parent = null;
-        objetoAgarrado.GetComponent<Collider>().enabled = true;
+        objetoAgarrado.GetComponent<Collider>().enabled = false;
         objetoAgarrado.GetComponent<Rigidbody>().isKinematic = true;
         objetoAgarrado.transform.position = new Vector3(point.x, point.y + 0.1f, point.z);
         objetoAgarrado.transform.rotation = new Quaternion(0, 0, 0, 0);
         objetoAgarrado.SetActive(true);
         AudioSource a = objetoAgarrado.GetComponent<AudioSource>();
         a.Play();
-        while(a.isPlaying)
-        {
-            //AUDIO PLAYING
-        }
-        Destroy(objetoAgarrado);
+        StartCoroutine(WaitForSound(a, a.clip, objetoAgarrado));
+
+    }
+
+
+    public IEnumerator WaitForSound(AudioSource a, AudioClip Sound, GameObject bandeja)
+    {
+        yield return new WaitUntil(() => a.isPlaying == false);
+        // or yield return new WaitWhile(() => audiosource.isPlaying == true);
+        Destroy(bandeja);
     }
 
     IEnumerator WaitForSeconds(float time)
