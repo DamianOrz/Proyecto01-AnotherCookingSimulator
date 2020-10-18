@@ -100,8 +100,8 @@ public class TomarPedido : NetworkBehaviour
 
     private void Start()
     {
-        GetComponent<NetworkIdentity>().AssignClientAuthority(this.GetComponent<NetworkIdentity>().connectionToServer);
-        _contenedor = GameObject.FindGameObjectWithTag("ContentMostrarHamburguesa");
+        //GetComponent<NetworkIdentity>().AssignClientAuthority(this.GetComponent<NetworkIdentity>().connectionToServer);
+        //_contenedor = GameObject.FindGameObjectWithTag("ContentMostrarHamburguesa");
     }
 
     private void Update()
