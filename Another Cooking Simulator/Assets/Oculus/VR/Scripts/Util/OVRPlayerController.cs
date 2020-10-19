@@ -12,6 +12,7 @@ ANY KIND, either express or implied. See the License for the specific language g
 permissions and limitations under the License.
 ************************************************************************************/
 
+using Mirror;
 using System;
 using UnityEngine;
 
@@ -19,7 +20,7 @@ using UnityEngine;
 /// Controls the player's movement in virtual reality.
 /// </summary>
 [RequireComponent(typeof(CharacterController))]
-public class OVRPlayerController : MonoBehaviour
+public class OVRPlayerController : NetworkBehaviour
 {
 	/// <summary>
 	/// The rate acceleration during movement.
@@ -161,7 +162,18 @@ public class OVRPlayerController : MonoBehaviour
 
 	void Awake()
 	{
-		Controller = gameObject.GetComponent<CharacterController>();
+        if (!transform.root.gameObject.GetComponent<NetworkIdentity>().hasAuthority)
+        {
+            //animator.GetComponent<Animator>().enabled = false;
+            gameObject.GetComponentInChildren<Camera>().enabled = false;
+            return;
+        }
+        else
+        {
+            gameObject.GetComponentInChildren<Camera>().enabled = true;
+            //animator.GetComponent<Animator>().enabled = true;
+        }
+        Controller = gameObject.GetComponent<CharacterController>();
 
 		if (Controller == null)
 			Debug.LogWarning("OVRPlayerController: No CharacterController attached.");
