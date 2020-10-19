@@ -13,6 +13,7 @@ public class IngredienteSpawner : NetworkBehaviour
     [SerializeField] private Vector3 _positionSpawnPanSuperior;
     [SerializeField] private Vector3 _positionSpawnPanInferior;
     [SerializeField] private Vector3 _positionSpawnCheddar;
+    [SerializeField] private Vector3 _positionSpawnBandeja;
 
     private void Awake()
     {
@@ -36,6 +37,11 @@ public class IngredienteSpawner : NetworkBehaviour
     public void SpawnCheddar()
     {
         GameObject objeto = _ingredienteFactory.CreateWithPosition("cheddar", _positionSpawnCheddar).gameObject;
+        SpawnIngrediente(objeto);
+    }
+    public void SpawnBandeja()
+    {
+        GameObject objeto = _ingredienteFactory.CreateWithPosition("bandeja", _positionSpawnBandeja).gameObject;
         SpawnIngrediente(objeto);
     }
     [Server]

@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 953757367818816483}
   - component: {fileID: 3762574083794359849}
   - component: {fileID: -5103520809036700964}
+  - component: {fileID: 4698655225174261836}
   m_Layer: 0
   m_Name: Bandeja (NO AGARRABLE)
   m_TagString: Grabable
@@ -338,6 +339,19 @@ MonoBehaviour:
   objectToHighlight: {fileID: 0}
   objectHighlighter: {fileID: 0}
   objectToAffect: {fileID: 0}
+--- !u!114 &4698655225174261836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2582519851834730751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65bc7ff2258f4ab498b047a22b0f3c9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: bandeja
 --- !u!1 &2635557236798395363
 GameObject:
   m_ObjectHideFlags: 0
