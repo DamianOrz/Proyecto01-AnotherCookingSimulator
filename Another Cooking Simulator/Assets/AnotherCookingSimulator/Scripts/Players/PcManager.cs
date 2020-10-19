@@ -176,7 +176,7 @@ public class PcManager : NetworkBehaviour
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
 
-        anim.SetFloat("Speed", -(velocity.y)); //Por ahora siempre es 6/-6
+         anim.SetFloat("Speed", -(velocity.y)); //Por ahora siempre es 6/-6
     }
 
     void Interaction()
@@ -308,7 +308,7 @@ public class PcManager : NetworkBehaviour
         Debug.Log("SIMON: EL INGREDIENTE ES : " + objetoAgarrado.gameObject.name);
         objetoAgarrado.SetActive(false);
         objetoAgarrado.transform.parent = null;
-        objetoAgarrado.GetComponent<Collider>().enabled = true;
+        objetoAgarrado.GetComponent<Collider>().enabled = false;
         objetoAgarrado.GetComponent<Rigidbody>().isKinematic = true;
         objetoAgarrado.transform.position = new Vector3(point.x, point.y + 0.1f, point.z);
         objetoAgarrado.transform.rotation = new Quaternion(0, 0, 0, 0);
