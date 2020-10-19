@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9025575278006992023}
   - component: {fileID: 6531837583133476957}
   - component: {fileID: 7856646828350638852}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mesa
   m_TagString: Mesa
   m_Icon: {fileID: 0}
