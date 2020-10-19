@@ -141,12 +141,12 @@ public class PcManager : NetworkBehaviour
         }
         else { speed = 7; }
 
-        //isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-        isGrounded = Physics.Raycast(transform.position, -Vector3.up, (float)(this.transform.position.y) + 0.1f);
-        if (isGrounded == true && transform.position.y >= 7)
-        {
-            isGrounded = false;
-        }
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        //isGrounded = Physics.Raycast(transform.position, -Vector3.up, (float)(this.transform.position.y) + 0.1f);
+        //if (isGrounded == true && transform.position.y >= 7)
+        //{
+        //    isGrounded = false;
+        //}
 
         bool isWalking = false;
 
@@ -254,7 +254,6 @@ public class PcManager : NetworkBehaviour
                 }
             }
         }
-
     }
     #region ONLINE_PickUpObject
     [Command]
@@ -309,7 +308,7 @@ public class PcManager : NetworkBehaviour
         Debug.Log("SIMON: EL INGREDIENTE ES : " + objetoAgarrado.gameObject.name);
         objetoAgarrado.SetActive(false);
         objetoAgarrado.transform.parent = null;
-        objetoAgarrado.GetComponent<Collider>().enabled = false;
+        objetoAgarrado.GetComponent<Collider>().enabled = true;
         objetoAgarrado.GetComponent<Rigidbody>().isKinematic = true;
         objetoAgarrado.transform.position = new Vector3(point.x, point.y + 0.1f, point.z);
         objetoAgarrado.transform.rotation = new Quaternion(0, 0, 0, 0);
@@ -317,7 +316,6 @@ public class PcManager : NetworkBehaviour
         AudioSource a = objetoAgarrado.GetComponent<AudioSource>();
         a.Play();
         StartCoroutine(WaitForSound(a, a.clip, objetoAgarrado));
-
     }
 
 
@@ -340,7 +338,7 @@ public class PcManager : NetworkBehaviour
     void RpcRemoveAsChild(GameObject player)
     {
         GameObject destinationDelPlayer = player.transform.GetChild(1).transform.GetChild(0).transform.GetChild(0).gameObject;
-
+        
         destinationDelPlayer.SetActive(false);
         Debug.Log("SIMON :" + transform.name);
         destinationDelPlayer.transform.parent = null;
@@ -357,6 +355,7 @@ public class PcManager : NetworkBehaviour
         destinationDelPlayer.SetActive(false);
         destinationDelPlayer.transform.parent = null;
         destinationDelPlayer.GetComponent<Rigidbody>().isKinematic = false;
+        destinationDelPlayer.GetComponent<Collider>().enabled = true;
         destinationDelPlayer.transform.position = new Vector3(point.x, point.y + 0.01f, point.z);
         destinationDelPlayer.SetActive(true);
     }
