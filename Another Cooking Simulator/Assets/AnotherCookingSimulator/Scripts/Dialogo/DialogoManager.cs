@@ -49,7 +49,7 @@ public class DialogoManager : MonoBehaviour
                 "Ve a buscar la hamburguesa en la mesa de en frente",
                 "Ahora llevala a la parte violeta del mostrador anterior para que me la pueda comer pa",
                 "Esta un poco cruda pero para ser la primera vez zafa, ahora ya puedes salir por la puerta y a la izquierda veras el restaurante" };
-        //hacerDialogo(idImages, dialogos.Length, dialogos);
+        hacerDialogo(idImages, dialogos.Length, dialogos);
     }
 
     private void CargarDialogos()
