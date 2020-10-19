@@ -17,6 +17,7 @@ public class cuandoSeCocina : MonoBehaviour
     {
         rend = burger.GetComponent<Renderer>();
         rend.enabled = true;
+        rend.material = material[0];
     }
     // Se cuenta el tiempo que el pati esta tocando el horno
     // Y cambia estado dependiendo el tiempo que pasó
@@ -57,14 +58,14 @@ public class cuandoSeCocina : MonoBehaviour
     {
         if(tiempoCocinado>=12)
         {
-            rend.sharedMaterial = material[1];
+            rend.material = material[2];
 
             var main = grillSmoke.main;
             main.startColor = new Color(0, 0, 0, 1);
         }
         else if(tiempoCocinado>=6)
         {
-            rend.sharedMaterial = material[0];
+            rend.material = material[1];
             var main = grillSmoke.main;
             //main.startColor = new Color(0, 0, 23, 1);
         }
