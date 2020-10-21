@@ -15,9 +15,10 @@ GameObject:
   - component: {fileID: 9105280823325854948}
   - component: {fileID: 3946889834077517495}
   - component: {fileID: 7110802007294275805}
+  - component: {fileID: 1699732617026560171}
   m_Layer: 0
   m_Name: Sombrero
-  m_TagString: Untagged
+  m_TagString: VRHat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -95,7 +96,7 @@ MeshCollider:
   m_Enabled: 1
   serializedVersion: 4
   m_Convex: 0
-  m_CookingOptions: 30
+  m_CookingOptions: 14
   m_Mesh: {fileID: 589907463424423687, guid: 2b59a31793e044f47bc51fc00e7f6c66, type: 3}
 --- !u!114 &9105280823325854948
 MonoBehaviour:
@@ -165,3 +166,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18055ba762aa3994f9c10208cd088bc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &1699732617026560171
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3061832209960024747}
+  serializedVersion: 2
+  m_Mass: 2
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 3
