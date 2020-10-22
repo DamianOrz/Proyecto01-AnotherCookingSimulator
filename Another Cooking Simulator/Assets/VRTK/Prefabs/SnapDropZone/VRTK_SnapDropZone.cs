@@ -154,6 +154,11 @@ namespace VRTK
         {
             if (ObjectSnappedToDropZone != null)
             {
+                if (e.snappedObject.tag == "VRHat")
+                {
+                    e.snappedObject.transform.localPosition = new Vector3(0, 0, -.1f);
+                    e.snappedObject.transform.localRotation = new Quaternion(0, 0, 0, 0);
+                }
                 ObjectSnappedToDropZone(this, e);
             }
         }

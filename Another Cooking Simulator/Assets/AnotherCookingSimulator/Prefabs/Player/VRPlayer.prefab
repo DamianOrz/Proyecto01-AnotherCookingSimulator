@@ -138,9 +138,9 @@ GameObject:
   - component: {fileID: 735999978965572013}
   - component: {fileID: 1289367718953244056}
   - component: {fileID: 6590291579248572981}
-  - component: {fileID: 7061420748533522585}
   - component: {fileID: 4501243077691326885}
   - component: {fileID: 6911376336189119952}
+  - component: {fileID: 1806031212430122354}
   m_Layer: 0
   m_Name: SnapDropZone
   m_TagString: Untagged
@@ -182,7 +182,7 @@ MonoBehaviour:
   highlightColor: {r: 0, g: 0.15447187, b: 1, a: 1}
   validHighlightColor: {r: 0, g: 0, b: 0, a: 0}
   highlightAlwaysActive: 0
-  validObjectListPolicy: {fileID: 0}
+  validObjectListPolicy: {fileID: 4501243077691326885}
   displayDropZoneInEditor: 0
   defaultSnappedInteractableObject: {fileID: 0}
   defaultSnappedObject: {fileID: 0}
@@ -202,18 +202,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &7061420748533522585
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2813707136777429685}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e2c0977cb3960b46936ba7b199d2369, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &4501243077691326885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -241,8 +229,20 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.16
-  m_Center: {x: 0, y: 0, z: -0.06}
+  m_Radius: 0.03
+  m_Center: {x: 0, y: 0, z: -0.03}
+--- !u!114 &1806031212430122354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2813707136777429685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 293d7fbf85f8e154993bd3af4dfc01c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3877923965302336367
 GameObject:
   m_ObjectHideFlags: 0
