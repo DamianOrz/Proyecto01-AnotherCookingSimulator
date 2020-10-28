@@ -21,6 +21,7 @@ TagManager:
   - ContentMostrarHamburguesa
   - Pedido
   - VRHat
+  - Armado
   layers:
   - Default
   - TransparentFX

@@ -236,6 +236,12 @@ public class PcManager : NetworkBehaviour
                     CmdPutObjectOnTheTable(gameObject, whatIHit.point, iMesaId);
                     return;
                 }
+                if (whatIHit.collider.gameObject.tag == "Armado")
+                {
+                    //PutObjectOnTheTable(gameObject,whatIHit);
+                    CmdPutObjectOnBuildingZone(gameObject, whatIHit.point);
+                    return;
+                }
                 CmdDropObject(gameObject);
                 return;
             }
@@ -293,12 +299,31 @@ public class PcManager : NetworkBehaviour
         RpcRemoveAsChild(player);
     }
     [Command]
+    void CmdPutObjectOnBuildingZone(GameObject player, Vector3 point)
+    {
+        RpcPutObjectOnTheBuildingZone(player, point);
+    }
+    [Command]
     void CmdPutObjectOnTheTable(GameObject player, Vector3 point, int iMesaId)
     {
         RpcPutObjectOnTheTable(player, point);
 
         //Se debe hacer verificacion del pedido para saber si se entregó en la mesa correcta:
         //FALTA HACER EL CODIGO
+    }
+    [ClientRpc]
+    void RpcPutObjectOnTheBuildingZone(GameObject player, Vector3 point)
+    {
+        Debug.Log("SIMON: EL PUNTO ES : " + point);
+        GameObject objetoAgarrado = player.transform.GetChild(1).transform.GetChild(0).transform.GetChild(0).gameObject;
+        Debug.Log("SIMON: EL INGREDIENTE ES : " + objetoAgarrado.gameObject.name);
+        objetoAgarrado.SetActive(false);
+        objetoAgarrado.transform.parent = null;
+        objetoAgarrado.GetComponent<Collider>().enabled = true;
+        objetoAgarrado.transform.position = new Vector3(point.x, point.y + 0.03f, point.z);
+        objetoAgarrado.transform.rotation = new Quaternion(0, 0, 0, 0);
+        objetoAgarrado.SetActive(true);
+        objetoAgarrado.transform.rotation.Set(0, 270, 0, 0);
     }
     [ClientRpc]
     void RpcPutObjectOnTheTable(GameObject player, Vector3 point)
