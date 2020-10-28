@@ -63,6 +63,8 @@ public class PcManager : NetworkBehaviour
     private PointerEventData m_PointerEventData;
 
     //Material
+    private int identifier;
+    [SerializeField] private Material analisis;
     [SerializeField] private Material isSeeing;
     [SerializeField] private Material original;
     private Renderer rendDeLaMesa = null;
@@ -224,16 +226,20 @@ public class PcManager : NetworkBehaviour
                         objetoAMover.transform.rotation = destinoHamburguesa.rotation;
                     }
                 }
-                if (whatIHit.collider.gameObject.tag == "Mesa")
+                if (whatIHit.collider.gameObject.tag == "Mesa" || whatIHit.collider.gameObject.tag == "Analisis")
                 {
-                    int iMesaId = whatIHit.collider.gameObject.GetComponent<MesaIdentifier>().id;
-                    //PutObjectOnTheTable(gameObject,whatIHit);
-                    if(destination.GetChild(0).gameObject.name.Contains("Bandeja"))
+                    if (whatIHit.collider.gameObject.tag == "Mesa")
                     {
-                        PedidoManager.instancePedidoManager.EvaluarPedido(iMesaId, destination.GetChild(0).gameObject);
-                        Debug.Log("[LOCAL][DAMIAN] La mesa en la que se dejó el pedido es: " + iMesaId); 
+                        int iMesaId = whatIHit.collider.gameObject.GetComponent<MesaIdentifier>().id;
+                        //PutObjectOnTheTable(gameObject,whatIHit);
+                        if(destination.GetChild(0).gameObject.name.Contains("Bandeja"))
+                        {
+                            PedidoManager.instancePedidoManager.EvaluarPedido(iMesaId, destination.GetChild(0).gameObject);
+                            Debug.Log("[LOCAL][DAMIAN] La mesa en la que se dejó el pedido es: " + iMesaId); 
+                        }
                     }
-                    CmdPutObjectOnTheTable(gameObject, whatIHit.point, iMesaId);
+                    
+                    CmdPutObjectOnTheTable(gameObject, whatIHit.point);
                     return;
                 }
                 if (whatIHit.collider.gameObject.tag == "Armado")
@@ -304,7 +310,7 @@ public class PcManager : NetworkBehaviour
         RpcPutObjectOnTheBuildingZone(player, point);
     }
     [Command]
-    void CmdPutObjectOnTheTable(GameObject player, Vector3 point, int iMesaId)
+    void CmdPutObjectOnTheTable(GameObject player, Vector3 point)
     {
         RpcPutObjectOnTheTable(player, point);
 
@@ -399,7 +405,8 @@ public class PcManager : NetworkBehaviour
         {
             if (rendDeLaMesa != null)
             {
-                rendDeLaMesa.sharedMaterial = original;
+                if(identifier == 0)rendDeLaMesa.sharedMaterial = original;
+                if(identifier == 1) rendDeLaMesa.sharedMaterial = analisis;
             }
             return;
         }
@@ -415,16 +422,23 @@ public class PcManager : NetworkBehaviour
     }
     private void IluminarMesa()
     {
-        if (whatIHit.collider.gameObject.tag == "Mesa" && destination.childCount > 0)
+        if ((whatIHit.collider.gameObject.tag == "Mesa"|| whatIHit.collider.gameObject.tag == "Analisis") && destination.childCount > 0)
         {
             rendDeLaMesa = whatIHit.collider.gameObject.GetComponent<Renderer>();
             rendDeLaMesa.sharedMaterial = isSeeing;
+            if(whatIHit.collider.gameObject.tag == "Mesa")
+            {
+                identifier = 0;
+                return;
+            }
+            if (whatIHit.collider.gameObject.tag == "Analisis") identifier = 1;
         }
         else
         {
             if (rendDeLaMesa != null)
             {
-                rendDeLaMesa.sharedMaterial = original;
+                if (identifier == 0) rendDeLaMesa.sharedMaterial = original;
+                if (identifier == 1) rendDeLaMesa.sharedMaterial = analisis;
             }
         }
     }
