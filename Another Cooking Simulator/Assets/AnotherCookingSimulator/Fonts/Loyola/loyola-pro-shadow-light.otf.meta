@@ -1,0 +1,33 @@
+fileFormatVersion: 2
+guid: bceadbe122d689c478b08e11ab03c0c1
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Loyola Pro
+  fontNames:
+  - Loyola Pro
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 99be61734310dd445a7bd786f9b2bb8b, type: 3}
+  - {fileID: 12800000, guid: 70927f95cad50fb48bbf4542d3769a3f, type: 3}
+  - {fileID: 12800000, guid: bcf4112681ecbeb408ab782d97671717, type: 3}
+  - {fileID: 12800000, guid: 3488bc67642337d4a8b431a52dc6d9fe, type: 3}
+  - {fileID: 12800000, guid: 06190a7749ab8e64f96fb887a2aae1d1, type: 3}
+  - {fileID: 12800000, guid: faf766a7368f3174e822dbb66a2bd680, type: 3}
+  - {fileID: 12800000, guid: 67dddefabdfe11948834d67b5e283b30, type: 3}
+  - {fileID: 12800000, guid: e501313c679294e46a6c34be1d0d6427, type: 3}
+  - {fileID: 12800000, guid: d26b5c6c91086864382c6bbd0dc2266a, type: 3}
+  - {fileID: 12800000, guid: 245bb1bc617d4f345ab6ad116639bb5e, type: 3}
+  - {fileID: 12800000, guid: c1354d4fde8c2b040bd9409722209fe5, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
