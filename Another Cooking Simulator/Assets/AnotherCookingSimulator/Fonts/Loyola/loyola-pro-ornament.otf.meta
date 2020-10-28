@@ -1,0 +1,25 @@
+fileFormatVersion: 2
+guid: 245bb1bc617d4f345ab6ad116639bb5e
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Loyola Pro
+  fontNames:
+  - Loyola Pro
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 70927f95cad50fb48bbf4542d3769a3f, type: 3}
+  - {fileID: 12800000, guid: d26b5c6c91086864382c6bbd0dc2266a, type: 3}
+  - {fileID: 12800000, guid: c1354d4fde8c2b040bd9409722209fe5, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
