@@ -1094,8 +1094,8 @@ MonoBehaviour:
     m_Bits: 256
   distanceToSee: 1.7
   mouseSensitivity: 200
+  analisis: {fileID: 2100000, guid: 314c24f338a2ba3478ddf80de01bd7dd, type: 2}
   isSeeing: {fileID: 2100000, guid: c7f018131eff5af4985e7921a3e1c13a, type: 2}
-  mesada: {fileID: 2100000, guid: bd0bb729cb6159b4ab21c5f62cad24ee, type: 3}
   original: {fileID: 6085552127086632972, guid: 0b5635c976f82ca47abda6d6cd5ec9b0,
     type: 3}
 --- !u!114 &2918585379329053316
