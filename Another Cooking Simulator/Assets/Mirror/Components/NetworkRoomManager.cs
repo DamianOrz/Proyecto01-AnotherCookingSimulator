@@ -81,6 +81,20 @@ namespace Mirror
         [Tooltip("Parametro CUSTOM con el cual se selecciona el nivel a jugar")]
         public int LevelSelected = 0;
 
+        [Header("Players Colors")]
+        public Color player1Color = Color.blue;
+        public Color player2Color = Color.red;
+        public Color player3Color = Color.green;
+        public Color player4Color = Color.yellow;
+        public Color player5Color = Color.magenta;
+
+        [Header("Player Names")]
+        public String player1Name = "Blue";
+        public String player2Name = "Red";
+        public String player3Name = "Green";
+        public String player4Name = "Yellow";
+        public String player5Name = "Magenta";
+
         public override void OnValidate()
         {
             // always >= 0
@@ -200,10 +214,12 @@ namespace Mirror
 
         void CallOnClientEnterRoom()
         {
+
             OnRoomClientEnter();
             foreach (NetworkRoomPlayer player in roomSlots)
                 if (player != null)
                 {
+
                     player.OnClientEnterRoom();
                 }
         }
@@ -300,6 +316,41 @@ namespace Mirror
                 GameObject newRoomGameObject = OnRoomServerCreateRoomPlayer(conn);
                 if (newRoomGameObject == null)
                     newRoomGameObject = Instantiate(roomPlayerPrefab.gameObject, Vector3.zero, Quaternion.identity);
+
+
+                NetworkRoomPlayer newPlayer = newRoomGameObject.GetComponent<NetworkRoomPlayer>();
+                Color newColor;
+                String playerUsername;
+
+                switch (roomSlots.Count + 1)
+                {
+                    case 1:
+                        newColor = player1Color;
+                        playerUsername = player1Name;
+                        break;
+                    case 2:
+                        newColor = player2Color;
+                        playerUsername = player2Name;
+                        break;
+                    case 3:
+                        newColor = player3Color;
+                        playerUsername = player3Name;
+                        break;
+                    case 4:
+                        newColor = player4Color;
+                        playerUsername = player4Name;
+                        break;
+                    case 5:
+                        newColor = player5Color;
+                        playerUsername = player5Name;
+                        break;
+                    default:
+                        newColor = Color.black;
+                        playerUsername = "ERROR";
+                        break;
+                }
+                newPlayer.playerColor = newColor;
+                newPlayer.playerName = playerUsername;
 
                 NetworkServer.AddPlayerForConnection(conn, newRoomGameObject);
             }
@@ -651,9 +702,9 @@ namespace Mirror
         /// <summary>
         /// This is a hook to allow custom behaviour when the game client enters the room.
         /// </summary>
+
         public virtual void OnRoomClientEnter()
         {
-
         }
 
         /// <summary>

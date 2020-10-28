@@ -45,20 +45,6 @@ public class RoomManagerScript : NetworkBehaviour
     public int iLimiteJugadoresVR = 1;
     public int iLimiteJugadoresPC = 4;
 
-    [Header("Players Colors")]
-    public Color player1Color = Color.blue;
-    public Color player2Color = Color.red;
-    public Color player3Color = Color.green;
-    public Color player4Color = Color.yellow;
-    public Color player5Color = Color.magenta;
-
-    [Header("Player Names")]
-    public String player1Name = "Blue";
-    public String player2Name = "Red";
-    public String player3Name = "Green";
-    public String player4Name = "Yellow";
-    public String player5Name = "Magenta";
-
 
 
     #endregion

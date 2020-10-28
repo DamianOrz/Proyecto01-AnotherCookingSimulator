@@ -110,7 +110,15 @@ namespace Mirror
         /// This is a hook that is invoked on all player objects when entering the room.
         /// <para>Note: isLocalPlayer is not guaranteed to be set until OnStartLocalPlayer is called.</para>
         /// </summary>
-        public virtual void OnClientEnterRoom() { }
+        public virtual void OnClientEnterRoom(String username, Color newColor)
+        {
+            playerColor = newColor;
+            playerName = username;
+        }
+        public virtual void OnClientEnterRoom()
+        {
+
+        }
         /// <summary>
         /// This is a hook that is invoked on all player objects when exiting the room.
         /// </summary>
