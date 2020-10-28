@@ -321,9 +321,8 @@ public class PcManager : NetworkBehaviour
         objetoAgarrado.transform.parent = null;
         objetoAgarrado.GetComponent<Collider>().enabled = true;
         objetoAgarrado.transform.position = new Vector3(point.x, point.y + 0.03f, point.z);
-        objetoAgarrado.transform.rotation = new Quaternion(0, 0, 0, 0);
+        objetoAgarrado.transform.rotation = Quaternion.Euler(0, -90, 0);
         objetoAgarrado.SetActive(true);
-        objetoAgarrado.transform.rotation.Set(0, 270, 0, 0);
     }
     [ClientRpc]
     void RpcPutObjectOnTheTable(GameObject player, Vector3 point)
