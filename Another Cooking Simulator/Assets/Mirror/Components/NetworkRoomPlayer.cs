@@ -42,6 +42,13 @@ namespace Mirror
         [SyncVar]
         public int playerType = 2;
 
+        [SyncVar]
+        public Color playerColor;
+
+        [SyncVar]
+        public String playerName;
+
+
         //Glosario playerType:
         //0 = VR
         //1 = PC

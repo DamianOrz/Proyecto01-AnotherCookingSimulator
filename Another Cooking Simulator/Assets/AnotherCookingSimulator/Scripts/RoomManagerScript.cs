@@ -52,6 +52,13 @@ public class RoomManagerScript : NetworkBehaviour
     public Color player4Color = Color.yellow;
     public Color player5Color = Color.magenta;
 
+    [Header("Player Names")]
+    public String player1Name = "Blue";
+    public String player2Name = "Red";
+    public String player3Name = "Green";
+    public String player4Name = "Yellow";
+    public String player5Name = "Magenta";
+
 
 
     #endregion
@@ -123,7 +130,7 @@ public class RoomManagerScript : NetworkBehaviour
             aPlayer.GetComponentInChildren<TMP_Text>().SetText(p.index.ToString());
 
             //myPlayer.gameObject.transform.GetChild(0); --> 0 = fondo, 1 = nombre, 2 = ready
-            aPlayer.gameObject.transform.GetChild(1).GetComponent<TMP_Text>().SetText(p.netId.ToString());
+            aPlayer.gameObject.transform.GetChild(1).GetComponent<TMP_Text>().SetText(p.playerName);
 
             string isReady;
             if (p.readyToBegin == true)
@@ -143,7 +150,7 @@ public class RoomManagerScript : NetworkBehaviour
             if (p.isLocalPlayer)
             {
                 myPlayer = p;
-                aPlayer.transform.GetChild(0).GetComponent<Image>().color = Color.gray;
+                aPlayer.transform.GetChild(0).GetComponent<Image>().color = p.playerColor;
             }
 
             num++;
