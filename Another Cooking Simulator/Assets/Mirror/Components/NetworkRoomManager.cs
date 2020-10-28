@@ -618,6 +618,8 @@ namespace Mirror
                 go.name = "PCPlayer " + numPCPlayers;
 
                 go.transform.parent = gamePlayer.transform;
+                Color c = UnityEngine.Random.ColorHSV();
+                go.GetComponentInChildren<Renderer>().material.color = c;
 
                 float x = (float)57.79;
                 float y = (float)1.28;

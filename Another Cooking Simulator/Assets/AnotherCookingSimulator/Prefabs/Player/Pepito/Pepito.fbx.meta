@@ -6,7 +6,12 @@ ModelImporter:
   - first:
       74: -7668713029757910060
     second: metarig.001|pepito_walk
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material
+    second: {fileID: 2100000, guid: 52f51f3163fe580469fbbf15dac59466, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
