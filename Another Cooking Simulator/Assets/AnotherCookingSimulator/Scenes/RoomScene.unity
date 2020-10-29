@@ -1657,7 +1657,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1827471904}
   m_Direction: 0
   m_Value: 1
-  m_Size: 1
+  m_Size: 0.9999999
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2747,7 +2747,7 @@ RectTransform:
   m_GameObject: {fileID: 687985522}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.40465856, y: 0.40465856, z: 0.40465856}
+  m_LocalScale: {x: 0.3980324, y: 0.3980324, z: 0.3980324}
   m_Children:
   - {fileID: 1066156933}
   m_Father: {fileID: 0}
@@ -2755,8 +2755,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 388.5, y: 218.5}
-  m_SizeDelta: {x: 1920.1373, y: 0}
+  m_AnchoredPosition: {x: 382, y: 215}
+  m_SizeDelta: {x: 1919.4418, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &687985527
 MonoBehaviour:
@@ -3959,7 +3959,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2059287647}
   m_Direction: 2
   m_Value: 1.0000001
-  m_Size: 0.31869322
+  m_Size: 0.31869316
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
