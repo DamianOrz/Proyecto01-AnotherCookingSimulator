@@ -113,10 +113,10 @@ public class RoomManagerScript : NetworkBehaviour
 
             }
 
-            aPlayer.GetComponentInChildren<TMP_Text>().SetText(p.index.ToString());
+            //aPlayer.GetComponentInChildren<TMP_Text>().SetText(p.index.ToString()); --> SETEA EL ID COMO NOMBRE
 
-            //myPlayer.gameObject.transform.GetChild(0); --> 0 = fondo, 1 = nombre, 2 = ready
-            aPlayer.gameObject.transform.GetChild(1).GetComponent<TMP_Text>().SetText(p.playerName);
+            //myPlayer.gameObject.transform.GetChild(0); --> 0 = fondo ready, 1 = fondo, 2 = nombre,  1 = nombre, 2 = ready - EN DESUSO
+            aPlayer.gameObject.transform.FindChildRecursive("PlayerName").GetComponent<TMP_Text>().SetText(p.playerName);
 
             string isReady;
             if (p.readyToBegin == true)
@@ -127,7 +127,7 @@ public class RoomManagerScript : NetworkBehaviour
             {
                 isReady = "NOT READY";
             }
-            aPlayer.gameObject.transform.GetChild(2).GetComponent<TMP_Text>().SetText(isReady);
+            aPlayer.gameObject.transform.FindChildRecursive("PlayerReadyBackground").GetComponentInChildren<TMP_Text>().SetText(isReady);
 
             aPlayer.SetActive(true);
 
@@ -136,7 +136,7 @@ public class RoomManagerScript : NetworkBehaviour
             if (p.isLocalPlayer)
             {
                 myPlayer = p;
-                aPlayer.transform.GetChild(0).GetComponent<Image>().color = p.playerColor;
+                aPlayer.transform.FindChildRecursive("PlayerReadyBackground").GetComponent<Image>().color = p.playerColor; //SE PODRÍA SACAR
             }
 
             num++;
