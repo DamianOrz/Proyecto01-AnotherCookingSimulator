@@ -30,7 +30,12 @@ public class PedidoManager : NetworkBehaviour
         bien = 70,
         muyBien = 100,
     }
-
+    #region MostrarCanvas
+    private int _alturaY = 106;
+    private int _aumento = 123;
+    [SerializeField] private GameObject contentPedidoDelCliente;
+    [SerializeField] private GameObject _pedidoCanvas;
+    #endregion
     private void Awake()
     {
         if (instancePedidoManager != null && instancePedidoManager != this)
@@ -42,7 +47,9 @@ public class PedidoManager : NetworkBehaviour
             instancePedidoManager = this;
         }
     }
+    
 
+    
     [SerializeField] private static List<Pedido> _listaPedidos = new List<Pedido>();
     private List<int> _listaDeMesasDisponibles = new List<int>() {1, 2, 3, 4, 5, 6};
     public void cambiarPuntaje(int indice, int[] interpretacionVR)
@@ -105,8 +112,7 @@ public class PedidoManager : NetworkBehaviour
         }
         return true;
     }
-
-
+   
     public void crearPedidoRandom()
     {
         if (_listaDeMesasDisponibles.Count <= 0) return;
@@ -185,14 +191,44 @@ public class PedidoManager : NetworkBehaviour
         iNumPedido++;
     }
 
+    public static void BorrarPedidoDelCanvas(int numeroDeMesa)
+    {
+        Vector3 posYDelPedidoQueSeBorro = new Vector3();
+        bool seDestruyo = false;
+        foreach (Transform child in instancePedidoManager.contentPedidoDelCliente.transform)
+        {
+            if (seDestruyo)
+            {
+                
+                //alturaActual = alturaActual + instancePedidoManager._aumento;
+                //child.GetComponent<RectTransform>().position = new Vector3(0f, alturaActual , 0f);
+            }
+            else
+            {
+                //Hago una busqueda por los pedidos en el canvas, buscando la mesa que se ingreso al tomar un pedido
+                if(child.Find("DatosUsuario").gameObject.transform.Find("Mesa").gameObject.GetComponent<TMP_Text>().text.Contains(numeroDeMesa.ToString()))
+                {
+                    //posYDelPedidoQueSeBorro = child.position;
+                    Destroy(child.gameObject);
+                    seDestruyo = true;
+                }
+            }
+        }
+    }
     #region OnlinePedidos
+    //[Server]
+    //private void SincronizarPedidoEnPantalla( int numMesa)
+    //{
+        //Ejecuto un rpc para ejecutar el codigo en todos los clientes(mando orden)
+        
+    //}
     [Server]
     private void SincronizarPedidoEnPantalla(int idPedido, string ordenDeIngredientes, int numMesa)
     {
         //Ejecuto un rpc para ejecutar el codigo en todos los clientes(mando orden)
         if (idPedido == -1)
         {
-            RpcMostrarPedidoACadaCliente(ordenDeIngredientes, numMesa);
+            RpcMostrarPedido(ordenDeIngredientes, numMesa);
             return;
         }
         else if (idPedido == -2)
@@ -204,6 +240,26 @@ public class PedidoManager : NetworkBehaviour
         {
             RpcMostrarPedidoAVR(idPedido, ordenDeIngredientes);
         }
+    }
+    [ClientRpc]
+    private void RpcMostrarPedido(string ordenIngredientes, int numMesa)
+    {
+        //Instancio el prefab del cliente
+        GameObject pedidoCreado = Instantiate(instancePedidoManager._pedidoCanvas);
+        //Busco el panel
+        GameObject panel = pedidoCreado.transform.Find("DatosUsuario").gameObject;
+        //Le inserto el orden de ingredientes al prefab
+
+        Debug.Log("SIMON: Los ingrediente son :" + ordenIngredientes);
+        panel.transform.Find("Quiere").gameObject.GetComponent<TMP_Text>().text = ordenIngredientes;
+        panel.transform.Find("Mesa").gameObject.GetComponent<TMP_Text>().text = "Numero de mesa: " + numMesa;
+
+        //Le doy la altura
+        pedidoCreado.GetComponent<RectTransform>().position = new Vector3(0f, _alturaY, 0f);
+        _alturaY = _alturaY - _aumento;
+
+        //Lo hago hijo de la pantalla para que se vea
+        pedidoCreado.transform.SetParent(instancePedidoManager.contentPedidoDelCliente.transform, false);
     }
     [ClientRpc]
     private void RpcMostrarPedidoACadaCliente(string ordenIngredientes, int numMesa)

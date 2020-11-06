@@ -9,6 +9,7 @@ using Mirror;
 public class TomarPedido : NetworkBehaviour
 {
     private List<int> _interpretacionDePC = new List<int>();
+    private int _numeroDeMesa = 0;
 
     //Mostrar el progreso de la interpretacion del de pc
     [SerializeField]private GameObject _prefabIngrediente;
@@ -19,6 +20,11 @@ public class TomarPedido : NetworkBehaviour
     private int _alturaY = -92;
     private bool _actualizarHamburguesa = false;
 
+    #region eleccionDeMesa
+    [SerializeField] private GameObject leftPart;
+    [SerializeField] private GameObject rightPart;
+    [SerializeField] private GameObject seleccionDeMesa;
+    #endregion
     [SerializeField]private Texture[] _ingredientes;
 
     //Añadir ingredientes a interpretacion
@@ -41,18 +47,22 @@ public class TomarPedido : NetworkBehaviour
     {
         FindObjectOfType<AudioManager>().Play("FX-Tap");
         AñadirIngredienteAInterpretacion(4);
-        
     }
     public void AñadirLechugaAInterpretacion()
     {
         FindObjectOfType<AudioManager>().Play("FX-Tap");
         AñadirIngredienteAInterpretacion(5);
     }
-
+    public void AñadirMesaAInterpretacion(int numeroDeLaMesa)
+    {
+        FindObjectOfType<AudioManager>().Play("FX-Tap");
+        _numeroDeMesa = numeroDeLaMesa;
+    }
     //limpiar interpretacion
     public void LimpiarInterpretacion()
     {
         _interpretacionDePC.Clear();
+        _numeroDeMesa = 0;
         _actualizarHamburguesa = true;
     }
 
@@ -62,28 +72,35 @@ public class TomarPedido : NetworkBehaviour
         _interpretacionDePC.Add(idIngrediente);
         _actualizarHamburguesa = true;
     }
-
+    public void ContinueInterpretacion()
+    {
+        if (_interpretacionDePC.Count <= 0) return;
+        leftPart.SetActive(false); rightPart.SetActive(false);seleccionDeMesa.SetActive(true);
+        
+    }
     public void SendInterpretacion()
     {
 
-        if (_interpretacionDePC.Count <= 0) return;
+        if (_numeroDeMesa == 0) return;
+        Debug.Log("SIMON: LA MESA DE LA INTERPRETACION ES : " + _numeroDeMesa);
         int[] interpretacion;
 
         GameObject panSuperior = Instantiate(_prefabIngrediente); //Creo el pan superior
 
         panSuperior.GetComponent<RawImage>().texture = _ingredientes[0];
         panSuperior.transform.SetParent(_contenedor.transform, false);
-        //a.transform.SetParent(_contenedor.transform); //Lo pongo como hijo del contenedor que tiene a los otros panes
-        //a.transform.localPosition = new Vector3(9, 200, 0); //Falta arreglar la posición.
-        //a.transform.localScale = new Vector3(1, 1, 1);
-        //a.transform.localRotation = new Quaternion(0, 0, 0, 0);
 
         AñadirPanesAInterpretacion();
         interpretacion = AñadirPanesAInterpretacion();
 
         PedidoManager.instancePedidoManager.CrearInterpretacion(interpretacion);
 
+        PedidoManager.BorrarPedidoDelCanvas(_numeroDeMesa);
+
         LimpiarInterpretacion();
+
+        
+        leftPart.SetActive(true); rightPart.SetActive(true); seleccionDeMesa.SetActive(false);
     }
 
     private int[] AñadirPanesAInterpretacion()

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dia: 999
   maxIngredientesEntrePanes: 2
-  clientesEnElDia: 2
+  clientesEnElDia: 10
   duracionDelDia: 9999999
-  ratioDePedidos: 30
+  ratioDePedidos: 5
   posiblesIngredientes: 000000000100000002000000
