@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Mirror;
+using UnityEngine.UI;
 using Random = System.Random;
 
 public class PedidoManager : NetworkBehaviour
@@ -33,8 +34,13 @@ public class PedidoManager : NetworkBehaviour
     #region MostrarCanvas
     private int _alturaY = 106;
     private int _aumento = 123;
+    [SyncVar]
+    private float _alturaDeIngredientesDePedido = -77f;
+    private float _aumentoDeAlturaDeIngrediente = 7f;
     [SerializeField] private GameObject contentPedidoDelCliente;
     [SerializeField] private GameObject _pedidoCanvas;
+    [SerializeField] private GameObject _prefabIngrediente;
+    [SerializeField] private Texture[] _ingredientes;
     #endregion
     private void Awake()
     {
@@ -165,7 +171,7 @@ public class PedidoManager : NetworkBehaviour
         //Agarro orden de ingredientes
         string strOrden = CambiarArrayAString(unPedido.GetInterpretacionIngredientes());
         //Ejecuto funcion server y le mando los ingredientes
-        SincronizarPedidoEnPantalla(unPedido.GetIdPedido(), strOrden, unPedido.GetNumMesa());
+        SincronizarPedidoEnPantalla(unPedido.GetIdPedido(), strOrden,null, unPedido.GetNumMesa());
 
         iNumPedido++;
     }
@@ -176,7 +182,7 @@ public class PedidoManager : NetworkBehaviour
         string strOrden = CambiarArrayAString(unPedido.GetOrdenIngredientes());
         
         //Ejecuto funcion server y le mando los ingredientes
-        SincronizarPedidoEnPantalla(-1, strOrden, unPedido.GetNumMesa());
+        SincronizarPedidoEnPantalla(-1, strOrden, unPedido.GetOrdenIngredientes(), unPedido.GetNumMesa());
 
         iNumPedido++;
     }
@@ -186,7 +192,7 @@ public class PedidoManager : NetworkBehaviour
         //Agarro orden de ingredientes
         string strOrden = CambiarArrayAString(Ingredientes);
         //Ejecuto funcion server y le mando los ingredientes
-        SincronizarPedidoEnPantalla(-2, strOrden, -1);
+        SincronizarPedidoEnPantalla(-2, strOrden,null, -1);
 
         iNumPedido++;
     }
@@ -223,12 +229,12 @@ public class PedidoManager : NetworkBehaviour
         
     //}
     [Server]
-    private void SincronizarPedidoEnPantalla(int idPedido, string ordenDeIngredientes, int numMesa)
+    private void SincronizarPedidoEnPantalla(int idPedido, string ordenDeIngredientes, int[]ordenCifrado, int numMesa)
     {
         //Ejecuto un rpc para ejecutar el codigo en todos los clientes(mando orden)
         if (idPedido == -1)
         {
-            RpcMostrarPedido(ordenDeIngredientes, numMesa);
+            RpcMostrarPedido(ordenDeIngredientes, ordenCifrado, numMesa);
             return;
         }
         else if (idPedido == -2)
@@ -242,7 +248,7 @@ public class PedidoManager : NetworkBehaviour
         }
     }
     [ClientRpc]
-    private void RpcMostrarPedido(string ordenIngredientes, int numMesa)
+    private void RpcMostrarPedido(string ordenIngredientes, int[]orden, int numMesa)
     {
         //Instancio el prefab del cliente
         GameObject pedidoCreado = Instantiate(instancePedidoManager._pedidoCanvas);
@@ -251,10 +257,23 @@ public class PedidoManager : NetworkBehaviour
         //Le inserto el orden de ingredientes al prefab
 
         Debug.Log("SIMON: Los ingrediente son :" + ordenIngredientes);
-        panel.transform.Find("Quiere").gameObject.GetComponent<TMP_Text>().text = ordenIngredientes;
+        panel.transform.Find("IngredientesTexto").gameObject.GetComponent<TMP_Text>().text += ordenIngredientes;
         panel.transform.Find("Mesa").gameObject.GetComponent<TMP_Text>().text = "Numero de mesa: " + numMesa;
 
-        //Le doy la altura
+        //Mostrar ingredientes
+        GameObject contenedorDeIngredientes = panel.transform.FindChildRecursive("Ingredientes").gameObject;
+        Debug.Log("SIMON: ENCONTRE ESTE CONTENEDOR :" + contenedorDeIngredientes.name);
+        for (int i = 0; i < orden.Length; i++)
+        {
+            GameObject ingrediente = Instantiate(_prefabIngrediente);
+            ingrediente.GetComponent<RawImage>().texture = _ingredientes[orden[i]];
+            if(i == orden.Length-1) ingrediente.GetComponent<RawImage>().texture = _ingredientes[6];
+            ingrediente.GetComponent<RectTransform>().position = new Vector3(9f, _alturaDeIngredientesDePedido, 0f);
+            _alturaDeIngredientesDePedido = _alturaDeIngredientesDePedido + _aumentoDeAlturaDeIngrediente;
+            ingrediente.transform.SetParent(contenedorDeIngredientes.transform, false);
+        }
+        _alturaDeIngredientesDePedido = -77f;
+        //Le doy la altura al PEDIDO
         pedidoCreado.GetComponent<RectTransform>().position = new Vector3(0f, _alturaY, 0f);
         _alturaY = _alturaY - _aumento;
 
