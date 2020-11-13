@@ -214,8 +214,11 @@ public class PedidoManager : NetworkBehaviour
                 //Hago una busqueda por los pedidos en el canvas, buscando la mesa que se ingreso al tomar un pedido
                 if(child.Find("DatosUsuario").gameObject.transform.Find("Mesa").gameObject.GetComponent<TMP_Text>().text.Contains(numeroDeMesa.ToString()))
                 {
+                    Debug.Log("SIMON: EL NOMBRE ES: " + child.name);
+                    Debug.Log("SIMON: POSICION ANTES DE DESTRUIR: " + child.position);
                     //posYDelPedidoQueSeBorro = child.position;
                     Destroy(child.gameObject);
+                    Debug.Log("SIMON: POSICION DESPUES DE DESTRUIR: " + child.position);
                     seDestruyo = true;
                 }
             }
