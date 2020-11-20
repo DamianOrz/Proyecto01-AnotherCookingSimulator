@@ -421,7 +421,7 @@ GameObject:
   - component: {fileID: 3360040837916958719}
   - component: {fileID: 769640860526203065}
   - component: {fileID: 4450574096003753637}
-  - component: {fileID: 3133140837417638345}
+  - component: {fileID: 2130837938002232602}
   m_Layer: 5
   m_Name: Pedido
   m_TagString: Untagged
@@ -529,25 +529,22 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!95 &3133140837417638345
-Animator:
-  serializedVersion: 3
+--- !u!111 &2130837938002232602
+Animation:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4133662284873187535}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 22ce122732f3f6743af652c76164f36d, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 94c9715d199533c41b9c2e520f9839cd, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 94c9715d199533c41b9c2e520f9839cd, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &4904130639119914039
 GameObject:
   m_ObjectHideFlags: 0

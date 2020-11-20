@@ -199,26 +199,23 @@ public class PedidoManager : NetworkBehaviour
 
     public static void BorrarPedidoDelCanvas(int numeroDeMesa)
     {
-        Vector3 posYDelPedidoQueSeBorro = new Vector3();
         bool seDestruyo = false;
         foreach (Transform child in instancePedidoManager.contentPedidoDelCliente.transform)
         {
             if (seDestruyo)
             {
-                
-                //alturaActual = alturaActual + instancePedidoManager._aumento;
-                //child.GetComponent<RectTransform>().position = new Vector3(0f, alturaActual , 0f);
+                //child.gameObject.GetComponent<Animation>().Play();
+                float positionY=child.gameObject.GetComponent<RectTransform>().anchoredPosition.y;
+                child.GetComponent<RectTransform>().anchoredPosition = new Vector3(0f, positionY+123, 0f);
             }
             else
             {
                 //Hago una busqueda por los pedidos en el canvas, buscando la mesa que se ingreso al tomar un pedido
                 if(child.Find("DatosUsuario").gameObject.transform.Find("Mesa").gameObject.GetComponent<TMP_Text>().text.Contains(numeroDeMesa.ToString()))
-                {
-                    Debug.Log("SIMON: EL NOMBRE ES: " + child.name);
-                    Debug.Log("SIMON: POSICION ANTES DE DESTRUIR: " + child.position);
-                    //posYDelPedidoQueSeBorro = child.position;
+                { 
                     Destroy(child.gameObject);
-                    Debug.Log("SIMON: POSICION DESPUES DE DESTRUIR: " + child.position);
+
+                    instancePedidoManager._alturaY = instancePedidoManager._alturaY + instancePedidoManager._aumento;
                     seDestruyo = true;
                 }
             }
